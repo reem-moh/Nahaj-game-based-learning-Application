@@ -1,6 +1,10 @@
 import UIKit
 import Flutter
 
+FirebaseApp.configure()
+GeneratedPluginRegistrant.register(with: self)
+
+
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
