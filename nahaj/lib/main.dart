@@ -9,7 +9,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
