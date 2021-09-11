@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future<void> addUser() {
+    // Call the user's CollectionReference to add a new user
+    return users
+        .add({
+          'full_name': "fullName", // John Doe
+          'company': "company", // Stokes and Sons
+          'age': "age" // 42
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -56,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      addUser();
     });
   }
 
