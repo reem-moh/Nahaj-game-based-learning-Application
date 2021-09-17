@@ -12,19 +12,19 @@ class HomePage extends StatelessWidget {
         body: Stack(children: <Widget>[
           //top image
           Positioned(
-              width: MediaQuery.of(context).size.width / 4.17,
-              height: MediaQuery.of(context).size.height / 6,
-              left: MediaQuery.of(context).size.width * 0.84,
+              width: MediaQuery.of(context).size.width / 4.46,
+              //height: MediaQuery.of(context).size.height / 8.317,
+              left: MediaQuery.of(context).size.width * 0.776,
               child: Image(
                 fit: BoxFit.fill,
                 image: AssetImage("assets/homeTopBackground.jpg"),
               )),
           //side menu
           Positioned(
-              //width: MediaQuery.of(context).size.width / 6,
-              //height: MediaQuery.of(context).size.height / 8,
-              left: MediaQuery.of(context).size.width * 0.85,
-              top: MediaQuery.of(context).size.height / 1000,
+              width: MediaQuery.of(context).size.width / 10.34,
+              height: MediaQuery.of(context).size.height / 21.9,
+              left: MediaQuery.of(context).size.width * 0.875,
+              top: MediaQuery.of(context).size.height / 50,
               child: IconButton(
                   onPressed: () {
                     //on pressed
