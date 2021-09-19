@@ -60,43 +60,103 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           //padding: EdgeInsets.zero,
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            UserAccountsDrawerHeader(
-              accountName: Text("reem",
+            //SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(125, 40, 0, 10),
+              child: UserAccountsDrawerHeader(
+                accountName: Text(
+                  "reem",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 22,
-                  )),
-              accountEmail: Text(""),
-              currentAccountPicture: CircleAvatar(
-                child: ClipOval(
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
+                ),
+                accountEmail: Text(""),
+                currentAccountPicture: CircleAvatar(
                   child: Image.asset(
-                    'assets/nahajLogo.png',
+                    'assets/owl_defaultProfile.png',
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   ),
+                  backgroundColor: Colors.grey[400],
+                ),
+                decoration: BoxDecoration(
+                  color: backgroundColorOfSideBar,
                 ),
               ),
-              decoration: BoxDecoration(
-                color: backgroundColorOfSideBar,
+            ),
+            // SizedBox(height: 10),
+            //الرئيسية
+            ListTile(
+              trailing: Icon(Icons.home_rounded, size: 40),
+              title: Text(
+                "الرئيسية",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+                textDirection: TextDirection.rtl,
               ),
+              onTap: () {
+                setState(() {
+                  if (isCollapsed)
+                    _controller.forward();
+                  else
+                    _controller.reverse();
+
+                  isCollapsed = !isCollapsed;
+                });
+              },
             ),
+            SizedBox(height: 10),
+            //ملف شخصي
             ListTile(
-              trailing: Icon(Icons.home_rounded),
-              title: Text("الرئيسية",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
+              title: Text(
+                "ملف شخصي",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+                textDirection: TextDirection.rtl,
+              ),
+              trailing: Icon(Icons.person, size: 40),
               onTap: () => null,
             ),
+            //مساعدة
+            SizedBox(height: 10),
             ListTile(
-              title: Text("ملف شخصي",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
-              //  style: TextStyle(color: Colors.black, fontSize: 22)),
-              trailing: Icon(Icons.person_outline_rounded),
+              trailing: Icon(Icons.help, size: 40),
+              title: Text(
+                "مساعدة",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+                textDirection: TextDirection.rtl,
+              ),
               onTap: () => null,
             ),
+            SizedBox(height: 850),
             ListTile(
-              trailing: Icon(Icons.help),
-              title: Text("مساعدة",
-                  style: TextStyle(color: Colors.black, fontSize: 22)),
+              trailing: Icon(Icons.exit_to_app_rounded, size: 40),
+              title: Text(
+                "خروج",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                ),
+                textDirection: TextDirection.rtl,
+              ),
               onTap: () => null,
             ),
           ],
