@@ -162,7 +162,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                 },
                               ),
                               alignment: Alignment.topRight,
-                              padding: const EdgeInsets.only( right: 20),
+                              padding: const EdgeInsets.only(right: 20),
                             ),
                           ]),
                       SizedBox(height: 10),
@@ -222,18 +222,39 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      SizedBox(height: 350),
-
+                      //SizedBox(height: 350),
+                      Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Positioned(
+                                    child: Text(
+                                      ':الأقسام',
+                                      style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 30),
+                                    ),
+                                  ),
+                                  Image.asset('assets/TabsIndicator.png'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       //background bottom
                       Container(
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.zero,
-                         
                           child: Image(
                               fit: BoxFit.fill,
                               image: AssetImage(
-                                  "assets/homeBottomBackground.jpg"))
-                          ),
+                                  "assets/homeBottomBackground.jpg"))),
                     ]),
                   ),
                 ],
