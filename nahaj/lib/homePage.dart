@@ -229,14 +229,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Positioned(
-                                  child: Text(
-                                    ':الأقسام',
-                                    style: TextStyle(
-                                        fontFamily: 'Cairo',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 30),
-                                  ),
+                                Text(
+                                  ':الأقسام',
+                                  style: TextStyle(
+                                      fontFamily: 'Cairo',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 30),
                                 ),
                                 Image.asset('assets/TabsIndicator.png'),
                               ],
