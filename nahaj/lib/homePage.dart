@@ -226,23 +226,20 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       Container(
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Positioned(
-                                    child: Text(
-                                      ':الأقسام',
-                                      style: TextStyle(
-                                          fontFamily: 'Cairo',
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 30),
-                                    ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Positioned(
+                                  child: Text(
+                                    ':الأقسام',
+                                    style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 30),
                                   ),
-                                  Image.asset('assets/TabsIndicator.png'),
-                                ],
-                              ),
+                                ),
+                                Image.asset('assets/TabsIndicator.png'),
+                              ],
                             ),
                           ],
                         ),
