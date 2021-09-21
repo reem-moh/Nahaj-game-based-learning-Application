@@ -17,6 +17,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
+  late List<int> index;
 
   @override
   void initState() {
@@ -63,13 +64,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           children: [
             SizedBox(height: 35),
             //profile image and name
-            Theme(
-              data: ThemeData(
-                highlightColor: Colors.white,
-                splashColor: Colors.white,
-                selectedRowColor: Colors.white,
-              ),
-              child: SizedBox(
+            SizedBox(
                 height: 220,
                 child: UserAccountsDrawerHeader(
                   accountName: Row(
@@ -104,7 +99,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-            ),
 
             //home page الرئيسية
             Theme(
@@ -114,6 +108,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 selectedRowColor: Colors.white,
               ),
               child: ListTile(
+                tileColor: tappedIndex == 0 ? Colors.white : null,
                 trailing: Icon(Icons.home_rounded, size: 40),
                 title: Text(
                   "الرئيسية",
@@ -133,6 +128,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       _controller.reverse();
 
                     isCollapsed = !isCollapsed;
+                    tappedIndex = 0;
                   });
                 },
               ),
@@ -148,6 +144,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 selectedRowColor: Colors.white,
               ),
               child: ListTile(
+                tileColor: tappedIndex == 1 ? Colors.white : null,
                 title: Text(
                   "ملف شخصي",
                   style: TextStyle(
@@ -159,7 +156,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   textDirection: TextDirection.rtl,
                 ),
                 trailing: Icon(Icons.person, size: 40),
-                onTap: () => null,
+                onTap: () {
+                  setState(() {
+                    tappedIndex = 1;
+                  });
+                },
               ),
             ),
 
@@ -173,6 +174,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 selectedRowColor: Colors.white,
               ),
               child: ListTile(
+                tileColor: tappedIndex == 2 ? Colors.white : null,
                 trailing: Icon(Icons.help, size: 40),
                 title: Text(
                   "مساعدة",
@@ -184,7 +186,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   textDirection: TextDirection.rtl,
                 ),
-                onTap: () => null,
+                onTap: () {
+                  setState(() {
+                    tappedIndex = 2;
+                  });
+                },
               ),
             ),
 
@@ -196,6 +202,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 highlightColor: Colors.white,
               ),
               child: ListTile(
+                tileColor: tappedIndex == 3 ? Colors.white : null,
                 trailing: Icon(Icons.exit_to_app_rounded, size: 40),
                 title: Text(
                   "خروج",
@@ -207,7 +214,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   textDirection: TextDirection.rtl,
                 ),
-                onTap: () => null,
+                onTap: () {
+                  setState(() {
+                    tappedIndex = 3;
+                  });
+                },
               ),
             ),
           ],
