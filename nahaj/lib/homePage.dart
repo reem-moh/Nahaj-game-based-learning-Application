@@ -16,6 +16,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _scaleAnimation;
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
+  late int tappedIndex;
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         Tween<double>(begin: 0.5, end: 1).animate(_controller);
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
+    tappedIndex = 0;
   }
 
   @override
@@ -57,107 +59,156 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       child: ScaleTransition(
         scale: _menuScaleAnimation,
         child: ListView(
-          //padding: EdgeInsets.zero,
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            //SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(125, 40, 0, 10),
-              child: UserAccountsDrawerHeader(
-                accountName: Text(
-                  "reem",
+            SizedBox(height: 35),
+            //profile image and name
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.white,
+                splashColor: Colors.white,
+                selectedRowColor: Colors.white,
+              ),
+              child: SizedBox(
+                height: 220,
+                child: UserAccountsDrawerHeader(
+                  accountName: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        child: Text(
+                          "ريم",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  accountEmail: Text(""),
+                  currentAccountPicture: CircleAvatar(
+                    child: Image.asset(
+                      'assets/owl_defaultProfile.png',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                    ),
+                    backgroundColor: Colors.grey[400],
+                  ),
+                  currentAccountPictureSize: Size(290, 80),
+                  decoration: BoxDecoration(
+                    color: backgroundColorOfSideBar,
+                  ),
+                ),
+              ),
+            ),
+
+            //home page الرئيسية
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.white,
+                splashColor: Colors.white,
+                selectedRowColor: Colors.white,
+              ),
+              child: ListTile(
+                trailing: Icon(Icons.home_rounded, size: 40),
+                title: Text(
+                  "الرئيسية",
                   style: TextStyle(
                     color: Colors.black,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w600,
                     fontSize: 24,
                   ),
+                  textDirection: TextDirection.rtl,
                 ),
-                accountEmail: Text(""),
-                currentAccountPicture: CircleAvatar(
-                  child: Image.asset(
-                    'assets/owl_defaultProfile.png',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                  ),
-                  backgroundColor: Colors.grey[400],
-                ),
-                decoration: BoxDecoration(
-                  color: backgroundColorOfSideBar,
-                ),
-              ),
-            ),
-            // SizedBox(height: 10),
-            //الرئيسية
-            ListTile(
-              trailing: Icon(Icons.home_rounded, size: 40),
-              title: Text(
-                "الرئيسية",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-                textDirection: TextDirection.rtl,
-              ),
-              onTap: () {
-                setState(() {
-                  if (isCollapsed)
-                    _controller.forward();
-                  else
-                    _controller.reverse();
+                onTap: () {
+                  setState(() {
+                    if (isCollapsed)
+                      _controller.forward();
+                    else
+                      _controller.reverse();
 
-                  isCollapsed = !isCollapsed;
-                });
-              },
-            ),
-            SizedBox(height: 10),
-            //ملف شخصي
-            ListTile(
-              title: Text(
-                "ملف شخصي",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-                textDirection: TextDirection.rtl,
+                    isCollapsed = !isCollapsed;
+                  });
+                },
               ),
-              trailing: Icon(Icons.person, size: 40),
-              onTap: () => null,
             ),
-            //مساعدة
+
             SizedBox(height: 10),
-            ListTile(
-              trailing: Icon(Icons.help, size: 40),
-              title: Text(
-                "مساعدة",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-                textDirection: TextDirection.rtl,
+
+            //profile ملف شخصي
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.white,
+                splashColor: Colors.white,
+                selectedRowColor: Colors.white,
               ),
-              onTap: () => null,
+              child: ListTile(
+                title: Text(
+                  "ملف شخصي",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
+                trailing: Icon(Icons.person, size: 40),
+                onTap: () => null,
+              ),
             ),
+
+            SizedBox(height: 10),
+
+            //help مساعدة
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.white,
+                splashColor: Colors.white,
+                selectedRowColor: Colors.white,
+              ),
+              child: ListTile(
+                trailing: Icon(Icons.help, size: 40),
+                title: Text(
+                  "مساعدة",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
+                onTap: () => null,
+              ),
+            ),
+
             SizedBox(height: 850),
-            ListTile(
-              trailing: Icon(Icons.exit_to_app_rounded, size: 40),
-              title: Text(
-                "خروج",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-                textDirection: TextDirection.rtl,
+
+            //logout
+            Theme(
+              data: ThemeData(
+                highlightColor: Colors.white,
               ),
-              onTap: () => null,
+              child: ListTile(
+                trailing: Icon(Icons.exit_to_app_rounded, size: 40),
+                title: Text(
+                  "خروج",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
+                onTap: () => null,
+              ),
             ),
           ],
         ),
@@ -205,10 +256,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                             //sidebar
                             Container(
                               child: InkWell(
-                                child: Icon(
-                                  Icons.menu,
-                                  color: Colors.grey[800],
+                                child: AnimatedIcon(
+                                  icon: AnimatedIcons.menu_close,
                                   size: MediaQuery.of(context).size.width / 20,
+                                  progress: _controller,
+                                  color: Colors.grey[800],
                                 ),
                                 onTap: () {
                                   setState(() {
@@ -216,7 +268,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       _controller.forward();
                                     else
                                       _controller.reverse();
-
                                     isCollapsed = !isCollapsed;
                                   });
                                 },
