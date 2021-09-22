@@ -69,7 +69,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
             //profile image and name
 
             SizedBox(
-              height: 220,
+              height: screenHeight*0.3,
               child: UserAccountsDrawerHeader(
                 accountName: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +97,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   backgroundColor: Colors.grey[400],
                 ),
-                currentAccountPictureSize: Size(290, 80),
+                currentAccountPictureSize: Size( screenHeight *0.38, screenWidth *0.125),
                 decoration: BoxDecoration(
                   color: backgroundColorOfSideBar,
                 ),
@@ -200,7 +200,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight* 0.53),
+            SizedBox(height: screenHeight* 0.39),
 
             //logout
             Theme(
