@@ -64,41 +64,42 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           children: [
             SizedBox(height: 35),
             //profile image and name
+
             SizedBox(
-                height: 220,
-                child: UserAccountsDrawerHeader(
-                  accountName: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        child: Text(
-                          "ريم",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                          ),
+              height: 220,
+              child: UserAccountsDrawerHeader(
+                accountName: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      child: Text(
+                        "ريم",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 27,
                         ),
                       ),
-                    ],
-                  ),
-                  accountEmail: Text(""),
-                  currentAccountPicture: CircleAvatar(
-                    child: Image.asset(
-                      'assets/owl_defaultProfile.png',
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center,
                     ),
-                    backgroundColor: Colors.grey[400],
+                  ],
+                ),
+                accountEmail: Text(""),
+                currentAccountPicture: CircleAvatar(
+                  child: Image.asset(
+                    'assets/owl_defaultProfile.png',
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
                   ),
-                  currentAccountPictureSize: Size(290, 80),
-                  decoration: BoxDecoration(
-                    color: backgroundColorOfSideBar,
-                  ),
+                  backgroundColor: Colors.grey[400],
+                ),
+                currentAccountPictureSize: Size(290, 80),
+                decoration: BoxDecoration(
+                  color: backgroundColorOfSideBar,
                 ),
               ),
+            ),
 
             //home page الرئيسية
             Theme(
@@ -345,6 +346,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       //SizedBox(height: 350),
+                      //categories
                       Container(
                         child: Column(
                           children: [
@@ -358,7 +360,34 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       fontWeight: FontWeight.w700,
                                       fontSize: 30),
                                 ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 800,
+                                ),
                                 Image.asset('assets/TabsIndicator.png'),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 40,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CategoryCard(
+                                    cardColor:
+                                        Color.fromARGB(255, 223, 221, 223),
+                                    title: 'الكيمياء',
+                                    image: 'assets/chemistry.gif'),
+                                CategoryCard(
+                                  cardColor: Color.fromARGB(255, 202, 203, 203),
+                                  title: 'النباتات',
+                                  image: 'assets/plants.gif',
+                                ),
+                                CategoryCard(
+                                  cardColor: Color.fromARGB(255, 230, 230, 230),
+                                  title: 'الحيوانات',
+                                  image: 'assets/animals.png',
+                                ),
                               ],
                             ),
                           ],
@@ -374,10 +403,158 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                   "assets/homeBottomBackground.jpg"))),
                     ]),
                   ),
+
+                  //groups
+                  Container(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height - 350,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              ':المجموعات',
+                              style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 30),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 40,
+                            ),
+                            Image.asset('assets/TabsIndicator.png'),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 40,
+                            ),
+                          ],
+                        ),
+                        //list view
+                        Container(
+                          margin: EdgeInsets.all(10.0),
+                          height: 140.0,
+                          child: ListView.separated(
+                            itemCount: 3,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                width: 10,
+                              );
+                            },
+                            itemBuilder: (_, i) => groupsCard(),
+                            scrollDirection: Axis.horizontal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           )),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({
+    this.cardColor = Colors.grey,
+    this.title = 'Title',
+    this.image = 'assets/plants.gif',
+  });
+
+  final Color cardColor;
+  final String title;
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: cardColor, width: 2.0),
+        color: cardColor,
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade400,
+            blurRadius: 7,
+            spreadRadius: 0,
+            offset: Offset(4, 4),
+          ),
+        ],
+      ),
+      margin: EdgeInsets.all(8),
+      height: 250,
+      width: 210,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24.0,
+                    color: Color.fromARGB(255, 114, 78, 140)),
+              ),
+            ],
+          ),
+          /*SizedBox(
+            height: 0.0,
+          ),*/
+          Image.asset(
+            image,
+            height: 201,
+            width: 210,
+            //fit: BoxFit.contain,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class groupsCard extends StatelessWidget {
+  const groupsCard({
+    this.groupImage = 'assets/animals.png',
+    this.groupName = 'group name',
+  });
+
+  final String groupImage;
+  final String groupName;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Container(
+          width: 120.0,
+          height: 120.0,
+          padding: EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black,
+          ),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://media-exp1.licdn.com/dms/image/C4D03AQFgZBilNtPUMA/profile-displayphoto-shrink_800_800/0/1604728137407?e=1632960000&v=beta&t=QKa1Nq3WKWQGEGaiKdZ1ovp1h6uAbwPZfihdqY2_pNU'),
+          ),
+        ),
+        /*Container(
+          child: Text(
+            groupName,
+            style: TextStyle(
+                fontFamily: 'Cairo',
+                //fontWeight: FontWeight.w700,
+                fontSize: 30),
+          ),
+        ),*/
+      ],
     );
   }
 }
