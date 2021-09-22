@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nahaj/database.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
 
 class HomePage extends StatefulWidget {
+  final DataBase db;
+  HomePage({Key? key, required this.db}) : super(key: key);
+
   @override
   _HomePage createState() => _HomePage();
 }
@@ -17,7 +21,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
-  late List<int> index;
 
   @override
   void initState() {
@@ -62,7 +65,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         child: ListView(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            SizedBox(height: 35),
+            SizedBox(height: screenHeight* 0.03),
             //profile image and name
 
             SizedBox(
@@ -110,7 +113,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
               child: ListTile(
                 tileColor: tappedIndex == 0 ? Colors.white : null,
-                trailing: Icon(Icons.home_rounded, size: 40),
+                trailing: Icon(Icons.home_rounded, size: screenHeight*0.032),
                 title: Text(
                   "الرئيسية",
                   style: TextStyle(
@@ -135,7 +138,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: screenHeight* 0.012),
 
             //profile ملف شخصي
             Theme(
@@ -156,16 +159,18 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   textDirection: TextDirection.rtl,
                 ),
-                trailing: Icon(Icons.person, size: 40),
+                trailing: Icon(Icons.person, size: screenHeight*0.032),
                 onTap: () {
+                  
                   setState(() {
+                    widget.db.addUser("reem","reem",90);
                     tappedIndex = 1;
                   });
                 },
               ),
             ),
 
-            SizedBox(height: 10),
+            SizedBox(height: screenHeight* 0.012),
 
             //help مساعدة
             Theme(
@@ -176,7 +181,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
               child: ListTile(
                 tileColor: tappedIndex == 2 ? Colors.white : null,
-                trailing: Icon(Icons.help, size: 40),
+                trailing: Icon(Icons.help, size: screenHeight*0.032),
                 title: Text(
                   "مساعدة",
                   style: TextStyle(
@@ -195,7 +200,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: 850),
+            SizedBox(height: screenHeight* 0.53),
 
             //logout
             Theme(
