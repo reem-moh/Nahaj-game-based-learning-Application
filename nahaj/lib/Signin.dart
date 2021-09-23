@@ -59,7 +59,7 @@ Positioned(
                                             mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   
                  child:
                    Padding(
@@ -80,7 +80,7 @@ Positioned(
                     ),
 
                    SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.1,
                  child:
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
@@ -96,7 +96,7 @@ Positioned(
                                             mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   
                  child:
                    Padding(
@@ -117,7 +117,7 @@ Positioned(
                     ),
 
                       SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.1,
                  child:
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
