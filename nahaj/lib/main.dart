@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/Signin.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nahaj/signUp.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Signin(),
+      home: SignUp(),
       //MyHomePage(title: 'Nahaj')
     );
   }
