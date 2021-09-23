@@ -65,11 +65,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         child: ListView(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            SizedBox(height: screenHeight* 0.03),
+            SizedBox(height: screenHeight * 0.03),
             //profile image and name
 
             SizedBox(
-              height: screenHeight*0.3,
+              height: screenHeight * 0.3,
               child: UserAccountsDrawerHeader(
                 accountName: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +97,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   backgroundColor: Colors.grey[400],
                 ),
-                currentAccountPictureSize: Size( screenHeight *0.38, screenWidth *0.125),
+                currentAccountPictureSize:
+                    Size(screenHeight * 0.38, screenWidth * 0.125),
                 decoration: BoxDecoration(
                   color: backgroundColorOfSideBar,
                 ),
@@ -113,7 +114,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
               child: ListTile(
                 tileColor: tappedIndex == 0 ? Colors.white : null,
-                trailing: Icon(Icons.home_rounded, size: screenHeight*0.032),
+                trailing: Icon(Icons.home_rounded, size: screenHeight * 0.032),
                 title: Text(
                   "الرئيسية",
                   style: TextStyle(
@@ -138,7 +139,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight* 0.012),
+            SizedBox(height: screenHeight * 0.012),
 
             //profile ملف شخصي
             Theme(
@@ -159,18 +160,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   textDirection: TextDirection.rtl,
                 ),
-                trailing: Icon(Icons.person, size: screenHeight*0.032),
+                trailing: Icon(Icons.person, size: screenHeight * 0.032),
                 onTap: () {
-                  
                   setState(() {
-                    widget.db.addUser("reem","reem",90);
+                    widget.db.addUser("reem", "reem", 90);
                     tappedIndex = 1;
                   });
                 },
               ),
             ),
 
-            SizedBox(height: screenHeight* 0.012),
+            SizedBox(height: screenHeight * 0.012),
 
             //help مساعدة
             Theme(
@@ -181,7 +181,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
               child: ListTile(
                 tileColor: tappedIndex == 2 ? Colors.white : null,
-                trailing: Icon(Icons.help, size: screenHeight*0.032),
+                trailing: Icon(Icons.help, size: screenHeight * 0.032),
                 title: Text(
                   "مساعدة",
                   style: TextStyle(
@@ -200,7 +200,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight* 0.39),
+            SizedBox(height: screenHeight * 0.39),
 
             //logout
             Theme(
@@ -261,195 +261,197 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     ),
                     alignment: Alignment.topRight,
                   ),
-
-                  Container(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Column(children: <Widget>[
-                      //sidebar
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            //sidebar
-                            Container(
-                              child: InkWell(
-                                child: AnimatedIcon(
-                                  icon: AnimatedIcons.menu_close,
-                                  size: MediaQuery.of(context).size.width / 20,
-                                  progress: _controller,
-                                  color: Colors.grey[800],
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    if (isCollapsed)
-                                      _controller.forward();
-                                    else
-                                      _controller.reverse();
-                                    isCollapsed = !isCollapsed;
-                                  });
-                                },
-                              ),
-                              alignment: Alignment.topRight,
-                              padding: const EdgeInsets.only(right: 20),
+                  //sidebar
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        //sidebar
+                        Container(
+                          padding: const EdgeInsets.only(top: 23, right: 20),
+                          child: InkWell(
+                            child: AnimatedIcon(
+                              icon: AnimatedIcons.menu_close,
+                              size: MediaQuery.of(context).size.width / 20,
+                              progress: _controller,
+                              color: Colors.grey[800],
                             ),
-                          ]),
-                      SizedBox(height: 10),
-
-                      //profile column
-                      Container(
-                        height: MediaQuery.of(context).size.height / 3.18,
-                        child: Stack(
-                          children: [
-                            //welcome message background
-                            Positioned(
-                                width: MediaQuery.of(context).size.width,
-                                //top: MediaQuery.of(context).size.height / 11,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.09,
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                4.18,
-                                        image: AssetImage(
-                                            "assets/helloMessageBackground.png"))
-                                  ],
-                                )),
-
-                            //welcome message text
-                            Positioned(
-                                width: MediaQuery.of(context).size.width / 1.09,
-                                top: MediaQuery.of(context).size.height * 0.04,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/owl.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                    SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.height *
-                                                0.10),
-                                    Text(
-                                      'أهلاً، سلطان',
-                                      style: TextStyle(
-                                        fontFamily: 'Cairo',
-                                        color: Colors.white,
-                                        fontSize: 36,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                          ],
+                            onTap: () {
+                              setState(() {
+                                if (isCollapsed)
+                                  _controller.forward();
+                                else
+                                  _controller.reverse();
+                                isCollapsed = !isCollapsed;
+                              });
+                            },
+                          ),
+                          alignment: Alignment.topRight,
                         ),
-                      ),
-                      //SizedBox(height: 350),
-                      //categories
-                      Container(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  ':الأقسام',
-                                  style: TextStyle(
-                                      fontFamily: 'Cairo',
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 30),
-                                ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 800,
-                                ),
-                                Image.asset('assets/TabsIndicator.png'),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 40,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CategoryCard(
-                                    cardColor:
-                                        Color.fromARGB(255, 223, 221, 223),
-                                    title: 'الكيمياء',
-                                    image: 'assets/chemistry.gif'),
-                                CategoryCard(
-                                  cardColor: Color.fromARGB(255, 202, 203, 203),
-                                  title: 'النباتات',
-                                  image: 'assets/plants.gif',
-                                ),
-                                CategoryCard(
-                                  cardColor: Color.fromARGB(255, 230, 230, 230),
-                                  title: 'الحيوانات',
-                                  image: 'assets/animals.png',
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      //background bottom
-                      Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.zero,
-                          child: Image(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                  "assets/homeBottomBackground.jpg"))),
-                    ]),
-                  ),
+                      ]),
 
-                  //groups
                   Container(
                     child: Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height - 350,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              ':المجموعات',
-                              style: TextStyle(
-                                  fontFamily: 'Cairo',
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 30),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 40,
-                            ),
-                            Image.asset('assets/TabsIndicator.png'),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 40,
-                            ),
-                          ],
-                        ),
-                        //list view
+                      children: <Widget>[
+                        SizedBox(height: 45),
+
+                        //profile column
                         Container(
-                          margin: EdgeInsets.all(10.0),
-                          height: 140.0,
-                          child: ListView.separated(
-                            itemCount: 3,
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return SizedBox(
-                                width: 10,
-                              );
-                            },
-                            itemBuilder: (_, i) => groupsCard(),
-                            scrollDirection: Axis.horizontal,
-                          ),
+                            height: MediaQuery.of(context).size.height / 4.18,
+                            width: MediaQuery.of(context).size.height / 1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(26),
+                              color: Color.fromARGB(200, 145, 111, 170),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade400,
+                                  blurRadius: 7,
+                                  spreadRadius: 0,
+                                  offset: Offset(4, 4),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/owl.png',
+                                  fit: BoxFit.cover,
+                                ),
+                                SizedBox(
+                                    width: MediaQuery.of(context).size.height *
+                                        0.10),
+                                Text(
+                                  'أهلاً، سلطان',
+                                  style: TextStyle(
+                                    fontFamily: 'Cairo',
+                                    color: Colors.white,
+                                    fontSize: 36,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            )),
+                        Container(
+                          child: Stack(children: [
+                            //background bottom
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.width *
+                                        0.2),
+                                child: Image(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(
+                                        "assets/homeBottomBackground.png"))),
+                            Column(
+                              children: [
+                                //categories
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      ':الأقسام',
+                                      style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 30),
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          800,
+                                    ),
+                                    Image.asset('assets/TabsIndicator.png'),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          40,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    CategoryCard(
+                                        cardColor:
+                                            Color.fromARGB(255, 223, 221, 223),
+                                        title: 'الكيمياء',
+                                        image: 'assets/chemistry.gif'),
+                                    CategoryCard(
+                                      cardColor:
+                                          Color.fromARGB(255, 202, 203, 203),
+                                      title: 'النباتات',
+                                      image: 'assets/plants.gif',
+                                    ),
+                                    CategoryCard(
+                                      cardColor:
+                                          Color.fromARGB(255, 230, 230, 230),
+                                      title: 'الحيوانات',
+                                      image: 'assets/animals.png',
+                                    ),
+                                  ],
+                                ),
+                                //groups
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            ':المجموعات',
+                                            style: TextStyle(
+                                                fontFamily: 'Cairo',
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 30),
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                60,
+                                          ),
+                                          Image.asset(
+                                              'assets/TabsIndicator.png'),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                40,
+                                          ),
+                                        ],
+                                      ),
+                                      //list view
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 30.0, right: 30.0),
+                                        height: 180.0,
+                                        child: ListView.separated(
+                                          reverse: true,
+                                          itemCount: 3,
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                  int index) {
+                                            return SizedBox(
+                                              width: 25,
+                                            );
+                                          },
+                                          itemBuilder: (_, i) {
+                                            return i == 3 - 1
+                                                ? AddGroupButton()
+                                                : GroupsCard();
+                                          },
+                                          scrollDirection: Axis.horizontal,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ]),
                         ),
                       ],
                     ),
@@ -475,47 +477,94 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: cardColor, width: 2.0),
-        color: cardColor,
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade400,
-            blurRadius: 7,
-            spreadRadius: 0,
-            offset: Offset(4, 4),
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        print(title);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: cardColor, width: 2.0),
+          color: cardColor,
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade400,
+              blurRadius: 7,
+              spreadRadius: 0,
+              offset: Offset(4, 4),
+            ),
+          ],
+        ),
+        margin: EdgeInsets.all(8),
+        height: 250,
+        width: 210,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                      color: Color.fromARGB(255, 114, 78, 140)),
+                ),
+              ],
+            ),
+            Image.asset(
+              image,
+              height: 201,
+              width: 210,
+            ),
+          ],
+        ),
       ),
-      margin: EdgeInsets.all(8),
-      height: 250,
-      width: 210,
+    );
+  }
+}
+
+class GroupsCard extends StatelessWidget {
+  const GroupsCard({
+    this.groupImage = 'assets/animals.png',
+    this.groupName = 'مجموعة',
+  });
+
+  final String groupImage;
+  final String groupName;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        print('مجموعة');
+      },
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.0,
-                    color: Color.fromARGB(255, 114, 78, 140)),
-              ),
-            ],
+          Container(
+            width: 130.0,
+            height: 130.0,
+            padding: EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[350],
+            ),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                  'https://media-exp1.licdn.com/dms/image/C4D03AQFgZBilNtPUMA/profile-displayphoto-shrink_800_800/0/1604728137407?e=1632960000&v=beta&t=QKa1Nq3WKWQGEGaiKdZ1ovp1h6uAbwPZfihdqY2_pNU'),
+            ),
           ),
-          /*SizedBox(
-            height: 0.0,
-          ),*/
-          Image.asset(
-            image,
-            height: 201,
-            width: 210,
-            //fit: BoxFit.contain,
+          Container(
+            child: Text(
+              groupName,
+              style: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  color: Color.fromARGB(170, 0, 0, 0)),
+            ),
           ),
         ],
       ),
@@ -523,43 +572,36 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-// ignore: camel_case_types
-class groupsCard extends StatelessWidget {
-  const groupsCard({
-    this.groupImage = 'assets/animals.png',
-    this.groupName = 'group name',
-  });
-
-  final String groupImage;
-  final String groupName;
+class AddGroupButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Container(
-          width: 120.0,
-          height: 120.0,
-          padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black,
+    return InkWell(
+      onTap: () {
+        print('انشاء مجموعة جديدة');
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 130.0,
+            height: 130.0,
+            child: Image.asset(
+              'assets/addGroupButton.png',
+              fit: BoxFit.fill,
+            ),
           ),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://media-exp1.licdn.com/dms/image/C4D03AQFgZBilNtPUMA/profile-displayphoto-shrink_800_800/0/1604728137407?e=1632960000&v=beta&t=QKa1Nq3WKWQGEGaiKdZ1ovp1h6uAbwPZfihdqY2_pNU'),
+          Container(
+            child: Text(
+              'إنشاء مجموعة جديدة',
+              style: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  color: Color.fromARGB(170, 0, 0, 0)),
+            ),
           ),
-        ),
-        /*Container(
-          child: Text(
-            groupName,
-            style: TextStyle(
-                fontFamily: 'Cairo',
-                //fontWeight: FontWeight.w700,
-                fontSize: 30),
-          ),
-        ),*/
-      ],
+        ],
+      ),
     );
   }
 }
