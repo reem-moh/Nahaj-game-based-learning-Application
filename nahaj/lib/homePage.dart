@@ -469,7 +469,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 }
 
-
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
     this.cardColor = Colors.grey,
@@ -503,7 +502,7 @@ class CategoryCard extends StatelessWidget {
         ),
         margin: EdgeInsets.all(8),
         height: 250,
-        width: 210,
+        width: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -523,7 +522,7 @@ class CategoryCard extends StatelessWidget {
             Image.asset(
               image,
               height: 201,
-              width: 210,
+              width: 250,
             ),
           ],
         ),
