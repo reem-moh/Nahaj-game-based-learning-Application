@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/database.dart';
+import 'package:nahaj/AR.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
@@ -194,6 +195,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 ),
                 onTap: () {
                   setState(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AR()),
+                    );
                     tappedIndex = 2;
                   });
                 },
@@ -463,6 +468,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     );
   }
 }
+
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
