@@ -66,7 +66,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         child: ListView(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            SizedBox(height: screenHeight * 0.03),
+            //SizedBox(height: screenHeight * 0.03),
             //profile image and name
 
             SizedBox(
@@ -74,9 +74,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               child: UserAccountsDrawerHeader(
                 accountName: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Container(
+                      height: screenHeight * 0.08,
                       child: Text(
                         "ريم",
                         style: TextStyle(
@@ -91,15 +91,33 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 ),
                 accountEmail: Text(""),
                 currentAccountPicture: CircleAvatar(
-                  child: Image.asset(
-                    'assets/owl_defaultProfile.png',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
+                  child: FutureBuilder(
+                    future: _getImage(context, 'image'),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasError) {
+                        return Container();
+                      }
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          return Container(
+                            child: snapshot.data,
+                          );
+                        }
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Container(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      return Container();
+                    },
                   ),
                   backgroundColor: Colors.grey[400],
                 ),
                 currentAccountPictureSize:
-                    Size(screenHeight * 0.38, screenWidth * 0.125),
+                    Size(screenHeight * 0.38, screenWidth * 0.1),
                 decoration: BoxDecoration(
                   color: backgroundColorOfSideBar,
                 ),
@@ -205,7 +223,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight * 0.39),
+            SizedBox(height: screenHeight * 0.34),
 
             //logout
             Theme(
@@ -241,7 +259,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   Widget dashboard(context) {
     return AnimatedPositioned(
       duration: duration,
-      top: isCollapsed ? 0 : -0.1 * screenWidth,
+      top: isCollapsed ? 0 : -0.09 * screenWidth,
       bottom: isCollapsed ? 0 : 0.01 * screenWidth,
       left: isCollapsed ? 0 : -0.2 * screenWidth,
       right: isCollapsed ? 0 : 0.2 * screenWidth,
@@ -466,6 +484,20 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
             ),
           )),
     );
+  }
+
+  Future<Widget> _getImage(BuildContext context, String image) async {
+    //read the path of image from firestore
+    //take the info to loadImage
+    Image image = Image.network('');
+    await widget.db.loadImage('Avatar', 'animals.png').then((value) {
+      image = Image.network(
+        value.toString(),
+        fit: BoxFit.fill,
+        alignment: Alignment.center,
+      );
+    });
+    return image;
   }
 }
 
