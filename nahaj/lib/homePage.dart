@@ -99,7 +99,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       }
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
-                          return Container(
+                          return ClipOval(
                             child: snapshot.data,
                           );
                         }
