@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nahaj/Signin.dart';
 import 'package:nahaj/signUp.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,11 +18,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: signUp(),
+      home: Signin(),
     );
   }
 }
-/*
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -45,4 +46,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}*/
+}

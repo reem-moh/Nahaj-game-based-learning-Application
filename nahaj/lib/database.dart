@@ -9,8 +9,8 @@ class DataBase {
   DataBase() {
     firestore = FirebaseFirestore.instance;
   }
-
-  Future<void> addUser(String fullName, String company, int age) {
+  CollectionReference user = FirebaseFirestore.instance.collection('user');
+  /*Future<void> addUser(String fullName, String company, int age) {
     // Call the user's CollectionReference to add a new user
     return firestore
         .collection('users')
@@ -20,6 +20,13 @@ class DataBase {
           'age': age // 42
         })
         .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }*/
+
+  Future<void> addNewUser(String name, String email, String uid) async {
+    return await user
+        .add({'name': name, 'email': email, 'ID': uid})
+        .then((value) => print("user added"))
         .catchError((error) => print("Failed to add user: $error"));
   }
 }

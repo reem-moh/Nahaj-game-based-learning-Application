@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:nahaj/AuthonticationServices.dart';
 
-class Signin extends StatelessWidget {
+class Signin extends StatefulWidget {
+  //final DataBase db;
+  //signUp({Key? key, required this.db}) : super(key: key);
+
+  @override
+  _SigninState createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
+  final _key = GlobalKey<FormState>();
+
+  final AuthonticationServices _auth = AuthonticationServices();
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,10 +86,13 @@ class Signin extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
-                    child: TextField(
+                    child: TextFormField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
+                      onChanged: (val) {
+                        email = val;
+                      },
                     ),
                   ),
                 ),
@@ -104,11 +122,14 @@ class Signin extends StatelessWidget {
                   child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
-                      child: const TextField(
+                      child: TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
+                        onChanged: (val) {
+                          password = val;
+                        },
                       )),
                 ),
                 SizedBox(
@@ -129,7 +150,10 @@ class Signin extends StatelessWidget {
                         ),
                         color: Color.fromARGB(255, 129, 190, 255),
                         textColor: Colors.white,
-                        onPressed: () {},
+                        onPressed: () {
+                          // if(_key.currentContext.validate())
+                          loginUser();
+                        },
                       ),
                     ),
                   ),
@@ -194,5 +218,14 @@ class Signin extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void loginUser() async {
+    dynamic authResutl = await _auth.loginUser(email, password);
+    if (authResutl == null) {
+      print("login error");
+    } else {
+      print("log in Successuflly");
+    }
   }
 }
