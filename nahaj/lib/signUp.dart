@@ -39,16 +39,16 @@ class _SignupState extends State<SignUp> {
               //Column(
               children: [
                 /*
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.33,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                    AssetImage("assets/nahajLogo.png"),
-                                fit: BoxFit.none)),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.33,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage("assets/nahajLogo.png"),
+                                  fit: BoxFit.none)),
+                        ),
                       ),
-                    ),
 */
 
                 SizedBox(
@@ -235,7 +235,7 @@ class _SignupState extends State<SignUp> {
                 ),
               ],
               // ),
-            )
+            ),
           ],
         ),
       ),
