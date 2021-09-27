@@ -4,8 +4,8 @@ import 'package:nahaj/AuthonticationServices.dart';
 import 'database.dart';
 
 class SignUp extends StatefulWidget {
-  //final DataBase db;
-  //signUp({Key? key, required this.db}) : super(key: key);
+  final DataBase db;
+  SignUp({Key? key, required this.db}) : super(key: key);
 
   @override
   _SignupState createState() => _SignupState();
@@ -14,7 +14,6 @@ class SignUp extends StatefulWidget {
 class _SignupState extends State<SignUp> {
   final _key = GlobalKey<FormState>();
 
-  final AuthonticationServices _auth = AuthonticationServices();
   String name = "";
   String email = "";
   String password = "";
@@ -243,7 +242,7 @@ class _SignupState extends State<SignUp> {
   }
 
   void createUser(String name, String email, String password) async {
-    dynamic result = await _auth.createNewUser(name, email, password);
+    dynamic result = await widget.db.createNewUser(name, email, password);
     if (result == null) {
       print("email is not valid");
     } else {

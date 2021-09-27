@@ -4,6 +4,8 @@ import 'package:nahaj/homepage.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+
+import 'SIgnIn.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
@@ -14,7 +16,7 @@ Future<void> main() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  DataBase db=DataBase();
+  DataBase db = DataBase();
   runApp(MyApp(db));
 }
 
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(db: this.database,),
+      home: Signin(
+        db: this.database,
+      ),
       //MyHomePage(title: 'Nahaj')
     );
   }

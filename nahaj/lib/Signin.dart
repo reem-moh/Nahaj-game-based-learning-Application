@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/AuthonticationServices.dart';
+import 'package:nahaj/homePage.dart';
 
 import 'SignUp.dart';
+import 'database.dart';
 
 class Signin extends StatefulWidget {
-  //final DataBase db;
-  //signUp({Key? key, required this.db}) : super(key: key);
+  final DataBase db;
+  Signin({Key? key, required this.db}) : super(key: key);
 
   @override
   _SigninState createState() => _SigninState();
@@ -14,7 +15,6 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   final _key = GlobalKey<FormState>();
 
-  final AuthonticationServices _auth = AuthonticationServices();
   String email = "";
   String password = "";
 
@@ -154,6 +154,16 @@ class _SigninState extends State<Signin> {
                           onPressed: () {
                             // if(_key.currentContext.validate())
                             loginUser();
+
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage(
+                                          db: widget.db,
+                                        )),
+                              );
+                            });
                           },
                         ),
                       ),
@@ -197,7 +207,9 @@ class _SigninState extends State<Signin> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp()),
+                                    builder: (context) => SignUp(
+                                          db: widget.db,
+                                        )),
                               );
                             });
                           },
@@ -231,7 +243,7 @@ class _SigninState extends State<Signin> {
   }
 
   void loginUser() async {
-    dynamic authResutl = await _auth.loginUser(email, password);
+    dynamic authResutl = await widget.db.loginUser(email, password);
     if (authResutl == null) {
       print("login error");
     } else {

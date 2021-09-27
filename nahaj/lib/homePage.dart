@@ -3,6 +3,8 @@ import 'package:nahaj/category.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/AR.dart';
 
+import 'group.dart';
+
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
 
@@ -183,7 +185,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 trailing: Icon(Icons.person, size: screenHeight * 0.032),
                 onTap: () {
                   setState(() {
-                    widget.db.addUser("reem", "reem", 90);
+                    //widget.db.addUser("reem", "reem", 90);
                     tappedIndex = 1;
                   });
                 },
