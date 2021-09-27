@@ -4,6 +4,7 @@ import 'package:nahaj/homepage.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:nahaj/signUp.dart';
 
 import 'SIgnIn.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';

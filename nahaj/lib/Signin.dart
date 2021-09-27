@@ -32,9 +32,9 @@ class _SigninState extends State<Signin> {
             ),
 
             //mainAxisAlignment: MainAxisAlignment.end,
-
-            SingleChildScrollView(
-              child: Column(
+   ListView(
+              key: _key,
+            
                 children: [
                   /*
                       SizedBox(
@@ -135,22 +135,22 @@ class _SigninState extends State<Signin> {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.13,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      child: Container(
-                        margin: EdgeInsets.all(25),
-                        child: FlatButton(
-                          child: Text(
-                            "تسجيل دخول",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    child: Container(
+                      margin: EdgeInsets.all(25),
+                      child: FlatButton(
+                        child: Text(
+                          " تسجيل الدخول ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
                           ),
-                          color: Color.fromARGB(255, 129, 190, 255),
-                          textColor: Colors.white,
+                        ),
+                        color: Color.fromARGB(255, 129, 190, 255),
+                        textColor: Colors.white,
                           onPressed: () {
                             // if(_key.currentContext.validate())
                             loginUser();
@@ -234,7 +234,7 @@ class _SigninState extends State<Signin> {
                     ],
                   ),
                 ],
-              ),
+              
             ),
           ],
         ),

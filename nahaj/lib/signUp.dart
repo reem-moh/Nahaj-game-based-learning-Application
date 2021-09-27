@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nahaj/AuthonticationServices.dart';
+import 'package:nahaj/Signin.dart';
 import 'database.dart';
 
 class SignUp extends StatefulWidget {
@@ -32,6 +33,26 @@ class _SignupState extends State<SignUp> {
                       fit: BoxFit.cover)),
             ),
 
+            InkWell(
+              child: Padding(
+                padding: EdgeInsets.only(top: 35, left: 15),
+                child: Image(
+                  /*
+                          width: MediaQuery.of(context).size.width / 1.09,
+                          height: MediaQuery.of(context).size.height / 4.18,*/
+                  image: AssetImage("assets/PreviosButton.png"),
+                  alignment: Alignment.topLeft,
+                ),
+              ),
+              onTap: () {
+                setState(() {
+                  Navigator.pop(
+                    context,
+                  );
+                });
+              },
+            ),
+
             //mainAxisAlignment: MainAxisAlignment.end,
             ListView(
               key: _key,
@@ -60,6 +81,8 @@ class _SignupState extends State<SignUp> {
                           width: MediaQuery.of(context).size.width / 1.09,
                           height: MediaQuery.of(context).size.height / 4.18,
                           image: AssetImage("assets/nahajLogo.png"))
+
+// ignore: deprecated_member_use
                     ],
                   ),
                 ),
