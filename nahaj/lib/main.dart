@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:nahaj/homepage.dart';
+import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:nahaj/Signin.dart';
-import 'package:nahaj/signUp.dart';
+import 'package:flutter/services.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+  DataBase db=DataBase();
+  runApp(MyApp(db));
 }
 
 class MyApp extends StatelessWidget {
+  final DataBase database;
+
+  @override
+  MyApp(this.database);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,32 +31,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Signin(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'push the button to go to the home page',
-            ),
-          ],
-        ),
-      ),
+      home: HomePage(db: this.database,),
+      //MyHomePage(title: 'Nahaj')
     );
   }
 }
