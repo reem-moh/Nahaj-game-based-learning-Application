@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nahaj/category.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/AR.dart';
 
@@ -517,6 +518,10 @@ class CategoryCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         print(title);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Category()),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -563,7 +568,7 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class GroupsCard extends StatelessWidget {
+class GroupsCard extends StatefulWidget {
   const GroupsCard({
     this.groupImage = 'assets/animals.png',
     this.groupName = 'مجموعة',
@@ -571,11 +576,23 @@ class GroupsCard extends StatelessWidget {
 
   final String groupImage;
   final String groupName;
+
+  @override
+  State<GroupsCard> createState() => _GroupsCardState();
+}
+
+class _GroupsCardState extends State<GroupsCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('مجموعة');
+        setState(() {
+          print('مجموعة');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Group()),
+          );
+        });
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -595,7 +612,7 @@ class GroupsCard extends StatelessWidget {
           ),
           Container(
             child: Text(
-              groupName,
+              widget.groupName,
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
