@@ -50,21 +50,19 @@ class _SignupState extends State<SignUp> {
                       ),
                     ),
 */
+
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
-                  child: Positioned(
-                      width: MediaQuery.of(context).size.width,
-                      //top: MediaQuery.of(context).size.height / 11,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                              width: MediaQuery.of(context).size.width / 1.09,
-                              height: MediaQuery.of(context).size.height / 4.18,
-                              image: AssetImage("assets/nahajLogo.png")),
-                        ],
-                      )),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                          width: MediaQuery.of(context).size.width / 1.09,
+                          height: MediaQuery.of(context).size.height / 4.18,
+                          image: AssetImage("assets/nahajLogo.png"))
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
