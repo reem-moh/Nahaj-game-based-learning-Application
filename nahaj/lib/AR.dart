@@ -14,9 +14,6 @@ class _ARState extends State<AR> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("AR Page"),
-      ),
       body: ARKitSceneView(
         onARKitViewCreated: (controller) => arView(controller),
       ),
@@ -31,7 +28,7 @@ void arView(ARKitController controller) {
     geometry: ARKitSphere(
       materials: [
         ARKitMaterial(
-          diffuse: ARKitMaterialImage('animals.png'),
+          diffuse: ARKitMaterialImage("assets/animals.png"),
           doubleSided: true,
         ),
       ],
