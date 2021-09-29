@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nahaj/category.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/AR.dart';
-
 import 'group.dart';
 
 //#FDE9A9

@@ -17,13 +17,20 @@ class DataBase extends ChangeNotifier {
     firestore = FirebaseFirestore.instance;
     firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
+    user = firestore.collection('user');
   }
 
   Future<void> addNewUser(String name, String email, String uid) async {
+    // Call the user's CollectionReference to add a new user
     return await user
         .add({'name': name, 'email': email, 'ID': uid})
-        .then((value) => print("user added"))
+        .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
+
+    /*return  user
+        .add({'name': name, 'email': email, 'ID': uid})
+        .then((value) => print("user added"))
+        .catchError((error) => print("Failed to add user: $error"));*/
   }
 
   Future<dynamic> loadImage(String path, String image) async {
@@ -37,9 +44,15 @@ class DataBase extends ChangeNotifier {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      print("createNewUser !!!");
+      print(result.user);
       User? user = result.user;
-      await DataBase().addNewUser(name, email, user!.uid);
+      await addNewUser(name, email, user!.uid);
       return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
     } catch (e) {
       print(e.toString());
     }

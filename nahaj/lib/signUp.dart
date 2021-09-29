@@ -246,6 +246,7 @@ class _SignupState extends State<SignUp> {
     if (result == null) {
       print("email is not valid");
     } else {
+      print('Sign up page/ createUser!!!!');
       print(result.toString());
       Navigator.pop(context);
     }
