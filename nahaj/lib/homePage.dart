@@ -109,7 +109,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 ),
                 accountEmail: Text(""),
                 currentAccountPicture: CircleAvatar(
-                  child: FutureBuilder(
+                  child: ClipOval(
+                    child: avatar == "1"
+                        ? CircularProgressIndicator()
+                        : Image.network(
+                            avatar,
+                            fit: BoxFit.fill,
+                            alignment: Alignment.center,
+                          ),
+                  ),
+
+                  /*FutureBuilder(
                     future: _getImage(context, 'image'),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
@@ -131,7 +141,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
                       return Container();
                     },
-                  ),
+                  ),*/
                   backgroundColor: Colors.grey[400],
                 ),
                 currentAccountPictureSize:
@@ -506,17 +516,14 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   Future<Widget> _getImage(BuildContext context, String image) async {
     //read the path of image from firestore
-    //take the info to loadImage
-    String x="";
     Image image = Image.network('');
     await widget.db.loadImage('Avatar', 'animals.png').then((value) {
       image = Image.network(
-        x = value.toString(),
+        value.toString(),
         fit: BoxFit.fill,
         alignment: Alignment.center,
       );
     });
-    print('inside get image:' + x.toString());
     return image;
   }
 }
@@ -626,7 +633,7 @@ class _GroupsCardState extends State<GroupsCard> {
             ),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://media-exp1.licdn.com/dms/image/C4D03AQFgZBilNtPUMA/profile-displayphoto-shrink_800_800/0/1604728137407?e=1632960000&v=beta&t=QKa1Nq3WKWQGEGaiKdZ1ovp1h6uAbwPZfihdqY2_pNU'),
+                  'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
             ),
           ),
           Container(

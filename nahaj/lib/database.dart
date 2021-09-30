@@ -51,7 +51,7 @@ class DataBase extends ChangeNotifier {
           'name': name,
           'email': email,
           //default values:
-          'avatar': "",
+          'avatar': "https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3",
           'level': 0.0,
         })
         .then((value) => print("User Added"))
