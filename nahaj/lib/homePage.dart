@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/category.dart';
 import 'package:nahaj/database.dart';
@@ -25,6 +26,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
 
+  String avatar = "1";
+  String username = "1";
+
   @override
   void initState() {
     super.initState();
@@ -35,12 +39,22 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
     tappedIndex = 0;
+
+    _getInfoFromSession();
   }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _getInfoFromSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      avatar = (prefs.getString('avatar') ?? "1");
+      username = (prefs.getString('username') ?? "1");
+    });
   }
 
   @override
@@ -79,15 +93,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   children: [
                     Container(
                       height: screenHeight * 0.08,
-                      child: Text(
-                        "ريم",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 27,
-                        ),
-                      ),
+                      child: username == "1"
+                          ? Text("something went wrong")
+                          : Text(
+                              username,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 27,
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -491,14 +507,16 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   Future<Widget> _getImage(BuildContext context, String image) async {
     //read the path of image from firestore
     //take the info to loadImage
+    String x="";
     Image image = Image.network('');
     await widget.db.loadImage('Avatar', 'animals.png').then((value) {
       image = Image.network(
-        value.toString(),
+        x = value.toString(),
         fit: BoxFit.fill,
         alignment: Alignment.center,
       );
     });
+    print('inside get image:' + x.toString());
     return image;
   }
 }

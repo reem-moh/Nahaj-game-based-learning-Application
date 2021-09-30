@@ -4,6 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'child.dart';
+
 class DataBase extends ChangeNotifier {
   late FirebaseAuth _auth;
   //for data
@@ -20,26 +22,7 @@ class DataBase extends ChangeNotifier {
     user = firestore.collection('user');
   }
 
-  Future<void> addNewUser(String name, String email, String uid) async {
-    // Call the user's CollectionReference to add a new user
-    return await user
-        .add({'name': name, 'email': email, 'ID': uid})
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
-
-    /*return  user
-        .add({'name': name, 'email': email, 'ID': uid})
-        .then((value) => print("user added"))
-        .catchError((error) => print("Failed to add user: $error"));*/
-  }
-
-  Future<dynamic> loadImage(String path, String image) async {
-    //path is the folder after the root on storage firebase
-    //name of the image with extention
-    return await firestorage.ref(path).child(image).getDownloadURL();
-  }
-
-  //sign up
+  //sign up 1
   Future createNewUser(String name, String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -58,6 +41,23 @@ class DataBase extends ChangeNotifier {
     }
   }
 
+  //sign up 2
+  Future<void> addNewUser(String name, String email, String uid) async {
+    // Call the user's CollectionReference to add a new user
+    //because we want the same id of auth we can't use add method..
+    return await user
+        .doc(uid)
+        .set({
+          'name': name,
+          'email': email,
+          //default values:
+          'avatar': "",
+          'level': 0.0,
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
   //sign in
   Future loginUser(String email, String password) async {
     try {
@@ -67,5 +67,23 @@ class DataBase extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<dynamic> userInfo(String uid) async {
+    /*
+    await user.doc(uid).get().then<dynamic>((DocumentSnapshot snapshot) async {
+      Map<String, dynamic> data = snapshot.data as Map<String, dynamic>;
+      print('the data inside userInfo: \n ${data['name']} ${data['email']}');
+      return new Child(data['name'], data['email'], data['avatar'],
+          data['level'].toDouble());
+    }).catchError((error) => print("Failed to read userInfo: $error"));
+    */
+    return new Child('', '', '', 0);
+  }
+
+  Future<dynamic> loadImage(String path, String image) async {
+    //path is the folder after the root on storage firebase
+    //name of the image with extention
+    return await firestorage.ref(path).child(image).getDownloadURL();
   }
 }
