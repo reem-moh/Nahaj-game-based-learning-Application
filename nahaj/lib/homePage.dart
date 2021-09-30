@@ -49,12 +49,29 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  void _getInfoFromSession() async {
+  Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       avatar = (prefs.getString('avatar') ?? "1");
       username = (prefs.getString('username') ?? "1");
+      print('username inside getinfo from homepage:' + username);
+      print('avatar inside getinfo from homepage:' + avatar);
     });
+  }
+
+  void _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString('id', '');
+      prefs.setString('username', '');
+      prefs.setString('avatar', '');
+      prefs.setDouble('level', -1.0);
+      prefs.setString('email', '');
+      avatar = "1";
+      username = "1";
+    });
+
+     Navigator.pop(context);
   }
 
   @override
@@ -82,9 +99,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         child: ListView(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
           children: [
-            //SizedBox(height: screenHeight * 0.03),
             //profile image and name
-
             SizedBox(
               height: screenHeight * 0.3,
               child: UserAccountsDrawerHeader(
@@ -94,7 +109,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     Container(
                       height: screenHeight * 0.08,
                       child: username == "1"
-                          ? Text("something went wrong")
+                          ? Text("...")
                           : Text(
                               username,
                               style: TextStyle(
@@ -118,30 +133,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                             alignment: Alignment.center,
                           ),
                   ),
-
-                  /*FutureBuilder(
-                    future: _getImage(context, 'image'),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasError) {
-                        return Container();
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        if (snapshot.hasData) {
-                          return ClipOval(
-                            child: snapshot.data,
-                          );
-                        }
-                      }
-
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Container(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-
-                      return Container();
-                    },
-                  ),*/
                   backgroundColor: Colors.grey[400],
                 ),
                 currentAccountPictureSize:
@@ -274,6 +265,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 onTap: () {
                   setState(() {
                     tappedIndex = 3;
+                     _logout();
+                       
+                    
                   });
                 },
               ),
@@ -366,22 +360,26 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                  'assets/owl.png',
-                                  fit: BoxFit.cover,
-                                ),
+                                avatar == "1"
+                                    ? CircularProgressIndicator()
+                                    : Image.network(
+                                        avatar,
+                                        fit: BoxFit.cover,
+                                      ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
-                                Text(
-                                  'أهلاً، سلطان',
-                                  style: TextStyle(
-                                    fontFamily: 'Cairo',
-                                    color: Colors.white,
-                                    fontSize: 36,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+                                username == "1"
+                                    ? Text("...")
+                                    : Text(
+                                        'أهلاً، $username',
+                                        style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          color: Colors.white,
+                                          fontSize: 36,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
                               ],
                             )),
                         Container(
@@ -512,19 +510,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
             ),
           )),
     );
-  }
-
-  Future<Widget> _getImage(BuildContext context, String image) async {
-    //read the path of image from firestore
-    Image image = Image.network('');
-    await widget.db.loadImage('Avatar', 'animals.png').then((value) {
-      image = Image.network(
-        value.toString(),
-        fit: BoxFit.fill,
-        alignment: Alignment.center,
-      );
-    });
-    return image;
   }
 }
 

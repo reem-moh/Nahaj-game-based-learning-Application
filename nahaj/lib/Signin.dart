@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/homePage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'SignUp.dart';
-import 'child.dart';
 import 'database.dart';
 
 class Signin extends StatefulWidget {
@@ -17,10 +15,10 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   final _key = GlobalKey<FormState>();
 
-  String email = "";
-  String password = "";
-  String username = "";
-  String avatar = "";
+  String email = "reem@gmail.com";
+  String password = "12345678";
+  String username = "1";
+  String avatar = "1";
   double level = 0;
 
   @override
@@ -156,9 +154,9 @@ class _SigninState extends State<Signin> {
                           ),
                           color: Color.fromARGB(255, 129, 190, 255),
                           textColor: Colors.white,
-                          onPressed: () {
+                          onPressed: () async {
                             // if(_key.currentContext.validate())
-                            loginUser();
+                            await loginUser();
 
                             setState(() {
                               Navigator.push(
@@ -247,40 +245,13 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  void loginUser() async {
+  Future<void> loginUser() async {
     dynamic authResutl = await widget.db.loginUser(email, password);
     if (authResutl == null) {
       print("login error");
-      final prefs = await SharedPreferences.getInstance();
-      setState(() {
-        prefs.setString('id', '000000');
-        prefs.setString('username', 'rrrrrrr');
-        prefs.setString('avatar', 'errrror');
-        prefs.setDouble('level', 0);
-      });
     } else {
-      print("log in Successuflly");
-      print('id of user inside loginUser method: ' + authResutl.uid.toString());
-      await _getUserInfo(context, authResutl.uid.toString());
+      print("log in Successuflly, signin page");
+      await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
     }
-  }
-
-  Future<void> _getUserInfo(BuildContext context, String uid) async {
-    String name = '1';
-    String image = '1';
-    double childLevel = 0;
-    //read the path of image from firestore
-    await widget.db.userInfo(uid).then((value) {
-      name = value.username;
-      image = value.avatar;
-      childLevel = value.level;
-    });
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      prefs.setString('id', uid);
-      prefs.setString('username', name);
-      prefs.setString('avatar', image);
-      prefs.setDouble('level', childLevel);
-    });
   }
 }
