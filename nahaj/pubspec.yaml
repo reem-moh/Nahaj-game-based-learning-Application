@@ -29,6 +29,7 @@ dependencies:
   firebase_storage: ^10.0.3
   flutter:
     sdk: flutter
+  focused_menu: ^1.0.5
   shared_preferences: ^2.0.6
 
 dev_dependencies:

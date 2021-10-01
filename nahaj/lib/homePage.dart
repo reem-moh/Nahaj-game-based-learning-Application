@@ -1,3 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
+import 'package:nahaj/addGroup.dart';
+import 'package:nahaj/joinGroup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/category.dart';
@@ -71,7 +76,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       username = "1";
     });
 
-     Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   @override
@@ -265,9 +270,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 onTap: () {
                   setState(() {
                     tappedIndex = 3;
-                     _logout();
-                       
-                    
+                    _logout();
                   });
                 },
               ),
@@ -449,6 +452,59 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
+                                          FocusedMenuHolder(
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                right: 900,
+                                              ),
+                                              child: Icon(
+                                                Icons.add,
+                                                size: 40,
+                                              ),
+                                            ),
+                                            onPressed: () {},
+                                            openWithTap: true,
+                                            menuWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.30,
+                                            menuItems: [
+                                              FocusedMenuItem(
+                                                  title: Text(
+                                                    "إنشاء مجموعة",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                    ),
+                                                  ),
+                                                  trailingIcon:
+                                                      Icon(Icons.group_add),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AddGroup()),
+                                                    );
+                                                  }),
+                                              FocusedMenuItem(
+                                                  title: Text(
+                                                    "انضمام إلى مجموعة",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                    ),
+                                                  ),
+                                                  trailingIcon:
+                                                      Icon(Icons.group),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              JoinGroup()),
+                                                    );
+                                                  }),
+                                            ],
+                                          ),
                                           Text(
                                             ':المجموعات',
                                             style: TextStyle(
@@ -488,9 +544,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             );
                                           },
                                           itemBuilder: (_, i) {
-                                            return i == 3 - 1
-                                                ? AddGroupButton()
-                                                : GroupsCard();
+                                            return GroupsCard();
                                           },
                                           scrollDirection: Axis.horizontal,
                                         ),
@@ -581,11 +635,9 @@ class CategoryCard extends StatelessWidget {
 
 class GroupsCard extends StatefulWidget {
   const GroupsCard({
-    this.groupImage = 'assets/animals.png',
     this.groupName = 'مجموعة',
   });
 
-  final String groupImage;
   final String groupName;
 
   @override
@@ -624,40 +676,6 @@ class _GroupsCardState extends State<GroupsCard> {
           Container(
             child: Text(
               widget.groupName,
-              style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 22,
-                  color: Color.fromARGB(170, 0, 0, 0)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class AddGroupButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print('انشاء مجموعة جديدة');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 130.0,
-            height: 130.0,
-            child: Image.asset(
-              'assets/addGroupButton.png',
-              fit: BoxFit.fill,
-            ),
-          ),
-          Container(
-            child: Text(
-              'إنشاء مجموعة جديدة',
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
