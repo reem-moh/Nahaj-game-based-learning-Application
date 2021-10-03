@@ -35,9 +35,9 @@ class _SigninState extends State<Signin> {
             ),
 
             //mainAxisAlignment: MainAxisAlignment.end,
-
-            SingleChildScrollView(
-              child: Column(
+   ListView(
+              key: _key,
+            
                 children: [
                   /*
                       SizedBox(
@@ -121,6 +121,8 @@ class _SigninState extends State<Signin> {
                       ),
                     ],
                   ),
+
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: Padding(
@@ -136,42 +138,48 @@ class _SigninState extends State<Signin> {
                           },
                         )),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.13,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      child: Container(
-                        margin: EdgeInsets.all(25),
-                        child: FlatButton(
-                          child: Text(
-                            "تسجيل دخول",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
-                          ),
-                          color: Color.fromARGB(255, 129, 190, 255),
-                          textColor: Colors.white,
-                          onPressed: () async {
-                            // if(_key.currentContext.validate())
-                            await loginUser();
 
-                            setState(() {
+Container(
+              margin: EdgeInsets.all(10),
+              height: 60.0,
+              child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 120, vertical: 0),
+              child: RaisedButton(
+                
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    side: BorderSide(color: Color.fromARGB(255, 129, 190, 255))),
+                onPressed: (){
+                  // if(_key.currentContext.validate())
+                            await loginUser();
+                            /*setState(() {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage(
+                                    builder: (context) => SignUp(
                                           db: widget.db,
                                         )),
                               );
-                            });
-                          },
+                            });*/
+                          }, 
+                padding: EdgeInsets.all(0.0),
+                color: Color.fromARGB(255, 129, 190, 255),
+                textColor: Colors.white,
+                child: Text(
+                          "تسجيل الدخول ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
+                            
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
+              ),
+            ),  
+),
+
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.13,
                     child: Container(
@@ -237,7 +245,7 @@ class _SigninState extends State<Signin> {
                     ],
                   ),
                 ],
-              ),
+              
             ),
           ],
         ),
