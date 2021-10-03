@@ -27,133 +27,122 @@ class _SigninState extends State<Signin> {
       body: Container(
         child: Stack(
           children: [
+            //Background
             Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/SignUpSignInbackground.png"),
                       fit: BoxFit.cover)),
             ),
-
-            //mainAxisAlignment: MainAxisAlignment.end,
-   ListView(
+            //listview container
+            ListView(
               key: _key,
-            
-                children: [
-                  /*
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.33,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage("assets/nahajLogo.png"),
-                                  fit: BoxFit.none)),
-                        ),
-                      ),
-*/
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                            width: MediaQuery.of(context).size.width / 1.09,
-                            height: MediaQuery.of(context).size.height / 4.18,
-                            image: AssetImage("assets/nahajLogo.png"))
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                //Nahaj logo
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 150, vertical: 0),
-                          child: Text(
-                            ":البريد الإلكتروني ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
+                      Image(
+                          width: MediaQuery.of(context).size.width / 1.09,
+                          height: MediaQuery.of(context).size.height / 4.18,
+                          image: AssetImage("assets/nahajLogo.png"))
+                    ],
+                  ),
+                ),
+                //Email
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                        child: Text(
+                          ":البريد الإلكتروني ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
                           ),
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                //Email textfield
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (val) {
+                        email = val;
+                      },
+                    ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Padding(
+                ),
+                //Password
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 130, vertical: 0),
+                        child: Text(
+                          ":كلمة السر",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //Password textfield
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
                         onChanged: (val) {
-                          email = val;
+                          password = val;
                         },
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 130, vertical: 0),
-                          child: Text(
-                            ":كلمة السر",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 120, vertical: 0),
-                        child: TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (val) {
-                            password = val;
-                          },
-                        )),
-                  ),
-
-Container(
-              margin: EdgeInsets.all(10),
-              height: 60.0,
-              child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 120, vertical: 0),
-              child: RaisedButton(
-                
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    side: BorderSide(color: Color.fromARGB(255, 129, 190, 255))),
-                onPressed: (){
-                  // if(_key.currentContext.validate())
-                            await loginUser();
-                            /*setState(() {
+                      )),
+                ),
+                //Sign in button
+                Container(
+                  margin: EdgeInsets.all(10),
+                  height: 60.0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
+                    // ignore: deprecated_member_use
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          side: BorderSide(
+                              color: Color.fromARGB(255, 129, 190, 255))),
+                      onPressed: () async {
+                        // if(_key.currentContext.validate())
+                        await loginUser();
+                        /*setState(() {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -162,31 +151,52 @@ Container(
                                         )),
                               );
                             });*/
-                          }, 
-                padding: EdgeInsets.all(0.0),
-                color: Color.fromARGB(255, 129, 190, 255),
-                textColor: Colors.white,
-                child: Text(
-                          "تسجيل الدخول ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                            
-                          ),
+                      },
+                      padding: EdgeInsets.all(0.0),
+                      color: Color.fromARGB(255, 129, 190, 255),
+                      textColor: Colors.white,
+                      child: Text(
+                        "تسجيل الدخول ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 27,
                         ),
-              ),
-            ),  
-),
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.13,
-                    child: Container(
+                      ),
+                    ),
+                  ),
+                ),
+                //Forgot password
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.13,
+                  child: Container(
+                    margin: EdgeInsets.all(25),
+                    // ignore: deprecated_member_use
+                    child: FlatButton(
+                      child: Text(
+                        " نسيت كلمة المرور؟ ",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 6, 106, 212),
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 27,
+                        ),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                //Sign up page button
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
                       margin: EdgeInsets.all(25),
+                      // ignore: deprecated_member_use
                       child: FlatButton(
                         child: Text(
-                          " نسيت كلمة المرور؟ ",
+                          "تسجيل",
                           style: TextStyle(
                             color: Color.fromARGB(255, 6, 106, 212),
                             fontFamily: 'Cairo',
@@ -194,58 +204,38 @@ Container(
                             fontSize: 27,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUp(
+                                        db: widget.db,
+                                      )),
+                            );
+                          });
+                        },
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(25),
-                        child: FlatButton(
-                          child: Text(
-                            "تسجيل",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 6, 106, 212),
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp(
-                                          db: widget.db,
-                                        )),
-                              );
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.07,
-                        child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          child: Text(
-                            " لاتمتلك حساب ؟  ",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                            ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        child: Text(
+                          " لاتمتلك حساب ؟  ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 27,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

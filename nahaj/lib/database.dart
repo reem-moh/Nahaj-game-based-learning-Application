@@ -21,7 +21,7 @@ class DataBase extends ChangeNotifier {
     user = firestore.collection('user');
   }
 
-  //sign up 1
+  //sign up 1 (add the user in Auth)
   Future createNewUser(String name, String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -36,11 +36,11 @@ class DataBase extends ChangeNotifier {
         print('The account already exists for that email, database page');
       }
     } catch (e) {
-      print('database page \n'+ e.toString());
+      print('database page \n' + e.toString());
     }
   }
 
-  //sign up 2
+  //sign up 2 (add the user in Firestore)
   Future<void> addNewUser(String name, String email, String uid) async {
     // Call the user's CollectionReference to add a new user
     return await user
@@ -48,13 +48,14 @@ class DataBase extends ChangeNotifier {
         .set({
           'name': name,
           'email': email,
-          //default values:
+          //default avatar values:
           'avatar':
               "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585",
           'level': 0.0,
         })
         .then((value) => print("User Added, database page"))
-        .catchError((error) => print("database page, Failed to add user: $error"));
+        .catchError(
+            (error) => print("database page, Failed to add user: $error"));
   }
 
   //sign in
@@ -64,10 +65,11 @@ class DataBase extends ChangeNotifier {
           email: email, password: password);
       return result.user;
     } catch (e) {
-      print('database page, '+ e.toString());
+      print('database page, ' + e.toString());
     }
   }
 
+  //Store user info in session
   Future<dynamic> userInfo(String uid) async {
     String name = '1';
     String email = '1';
@@ -75,7 +77,12 @@ class DataBase extends ChangeNotifier {
     double level = 0.0;
 
     await user.doc(uid).get().then((value) {
-      print('read from firestore: \n ' + value.get("email") + ' '+value.get("name") + ' '+ value.get("avatar"));
+      print('read from firestore: \n ' +
+          value.get("email") +
+          ' ' +
+          value.get("name") +
+          ' ' +
+          value.get("avatar"));
       name = value.get('name');
       email = value.get("email");
       avatar = value.get("avatar");
@@ -91,6 +98,7 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
+  //Get avatar image from Firestorage
   Future<dynamic> loadImage(String path, String image) async {
     //path is the folder after the root on storage firebase
     //name of the image with extention
