@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/homePage.dart';
-
 import 'SignUp.dart';
 import 'database.dart';
 
@@ -20,6 +19,8 @@ class _SigninState extends State<Signin> {
   String username = "1";
   String avatar = "1";
   double level = 0;
+  bool valid = false;
+  bool loginErr = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +81,26 @@ class _SigninState extends State<Signin> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      textDirection: TextDirection.rtl,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      onChanged: (val) {
+                      /*onChanged: (val) {
                         email = val;
+                      },*/
+                      validator: (val) {
+                        if (val!.length <= 0) {
+                          valid = false;
+                          return 'هذا الحقل مطلوب';
+                        } else {
+                          valid = true;
+                          email = val;
+                        }
+                        if (loginErr) {
+                          return 'البريد الإلكتروني أو كلمة المرور خاطئة';
+                        }
+                        return null;
                       },
                     ),
                   ),
@@ -118,12 +134,24 @@ class _SigninState extends State<Signin> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        textDirection: TextDirection.rtl,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        onChanged: (val) {
+                        /*onChanged: (val) {
                           password = val;
+                        },*/
+                        validator: (val) {
+                          if (val!.length <= 0) {
+                            valid = false;
+                            return 'هذا الحقل مطلوب';
+                          } else {
+                            valid = true;
+                            password = val;
+                          }
+                          return null;
                         },
                       )),
                 ),
@@ -140,17 +168,23 @@ class _SigninState extends State<Signin> {
                           side: BorderSide(
                               color: Color.fromARGB(255, 129, 190, 255))),
                       onPressed: () async {
+                        loginErr = false;
                         // if(_key.currentContext.validate())
-                        await loginUser();
-                        /*setState(() {
+                        if (valid) {
+                          if (await loginUser()) {
+                            setState(() {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUp(
+                                    builder: (context) => HomePage(
                                           db: widget.db,
                                         )),
                               );
-                            });*/
+                            });
+                          } else {
+                            loginErr = true;
+                          }
+                        }
                       },
                       padding: EdgeInsets.all(0.0),
                       color: Color.fromARGB(255, 129, 190, 255),
@@ -243,13 +277,15 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  Future<void> loginUser() async {
+  Future<bool> loginUser() async {
     dynamic authResutl = await widget.db.loginUser(email, password);
     if (authResutl == null) {
       print("login error");
+      return false;
     } else {
       print("log in Successuflly, signin page");
       await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
+      return true;
     }
   }
 }
