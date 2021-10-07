@@ -501,7 +501,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              JoinGroup()),
+                                                              JoinGroup(   db: widget.db,)),
                                                     );
                                                   }),
                                             ],

@@ -5,6 +5,7 @@ import 'package:nahaj/homepage.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:nahaj/joinGroup.dart';
 import 'package:nahaj/signUp.dart';
 
 import 'SIgnIn.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AddGroup2(
+      home: JoinGroup(
         db: this.database,
       ),
       //MyHomePage(title: 'Nahaj')
