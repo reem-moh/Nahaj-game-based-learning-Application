@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nahaj/addGroup2.dart';
 import 'package:nahaj/homePage.dart';
 import 'database.dart';
 
@@ -37,17 +38,10 @@ class _AddGroup extends State<AddGroup> {
             ListView(
               key: _key,
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //Back button
-                      // ignore: deprecated_member_use
-                      FlatButton(
+
+                   FlatButton(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 0, left: 0),
+                          padding: EdgeInsets.only(top: 20, right: 1050),
                           child:Image(
                             image: AssetImage("assets/PreviosButton.png"),
                             alignment: Alignment.topLeft,
@@ -66,13 +60,38 @@ class _AddGroup extends State<AddGroup> {
                           });
                         },
                       ),
+
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //Back button
+                      // ignore: deprecated_member_use
+                   
                       //Nahaj logo
                        FlatButton(
-                        child: Image(
+                        child: 
+                        /*
+                        Image(
                           width: MediaQuery.of(context).size.width / 1.2,
                           height: MediaQuery.of(context).size.height / 1,
                           image: AssetImage("assets/Groupimage.png"),alignment: Alignment.topCenter,),
-                          
+                          */
+                          Stack(
+    alignment: Alignment.topCenter,
+    children: <Widget>[
+        Container(
+            padding: EdgeInsets.only(top: 40),
+            child: AspectRatio(aspectRatio: 1, child: Image.asset("assets/Groupimage.png", fit: BoxFit.cover),),
+        ),
+        ClipRRect(
+            borderRadius: new BorderRadius.circular(40.0),
+            child: Image.asset("assets/EditImage.png", height: 150, width: 1000),
+        ),
+    ],
+),
                           onPressed: () {
                         changeImage();
                         },
@@ -148,7 +167,7 @@ class _AddGroup extends State<AddGroup> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage(
+                                  builder: (context) => AddGroup2(
                                         db: widget.db,
                                       )),
                             );
