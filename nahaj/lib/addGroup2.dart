@@ -38,12 +38,27 @@ class _AddGroup2 extends State<AddGroup2> {
             ListView(
               key: _key,
               children: [
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+
+                      
+                    ),
                 
+                              Image(
+                          width: MediaQuery.of(context).size.width / 1.09,
+                          height: MediaQuery.of(context).size.height / 4.18,
+                          image: AssetImage("assets/party.png")),
+
+                 SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+
+                      
+                    ),
                     //Name
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: Padding(
-                        padding:EdgeInsets.only(top: 0, left:  0),
+                        padding:EdgeInsets.only(top: 0, left:  450),
                         child: Text(
                           " تم إنشاء المجموعة بنجاح",
                           style: TextStyle(
@@ -61,7 +76,7 @@ class _AddGroup2 extends State<AddGroup2> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: Padding(
-                        padding:EdgeInsets.only(top: 0, left: 0),
+                        padding:EdgeInsets.only(top: 0, left: 530),
                         child: Text(
                           nameoftheGroup+"",
                           style: TextStyle(

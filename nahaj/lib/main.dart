@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:nahaj/signUp.dart';
 
 import 'SIgnIn.dart';
+import 'addGroup2.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AddGroup(
+      home: AddGroup2(
         db: this.database,
       ),
       //MyHomePage(title: 'Nahaj')
