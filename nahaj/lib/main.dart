@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nahaj/addGroup.dart';
 import 'package:nahaj/homepage.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Signin(
+      home: AddGroup(
         db: this.database,
       ),
       //MyHomePage(title: 'Nahaj')

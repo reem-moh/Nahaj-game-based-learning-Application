@@ -484,7 +484,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AddGroup()),
+                                                              AddGroup( db: widget.db,)),
                                                     );
                                                   }),
                                               FocusedMenuItem(
