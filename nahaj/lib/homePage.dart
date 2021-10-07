@@ -76,6 +76,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       username = "1";
     });
 
+    //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
     Navigator.pop(context);
   }
 

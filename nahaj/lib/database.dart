@@ -69,6 +69,15 @@ class DataBase extends ChangeNotifier {
     }
   }
 
+//reset password function (in Auth)
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print('database page, ' + e.toString());
+    }
+  }
+
   //Store user info in session
   Future<dynamic> userInfo(String uid) async {
     String name = '1';

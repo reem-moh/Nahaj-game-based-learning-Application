@@ -20,6 +20,11 @@ class _SignupState extends State<SignUp> {
   String email = "";
   String password = "";
   String repeatedPassword = "";
+  bool validName = false;
+  bool validEmail = false;
+  bool validPass = false;
+  bool validRePass = false;
+  bool loginErr = false;
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +108,30 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         cursorRadius: Radius.circular(50),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        onChanged: (val) {
+                        /*onChanged: (val) {
                           name = val;
+                        },*/
+                        validator: (val) {
+                          if (val!.length <= 0) {
+                            validName = false;
+                            return 'هذا الحقل مطلوب';
+                          } else if (val.length <= 2) {
+                            validName = false;
+                            print("name is not valid");
+                            return 'الإسم يجب أن يكون من ثلاثة أحرف أو أكثر';
+                          } else {
+                            validName = true;
+                            name = val;
+                          }
+                          /*if (loginErr) {
+                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
+                          }*/
+                          return null;
                         },
                       )),
                 ),
@@ -141,12 +164,34 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (val) {
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        /*onChanged: (val) {
+                          email = val;
+                        },*/
+                        validator: (val) {
+                          bool emailValid = RegExp(
+                                  r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                              .hasMatch(val!);
+                          if (val.length <= 0) {
+                            validEmail = false;
+                            return 'هذا الحقل مطلوب';
+                          } else if (!emailValid) {
+                            validEmail = false;
+                            print("email is not valid");
+                            return 'الرجاء إدخال بريد إلكتروني صحيح';
+                          } else if (emailValid) {
+                            validEmail = true;
                             email = val;
-                          })),
+                          }
+                          /*if (loginErr) {
+                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
+                          }*/
+                          return null;
+                        },
+                      )),
                 ),
                 //Password
                 Row(
@@ -176,13 +221,32 @@ class _SignupState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                        onChanged: (val) {
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                      /*onChanged: (val) {
                           password = val;
-                        }),
+                        },*/
+                      validator: (val) {
+                        if (val!.length <= 0) {
+                          validPass = false;
+                          return 'هذا الحقل مطلوب';
+                        } else if (val.length <= 7) {
+                          validPass = false;
+                          print("pass is not valid");
+                          return 'كلمة المرور يجب أن تكون من ٨ أرقام أو أحرف أو أكثر';
+                        } else {
+                          validPass = true;
+                          password = val;
+                        }
+                        /*if (loginErr) {
+                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
+                          }*/
+                        return null;
+                      },
+                    ),
                   ),
                 ),
                 //Repeat password
@@ -214,13 +278,32 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (val) {
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        /*onChanged: (val) {
                             repeatedPassword = val;
-                          })),
+                          },*/
+                        validator: (val) {
+                          if (val!.length <= 0) {
+                            validRePass = false;
+                            return 'هذا الحقل مطلوب';
+                          } else if (val != password) {
+                            validRePass = false;
+                            print("repass is not valid");
+                            return 'كلمة المرور غير متطابقة';
+                          } else if (val == password) {
+                            validRePass = true;
+                            repeatedPassword = val;
+                          }
+                          /*if (loginErr) {
+                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
+                          }*/
+                          return null;
+                        },
+                      )),
                 ),
                 //Sign up button
                 Container(
@@ -264,13 +347,29 @@ class _SignupState extends State<SignUp> {
   }
 
   void createUser(String name, String email, String password) async {
-    dynamic result = await widget.db.createNewUser(name, email, password);
-    if (result == null) {
-      print("email is not valid");
-    } else {
-      print('Sign up page/ createUser!!!!');
-      print(result.toString());
-      Navigator.pop(context);
+    if (validName && validEmail && validPass && validRePass) {
+      dynamic result = await widget.db.createNewUser(name, email, password);
+      if (result == null) {
+        print("Sign up error");
+      } else {
+        print('Sign up page/ createUser!!!!');
+        print(result.toString());
+
+        dynamic authResutl = await widget.db.loginUser(email, password);
+        if (authResutl == null) {
+          print("login error");
+        } else {
+          print("log in Successuflly, signin page");
+          await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      db: widget.db,
+                    )),
+          );
+        }
+      }
     }
   }
 }

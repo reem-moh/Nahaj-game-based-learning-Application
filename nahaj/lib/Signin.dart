@@ -20,6 +20,7 @@ class _SigninState extends State<Signin> {
   String avatar = "1";
   double level = 0;
   bool valid = false;
+  bool vaildEmail = false;
   bool loginErr = false;
 
   @override
@@ -92,9 +93,11 @@ class _SigninState extends State<Signin> {
                       validator: (val) {
                         if (val!.length <= 0) {
                           valid = false;
+                          vaildEmail = false;
                           return 'هذا الحقل مطلوب';
                         } else {
                           valid = true;
+                          vaildEmail = true;
                           email = val;
                         }
                         if (loginErr) {
@@ -217,7 +220,11 @@ class _SigninState extends State<Signin> {
                           fontSize: 27,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (vaildEmail && email.isNotEmpty) {
+                          await widget.db.resetPassword(email);
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -277,6 +284,7 @@ class _SigninState extends State<Signin> {
     );
   }
 
+  //sign in function
   Future<bool> loginUser() async {
     dynamic authResutl = await widget.db.loginUser(email, password);
     if (authResutl == null) {
