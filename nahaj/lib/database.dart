@@ -13,12 +13,13 @@ class DataBase extends ChangeNotifier {
   late FirebaseStorage firestorage;
   //contain the user account info
   late CollectionReference user;
-
+  late CollectionReference Groups;
   DataBase() {
     firestore = FirebaseFirestore.instance;
     firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
     user = firestore.collection('user');
+    Groups = firestore.collection('Groups');
   }
 
   //sign up 1 (add the user in Auth)
