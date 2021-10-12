@@ -11,11 +11,21 @@ public class PourLiquid : MonoBehaviour {
     public BottleSmash smashScript;
     public LiquidVolumeAnimator liquid;
     public Transform controllingTransform;
-    public ParticleSystem pouringParticleSystem;
+    public GameObject particleSystem;
+    private ParticleSystem pouringParticleSystem;
+
     //how many particles it takes to empty
     public float volumeOfParticles = 70.0f;
     private Rigidbody corkRB;
+
+    //pouring animator
+    Animator anim;
+
 	void Start () {
+
+        anim = gameObject.GetComponent<Animator>();
+        pouringParticleSystem = particleSystem.GetComponent<ParticleSystem>();
+
         if (smashScript != null)
         {
             if (smashScript.Cork != null)
@@ -27,17 +37,12 @@ public class PourLiquid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(corkRB != null)
-        {
-            if (corkRB.isKinematic)
-                return;
-            else if (!corkRB.gameObject.activeInHierarchy)
-                return;
-        }
-
-        float d = Vector3.Dot(controllingTransform.up, (liquid.finalPoint  - liquid.finalAnchor).normalized);
-        float d2 = (d + 1.0f) / 2;
-        float particleVal = 0.0f;
+        //activate pouring animation on click
+        if (Input.GetMouseButtonDown(0)){     
+            anim.SetTrigger("Active");
+            float d = Vector3.Dot(controllingTransform.up, (liquid.finalPoint  - liquid.finalAnchor).normalized);
+            float d2 = (d + 1.0f) / 2;
+            float particleVal = 0.0f;
         if(d2 < liquid.level)
         {
             particleVal = (liquid.level - d2) * rateOfFlow;
@@ -46,10 +51,10 @@ public class PourLiquid : MonoBehaviour {
         if(d <= 0.0f)
         {
             if(liquid.level > float.Epsilon)
-                particleVal = liquid.level;
+            particleVal = liquid.level;
             liquid.level = Mathf.Lerp(liquid.level, 0, Time.deltaTime * rateOfFlow);
         }
-        if(pouringParticleSystem != null)
+            if(pouringParticleSystem != null)
         {
             ParticleSystem.MinMaxCurve emi = pouringParticleSystem.emission.rateOverTime;
             emi.constant = volumeOfParticles * particleVal;
@@ -66,8 +71,10 @@ public class PourLiquid : MonoBehaviour {
             else
             {
                 pouringParticleSystem.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-            }
+                anim.SetTrigger("Inactive");
+            }  
         }
-		
 	}
+    
+}
 }
