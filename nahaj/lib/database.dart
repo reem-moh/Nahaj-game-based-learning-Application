@@ -5,18 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+FirebaseStorage firestorage = FirebaseStorage.instance;
+
 class DataBase extends ChangeNotifier {
   late FirebaseAuth _auth;
   //for data
-  late FirebaseFirestore firestore;
+  //late FirebaseFirestore firestore;
   //for images and videos
-  late FirebaseStorage firestorage;
+  //late FirebaseStorage firestorage;
   //contain the user account info
   late CollectionReference user;
   late CollectionReference Groups;
   DataBase() {
-    firestore = FirebaseFirestore.instance;
-    firestorage = FirebaseStorage.instance;
+    // firestore = FirebaseFirestore.instance;
+    //firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
     user = firestore.collection('user');
     Groups = firestore.collection('Groups');

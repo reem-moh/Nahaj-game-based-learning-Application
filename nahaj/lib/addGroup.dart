@@ -210,14 +210,32 @@ class _AddGroup extends State<AddGroup> {
   }
 
   void createGroup(String name, String uid, DataBase db) async {
+    String Code = "";
     if (validName) {
-      String groupId = Uuid().v1();
-      await db.Groups.doc(groupId).set({
-        "id": groupId,
-        "name": name,
-        "CreatorName": username,
-        "CraetorId": uid,
-      });
+      await firestore
+          .collection('GroupCode')
+          .doc("j8hFFCEFw1DMpeH8p91y")
+          .get()
+          .then((value) {
+        print('read from firestore: \n ' + value.get("Code"));
+        Code = value.get('membersCounter');
+      }).catchError((error) => print("Failed to get code: $error"));
+
+      var i = int.parse(Code) * 5 - 23;
+
+      Code = i.toString().substring(0, 6);
+
+      firestore
+          .collection('Groups')
+          .add({
+            "Code": Code,
+            "name": name,
+            "CreatorName": username,
+            "CraetorId": uid,
+            "membersCounter": "1",
+          })
+          .then((value) => print("Group created"))
+          .catchError((error) => print("Failed to create group: $error"));
     }
   }
 
