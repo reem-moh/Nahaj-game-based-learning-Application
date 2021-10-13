@@ -545,7 +545,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             );
                                           },
                                           itemBuilder: (_, i) {
-                                            return GroupsCard();
+                                            return GroupsCard(db: widget.db,);
                                           },
                                           scrollDirection: Axis.horizontal,
                                         ),
@@ -635,11 +635,15 @@ class CategoryCard extends StatelessWidget {
 }
 
 class GroupsCard extends StatefulWidget {
-  const GroupsCard({
-    this.groupName = 'مجموعة',
-  });
 
-  final String groupName;
+  final DataBase db;
+  GroupsCard({Key? key, required this.db}) : super(key: key);
+
+  
+  //Group({Key? key, required this.db}) : super(key: key);
+
+
+  //final String groupName;
 
   @override
   State<GroupsCard> createState() => _GroupsCardState();
@@ -654,7 +658,7 @@ class _GroupsCardState extends State<GroupsCard> {
           print('مجموعة');
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Group()),
+            MaterialPageRoute(builder: (context) => Group(db: widget.db)),
           );
         });
       },
@@ -676,7 +680,7 @@ class _GroupsCardState extends State<GroupsCard> {
           ),
           Container(
             child: Text(
-              widget.groupName,
+              "widget.groupName",
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,

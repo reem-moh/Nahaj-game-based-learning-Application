@@ -3,7 +3,6 @@ import 'package:nahaj/addGroup2.dart';
 import 'package:nahaj/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'database.dart';
-import 'package:uuid/uuid.dart';
 
 class AddGroup extends StatefulWidget {
   final DataBase db;
