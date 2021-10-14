@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
@@ -484,7 +485,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              AddGroup( db: widget.db,)),
+                                                              AddGroup(
+                                                                db: widget.db,
+                                                              )),
                                                     );
                                                   }),
                                               FocusedMenuItem(
@@ -501,7 +504,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              JoinGroup(   db: widget.db,)),
+                                                              JoinGroup(
+                                                                db: widget.db,
+                                                              )),
                                                     );
                                                   }),
                                             ],
@@ -536,7 +541,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         height: 180.0,
                                         child: ListView.separated(
                                           reverse: true,
-                                          itemCount: 3,
+                                          itemCount: 1,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
@@ -545,7 +550,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             );
                                           },
                                           itemBuilder: (_, i) {
-                                            return GroupsCard(db: widget.db,);
+                                            return GroupsCard(
+                                              db: widget.db,
+                                            );
                                           },
                                           scrollDirection: Axis.horizontal,
                                         ),
@@ -635,13 +642,11 @@ class CategoryCard extends StatelessWidget {
 }
 
 class GroupsCard extends StatefulWidget {
-
   final DataBase db;
+  String nameOfTheGroup = "";
   GroupsCard({Key? key, required this.db}) : super(key: key);
 
-  
   //Group({Key? key, required this.db}) : super(key: key);
-
 
   //final String groupName;
 
@@ -650,6 +655,14 @@ class GroupsCard extends StatefulWidget {
 }
 
 class _GroupsCardState extends State<GroupsCard> {
+  String id = "";
+  Future<void> _getInfoFromSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      id = (prefs.getString('id') ?? "1");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -675,12 +688,15 @@ class _GroupsCardState extends State<GroupsCard> {
             ),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                  'https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585'),
             ),
           ),
           Container(
             child: Text(
-              "widget.groupName",
+              //  getGroupName(id).toString() == "مجموعة ١١"
+              //    ? getGroupName(id).toString()
+              //   : "مجموعة ١١",
+              "الابطال",
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
@@ -692,4 +708,29 @@ class _GroupsCardState extends State<GroupsCard> {
       ),
     );
   }
+
+  /* Future<String> getGroupName(String uid) async {
+    String nameOfTheGroup = "";
+    /*await firestore
+        .collection('Groups')
+        .where("CraetorId", isEqualTo: uid)
+        .get()
+    .then((value){
+            nameOfTheGroup = value.docs;
+          }).catchError((error) => print("Failed to get code: $error"));*/
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('Groups')
+        .where("CraetorId", isEqualTo: uid)
+        .get();
+    List<QueryDocumentSnapshot> docs = snapshot.docs;
+    for (var doc in docs) {
+      if (doc.data() != null) {
+        var data = doc.data() as Map<String, dynamic>;
+        nameOfTheGroup = await data['name'].toString();
+        print("group name" + nameOfTheGroup);
+        return nameOfTheGroup;
+      }
+    }
+    return nameOfTheGroup;
+  }*/
 }

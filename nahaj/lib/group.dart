@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'database.dart';
 
 class Group extends StatefulWidget {
-final DataBase db;
+  final DataBase db;
   const Group({Key? key, required this.db}) : super(key: key);
 
   @override
@@ -11,15 +13,31 @@ final DataBase db;
 }
 
 class _Group extends State<Group> {
-    final _key = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
 
-    String nameOfTheGroup = "مجموعة 1";
+  String nameOfTheGroup = "مجموعة 1";
 
-    
+  String name = "";
+  bool validName = false;
+  String username = "1";
+  String uid = "0";
+
+  Future<void> _getInfoFromSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = (prefs.getString('username') ?? "1");
+      print('username inside getinfo from addGroup:' + username);
+      uid = (prefs.getString('id') ?? "1");
+      print('id inside getinfo from addGroup:' + uid);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    _getInfoFromSession();
+    getGroupName(uid);
+
     return Scaffold(
-      
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,68 +54,48 @@ class _Group extends State<Group> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-
-
-
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.13,),
-                  
-
-   FlatButton(
-                 child: Image(
-
-                    image: AssetImage("assets/Group13.png"),
-                    alignment: Alignment.topLeft,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.13,
                   ),
-                
-                onPressed: () {
+                  // ignore: deprecated_member_use
+                  FlatButton(
+                    child: Image(
+                      image: AssetImage("assets/Group13.png"),
+                      alignment: Alignment.topLeft,
+                    ),
+                    onPressed: () {
 // description of the group
-                },
-              ),
-
-
-
-Container(
-  margin:  EdgeInsets.only( right: 30.0),
-  child:   Text(
-                           nameOfTheGroup,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 27,
-                              
-                            ),
-                          ),
-),
-
- Container(
-            width: 120.0,
-            height: 120.0,
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey[350],
-            ),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
-            ),
-          ),
-
-
-
-
+                    },
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 30.0),
+                    child: Text(
+                      nameOfTheGroup,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 27,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 120.0,
+                    height: 120.0,
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey[350],
+                    ),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                    ),
+                  ),
                 ],
               )
             ],
           ),
-
-
-
-
-
-
-
           Stack(
             children: [
               Container(
@@ -109,36 +107,32 @@ Container(
                 ),
               ),
               //list view
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            left: 30.0, right: 30.0),
-                                        height: 280,
-                                        child: ListView.separated(
-                                          itemCount: 3,
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return SizedBox(
-                                              width: 25,
-                                            );
-                                          },
-                                          itemBuilder: (_, i) {
-                                            return Container(
-                width: MediaQuery.of(context).size.width,
-                height: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Color.fromARGB(255, 8, 128, 174),
+              Container(
+                margin: EdgeInsets.only(left: 30.0, right: 30.0),
+                height: 280,
+                child: ListView.separated(
+                  itemCount: 3,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: 25,
+                    );
+                  },
+                  itemBuilder: (_, i) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Color.fromARGB(255, 8, 128, 174),
+                      ),
+                    );
+                  },
+                  scrollDirection: Axis.vertical,
                 ),
-              );
-                                          },
-                                          scrollDirection: Axis.vertical,
-                                        ),
-                                      ),
+              ),
             ],
           ),
-
-             Stack(
+          Stack(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -149,20 +143,39 @@ Container(
                 ),
               ),
               Row(
-                children: [
-
-                ],
+                children: [],
               )
             ],
           ),
         ],
       ),
-   
     );
   }
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  Future<void> getGroupName(String uid) async {
+    nameOfTheGroup = "";
+    /*await firestore
+        .collection('Groups')
+        .where("CraetorId", isEqualTo: uid)
+        .get()
+    .then((value){
+            nameOfTheGroup = value.docs;
+          }).catchError((error) => print("Failed to get code: $error"));*/
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('Groups')
+        .where("CraetorId", isEqualTo: uid)
+        .get();
+    List<QueryDocumentSnapshot> docs = snapshot.docs;
+    for (var doc in docs) {
+      if (doc.data() != null) {
+        var data = doc.data() as Map<String, dynamic>;
+        nameOfTheGroup = await data['name'].toString();
+      }
+    }
+  }
 }
-
-
 
 /*
           Column(

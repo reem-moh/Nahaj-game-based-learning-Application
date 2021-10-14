@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:nahaj/addGroup2.dart';
 import 'package:nahaj/homePage.dart';
@@ -93,7 +95,7 @@ class _AddGroup extends State<AddGroup> {
                             padding: EdgeInsets.only(top: 40),
                             child: AspectRatio(
                               aspectRatio: 1,
-                              child: Image.asset("assets/Groupimage.png",
+                              child: Image.asset("assets/owl1.png",
                                   fit: BoxFit.cover),
                             ),
                           ),
@@ -211,32 +213,33 @@ class _AddGroup extends State<AddGroup> {
   void createGroup(String name, String uid, DataBase db) async {
     String Code = "";
     if (validName) {
-      await firestore
+      /*await firestore
           .collection('GroupCode')
           .doc("j8hFFCEFw1DMpeH8p91y")
           .get()
           .then((value) {
         print('read from firestore: \n ' + value.get("Code"));
         Code = value.get('membersCounter');
-      }).catchError((error) => print("Failed to get code: $error"));
+      }).catchError((error) => print("Failed to get code: $error"));\*/
 
-      var i = int.parse(Code) * 5 - 23;
+      // var i = int.parse(Code) * 5 - 23;
 
-      Code = i.toString().substring(0, 6);
+      //Code = i.toString().substring(0, 6);
 
       firestore
           .collection('Groups')
           .add({
-            "Code": Code,
+            "Code": 5556,
             "name": name,
             "CreatorName": username,
             "CraetorId": uid,
             "membersCounter": "1",
+            "members": List,
           })
           .then((value) => print("Group created"))
           .catchError((error) => print("Failed to create group: $error"));
     }
   }
-
-  void changeImage() async {}
 }
+
+void changeImage() async {}

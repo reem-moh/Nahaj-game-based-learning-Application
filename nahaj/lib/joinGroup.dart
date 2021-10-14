@@ -185,8 +185,9 @@ ToJoinGroup(String groupId, String userModel) async {
 
   if (int.parse(membersCounter) < 20 && int.parse(membersCounter) != 0) {
     var NweMember = "member$membersCounter";
-    firestore.collection("Groups").doc("fbFCVDbnwQwlY476HVL0").set(
-        {NweMember: userModel, "membersCounter": int.parse(membersCounter) + 1},
-        SetOptions(merge: true));
+    firestore.collection("Groups").doc("fbFCVDbnwQwlY476HVL0").set({
+      "members": FieldValue.arrayUnion(userModel as List<String>),
+      "membersCounter": int.parse(membersCounter) + 1
+    }, SetOptions(merge: true));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nahaj/Signin.dart';
 import 'package:nahaj/addGroup.dart';
 import 'package:nahaj/group.dart';
 import 'package:nahaj/homepage.dart';
@@ -8,8 +9,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:nahaj/joinGroup.dart';
 import 'package:nahaj/signUp.dart';
-
-import 'SIgnIn.dart';
 import 'addGroup2.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -38,10 +37,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Group(
+      home: Signin(
         db: this.database,
       ),
-      //MyHomePage(title: 'Nahaj')
+      /*AddGroup2(
+        db: this.database,
+      ),*/
+      //MyHomePage(title: 'Nahaj'),
     );
   }
 }
