@@ -37,7 +37,7 @@ class RouteGenerator {
       case '/AddGroup':
         return MaterialPageRoute(builder: (context) => AddGroup( db: this.db,));
       case '/Group':
-        return MaterialPageRoute(builder: (context) => Group(db: this.db,));
+        return MaterialPageRoute(builder: (context) => Group());
       case '/Category':
         return MaterialPageRoute(builder: (context) => Category());
       default:

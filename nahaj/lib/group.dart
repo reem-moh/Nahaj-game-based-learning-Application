@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'database.dart';
 
 class Group extends StatefulWidget {
-  final DataBase db;
-  const Group({Key? key, required this.db}) : super(key: key);
+  //final DataBase db;
+  const Group({Key? key, /*required this.db*/}) : super(key: key);
 
   @override
   _Group createState() => _Group();

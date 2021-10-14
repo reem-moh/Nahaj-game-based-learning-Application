@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:nahaj/Signin.dart';
 import 'package:nahaj/addGroup.dart';
+import 'package:nahaj/child.dart';
 import 'package:nahaj/joinGroup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   String avatar = "1";
   String username = "1";
+  String userId = "1";
 
   @override
   void initState() {
@@ -60,6 +63,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     setState(() {
       avatar = (prefs.getString('avatar') ?? "1");
       username = (prefs.getString('username') ?? "1");
+      userId = (prefs.getString('id') ?? "1");
       print('username inside getinfo from homepage:' + username);
       print('avatar inside getinfo from homepage:' + avatar);
     });
@@ -78,7 +82,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     });
 
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
-    Navigator.pop(context);
+    Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Signin(
+                                        db: widget.db,
+                                      )),
+                            );
+  }
+   List<Groups> groups = [];
+  Future<void> getGroups(String uid) async {
+    groups = await widget.db.getGroups(uid);
   }
 
   @override
@@ -86,7 +100,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
-
+getGroups(userId);
     return Scaffold(
       backgroundColor: backgroundColorOfSideBar,
       body: Stack(
@@ -541,7 +555,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         height: 180.0,
                                         child: ListView.separated(
                                           reverse: true,
-                                          itemCount: 1,
+                                          itemCount: groups.length,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
@@ -551,7 +565,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           },
                                           itemBuilder: (_, i) {
                                             return GroupsCard(
-                                              db: widget.db,
+                                              groupName:
+                                                  groups.elementAt(i).groupName,
                                             );
                                           },
                                           scrollDirection: Axis.horizontal,
@@ -641,28 +656,19 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
+
 class GroupsCard extends StatefulWidget {
-  final DataBase db;
-  String nameOfTheGroup = "";
-  GroupsCard({Key? key, required this.db}) : super(key: key);
+  const GroupsCard({
+    this.groupName = 'مجموعة',
+  });
 
-  //Group({Key? key, required this.db}) : super(key: key);
-
-  //final String groupName;
+  final String groupName;
 
   @override
   State<GroupsCard> createState() => _GroupsCardState();
 }
 
 class _GroupsCardState extends State<GroupsCard> {
-  String id = "";
-  Future<void> _getInfoFromSession() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      id = (prefs.getString('id') ?? "1");
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -671,7 +677,7 @@ class _GroupsCardState extends State<GroupsCard> {
           print('مجموعة');
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Group(db: widget.db)),
+            MaterialPageRoute(builder: (context) => Group()),
           );
         });
       },
@@ -688,15 +694,12 @@ class _GroupsCardState extends State<GroupsCard> {
             ),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585'),
+                  'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
             ),
           ),
           Container(
             child: Text(
-              //  getGroupName(id).toString() == "مجموعة ١١"
-              //    ? getGroupName(id).toString()
-              //   : "مجموعة ١١",
-              "الابطال",
+              widget.groupName,
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
@@ -708,29 +711,4 @@ class _GroupsCardState extends State<GroupsCard> {
       ),
     );
   }
-
-  /* Future<String> getGroupName(String uid) async {
-    String nameOfTheGroup = "";
-    /*await firestore
-        .collection('Groups')
-        .where("CraetorId", isEqualTo: uid)
-        .get()
-    .then((value){
-            nameOfTheGroup = value.docs;
-          }).catchError((error) => print("Failed to get code: $error"));*/
-    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
-        .collection('Groups')
-        .where("CraetorId", isEqualTo: uid)
-        .get();
-    List<QueryDocumentSnapshot> docs = snapshot.docs;
-    for (var doc in docs) {
-      if (doc.data() != null) {
-        var data = doc.data() as Map<String, dynamic>;
-        nameOfTheGroup = await data['name'].toString();
-        print("group name" + nameOfTheGroup);
-        return nameOfTheGroup;
-      }
-    }
-    return nameOfTheGroup;
-  }*/
 }
