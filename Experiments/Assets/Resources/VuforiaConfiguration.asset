@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
+  m_Script: {fileID: 0}
   m_Name: VuforiaConfiguration
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine:Vuforia:VuforiaConfiguration
   vuforia:
-    vuforiaLicenseKey: AQIju4L/////AAABmXOr9AVuG07znjgXQtsZGNaFes0pFiRo6f7wy4OVHNExhYUjD6k/+4g0Lsqpm2fAOKo4MLHy6MqcOsksRuamqDukZZ+Gr34V8sxfQziWZ/skNT8yHYXXBG4QaAm5I1MnPU0URfNEOYrHFbrrWRCK+UPklDmioTriv5/2bHTGssQOnIlflHrYL79htcClFm6w8kaZFPzosekfl8F5ZYAlJtHEk5GyxfH+MWszHqo75sD5JIAKhJhCGbwspO32QpRTgyvJxbbljYFobS5u+3G7H6+eNxGYVwYXvPa9tvxXcw/UJH3Nmskhq9r+6JhaX8LZIgfAjvSr08KIGmflFGSqn+WUilvi+nK1yVidhTRyD/ve
-    ufoLicenseKey: QWZPTTNIYi8vLy8vQUFBQUtPUzlOTjNqaEVuN3B0QjI4WFNjQVZwc0xaemxEVzR0NDVvRHN3bGN5TFBhOEY4UUFSRXFKNG1HdWZVai9vaG1vRTdKWGFKVU1QUWRUdU1nYzZiMFZHeThmVjdiV0hhVHJtUkR4TDdXdWFiN1dVZldPWklDcEgvbHUyWmJCa1gzeHQxc0dzUk8vaU0yeVlXQ3ZVWUl6UStKc05qb0JpODl1VU4vTFdsdXd2UVJNdjd2aEZ6R1NudlA4T0dFSmc4V3FFVnVqbmo3R3d2dEw5ODcvaklxa2tRM1huN0hYdnNoUTg1Z3hCR0hQaVpSaFcvb25qaG9MZjhaK2tMdE1kMkJ1bW5PbzgxbkxlcG1GT2M5a3ZybmxqZEtGYW9nY3lvT0FvRThiYnVIOUU4WWM2TkxZeFp4T0daUXZ2UW43QjdVeStWaFd0UzArbUpnNVJKc2NFcnNHNnVnZVN0WjhPeE1XTm5YQWJCQmZjSXY=
+    vuforiaLicenseKey: 
+    ufoLicenseKey: QVVPaklGci8vLy8vQUFBQUtNVmlrajd5cDB0dHM2ZDhZY2h0UTdwajNpUmtjUXQwbmRIQUZSOERxamVpZ1NuMUc3S2I2dmgzWVFmQkNHL2FVNGsvYjcwVGlMTFFMOWl0eTB5elMzeVRJVUxTUjZWbEgzMUZRNS9wY3J4QzhkVnFVWTNlelNpOG9xcTR0aUg4OXh3ZUdNK29RendLNzN6V3NwMWpsN2JkRWdkazhTdmpwRExSUXNtMUtET2w1MCtKWlFicExpRTF0U3A4SmowdlNtOUUzUTN2N1lZMDB3Mk01Q0w1NlVPZk9yaDBHYVA5cGZxSHJmSmcvSk1IOGZXOFR2RUJmL21udEVqc3haUk85Q2p6RFNqdno1OE51bjhPR3BRTDFUSXhrNERPMWM3KzhoOWFZS3I4VEJ5dmRFNXZRSUozQVZhQkErdEljZ3JSdFp4b2ErcW1reUY2MFB2ZzRKQkg4UFlWbUJpUjF1Q3l0c2JnZ3AyQ3ZmU1I=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
     shareRecordingsInITunes: 0
-    version: 10.2.5
+    version: 1.0.0
     eulaAcceptedVersions: '{"Values":["10.2"]}'
   database:
     disableModelExtraction: 0

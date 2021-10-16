@@ -21,13 +21,13 @@ public class fillLiquidOnBottle : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
                 {
             
-                 liquidSize.SetTrigger("PourActivate");
+                // liquidSize.SetTrigger("PourActivate");
 
                  }
-                 
+          */       
         /*if(doneLiquidSize && !beginPourWater){
             //check user put on wrong position
             if(InkBottleLiquid.GetComponent<Transform>().position.y == 100){
