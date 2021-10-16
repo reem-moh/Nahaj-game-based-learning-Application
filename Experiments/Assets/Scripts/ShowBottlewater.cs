@@ -19,7 +19,10 @@ public class ShowBottlewater : MonoBehaviour
     }
 
     void ShowWater(){
-        waterIsEnabled ^= true;
-        water.SetActive(waterIsEnabled);
+        if(water != null){
+         waterIsEnabled ^= true;
+         water.SetActive(waterIsEnabled);
+        }
+        
     }
 }
