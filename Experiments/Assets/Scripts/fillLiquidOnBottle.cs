@@ -1,78 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Touch;
 
 public class fillLiquidOnBottle : MonoBehaviour
 {
-    Animator liquidSize;
+    //lean touch script
+    private LeanDragTranslate drag;
 
-    [SerializeField] private GameObject InkBottleLiquid;
+    private Animator pourLiquid;
 
-    bool doneLiquidSize;
-    bool beginPourWater;
- 
-    void Start()
+    void Start ()
     {
-        liquidSize = gameObject.GetComponent<Animator>();
-        doneLiquidSize = false;
-        beginPourWater = false;
+        drag = gameObject.GetComponent<LeanDragTranslate>();
+        pourLiquid = gameObject.GetComponent<Animator>();
     }
 
-    void Update()
-    {
+    
+   
+    void OnCollisionEnter(Collision other){
+        Debug.Log("\nOnCollisionEnter");
+        if (other.gameObject.CompareTag("Cube"))
+        {
+            Debug.Log("Triggered by Cube from water bottle");
 
-        if (Input.GetMouseButtonDown(0))
-                {
+            //change the position of bottle above the volcano
+            gameObject.GetComponent<Transform>().position = new Vector3(-0.403f, 0.38f, 0f);
+
             
-                 liquidSize.SetTrigger("PourActivate");
-
-                 }
-                 
-        /*if(doneLiquidSize && !beginPourWater){
-            //check user put on wrong position
-            if(InkBottleLiquid.GetComponent<Transform>().position.y == 100){
-                print("inside position y = 100");
-                //liquidSize.SetTrigger("wrongSize");
-                liquidSize.SetTrigger("rightSize");
-                beginPourWater = true;
-
-                doneLiquidSize = false;
-            }else{
-                print("inside position y != 100");
-                liquidSize.SetTrigger("rightSize");
-            }
-
-        }else{
-
-            if(!doneLiquidSize){
-                if(Input.touchCount>0){
-
-
-                }
-                if (Input.GetMouseButtonDown(0))
-                {
-            
-                 liquidSize.SetTrigger("isEnabled");
-
-                 }
-            }
-
-            if(beginPourWater){
-                if (Input.GetMouseButtonDown(0))
-                {
-            
-                 liquidSize.SetTrigger("PourActivate");
-
-                 }
-
+            if(drag.enabled){
+             //turn off lean scribts to not let user move bottle
+                disableDrag();
+              //pour liquid 
+                enableAnimation();
             }
             
-        }*/
-
+        }
+        
     }
 
-    //method invoke when user press on right place
-    public void endLiquidSize(){
-        doneLiquidSize = true;
+    void disableDrag(){
+        Debug.Log("\n\n\n*****Disable lean touch*****\n\n\n");
+        drag.enabled = false;
+    }
+
+    void enableAnimation(){
+        Debug.Log("\n\n\n*****Pour liquid*****\n\n\n");
+        pourLiquid.SetTrigger("isCollider");
+    }
+
+    void distroy(){
+        Object.Destroy(gameObject, 2.0f);
     }
 }

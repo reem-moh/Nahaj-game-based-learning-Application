@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShowBottlewater : MonoBehaviour
 {
     [SerializeField] private GameObject water;
+    [SerializeField] private NextInstruction nextInstruction;
 
     private bool waterIsEnabled;
 
@@ -19,7 +20,11 @@ public class ShowBottlewater : MonoBehaviour
     }
 
     void ShowWater(){
-        waterIsEnabled ^= true;
-        water.SetActive(waterIsEnabled);
+        if(water != null /*&& nextInstruction.instructionIsEnabled3*/){
+         waterIsEnabled ^= true;
+         water.SetActive(waterIsEnabled);
+
+        }
+        
     }
 }

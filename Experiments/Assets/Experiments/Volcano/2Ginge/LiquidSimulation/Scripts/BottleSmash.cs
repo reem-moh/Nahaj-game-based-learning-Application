@@ -103,7 +103,7 @@ public class BottleSmash : MonoBehaviour {
 
     public void Smash()
     {
-        
+        /*
         broken = true;
         //the Corks collider needs to be turned on;
         if (Cork != null)
@@ -158,6 +158,7 @@ public class BottleSmash : MonoBehaviour {
             
         }
         Destroy(transform.gameObject, DespawnTime);
+        */
 
     }
 	// Update is called once per frame, for the change in velocity and all that jazz...

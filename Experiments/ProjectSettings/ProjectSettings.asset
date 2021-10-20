@@ -689,7 +689,13 @@ PlayerSettings:
   activeInputHandler: 0
   cloudProjectId: 3967c4d5-c93a-4627-b019-6935692b6ad0
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: Experiments
   organizationId: reemalgabani
   cloudEnabled: 0
