@@ -7,9 +7,6 @@ public class ShowBottleBakingSoda : MonoBehaviour
 {
     [SerializeField] private GameObject bakingSoda;
     [SerializeField] private NextInstruction nextInstruction;
-    private float timer = 0.0f;
-    private float timerMax = 0.0f;
-
 
     private bool bakingSodaIsEnabled;
 
@@ -23,26 +20,11 @@ public class ShowBottleBakingSoda : MonoBehaviour
     }
 
     void ShowBakingSoda(){
-        if(bakingSoda != null && nextInstruction.instructionIsEnabled7){
-        bakingSodaIsEnabled ^= true;
-        bakingSoda.SetActive(bakingSodaIsEnabled);
-        nextInstruction.clickable= false;
-        //if (Waited(20.0f)){
-            //nextInstruction.instructionIsEnabled4 = true;
-        //}
+        if(bakingSoda != null){
+            bakingSodaIsEnabled ^= true;
+            bakingSoda.SetActive(bakingSodaIsEnabled);
         }
+        
     }
-    private bool Waited(float seconds){
-     timerMax = seconds;
- 
-     timer += Time.deltaTime;
- 
-    if (timer >= timerMax)
-    {
-        return true; //max reached - waited x - seconds
-    }
- 
-    return false;
-}
 }
 

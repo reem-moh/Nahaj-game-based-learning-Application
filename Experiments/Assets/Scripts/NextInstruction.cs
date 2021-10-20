@@ -8,8 +8,6 @@ public class NextInstruction : MonoBehaviour
     [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7;
     [HideInInspector]
     public bool instructionIsEnabled1, instructionIsEnabled2,instructionIsEnabled3,instructionIsEnabled4,instructionIsEnabled5,instructionIsEnabled6,instructionIsEnabled7;
-    [HideInInspector]
-    public bool clickable = true;
     
     // Start is called before the first frame update
     void Start()
@@ -32,46 +30,41 @@ public class NextInstruction : MonoBehaviour
     }
 
     void ShowInstruction(){
-        if(instructionIsEnabled1 && clickable && instruction1!=null && instruction2!=null){
+        if(instructionIsEnabled1 && instruction1!=null && instruction2!=null){
             instructionIsEnabled1 = false;
             instructionIsEnabled2 = true;
             instruction1.SetActive(instructionIsEnabled1);
             instruction2.SetActive(instructionIsEnabled2);
-        }else if (instructionIsEnabled2 && clickable && instruction2!=null && instruction3!=null)
+        }else if (instructionIsEnabled2 && instruction2!=null && instruction3!=null)
         {
             instructionIsEnabled2 = false;
             instructionIsEnabled3 = true;
             instruction2.SetActive(instructionIsEnabled2);
             instruction3.SetActive(instructionIsEnabled3);
-            clickable = false;
-        }else if (instructionIsEnabled3 && clickable && instruction3!=null)
+        }else if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
         {
             instructionIsEnabled3 = false;
+            //instructionIsEnabled4 = true;
             instruction3.SetActive(instructionIsEnabled3);
-            clickable= false;
-        }else if (instructionIsEnabled4 && clickable && instruction4!=null)
-        {
             instruction4.SetActive(instructionIsEnabled4);
-            instructionIsEnabled4 = false;
-            clickable=false;
-        }else if (instructionIsEnabled5 && clickable && instruction5!=null)
+        }else if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
         {
+            instructionIsEnabled4 = false;
+            //instructionIsEnabled5 = true;
             instruction4.SetActive(instructionIsEnabled4);
             instruction5.SetActive(instructionIsEnabled5);
-            instructionIsEnabled5 = false;
-            clickable=false;
-        }else if (instructionIsEnabled6 && clickable && instruction6!=null)
+        }else if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
         {
+            instructionIsEnabled5 = false;
+            //instructionIsEnabled6 = true;
             instruction5.SetActive(instructionIsEnabled5);
             instruction6.SetActive(instructionIsEnabled6);
-            instructionIsEnabled6 = false;
-            clickable=false;
-        }else if (instructionIsEnabled7 && clickable && instruction7!=null)
+        }else if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
         {
+            instructionIsEnabled6 = false;
+            //instructionIsEnabled7 = true;
             instruction6.SetActive(instructionIsEnabled6);
             instruction7.SetActive(instructionIsEnabled7);
-            instructionIsEnabled7 = false;
-            clickable = false;
         }
     }
 }
