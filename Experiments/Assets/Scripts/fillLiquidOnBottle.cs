@@ -24,13 +24,21 @@ public class fillLiquidOnBottle : MonoBehaviour
         {
             Debug.Log("Triggered by Cube from water bottle");
 
+            Debug.Log("**************");
             //change the position of bottle above the volcano
-            gameObject.GetComponent<Transform>().position = new Vector3(-0.403f, 0.38f, 0f);
 
-            
             if(drag.enabled){
-             //turn off lean scribts to not let user move bottle
+                //turn off lean scribts to not let user move bottle
                 disableDrag();
+
+              Debug.Log("before: "+gameObject.GetComponent<Transform>().position);
+
+              // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
+             Vector3 p= gameObject.GetComponent<Transform>().position;
+             gameObject.GetComponent<Transform>().position = new Vector3((-0.05f+p.x),p.y,p.z);
+              Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
+             Debug.Log("**************");
+
               //pour liquid 
                 enableAnimation();
             }
@@ -40,16 +48,19 @@ public class fillLiquidOnBottle : MonoBehaviour
     }
 
     void disableDrag(){
-        Debug.Log("\n\n\n*****Disable lean touch*****\n\n\n");
+        Debug.Log("\n\t\t*****Disable lean touch*****\t\t\n");
         drag.enabled = false;
     }
 
     void enableAnimation(){
-        Debug.Log("\n\n\n*****Pour liquid*****\n\n\n");
+        Debug.Log("\n\t\t*****Pour liquid*****\t\t\n");
         pourLiquid.SetTrigger("isCollider");
+        gameObject.GetComponent<ParticleSystem>().Play();
     }
 
     void distroy(){
-        Object.Destroy(gameObject, 2.0f);
+        Debug.Log("\n\t\t*****distroy Object*****\t\t\n");
+        //Object.Destroy(gameObject, 2.0f);
     }
 }
+
