@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:nahaj/addGroup.dart';
+import 'package:nahaj/child.dart';
 import 'package:nahaj/joinGroup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +36,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   String avatar = "1";
   String username = "1";
+  String userId = "1";
 
   @override
   void initState() {
@@ -59,7 +63,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     setState(() {
       avatar = (prefs.getString('avatar') ?? "1");
       username = (prefs.getString('username') ?? "1");
+      userId = (prefs.getString('id') ?? "1");
       print('username inside getinfo from homepage:' + username);
+      print('userId inside getinfo from homepage:' + userId);
       print('avatar inside getinfo from homepage:' + avatar);
     });
   }
@@ -79,11 +85,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     Navigator.pop(context);
   }
 
+  List<Groups> groups = [];
+  Future<void> getGroups(String uid) async {
+    groups = await widget.db.getGroups(uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
+    getGroups(userId);
 
     return Scaffold(
       backgroundColor: backgroundColorOfSideBar,
@@ -535,7 +547,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         height: 180.0,
                                         child: ListView.separated(
                                           reverse: true,
-                                          itemCount: 3,
+                                          itemCount: groups.length,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
@@ -544,7 +556,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             );
                                           },
                                           itemBuilder: (_, i) {
-                                            return GroupsCard();
+                                            return GroupsCard(
+                                              groupName:
+                                                  groups.elementAt(i).groupName,
+                                            );
                                           },
                                           scrollDirection: Axis.horizontal,
                                         ),

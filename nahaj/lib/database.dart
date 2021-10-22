@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nahaj/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DataBase extends ChangeNotifier {
@@ -13,12 +14,15 @@ class DataBase extends ChangeNotifier {
   late FirebaseStorage firestorage;
   //contain the user account info
   late CollectionReference user;
+  //contain the group account info
+  late CollectionReference groups;
 
   DataBase() {
     firestore = FirebaseFirestore.instance;
     firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
     user = firestore.collection('user');
+    groups = firestore.collection('user');
   }
 
   //sign up 1 (add the user in Auth)
@@ -103,5 +107,32 @@ class DataBase extends ChangeNotifier {
     //path is the folder after the root on storage firebase
     //name of the image with extention
     return await firestorage.ref(path).child(image).getDownloadURL();
+  }
+
+  //get groups of the user
+  Future<List<Groups>> getGroups(String uid) async {
+    List<Groups> groupsInfo = [];
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('Groups')
+        .where('members', arrayContains: uid)
+        .get();
+
+    List<QueryDocumentSnapshot> docs = snapshot.docs;
+    for (var doc in docs) {
+      if (doc.data() != null) {
+        var data = doc.data() as Map<String, dynamic>;
+        Groups g = await Groups(
+            data['id'].toString(),
+            data['name'].toString(),
+            data['CraetorId'].toString(),
+            data['CreatorName'].toString(),
+            List.castFrom(data['members'] as List));
+        groupsInfo.add(g);
+        // You can get other data in this manner.
+      }
+    }
+    print("group info list in getGroups");
+    print(groupsInfo.last.creatorName);
+    return groupsInfo;
   }
 }
