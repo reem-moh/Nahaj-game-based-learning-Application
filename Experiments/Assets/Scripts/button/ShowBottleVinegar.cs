@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShowBottleVinegar : MonoBehaviour
 {
     [SerializeField] private GameObject vinegar;
+    [SerializeField] private NextInstruction nextInstruction;
 
     private bool vinegarIsEnabled;
 
@@ -19,7 +20,7 @@ public class ShowBottleVinegar : MonoBehaviour
     }
 
     void ShowVinegar(){
-        if(vinegar != null){
+        if(vinegar != null && nextInstruction.showVinegar4){
             vinegarIsEnabled ^= true;
             vinegar.SetActive(vinegarIsEnabled);
         } 

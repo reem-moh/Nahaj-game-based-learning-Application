@@ -10,6 +10,9 @@ public class fillLiquidOnBottle : MonoBehaviour
 
     private Animator pourLiquid;
 
+    //for the instructions button
+    [SerializeField] private NextInstruction nextInstruction;
+
     void Start ()
     {
         drag = gameObject.GetComponent<LeanDragTranslate>();
@@ -35,7 +38,8 @@ public class fillLiquidOnBottle : MonoBehaviour
 
               // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
              Vector3 p= gameObject.GetComponent<Transform>().position;
-             gameObject.GetComponent<Transform>().position = new Vector3((-0.05f+p.x),p.y,p.z);
+             //(-0.05f+p.x),p.y,p.z
+             gameObject.GetComponent<Transform>().position = new Vector3(p.x,p.y,p.z);
               Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
              Debug.Log("**************");
 
@@ -59,6 +63,7 @@ public class fillLiquidOnBottle : MonoBehaviour
     }
 
     void distroy(){
+        nextInstruction.enableClickable();
         Debug.Log("\n\t\t*****distroy Object*****\t\t\n");
         Object.Destroy(gameObject, 0.02f);
     }

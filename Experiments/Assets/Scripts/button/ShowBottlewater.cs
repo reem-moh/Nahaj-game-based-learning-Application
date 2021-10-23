@@ -20,7 +20,7 @@ public class ShowBottlewater : MonoBehaviour
     }
 
     void ShowWater(){
-        if(water != null /*&& nextInstruction.instructionIsEnabled3*/){
+        if(water != null && nextInstruction.showWater3){
          waterIsEnabled ^= true;
          water.SetActive(waterIsEnabled);
 

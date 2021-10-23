@@ -20,6 +20,11 @@ public class NextInstruction : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(ShowInstruction);
+        showWater3 = false;
+        showVinegar4 = false;
+        showColor5 = false;
+        showSoap6 = false;
+        showBakingSoda7 = false;
         instructionIsEnabled1 = true;
         instructionIsEnabled2 = false;
         instructionIsEnabled3 = false;
@@ -53,6 +58,7 @@ public class NextInstruction : MonoBehaviour
             showWater3=true;
             instruction2.SetActive(instructionIsEnabled2);
             instruction3.SetActive(instructionIsEnabled3);
+            clickable = false;
         }else 
         //show venigar instruction
         if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
@@ -65,6 +71,7 @@ public class NextInstruction : MonoBehaviour
             showVinegar4=true;
             instruction3.SetActive(instructionIsEnabled3);
             instruction4.SetActive(instructionIsEnabled4);
+            clickable = false;
         }else 
         //show food color instruction
         if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
@@ -77,6 +84,7 @@ public class NextInstruction : MonoBehaviour
             showColor5=true;
             instruction4.SetActive(instructionIsEnabled4);
             instruction5.SetActive(instructionIsEnabled5);
+            clickable = false;
         }else 
         //show soap instruction
         if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
@@ -89,6 +97,7 @@ public class NextInstruction : MonoBehaviour
             showSoap6=true;
             instruction5.SetActive(instructionIsEnabled5);
             instruction6.SetActive(instructionIsEnabled6);
+            clickable = false;
         }else 
         //show baking soda instruction
         if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
@@ -101,11 +110,16 @@ public class NextInstruction : MonoBehaviour
             showBakingSoda7=true;
             instruction6.SetActive(instructionIsEnabled6);
             instruction7.SetActive(instructionIsEnabled7);
+            clickable = false;
         }else
         if(instructionIsEnabled7){
             //disable click on بيكربونات الصوديوم button
             showBakingSoda7=false;
+            clickable = false;
         }
     }
+}
+public void enableClickable(){
+    clickable = true;
 }
 }

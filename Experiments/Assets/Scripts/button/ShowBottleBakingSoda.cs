@@ -20,7 +20,7 @@ public class ShowBottleBakingSoda : MonoBehaviour
     }
 
     void ShowBakingSoda(){
-        if(bakingSoda != null){
+        if(bakingSoda != null && nextInstruction.showBakingSoda7){
             bakingSodaIsEnabled ^= true;
             bakingSoda.SetActive(bakingSodaIsEnabled);
         }

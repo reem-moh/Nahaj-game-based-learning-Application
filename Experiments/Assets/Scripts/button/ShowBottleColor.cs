@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShowBottleColor : MonoBehaviour
 {
     [SerializeField] private GameObject color;
+    [SerializeField] private NextInstruction nextInstruction;
 
     private bool colorIsEnabled;
 
@@ -19,7 +20,7 @@ public class ShowBottleColor : MonoBehaviour
     }
 
     void ShowColor(){
-        if(color!= null){
+        if(color!= null && nextInstruction.showColor5){
             colorIsEnabled ^= true;
             color.SetActive(colorIsEnabled);
         }

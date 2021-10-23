@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShowBottleSoap : MonoBehaviour
 {
     [SerializeField] private GameObject soap;
+    [SerializeField] private NextInstruction nextInstruction;
 
     private bool soapIsEnabled;
 
@@ -19,7 +20,7 @@ public class ShowBottleSoap : MonoBehaviour
     }
 
     void ShowSoap(){
-        if(soap!= null){
+        if(soap!= null && nextInstruction.showSoap6){
             soapIsEnabled ^= true;
             soap.SetActive(soapIsEnabled);
         }

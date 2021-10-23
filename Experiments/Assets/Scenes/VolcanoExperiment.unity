@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44920975, g: 0.4992832, b: 0.5757136, a: 1}
+  m_IndirectSpecularColor: {r: 0.44920963, g: 0.49928302, b: 0.57571346, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2157,6 +2157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bc0f5a62c845a9a480c94bdad4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextInstruction: {fileID: 1109092578}
 --- !u!95 &150336153
 Animator:
   serializedVersion: 3
@@ -2944,6 +2945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soap: {fileID: 150336149}
+  nextInstruction: {fileID: 1109092578}
 --- !u!1 &198822061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3517,6 +3519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bc0f5a62c845a9a480c94bdad4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextInstruction: {fileID: 1109092578}
 --- !u!95 &283960845
 Animator:
   serializedVersion: 3
@@ -10255,6 +10258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bc0f5a62c845a9a480c94bdad4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextInstruction: {fileID: 1109092578}
 --- !u!95 &401564054
 Animator:
   serializedVersion: 3
@@ -58250,6 +58254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vinegar: {fileID: 1517836749}
+  nextInstruction: {fileID: 1109092578}
 --- !u!1 &1489262776
 GameObject:
   m_ObjectHideFlags: 0
@@ -58677,6 +58682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bc0f5a62c845a9a480c94bdad4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextInstruction: {fileID: 1109092578}
 --- !u!95 &1517836753
 Animator:
   serializedVersion: 3
@@ -75196,6 +75202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99bc0f5a62c845a9a480c94bdad4246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextInstruction: {fileID: 1109092578}
 --- !u!95 &1983875820
 Animator:
   serializedVersion: 3
@@ -76833,6 +76840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {fileID: 401564050}
+  nextInstruction: {fileID: 1109092578}
 --- !u!1 &2126951183
 GameObject:
   m_ObjectHideFlags: 0
