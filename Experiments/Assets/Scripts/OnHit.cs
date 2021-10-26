@@ -11,6 +11,7 @@ using Vuforia;
     if (listenerBehaviour != null)
     {
         listenerBehaviour.enabled = false;
+        //disable image 
     }
  }
 
