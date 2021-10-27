@@ -15,8 +15,10 @@ public class NextInstruction : MonoBehaviour
     //to enable clicking on the next button
     [HideInInspector]
     public bool clickable = true;
-
+    
+    //for arrow
     public RectTransform rt;
+    public Image arrow;
     
     // Start is called before the first frame update
     void Start()
@@ -125,6 +127,8 @@ public class NextInstruction : MonoBehaviour
             clickable = false;
             //move position of arrow to rightcorner screen
             rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+
+            arrow.enabled = false;
         }else
         if(instructionIsEnabled7){
             //disable click on بيكربونات الصوديوم button

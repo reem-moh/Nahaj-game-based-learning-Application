@@ -6,6 +6,6 @@ public class exitGame : MonoBehaviour
 {
     // Start is called before the first frame update
     public void EndGame(){
-        Application.Quit();
+        //Application.Quit();
     }
 }

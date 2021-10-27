@@ -88,7 +88,7 @@ public class fillLiquidOnBottle : MonoBehaviour
     }
 
     void enableSound(){
-        audioSource.Play();
+        //audioSource.Play();
         Debug.Log("\n\t\t*****PouringSoundt*****\t\t\n");
         
     }
