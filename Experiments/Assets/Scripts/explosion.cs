@@ -15,6 +15,15 @@ public class explosion : MonoBehaviour
 
     //for show effect
     public GameObject explosionEffect;
+    //sound
+    [SerializeField] private AudioSource audioSource;
+
+    //after finish experinment
+    [SerializeField] private GameObject lastInstruction,instruction7,endGame;
+    public RectTransform rt;
+
+    //hide all buttons after the end of experiment
+    [SerializeField] private GameObject water,vinegar,color,soab,bakingSoda;
 
     void Start()
     {
@@ -31,6 +40,7 @@ public class explosion : MonoBehaviour
         if(countdown <= 0.0f && !hasExploded && lastStep){
             explode();
             hasExploded = true;
+            Invoke("finished",2);
         }
     }
 
@@ -44,9 +54,32 @@ public class explosion : MonoBehaviour
     }
 
     void explode(){
+        enableSound();
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
        // Destroy(explosionEffect);
         Debug.Log("\nafter destroy explosion ");
+
+        
+    }
+
+    void finished(){
+        instruction7.SetActive(false);
+        lastInstruction.SetActive(true);
+
+        //diable all buttons
+        water.SetActive(false);
+        vinegar.SetActive(false);
+        color.SetActive(false);
+        soab.SetActive(false);
+        bakingSoda.SetActive(false);
+
+        //button to end game
+        endGame.SetActive(true);
+    }
+
+    void enableSound(){
+        audioSource.Play();
+        Debug.Log("\n\t\t*****ExplosionSoundt*****\t\t\n");  
     }
 }

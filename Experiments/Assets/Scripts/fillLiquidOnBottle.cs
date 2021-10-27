@@ -15,10 +15,7 @@ public class fillLiquidOnBottle : MonoBehaviour
 
     //for the instructions button
     [SerializeField] private NextInstruction nextInstruction;
-
-    //for the instructions button
-    [SerializeField] private NextInstruction nextInstruction;
-
+    [SerializeField] private AudioSource audioSource;
     void Start ()
     {
         drag = gameObject.GetComponent<LeanDragTranslate>();
@@ -46,16 +43,6 @@ public class fillLiquidOnBottle : MonoBehaviour
                 //turn off some property 
                 disable();
 
-<<<<<<< Updated upstream
-              // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
-             Vector3 p= gameObject.GetComponent<Transform>().position;
-             //(-0.05f+p.x),p.y,p.z
-             gameObject.GetComponent<Transform>().position = new Vector3(p.x,p.y,p.z);
-              Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
-             Debug.Log("**************");
-
-              //pour liquid 
-=======
                 //before move the object
                 Debug.Log("before: "+gameObject.GetComponent<Transform>().position);
                 // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
@@ -65,7 +52,6 @@ public class fillLiquidOnBottle : MonoBehaviour
                 gameObject.GetComponent<Transform>().position = p;
                 Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
                 //pour liquid 
->>>>>>> Stashed changes
                 enableAnimation();
             }
 
@@ -99,6 +85,12 @@ public class fillLiquidOnBottle : MonoBehaviour
         nextInstruction.enableClickable();
         Debug.Log("\n\t\t*****distroy Object*****\t\t\n");
         Object.Destroy(gameObject, 0.02f);
+    }
+
+    void enableSound(){
+        //audioSource.Play();
+        Debug.Log("\n\t\t*****PouringSoundt*****\t\t\n");
+        
     }
 }
 

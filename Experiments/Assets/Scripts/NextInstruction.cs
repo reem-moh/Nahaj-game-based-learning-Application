@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NextInstruction : MonoBehaviour
 {
-    [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7;
+    [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7,instruction8;
     //to show the next instruction
     [HideInInspector]
     public bool instructionIsEnabled1, instructionIsEnabled2,instructionIsEnabled3,instructionIsEnabled4,instructionIsEnabled5,instructionIsEnabled6,instructionIsEnabled7;
@@ -15,7 +15,11 @@ public class NextInstruction : MonoBehaviour
     //to enable clicking on the next button
     [HideInInspector]
     public bool clickable = true;
-
+    
+    //for arrow
+    public RectTransform rt;
+    public Image arrow;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +52,8 @@ public class NextInstruction : MonoBehaviour
             instructionIsEnabled2 = true;
             instruction1.SetActive(instructionIsEnabled1);
             instruction2.SetActive(instructionIsEnabled2);
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-176f,82f,0f);
         }else 
         //show water instruction
         if (instructionIsEnabled2 && instruction2!=null && instruction3!=null)
@@ -59,6 +65,8 @@ public class NextInstruction : MonoBehaviour
             instruction2.SetActive(instructionIsEnabled2);
             instruction3.SetActive(instructionIsEnabled3);
             clickable = false;
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
         }else 
         //show venigar instruction
         if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
@@ -72,6 +80,8 @@ public class NextInstruction : MonoBehaviour
             instruction3.SetActive(instructionIsEnabled3);
             instruction4.SetActive(instructionIsEnabled4);
             clickable = false;
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
         }else 
         //show food color instruction
         if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
@@ -85,6 +95,8 @@ public class NextInstruction : MonoBehaviour
             instruction4.SetActive(instructionIsEnabled4);
             instruction5.SetActive(instructionIsEnabled5);
             clickable = false;
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
         }else 
         //show soap instruction
         if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
@@ -98,6 +110,8 @@ public class NextInstruction : MonoBehaviour
             instruction5.SetActive(instructionIsEnabled5);
             instruction6.SetActive(instructionIsEnabled6);
             clickable = false;
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
         }else 
         //show baking soda instruction
         if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
@@ -111,15 +125,26 @@ public class NextInstruction : MonoBehaviour
             instruction6.SetActive(instructionIsEnabled6);
             instruction7.SetActive(instructionIsEnabled7);
             clickable = false;
+            //move position of arrow to rightcorner screen
+            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+
+            arrow.enabled = false;
         }else
         if(instructionIsEnabled7){
             //disable click on بيكربونات الصوديوم button
             showBakingSoda7=false;
             clickable = false;
+            instruction7.SetActive(false);
+            //after finish the experiment
+            
+            Destroy(gameObject);
+            
         }
     }
 }
-public void enableClickable(){
-    clickable = true;
-}
+
+    public void enableClickable(){
+        clickable = true;
+    }
+
 }
