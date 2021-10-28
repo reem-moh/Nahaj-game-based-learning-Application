@@ -6,6 +6,15 @@ using UnityEngine.UI;
 public class NextInstruction : MonoBehaviour
 {
     [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7,instruction8;
+    
+    //progress bar
+    [SerializeField] private GameObject pb0,pb1,pb2,pb3,pb4,pb5;
+
+    //to show the next progress bar
+    [HideInInspector]
+    public bool pbEnabled0, pbEnabled1, pbEnabled2,pbEnabled3,pbEnabled4,pbEnabled5;
+    
+    
     //to show the next instruction
     [HideInInspector]
     public bool instructionIsEnabled1, instructionIsEnabled2,instructionIsEnabled3,instructionIsEnabled4,instructionIsEnabled5,instructionIsEnabled6,instructionIsEnabled7;
@@ -24,11 +33,13 @@ public class NextInstruction : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(ShowInstruction);
+        //bottle buttons all disabled at first
         showWater3 = false;
         showVinegar4 = false;
         showColor5 = false;
         showSoap6 = false;
         showBakingSoda7 = false;
+        //enable first instruction at the start
         instructionIsEnabled1 = true;
         instructionIsEnabled2 = false;
         instructionIsEnabled3 = false;
@@ -43,6 +54,20 @@ public class NextInstruction : MonoBehaviour
         instruction5.SetActive(instructionIsEnabled5);
         instruction6.SetActive(instructionIsEnabled6);
         instruction7.SetActive(instructionIsEnabled7);
+        //enable progress bar 0 at the start
+        pbEnabled0 = true;
+        pbEnabled1 = false;
+        pbEnabled2 = false;
+        pbEnabled3 = false;
+        pbEnabled4 = false;
+        pbEnabled5 = false;
+        pb0.SetActive(pbEnabled0);
+        pb1.SetActive(pbEnabled1);
+        pb2.SetActive(pbEnabled2);
+        pb3.SetActive(pbEnabled3);
+        pb4.SetActive(pbEnabled4);
+        pb5.SetActive(pbEnabled5);
+
     }
 
     void ShowInstruction(){
@@ -66,7 +91,7 @@ public class NextInstruction : MonoBehaviour
             instruction3.SetActive(instructionIsEnabled3);
             clickable = false;
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show venigar instruction
         if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
@@ -145,6 +170,35 @@ public class NextInstruction : MonoBehaviour
 
     public void enableClickable(){
         clickable = true;
+    }
+
+    public void incrementPB(){
+        if(pbEnabled0 && pb0 != null && pb1 != null){
+            pbEnabled0 = false;
+            pbEnabled1 = true;
+            pb0.SetActive(pbEnabled0);
+            pb1.SetActive(pbEnabled1);
+        }else if(pbEnabled1 && pb1 != null && pb2 != null){
+            pbEnabled1 = false;
+            pbEnabled2 = true;
+            pb1.SetActive(pbEnabled1);
+            pb2.SetActive(pbEnabled2);
+        }else if(pbEnabled2 && pb2 != null && pb3 != null){
+            pbEnabled2 = false;
+            pbEnabled3 = true;
+            pb2.SetActive(pbEnabled2);
+            pb3.SetActive(pbEnabled3);
+        }else if(pbEnabled3 && pb3 != null && pb4 != null){
+            pbEnabled3 = false;
+            pbEnabled4 = true;
+            pb3.SetActive(pbEnabled3);
+            pb4.SetActive(pbEnabled4);
+        }else if(pbEnabled4 && pb4 != null && pb5 != null){
+            pbEnabled4 = false;
+            pbEnabled5 = true;
+            pb4.SetActive(pbEnabled4);
+            pb5.SetActive(pbEnabled5);
+        }
     }
 
 }

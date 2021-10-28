@@ -22,8 +22,9 @@ public class explosion : MonoBehaviour
     [SerializeField] private GameObject lastInstruction,instruction7,endGame;
     public RectTransform rt;
 
-    //hide all buttons after the end of experiment
-    [SerializeField] private GameObject water,vinegar,color,soab,bakingSoda;
+    //hide all buttons after the end of experiment Button
+    [SerializeField] private GameObject waterButton,vinegarButton,colorButton,soabButton,bakingSodaButton;
+    [SerializeField] private float timeToInvokeInstrucation;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class explosion : MonoBehaviour
         if(countdown <= 0.0f && !hasExploded && lastStep){
             explode();
             hasExploded = true;
-            Invoke("finished",2);
+            Invoke("finished",timeToInvokeInstrucation);
         }
     }
 
@@ -68,11 +69,11 @@ public class explosion : MonoBehaviour
         lastInstruction.SetActive(true);
 
         //diable all buttons
-        water.SetActive(false);
-        vinegar.SetActive(false);
-        color.SetActive(false);
-        soab.SetActive(false);
-        bakingSoda.SetActive(false);
+        waterButton.SetActive(false);
+        vinegarButton.SetActive(false);
+        colorButton.SetActive(false);
+        soabButton.SetActive(false);
+        bakingSodaButton.SetActive(false);
 
         //button to end game
         endGame.SetActive(true);
