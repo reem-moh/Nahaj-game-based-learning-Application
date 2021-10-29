@@ -9,9 +9,9 @@ public class explosion : MonoBehaviour
     //for counting the time before explosion
     float countdown;
     //check if explosion or not
-    bool hasExploded;
+    //bool hasExploded;
     //change it after the last step is end
-    bool lastStep;
+   // bool lastStep;
 
     //for show effect
     public GameObject explosionEffect;
@@ -19,7 +19,7 @@ public class explosion : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     //after finish experinment
-    [SerializeField] private GameObject lastInstruction,instruction7,endGame;
+    [SerializeField] private GameObject lastInstruction,instruction7,endGame,countdownObject;
     public RectTransform rt;
 
     //hide all buttons after the end of experiment Button
@@ -32,8 +32,8 @@ public class explosion : MonoBehaviour
     void Start()
     {
         countdown = delay;
-        hasExploded = false;
-        lastStep = false;
+        //hasExploded = false;
+        //lastStep = false;
     }
 
     // Update is called once per frame
@@ -41,29 +41,36 @@ public class explosion : MonoBehaviour
     {
         countdown -= Time.deltaTime;
 
-        if(countdown <= 0.0f && !hasExploded && lastStep){
+        /*if(countdown <= 0.0f && !hasExploded && lastStep){
             explode();
             hasExploded = true;
             Invoke("finished",timeToInvokeInstrucation);
-        }
+        }*/
     }
 
     void OnCollisionEnter(Collision other){
         Debug.Log("\nOnCollisionEnter last step Explode");
+
         if (other.gameObject.CompareTag("bottle"))
         {
             countdown = delay;
-            lastStep = true;
+            //lastStep = true;
+            Invoke("activate",3);
         }
     }
 
-    void explode(){
+    void activate(){
+        Debug.Log("\nInvoke countdown  ");
+        countdownObject.SetActive(true);
+    }
+
+    public void explode(){
         enableSound();
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
        // Destroy(explosionEffect);
         Debug.Log("\nafter destroy explosion ");
-
+        Invoke("finished",timeToInvokeInstrucation);
         lava.SetActive(true);
     }
 
