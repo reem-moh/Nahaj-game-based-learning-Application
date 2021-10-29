@@ -6,6 +6,7 @@ using Vuforia;
  public class OnHit : MonoBehaviour 
  {
      [SerializeField] private GameObject clickOnScrean,firstInstruction,arrow;
+     [SerializeField] private float timeToInvokeInstrucation;
      
 
      public void OnInteractiveHitTest(HitTestResult result)
@@ -17,7 +18,7 @@ using Vuforia;
             //disable image 
             //clickOnScrean.SetActive(false);
             Destroy(clickOnScrean);
-            Invoke("showInstruction",2);
+            Invoke("showInstruction",timeToInvokeInstrucation);
         }
     }
 

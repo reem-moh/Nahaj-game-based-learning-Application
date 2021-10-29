@@ -36,7 +36,7 @@ public class ShowBottlewater : MonoBehaviour
     }
 
     public void clicked(){
-        if(nextInstruction.showWater3){
+        if(water != null && nextInstruction.showWater3){
             audioSource.PlayOneShot(clickableBtn);
             //sound click
         }else{

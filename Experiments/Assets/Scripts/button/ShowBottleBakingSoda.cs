@@ -34,7 +34,7 @@ public class ShowBottleBakingSoda : MonoBehaviour
     }
 
     public void clicked(){
-        if(nextInstruction.showBakingSoda7){
+        if(bakingSoda != null && nextInstruction.showBakingSoda7){
             audioSource.PlayOneShot(clickableBtn);
             //sound click
         }else{

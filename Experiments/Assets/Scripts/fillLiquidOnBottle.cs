@@ -12,10 +12,19 @@ public class fillLiquidOnBottle : MonoBehaviour
     private BoxCollider cr;
     private bool doneCollsion;
     private Vector3 p;
-
+    
     //for the instructions button
     [SerializeField] private NextInstruction nextInstruction;
     [SerializeField] private AudioSource audioSource;
+    
+    //check image enables
+    [SerializeField] private GameObject enableCheck;
+    [SerializeField] private Transform target;
+    //[SerializeField] private float speed = 1;
+
+    //for disable volacno
+    [SerializeField] private GameObject cube;
+
     void Start ()
     {
         drag = gameObject.GetComponent<LeanDragTranslate>();
@@ -28,7 +37,8 @@ public class fillLiquidOnBottle : MonoBehaviour
     void update(){
         //to let the object not move
         if(doneCollsion){
-            gameObject.GetComponent<Transform>().position = new Vector3(p.x,p.y,p.z);
+            //new Vector3(p.x,p.y,p.z)
+            //GetComponent<Transform>().position = Vector3.Lerp(GetComponent<Transform>().position,target.position, speed * Time.deltaTime);
         }
     }
     
@@ -42,21 +52,39 @@ public class fillLiquidOnBottle : MonoBehaviour
             if(drag.enabled){
                 //turn off some property 
                 disable();
+                //turn off volacno property
+                disableVolacno();
 
                 //before move the object
                 Debug.Log("before: "+gameObject.GetComponent<Transform>().position);
+
+                //move object 
+                doneCollsion = true; 
+                //GetComponent<Transform>().position = Vector3.Lerp(GetComponent<Transform>().position,target.position, speed * Time.deltaTime);
+
+                gameObject.GetComponent<Transform>().position = target.position;
+
+                //after move the object
+                Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
+                
                 // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
                 //Vector3(-0.125400007,0.344900012,-0.0105999997)
-                p = gameObject.GetComponent<Transform>().position;
-                p = new Vector3(p.x + 0.0366f,p.y + 0.07f,p.z + -0.0255599f);
-                gameObject.GetComponent<Transform>().position = p;
-                Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
+               // p = gameObject.GetComponent<Transform>().position;
+               // p = new Vector3(p.x + 0.0366f,p.y + 0.07f,p.z + -0.0255599f);
+               // gameObject.GetComponent<Transform>().position = p;
+                
                 //pour liquid 
                 enableAnimation();
             }
-
-            doneCollsion = true; 
         }
+    }
+
+    void disableVolacno(){
+
+        //disable collider
+        cube.GetComponent<CapsuleCollider>().enabled = false;
+
+        Debug.Log("\n\t\t***** End of disableVolacno method *****\t\t\n");
     }
 
     void disable(){
@@ -85,6 +113,24 @@ public class fillLiquidOnBottle : MonoBehaviour
         nextInstruction.enableClickable();
         Debug.Log("\n\t\t*****distroy Object*****\t\t\n");
         Object.Destroy(gameObject, 0.02f);
+
+        //display check icon
+        if(!gameObject.CompareTag("bottle")){
+            enableCheck.SetActive(true);
+        }
+        //update progress bar
+        nextInstruction.incrementPB();
+
+        //enable volcano
+        enableVolcano();
+    }
+
+    void enableVolcano(){
+
+        //disable collider
+        cube.GetComponent<CapsuleCollider>().enabled = true;
+
+        Debug.Log("\n\t\t***** End of enableVolcano method *****\t\t\n");
     }
 
     void enableSound(){
