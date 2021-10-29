@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44920963, g: 0.49928302, b: 0.57571346, a: 1}
+  m_IndirectSpecularColor: {r: 0.44920975, g: 0.4992832, b: 0.5757136, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1766,7 +1766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133024111
@@ -2234,10 +2234,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 1109092578}
   audioSource: {fileID: 150336158}
-  enableCheck: {fileID: 0}
-  target: {fileID: 0}
-  speed: 1
-  cube: {fileID: 0}
+  enableCheck: {fileID: 1941365477}
+  target: {fileID: 1631636232}
+  cube: {fileID: 968002100}
 --- !u!95 &150336153
 Animator:
   serializedVersion: 3
@@ -3954,10 +3953,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 1109092578}
   audioSource: {fileID: 283960850}
-  enableCheck: {fileID: 0}
-  target: {fileID: 0}
-  speed: 1
-  cube: {fileID: 0}
+  enableCheck: {fileID: 1941365477}
+  target: {fileID: 1631636232}
+  cube: {fileID: 968002100}
 --- !u!95 &283960845
 Animator:
   serializedVersion: 3
@@ -10799,10 +10797,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 1109092578}
   audioSource: {fileID: 401564059}
-  enableCheck: {fileID: 0}
-  target: {fileID: 0}
-  speed: 1
-  cube: {fileID: 0}
+  enableCheck: {fileID: 1941365477}
+  target: {fileID: 1631636232}
+  cube: {fileID: 968002100}
 --- !u!95 &401564054
 Animator:
   serializedVersion: 3
@@ -42228,7 +42225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &921901471
@@ -47332,7 +47329,9 @@ MonoBehaviour:
   colorButton: {fileID: 261790047}
   soabButton: {fileID: 975097744}
   bakingSodaButton: {fileID: 1576922364}
+  progressBar: {fileID: 1438221899}
   timeToInvokeInstrucation: 2
+  lava: {fileID: 1900725047}
 --- !u!82 &968002106
 AudioSource:
   m_ObjectHideFlags: 0
@@ -49819,11 +49818,11 @@ RectTransform:
   m_Father: {fileID: 1438221900}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: 42}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146371640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52445,7 +52444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1283080073
@@ -60205,10 +60204,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 1109092578}
   audioSource: {fileID: 1517836758}
-  enableCheck: {fileID: 0}
-  target: {fileID: 0}
-  speed: 1
-  cube: {fileID: 0}
+  enableCheck: {fileID: 1941365477}
+  target: {fileID: 1631636232}
+  cube: {fileID: 968002100}
 --- !u!95 &1517836753
 Animator:
   serializedVersion: 3
@@ -67888,7 +67886,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693774828
@@ -76057,6 +76055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6baa43b759f44402d94943aec4bb252a, type: 3}
+--- !u!1 &1900725047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 243353276454878848, guid: 6baa43b759f44402d94943aec4bb252a, type: 3}
+  m_PrefabInstance: {fileID: 1900725046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1901100042
 GameObject:
   m_ObjectHideFlags: 0
@@ -77458,10 +77461,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 1109092578}
   audioSource: {fileID: 1983875825}
-  enableCheck: {fileID: 0}
-  target: {fileID: 0}
-  speed: 1
-  cube: {fileID: 0}
+  enableCheck: {fileID: 1941365477}
+  target: {fileID: 1631636232}
+  cube: {fileID: 968002100}
 --- !u!95 &1983875820
 Animator:
   serializedVersion: 3
@@ -78091,7 +78093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -51, y: 42}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2020164875

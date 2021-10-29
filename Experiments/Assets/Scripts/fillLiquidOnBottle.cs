@@ -20,7 +20,7 @@ public class fillLiquidOnBottle : MonoBehaviour
     //check image enables
     [SerializeField] private GameObject enableCheck;
     [SerializeField] private Transform target;
-    [SerializeField] private float speed = 1;
+    //[SerializeField] private float speed = 1;
 
     //for disable volacno
     [SerializeField] private GameObject cube;

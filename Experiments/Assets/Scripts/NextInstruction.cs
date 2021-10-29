@@ -106,7 +106,7 @@ public class NextInstruction : MonoBehaviour
             instruction4.SetActive(instructionIsEnabled4);
             clickable = false;
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show food color instruction
         if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
@@ -121,7 +121,7 @@ public class NextInstruction : MonoBehaviour
             instruction5.SetActive(instructionIsEnabled5);
             clickable = false;
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show soap instruction
         if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
@@ -136,7 +136,7 @@ public class NextInstruction : MonoBehaviour
             instruction6.SetActive(instructionIsEnabled6);
             clickable = false;
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show baking soda instruction
         if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
@@ -151,7 +151,7 @@ public class NextInstruction : MonoBehaviour
             instruction7.SetActive(instructionIsEnabled7);
             clickable = false;
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-24.8811f,-23.84338f,0f);
+            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
 
             arrow.enabled = false;
         }else

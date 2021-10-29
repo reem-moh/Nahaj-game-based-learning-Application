@@ -23,8 +23,11 @@ public class explosion : MonoBehaviour
     public RectTransform rt;
 
     //hide all buttons after the end of experiment Button
-    [SerializeField] private GameObject waterButton,vinegarButton,colorButton,soabButton,bakingSodaButton;
+    [SerializeField] private GameObject waterButton,vinegarButton,colorButton,soabButton,bakingSodaButton,progressBar;
     [SerializeField] private float timeToInvokeInstrucation;
+
+    //display lava of volcano
+    [SerializeField] private GameObject lava;
 
     void Start()
     {
@@ -61,7 +64,7 @@ public class explosion : MonoBehaviour
        // Destroy(explosionEffect);
         Debug.Log("\nafter destroy explosion ");
 
-        
+        lava.SetActive(true);
     }
 
     void finished(){
@@ -74,6 +77,7 @@ public class explosion : MonoBehaviour
         colorButton.SetActive(false);
         soabButton.SetActive(false);
         bakingSodaButton.SetActive(false);
+        progressBar.SetActive(false);
 
         //button to end game
         endGame.SetActive(true);
