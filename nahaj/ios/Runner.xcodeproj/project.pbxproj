@@ -14,6 +14,8 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		C25E2452272CC64500785D61 /* UnityFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C25E2451272CC64500785D61 /* UnityFramework.framework */; };
+		C25E2453272CC64500785D61 /* UnityFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C25E2451272CC64500785D61 /* UnityFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFD811901657614F497D13C1 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AA11EF2EDA7A2F9B2477D5 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C25E2453272CC64500785D61 /* UnityFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +51,7 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C25E2451272CC64500785D61 /* UnityFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UnityFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE21DBAA3332FE27B090DA07 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFD811901657614F497D13C1 /* Pods_Runner.framework in Frameworks */,
+				C25E2452272CC64500785D61 /* UnityFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +127,7 @@
 		AB0C0B52BFB731E676C8D9CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C25E2451272CC64500785D61 /* UnityFramework.framework */,
 				50AA11EF2EDA7A2F9B2477D5 /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
