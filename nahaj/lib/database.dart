@@ -135,11 +135,13 @@ class DataBase extends ChangeNotifier {
         var data = doc.data() as Map<String, dynamic>;
         print("doc in getGroups from db class"+data['groupName']!);
         Groups g = await Groups(
-            data['code'].toString(),
+            data['code'],
             data['groupName'].toString(),
             data['leaderId'].toString(),
             data['leaderName'].toString(),
-            List.castFrom(data['members'] as List));
+            List.castFrom(data['members'] as List),
+            data['pathOfImage'],
+        );
         groupsInfo.add(g);
         // You can get other data in this manner.
       }
