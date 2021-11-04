@@ -134,16 +134,60 @@ class DataBase extends ChangeNotifier {
         var data = doc.data() as Map<String, dynamic>;
         Groups g = await Groups(
             data['id'].toString(),
-            data['name'].toString(),
-            data['CraetorId'].toString(),
-            data['CreatorName'].toString(),
+            data['groupName'].toString(),
+            data['leaderId'].toString(),
+            data['leaderName'].toString(),
             List.castFrom(data['members'] as List));
         groupsInfo.add(g);
         // You can get other data in this manner.
       }
     }
     print("group info list in getGroups");
-    print(groupsInfo.last.creatorName);
+  for (var doc in groupsInfo){
+      print(doc.creatorName);
+    }
+    
     return groupsInfo;
+  }
+
+  Future<void> createGroup(int code,String groupName,String leaderName,String leaderId,String pathOfImage ) async {
+    
+    //add to group collection
+    final groupDocument = firestore.collection('Groups').doc();
+    List members = [];
+    members.add({
+      "userId":leaderId,
+      "userName":leaderName,
+    });
+    groupDocument.set({
+            "code": code,
+            "groupName": groupName,
+            "leaderName": leaderName,
+            "leaderId": leaderId,
+            "membersCounter": 1,
+            "members": FieldValue.arrayUnion(members),
+            "pathOfImage": pathOfImage,
+          })
+          .then((value) => print("Group created"))
+          .catchError((error) => print("Failed to create group: $error"));
+    //to add more on members array using groupDocument.updateData rather than groupDocument.set
+  }
+
+  Future<bool> checkGroupCode(int code) async {
+    bool isFound= false;
+    //read the list of groups from 
+    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
+        .collection('Groups')
+        .where('code', isEqualTo: code)
+        .get();
+
+    if(snapshot.docs.length >= 1){
+      print("inside checkGroupCode more than one doc have the same code ");
+      isFound = true;
+    }else{
+       print("only one unique value");
+    }
+
+    return isFound;
   }
 }

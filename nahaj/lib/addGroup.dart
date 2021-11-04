@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:nahaj/addGroup2.dart';
 import 'package:nahaj/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'database.dart';
+import 'dart:math';
 
 class AddGroup extends StatefulWidget {
   final DataBase db;
@@ -21,6 +20,8 @@ class _AddGroup extends State<AddGroup> {
   bool validName = false;
   String username = "1";
   String uid = "0";
+  //to let user enter _getInfoFromSession only one
+  bool entere = true;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -34,7 +35,11 @@ class _AddGroup extends State<AddGroup> {
 
   @override
   Widget build(BuildContext context) {
-    _getInfoFromSession();
+    if(entere){
+      _getInfoFromSession();
+      entere=false;
+    }
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -176,7 +181,7 @@ class _AddGroup extends State<AddGroup> {
                         side: BorderSide(
                             color: Color.fromARGB(255, 129, 190, 255))),
                     onPressed: () {
-                      createGroup(name, uid, widget.db);
+                      createGroup(name, widget.db);
                       setState(() {
                         Navigator.push(
                           context,
@@ -210,34 +215,20 @@ class _AddGroup extends State<AddGroup> {
     );
   }
 
-  void createGroup(String name, String uid, DataBase db) async {
-    String Code = "";
+void createGroup(String groupName, DataBase db) async {
+    //check if the name of group greater than 3 character
     if (validName) {
-      /*await firestore
-          .collection('GroupCode')
-          .doc("j8hFFCEFw1DMpeH8p91y")
-          .get()
-          .then((value) {
-        print('read from firestore: \n ' + value.get("Code"));
-        Code = value.get('membersCounter');
-      }).catchError((error) => print("Failed to get code: $error"));\*/
-
-      // var i = int.parse(Code) * 5 - 23;
-
-      //Code = i.toString().substring(0, 6);
-
-      firestore
-          .collection('Groups')
-          .add({
-            "Code": 5556,
-            "name": name,
-            "CreatorName": username,
-            "CraetorId": uid,
-            "membersCounter": "1",
-            "members": List,
-          })
-          .then((value) => print("Group created"))
-          .catchError((error) => print("Failed to create group: $error"));
+      
+      int code = 0;
+      bool isFound = true;
+      //check if code is not genetrated before
+      while(isFound){
+        //722933;
+        code = Random().nextInt(1000000);
+        
+        isFound = await widget.db.checkGroupCode(code);
+      }
+      widget.db.createGroup(code, groupName, username, uid,"");
     }
   }
 }
