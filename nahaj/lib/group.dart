@@ -37,6 +37,7 @@ class _Group extends State<Group> {
 
   @override
   Widget build(BuildContext context) {
+        Size size = MediaQuery.of(context).size;
 if(entere){
       _getInfoFromSession();
       entere=false;
@@ -50,7 +51,7 @@ if(entere){
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 100,
+                height: 120,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Color.fromARGB(255, 224, 224, 224),
@@ -66,7 +67,7 @@ if(entere){
 
                   TextButton(
                     child: Padding(
-                  padding: EdgeInsets.only(top: 0, right: 850),
+                  padding: EdgeInsets.only(top: 0, right: 830),
                   child: Image(
                       image: AssetImage("assets/Group13.png"),
                       alignment: Alignment.topLeft,
@@ -119,7 +120,7 @@ if(entere){
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 600,
+                height: 540,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.white,
@@ -158,17 +159,54 @@ if(entere){
 
           Stack(
             children: [
+              
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 80,
+                height: 100,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Color.fromARGB(255, 224, 224, 224),
                 ),
               ),
+             Padding(
+                  padding: EdgeInsets.only(bottom: 0),
+                  child:
               Row(
-                children: [],
-              )
+                children: [
+
+ Flexible(
+                  child: Column(
+                children: <Widget>[
+                  Container(
+                    child: TextField(
+  decoration: InputDecoration(
+   hintTextDirection: TextDirection.rtl,
+               hintText: " اكتب ... ",
+               
+               hintStyle: TextStyle(fontWeight: FontWeight.w300, color: Colors.black , fontSize: 30 )
+              ),  
+                      
+                    ),
+                  )
+                  //container
+                ],
+              )),
+
+     TextButton(
+                    child: Padding(
+                  padding: EdgeInsets.only(top: 0, left: 0),
+                  child: Icon(Icons.send, size: size.height * 0.1),
+                      ),
+                    onPressed: () {
+// description of the group
+                    },
+                
+              ),
+
+
+                ],
+              ),
+              ),
             ],
           ),
         ],
