@@ -9,11 +9,12 @@ class Child extends ChangeNotifier {
 }
 
 class Groups extends ChangeNotifier {
-  String groupId = "";
+  int groupId = -1;
   String groupName = "";
   String leaderId = "";
   String leaderName = "";
+  String pathOfImage = "";
   List<String> membersId = [];
   Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
-      this.membersId);
+      this.membersId,this.pathOfImage);
 }
