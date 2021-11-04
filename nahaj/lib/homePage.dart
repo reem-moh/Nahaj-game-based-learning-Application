@@ -93,6 +93,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
    List<Groups> groups = [];
   Future<void> getGroups(String uid) async {
     groups = await widget.db.getGroups(uid);
+    print(groups);
   }
 
   @override

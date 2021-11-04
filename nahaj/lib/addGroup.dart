@@ -97,17 +97,30 @@ class _AddGroup extends State<AddGroup> {
                         alignment: Alignment.topCenter,
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.only(top: 40),
+                            //padding: EdgeInsets.only(top: 40),
+                             margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(13.0),
+               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+        Radius.circular(120.0) //                 <--- border radius here
+    ),
+                border: Border.all(color: Colors.grey)
+                
+  ),
                             child: AspectRatio(
                               aspectRatio: 1,
+                              
                               child: Image.asset("assets/owl1.png",
                                   fit: BoxFit.cover),
                             ),
                           ),
                           ClipRRect(
                             borderRadius: new BorderRadius.circular(40.0),
-                            child: Image.asset("assets/EditImage.png",
+                             child: Padding(
+                  padding: EdgeInsets.only(top: 160, right: 120),
+                  child: Image.asset("assets/EditImage.png",
                                 height: 150, width: 1000),
+                          ),
                           ),
                         ],
                       ),

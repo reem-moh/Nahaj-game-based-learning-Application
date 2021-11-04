@@ -11,9 +11,9 @@ class Child extends ChangeNotifier {
 class Groups extends ChangeNotifier {
   String groupId = "";
   String groupName = "";
-  String creatorId = "";
-  String creatorName = "";
+  String leaderId = "";
+  String leaderName = "";
   List<String> membersId = [];
-  Groups(this.groupId, this.groupName, this.creatorId, this.creatorName,
+  Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
       this.membersId);
 }

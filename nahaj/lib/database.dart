@@ -129,11 +129,13 @@ class DataBase extends ChangeNotifier {
         .get();
 
     List<QueryDocumentSnapshot> docs = snapshot.docs;
+    //print("number of docs in getGroups from db"+ docs.getLength);
     for (var doc in docs) {
       if (doc.data() != null) {
         var data = doc.data() as Map<String, dynamic>;
+        print("doc in getGroups from db class"+data['groupName']!);
         Groups g = await Groups(
-            data['id'].toString(),
+            data['code'].toString(),
             data['groupName'].toString(),
             data['leaderId'].toString(),
             data['leaderName'].toString(),
@@ -144,7 +146,7 @@ class DataBase extends ChangeNotifier {
     }
     print("group info list in getGroups");
   for (var doc in groupsInfo){
-      print(doc.creatorName);
+      print(doc.leaderName);
     }
     
     return groupsInfo;
