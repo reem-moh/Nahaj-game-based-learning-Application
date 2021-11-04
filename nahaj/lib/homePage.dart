@@ -566,6 +566,7 @@ getGroups(userId);
                                           },
                                           itemBuilder: (_, i) {
                                             return GroupsCard(
+                                                db: widget.db,
                                               groupName:
                                                   groups.elementAt(i).groupName,
                                             );
@@ -659,12 +660,13 @@ class CategoryCard extends StatelessWidget {
 
 
 class GroupsCard extends StatefulWidget {
-  const GroupsCard({
+  /*const GroupsCard({
     this.groupName = 'مجموعة',
-  });
+  });*/
 
   final String groupName;
-
+  final DataBase db;
+  GroupsCard({Key? key, required this.db, required this.groupName}) : super(key: key);
   @override
   State<GroupsCard> createState() => _GroupsCardState();
 }
@@ -678,7 +680,7 @@ class _GroupsCardState extends State<GroupsCard> {
           print('مجموعة');
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Group()),
+            MaterialPageRoute(builder: (context) => Group(groupName: 'مجموعة',db: widget.db)),
           );
         });
       },
