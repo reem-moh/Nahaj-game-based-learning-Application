@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   focused_menu: ^1.0.5
+  image_picker: ^0.8.4+4
   shared_preferences: ^2.0.6
   uuid: ^3.0.5
 
