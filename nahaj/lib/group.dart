@@ -140,13 +140,12 @@ if(entere){
               )
             ],
           ),
- SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              physics: ClampingScrollPhysics(),
-              child:
-         //chat
+ 
+
+
           Stack(
             children: [
+              /*
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 540,
@@ -177,12 +176,12 @@ if(entere){
     );
   },
 ),
-
+*/
               //list view
-              /*
+              
               Container(
                 margin: EdgeInsets.only(left: 30.0, right: 30.0),
-                height: 280,
+                height: 550,
                 child: ListView.separated(
                   itemCount: numOfchate,
                   separatorBuilder: (BuildContext context, int index) {
@@ -192,22 +191,50 @@ if(entere){
                   },
                   itemBuilder: (_, i) {
                     return Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Color.fromARGB(255, 8, 128, 174),
-                      ),
+/*
+           Container(
+                width: MediaQuery.of(context).size.width,
+                height: 540,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.white,
+                ),
+              ),
+              */
+            child:  ListView.builder(
+  itemCount: messages.length,
+  shrinkWrap: true,
+  padding: EdgeInsets.only(top: 10,bottom: 10),
+  physics: ClampingScrollPhysics(),
+  itemBuilder: (context, index){
+    return Container(
+      padding: EdgeInsets.only(left: 14,right: 14,top: 10,bottom: 10),
+      child: Align(
+        alignment: (messages[index].messageType == "receiver"?Alignment.topLeft:Alignment.topRight),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
+          ),
+          padding: EdgeInsets.all(16),
+          child: Text(messages[index].messageContent, style: TextStyle(fontSize: 15),),
+        ),
+      ),
+    );
+  },
+),
+
+
                     );
                   },
                   scrollDirection: Axis.vertical,
                 ),
               ),
 
-              */
+              
             ],
           ),
-      ),
+       
 
 
 
