@@ -22,6 +22,7 @@ class _JoinGroup extends State<JoinGroup> {
   bool validName = false;
   String username = "1";
   String uid = "0";
+  bool entere = true;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -35,8 +36,10 @@ class _JoinGroup extends State<JoinGroup> {
 
   @override
   Widget build(BuildContext context) {
-    _getInfoFromSession();
-    return Scaffold(
+ if(entere){
+      _getInfoFromSession();
+      entere=false;
+    }    return Scaffold(
       body: Stack(
         children: [
           //Background

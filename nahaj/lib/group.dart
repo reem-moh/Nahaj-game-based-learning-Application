@@ -6,7 +6,9 @@ import 'database.dart';
 
 class Group extends StatefulWidget {
   //final DataBase db;
-  const Group({Key? key, /*required this.db*/}) : super(key: key);
+  //const Group({Key? key, /*required this.db*/}) : super(key: key);
+ final DataBase db;
+  Group({Key? key, required this.db, required String groupName}) : super(key: key);
 
   @override
   _Group createState() => _Group();
@@ -21,21 +23,24 @@ class _Group extends State<Group> {
   bool validName = false;
   String username = "1";
   String uid = "0";
+  bool entere = true;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       username = (prefs.getString('username') ?? "1");
-      print('username inside getinfo from addGroup:' + username);
+      print('username inside getinfo from Group:' + username);
       uid = (prefs.getString('id') ?? "1");
-      print('id inside getinfo from addGroup:' + uid);
+      print('id inside getinfo from Group:' + uid);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _getInfoFromSession();
-    getGroupName(uid);
+if(entere){
+      _getInfoFromSession();
+      entere=false;
+    }    getGroupName(uid);
 
     return Scaffold(
       body: Column(
@@ -58,15 +63,21 @@ class _Group extends State<Group> {
                     height: MediaQuery.of(context).size.height * 0.13,
                   ),
                   // ignore: deprecated_member_use
-                  FlatButton(
-                    child: Image(
+
+                  TextButton(
+                    child: Padding(
+                  padding: EdgeInsets.only(top: 0, right: 850),
+                  child: Image(
                       image: AssetImage("assets/Group13.png"),
                       alignment: Alignment.topLeft,
                     ),
+                      ),
                     onPressed: () {
 // description of the group
                     },
-                  ),
+                
+              ),
+
                   Container(
                     margin: EdgeInsets.only(right: 30.0),
                     child: Text(
@@ -79,6 +90,10 @@ class _Group extends State<Group> {
                       ),
                     ),
                   ),
+
+  Padding(
+                  padding: EdgeInsets.only(top: 0, right: 50),
+                  child:
                   Container(
                     width: 120.0,
                     height: 120.0,
@@ -92,10 +107,14 @@ class _Group extends State<Group> {
                           'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
                     ),
                   ),
+  ),
                 ],
               )
             ],
           ),
+
+
+
           Stack(
             children: [
               Container(
@@ -132,6 +151,11 @@ class _Group extends State<Group> {
               ),
             ],
           ),
+
+
+
+
+
           Stack(
             children: [
               Container(
@@ -155,7 +179,7 @@ class _Group extends State<Group> {
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 
   Future<void> getGroupName(String uid) async {
-    nameOfTheGroup = "";
+    nameOfTheGroup = "مجموعه١";
     /*await firestore
         .collection('Groups')
         .where("CraetorId", isEqualTo: uid)
