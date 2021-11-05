@@ -1,4 +1,6 @@
 // Import the firebase_core and cloud_firestore plugin
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -114,10 +116,25 @@ class DataBase extends ChangeNotifier {
   }
 
   //Get avatar image from Firestorage
-  Future<dynamic> loadImage(String path, String image) async {
+  Future<String> loadImage(String path) async {
     //path is the folder after the root on storage firebase
     //name of the image with extention
-    return await firestorage.ref(path).child(image).getDownloadURL();
+    return await firestorage.ref(path).getDownloadURL();
+  }
+
+  Future<String> storeImage(String destination,File path) async{
+    try{
+      Reference ref = firestorage.ref(destination);
+      print('path.toString()'+ path.toString());
+      
+      await ref.putFile(path);
+      String downloadURL = await ref.getDownloadURL();
+      return downloadURL;
+
+    } on FirebaseException catch (e){
+      print("error occure when store image in firestorage, method:storeImage class: DB error: $e");
+    }
+    return "-1";
   }
 
   //get groups of the user

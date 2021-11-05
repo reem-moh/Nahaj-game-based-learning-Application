@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nahaj/addGroup2.dart';
 import 'package:nahaj/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +23,13 @@ class _AddGroup extends State<AddGroup> {
   bool validName = false;
   String username = "1";
   String uid = "0";
+  File? pathOfImage;
+  String image = "";
+  String defaultImage =
+      "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585";
+  int code = 0;
   //to let user enter _getInfoFromSession only one
-  bool entere = true;
+  bool enter = true;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -35,11 +43,11 @@ class _AddGroup extends State<AddGroup> {
 
   @override
   Widget build(BuildContext context) {
-    if(entere){
+    if (enter) {
       _getInfoFromSession();
-      entere=false;
+      enter = false;
     }
-    
+
     return Scaffold(
       body: Stack(
         children: [
@@ -54,7 +62,8 @@ class _AddGroup extends State<AddGroup> {
           ListView(
             key: _key,
             children: [
-              FlatButton(
+              //back button
+              TextButton(
                 child: Padding(
                   padding: EdgeInsets.only(top: 20, right: 1050),
                   child: Image(
@@ -74,58 +83,52 @@ class _AddGroup extends State<AddGroup> {
                   });
                 },
               ),
-
+              //image of group
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //Back button
-                    // ignore: deprecated_member_use
-
-                    //Nahaj logo
-                    FlatButton(
-                      child:
-                          /*
-                        Image(
-                          width: MediaQuery.of(context).size.width / 1.2,
-                          height: MediaQuery.of(context).size.height / 1,
-                          image: AssetImage("assets/Groupimage.png"),alignment: Alignment.topCenter,),
-                          */
-                          Stack(
+                    //change the image of group
+                    TextButton(
+                      child: Stack(
                         alignment: Alignment.topCenter,
                         children: <Widget>[
                           Container(
-                            //padding: EdgeInsets.only(top: 40),
-                             margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(13.0),
-               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-        Radius.circular(120.0) //                 <--- border radius here
-    ),
-                border: Border.all(color: Colors.grey)
-                
-  ),
+                            margin: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(13.0),
+                            //Group Image
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        120.0) //                 <--- border radius here
+                                    ),
+                                border: Border.all(color: Colors.grey)),
                             child: AspectRatio(
                               aspectRatio: 1,
-                              
-                              child: Image.asset("assets/owl1.png",
-                                  fit: BoxFit.cover),
+                              child: pathOfImage != null
+                                  ? ClipOval(
+                                      child: Image.file(pathOfImage!,
+                                          fit: BoxFit.cover),
+                                    )
+                                  : ClipOval(
+                                      child: Image.asset("assets/owl1.png",
+                                          fit: BoxFit.cover)),
                             ),
                           ),
+                          //Camera Iamge
                           ClipRRect(
                             borderRadius: new BorderRadius.circular(40.0),
-                             child: Padding(
-                  padding: EdgeInsets.only(top: 160, right: 120),
-                  child: Image.asset("assets/EditImage.png",
-                                height: 150, width: 1000),
-                          ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 160, right: 120),
+                              child: Image.asset("assets/EditImage.png",
+                                  height: 150, width: 1000),
+                            ),
                           ),
                         ],
                       ),
                       onPressed: () {
-                        changeImage();
+                        pickImage();
                       },
                     ),
                   ],
@@ -193,18 +196,20 @@ class _AddGroup extends State<AddGroup> {
                         borderRadius: BorderRadius.circular(30.0),
                         side: BorderSide(
                             color: Color.fromARGB(255, 129, 190, 255))),
-                    onPressed: () {
-                      createGroup(name, widget.db);
-                      setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddGroup2(
-                                    db: widget.db,
-                                  )),
-                        );
-                      });
-                      //createGroup(name);
+                    onPressed: () async {
+                      bool check = await createGroup(name, widget.db);
+                      if (check) {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddGroup2(
+                                      db: widget.db,
+                                      nameoftheGroup: "$code",
+                                    )),
+                          );
+                        });
+                      }
                     },
                     padding: EdgeInsets.all(0.0),
                     color: Color.fromARGB(255, 129, 190, 255),
@@ -228,22 +233,49 @@ class _AddGroup extends State<AddGroup> {
     );
   }
 
-void createGroup(String groupName, DataBase db) async {
+  Future<bool> createGroup(String groupName, DataBase db) async {
     //check if the name of group greater than 3 character
     if (validName) {
-      
-      int code = 0;
       bool isFound = true;
       //check if code is not genetrated before
-      while(isFound){
-        //722933;
+      while (isFound) {
         code = Random().nextInt(1000000);
-        
+
         isFound = await widget.db.checkGroupCode(code);
       }
-      widget.db.createGroup(code, groupName, username, uid,"");
+      if (pathOfImage != null) {
+        print("pathOfImage: $pathOfImage");
+        String imageURL =
+            await widget.db.storeImage('/GroupsAvatars/$code', pathOfImage!);
+        //thats mean there is no error
+        if (imageURL != "-1") {
+          widget.db.createGroup(code, groupName, username, uid, imageURL);
+        }
+      } else {
+        //using default image
+        String imageUrl = await widget.db.loadImage('/Avatar/owl.png');
+        widget.db.createGroup(code, groupName, username, uid, imageUrl);
+        print("default image inside method createGrou, in addGroup class ");
+      }
+      return true;
+    }
+    //it's not a valid name
+    return false;
+  }
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (image == null) {
+        return;
+      }
+
+      final imageTemporary = File(image.path);
+      setState(() => this.pathOfImage = imageTemporary);
+      print("pathOfImage inside pickImage");
+    } on PlatformException catch (e) {
+      print("Failed to pick image: $e");
     }
   }
 }
-
-void changeImage() async {}
