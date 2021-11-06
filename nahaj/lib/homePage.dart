@@ -83,14 +83,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
     Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Signin(
-                                        db: widget.db,
-                                      )),
-                            );
+      context,
+      MaterialPageRoute(
+          builder: (context) => Signin(
+                db: widget.db,
+              )),
+    );
   }
-   List<Groups> groups = [];
+
+  List<Groups> groups = [];
   Future<void> getGroups(String uid) async {
     groups = await widget.db.getGroups(uid);
     print(groups);
@@ -101,7 +102,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
-getGroups(userId);
+    getGroups(userId);
     return Scaffold(
       backgroundColor: backgroundColorOfSideBar,
       body: Stack(
@@ -569,6 +570,8 @@ getGroups(userId);
                                                 db: widget.db,
                                               groupName:
                                                   groups.elementAt(i).groupName,
+                                                  groupImage:
+                                                  groups.elementAt(i).pathOfImage,
                                             );
                                           },
                                           scrollDirection: Axis.horizontal,
@@ -658,15 +661,13 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-
 class GroupsCard extends StatefulWidget {
-  /*const GroupsCard({
-    this.groupName = 'مجموعة',
-  });*/
 
   final String groupName;
   final DataBase db;
-  GroupsCard({Key? key, required this.db, required this.groupName}) : super(key: key);
+  final String groupImage;
+  GroupsCard({Key? key, required this.db, required this.groupName, required this.groupImage})
+      : super(key: key);
   @override
   State<GroupsCard> createState() => _GroupsCardState();
 }
@@ -680,7 +681,9 @@ class _GroupsCardState extends State<GroupsCard> {
           print('مجموعة');
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Group(groupName: 'مجموعة',db: widget.db)),
+            MaterialPageRoute(
+                builder: (context) =>
+                    Group(groupName: 'مجموعة', db: widget.db)),
           );
         });
       },
@@ -697,7 +700,7 @@ class _GroupsCardState extends State<GroupsCard> {
             ),
             child: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                  widget.groupImage),
             ),
           ),
           Container(

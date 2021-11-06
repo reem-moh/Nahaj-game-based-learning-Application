@@ -14,7 +14,8 @@ class Groups extends ChangeNotifier {
   String leaderId = "";
   String leaderName = "";
   String pathOfImage = "";
-  List<String> membersId = [];
+  List<String> memberId = [];
+  List<String> memberName = [];
   Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
-      this.membersId,this.pathOfImage);
+      this.memberId,this.memberName,this.pathOfImage);
 }

@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'addGroup2.dart';
 import 'database.dart';
 import 'homePage.dart';
 
@@ -18,11 +15,11 @@ class JoinGroup extends StatefulWidget {
 class _JoinGroup extends State<JoinGroup> {
   final _key = GlobalKey<FormState>();
 
-  String name = "";
+  int groupCode = -1;
   bool validName = false;
   String username = "1";
   String uid = "0";
-  bool entere = true;
+  bool enter = true;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -36,10 +33,11 @@ class _JoinGroup extends State<JoinGroup> {
 
   @override
   Widget build(BuildContext context) {
- if(entere){
+    if (enter) {
       _getInfoFromSession();
-      entere=false;
-    }    return Scaffold(
+      enter = false;
+    }
+    return Scaffold(
       body: Stack(
         children: [
           //Background
@@ -53,7 +51,8 @@ class _JoinGroup extends State<JoinGroup> {
           ListView(
             key: _key,
             children: [
-              FlatButton(
+              //backbutton
+              TextButton(
                 child: Padding(
                   padding: EdgeInsets.only(top: 20, right: 1050),
                   child: Image(
@@ -73,6 +72,7 @@ class _JoinGroup extends State<JoinGroup> {
                   });
                 },
               ),
+              //logo
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
                 child: Row(
@@ -86,7 +86,7 @@ class _JoinGroup extends State<JoinGroup> {
                   ],
                 ),
               ),
-              //Name
+              //انضمام للمجموعه
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Padding(
@@ -103,9 +103,10 @@ class _JoinGroup extends State<JoinGroup> {
                 ),
               ),
 
-              //Name text field
+              //Code text field
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
+                //Code text field
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
@@ -114,20 +115,20 @@ class _JoinGroup extends State<JoinGroup> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      /*onChanged: (val) {
-                          name = val;
-                        },*/
                       validator: (val) {
                         if (val!.length <= 0) {
                           validName = false;
                           return 'هذا الحقل مطلوب';
-                        } else if (val.length <= 2) {
+                        } else if (val.length <= 5) {
                           validName = false;
-                          print("name is not valid");
-                          return 'الإسم يجب أن يكون من ثلاثة أحرف أو أكثر';
+                          print("groupCode is not valid");
+                          return 'الرمز يجب أن يكون من ٦ أرقام أو أكثر';
                         } else {
                           validName = true;
-                          name = val;
+                          if (int.tryParse(val) == null) {
+                            return 'Only Number are allowed';
+                          }
+                          groupCode = int.parse(val);
                         }
                         /*if (loginErr) {
                             return 'البريد الإلكتروني أو كلمة المرور خاطئة';
@@ -137,25 +138,41 @@ class _JoinGroup extends State<JoinGroup> {
                     )),
               ),
 
+              //button
               Container(
                 margin: EdgeInsets.all(10),
                 height: 60.0,
+                //button
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
+                  child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                         side: BorderSide(
                             color: Color.fromARGB(255, 129, 190, 255))),
-                    onPressed: () {
-                      print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-                      ToJoinGroup(name, uid);
-                      //createGroup(name);
+                    onPressed: () async {
+                      //group code is shorter than usual
+                      if (validName) {
+                        print("groupCode before enter join group: $groupCode");
+                        String check = await joinGroup(groupCode);
+                        //1 means added to the group
+                        if (check == '1') {
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                        db: widget.db,
+                                      )),
+                            );
+                          });
+                        }
+                      }
                     },
                     padding: EdgeInsets.all(0.0),
                     color: Color.fromARGB(255, 129, 190, 255),
                     textColor: Colors.white,
+                    //text of button
                     child: Text(
                       "انضمام ",
                       style: TextStyle(
@@ -174,23 +191,17 @@ class _JoinGroup extends State<JoinGroup> {
       ),
     );
   }
-}
 
-// ignore: non_constant_identifier_names
-ToJoinGroup(String groupId, String userModel) async {
-  CollectionReference groups = firestore.collection("Groups");
-  String membersCounter = '0';
+  Future<String> joinGroup(int groupCode) async {
+    //check if there is a group and if user in it .
+    String groupId = await widget.db.joinGroup(groupCode, uid, username);
+    if (groupId == "-1") {
+      return "there is no group has this code!!";
+    }
 
-  await groups.doc("fbFCVDbnwQwlY476HVL0").get().then((value) {
-    print('read from firestore: \n ' + value.get("membersCounter"));
-    membersCounter = value.get('membersCounter');
-  }).catchError((error) => print("Failed to join group: $error"));
-
-  if (int.parse(membersCounter) < 20 && int.parse(membersCounter) != 0) {
-    var NweMember = "member$membersCounter";
-    firestore.collection("Groups").doc("fbFCVDbnwQwlY476HVL0").set({
-      "members": FieldValue.arrayUnion(userModel as List<String>),
-      "membersCounter": int.parse(membersCounter) + 1
-    }, SetOptions(merge: true));
+    if (groupId == "0") {
+      return "you are in the group!!";
+    }
+    return "1";
   }
 }

@@ -19,14 +19,13 @@ class DataBase extends ChangeNotifier {
   //late FirebaseStorage firestorage;
   //contain the user account info
   late CollectionReference user;
-   //contain the group account info
+  //contain the group account info
   late CollectionReference groups;
   DataBase() {
     // firestore = FirebaseFirestore.instance;
     //firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
     user = firestore.collection('user');
-    groups = firestore.collection('user');
   }
 
   //sign up 1 (add the user in Auth)
@@ -122,17 +121,17 @@ class DataBase extends ChangeNotifier {
     return await firestorage.ref(path).getDownloadURL();
   }
 
-  Future<String> storeImage(String destination,File path) async{
-    try{
+  Future<String> storeImage(String destination, File path) async {
+    try {
       Reference ref = firestorage.ref(destination);
-      print('path.toString()'+ path.toString());
-      
+      print('path.toString()' + path.toString());
+
       await ref.putFile(path);
       String downloadURL = await ref.getDownloadURL();
       return downloadURL;
-
-    } on FirebaseException catch (e){
-      print("error occure when store image in firestorage, method:storeImage class: DB error: $e");
+    } on FirebaseException catch (e) {
+      print(
+          "error occure when store image in firestorage, method:storeImage class: DB error: $e");
     }
     return "-1";
   }
@@ -142,73 +141,132 @@ class DataBase extends ChangeNotifier {
     List<Groups> groupsInfo = [];
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('Groups')
-        .where('members', arrayContains: uid)
+        .where('memberID', arrayContains: uid)
         .get();
 
     List<QueryDocumentSnapshot> docs = snapshot.docs;
-    //print("number of docs in getGroups from db"+ docs.getLength);
+
     for (var doc in docs) {
       if (doc.data() != null) {
         var data = doc.data() as Map<String, dynamic>;
-        print("doc in getGroups from db class"+data['groupName']!);
-        Groups g = await Groups(
-            data['code'],
-            data['groupName'].toString(),
-            data['leaderId'].toString(),
-            data['leaderName'].toString(),
-            List.castFrom(data['members'] as List),
-            data['pathOfImage'],
+        print("in (getGroups, DB) : groupName ->" + data['groupName']!);
+        List.from(data['memberID']).forEach((element) {
+          print('(db) group members Id -> '+element);
+        });
+        Groups g = Groups(
+          data['code'],
+          data['groupName'].toString(),
+          data['leaderId'].toString(),
+          data['leaderName'].toString(),
+          List.castFrom(data['memberID'] as List),
+          List.castFrom(data['memberName'] as List),
+          data['pathOfImage'],
         );
+        g.memberId.forEach((element) {
+          print('(g) group members Id ->'+element);
+        });
         groupsInfo.add(g);
-        // You can get other data in this manner.
       }
     }
-    print("group info list in getGroups");
-  for (var doc in groupsInfo){
-      print(doc.leaderName);
-    }
-    
     return groupsInfo;
   }
 
-  Future<void> createGroup(int code,String groupName,String leaderName,String leaderId,String pathOfImage ) async {
-    
+  Future<void> createGroup(int code, String groupName, String leaderName,
+      String leaderId, String pathOfImage) async {
     //add to group collection
     final groupDocument = firestore.collection('Groups').doc();
-    List members = [];
-    members.add({
-      "userId":leaderId,
-      "userName":leaderName,
-    });
-    groupDocument.set({
-            "code": code,
-            "groupName": groupName,
-            "leaderName": leaderName,
-            "leaderId": leaderId,
-            "membersCounter": 1,
-            "members": FieldValue.arrayUnion(members),
-            "pathOfImage": pathOfImage,
-          })
-          .then((value) => print("Group created"))
-          .catchError((error) => print("Failed to create group: $error"));
+    List<String> members = [leaderId];
+    List<String> MemberN = [leaderName];
+    /*members.add({
+      "userId": leaderId,
+      "userName": leaderName,
+    });*/
+    groupDocument
+        .set({
+          "code": code,
+          "groupName": groupName,
+          "leaderName": leaderName,
+          "leaderId": leaderId,
+          "membersCounter": 1,
+          "memberID": FieldValue.arrayUnion(members),
+          "memberName": FieldValue.arrayUnion(MemberN),
+          "pathOfImage": pathOfImage,
+        })
+        .then((value) => print("Group created"))
+        .catchError((error) => print("Failed to create group: $error"));
     //to add more on members array using groupDocument.updateData rather than groupDocument.set
   }
 
   Future<bool> checkGroupCode(int code) async {
-    bool isFound= false;
-    //read the list of groups from 
+    bool isFound = false;
+    //read the list of groups from
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('Groups')
         .where('code', isEqualTo: code)
         .get();
 
-    if(snapshot.docs.length >= 1){
+    if (snapshot.docs.length >= 1) {
       print("inside checkGroupCode more than one doc have the same code ");
       isFound = true;
-    }else{
-       print("only one unique value");
+    } else {
+      print("only one unique value");
     }
 
     return isFound;
+  }
+
+  Future<String> joinGroup(int groupCode, String userId, String userName) async {
+    print("in (joinGroup,DB) groupId: $groupCode, userID: $userId, userName: $userName");
+
+    String groupId = await findGroup(groupCode, userId);
+
+    if (groupId == '-1') {
+      return '-1';
+    }
+
+    var docRef = firestore.collection('Groups').doc(groupId);
+    print('docRef: $docRef');
+
+    var doc = await docRef.get();
+    var data = doc.data() as Map<String, dynamic>;
+
+    List<String> newMemberI = [userId];
+    List<String> newMemberN = [userName];
+    //first check if user in the group
+    if(!List.castFrom(data['memberID']).contains(userId)){
+      docRef.update({
+        "memberID": FieldValue.arrayUnion(newMemberI),
+        "memberName": FieldValue.arrayUnion(newMemberN),
+        "membersCounter": ++data['membersCounter'],
+      });
+    }
+    
+
+    return 'join group success';
+  }
+
+  Future<String> findGroup(int groupCode, String uid) async {
+    var collection =
+        firestore.collection('Groups').where('code', isEqualTo: groupCode);
+
+    var querySnapshot = await collection.get();
+    if (querySnapshot.docs.length == 0) {
+      print(
+          "there is no group has this code, (findGroup, database)\n$querySnapshot\n${querySnapshot.docs}");
+      return '-1';
+    }
+    return querySnapshot.docs[0].reference.id;
+  }
+
+  removeUserFromGroup(String groupId, String userId, String userName) {
+    var docRef = firestore.collection('Groups').doc(groupId);
+    List deletedMember = [];
+    deletedMember.add({
+      "userId": userId,
+      "userName": userName,
+    });
+    docRef.update({
+      "members": FieldValue.arrayRemove(deletedMember),
+    });
   }
 }
