@@ -209,7 +209,14 @@ if(entere){
   itemBuilder: (context, index){
     return Container(
       padding: EdgeInsets.only(left: 14,right: 14,top: 10,bottom: 10),
-      child: Align(
+       
+
+
+
+            child: Stack( children: [ 
+              
+        
+              Align(
         alignment: (messages[index].messageType == "receiver"?Alignment.topLeft:Alignment.topRight),
         child: Container(
           decoration: BoxDecoration(
@@ -217,10 +224,38 @@ if(entere){
             color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
           ),
           padding: EdgeInsets.all(16),
-          child: Text(messages[index].messageContent, style: TextStyle(fontSize: 15),),
+          child: Stack( children: [ 
+
+            
+ if(messages[index].messageType == "receiver")(
+        Padding(
+                    padding:  (EdgeInsets.only(bottom: 0)),
+                    child:
+           Text("Reem", style: TextStyle(fontSize: 20 , fontWeight: FontWeight.w700 ),),
+           )
+         ),
+
+           Text(messages[index].messageContent, style: TextStyle(fontSize: 25),),
+        
+               Padding(
+                    padding: (messages[index].messageType == "receiver"?EdgeInsets.only(top: 35, left: 0):EdgeInsets.only(top: 35 ,right: 0)),
+                    child:
+           Text("5:10 PM", style: TextStyle(fontSize: 15),),
+           ),
+          ],
+          ),
+          
         ),
+
       ),
+ 
+
+
+           
+        ],
+            ),
     );
+
   },
 ),
 
@@ -311,10 +346,10 @@ if(entere){
 
 List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello", messageType: "receiver"),
-    ChatMessage(messageContent: "Hello", messageType: "receiver"),
+    ChatMessage(messageContent: "HelloHelloHello", messageType: "receiver"),
     ChatMessage(messageContent: "Hello", messageType: "sender"),
-    ChatMessage(messageContent: "Hello", messageType: "receiver"),
-    ChatMessage(messageContent: "IHello", messageType: "sender"),
+    ChatMessage(messageContent: "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello", messageType: "receiver"),
+    ChatMessage(messageContent: "IHelloHelloHelloHello", messageType: "sender"),
     
   ];
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Signin(
+      home: Group(
         //groupName: 'مجموعة',
-        db: this.database,
+        db: this.database, groupName: '',
       ),
       /*AddGroup2(
         db: this.database,
