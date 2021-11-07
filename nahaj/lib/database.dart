@@ -13,17 +13,10 @@ FirebaseStorage firestorage = FirebaseStorage.instance;
 
 class DataBase extends ChangeNotifier {
   late FirebaseAuth _auth;
-  //for data
-  //late FirebaseFirestore firestore;
-  //for images and videos
-  //late FirebaseStorage firestorage;
-  //contain the user account info
   late CollectionReference user;
-  //contain the group account info
   late CollectionReference groups;
+
   DataBase() {
-    // firestore = FirebaseFirestore.instance;
-    //firestorage = FirebaseStorage.instance;
     _auth = FirebaseAuth.instance;
     user = firestore.collection('user');
   }
@@ -35,9 +28,9 @@ class DataBase extends ChangeNotifier {
           email: email, password: password);
       print("createNewUser, database page");
       print(result.user);
-      User? user = result.user;
-      await addNewUser(name, email, user!.uid);
-      return user;
+      //User user = result.user;
+      await addNewUser(name, email, result.user!.uid);
+      return result.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('The account already exists for that email, database page');
@@ -76,7 +69,7 @@ class DataBase extends ChangeNotifier {
     }
   }
 
-//reset password function (in Auth)
+  //reset password function (in Auth)
   Future<void> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -106,7 +99,7 @@ class DataBase extends ChangeNotifier {
     });
 
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('id', uid);
+    prefs.setString('userId', uid);
     prefs.setString('username', name);
     prefs.setString('avatar', avatar);
     prefs.setDouble('level', level);

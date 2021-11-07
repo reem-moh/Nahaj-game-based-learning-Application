@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nahaj/Signin.dart';
-import 'package:nahaj/addGroup.dart';
-import 'package:nahaj/group.dart';
-import 'package:nahaj/homepage.dart';
+import 'package:nahaj/SignPages/Signin.dart';
+import 'package:nahaj/Group/addGroup.dart';
+import 'package:nahaj/Group/group.dart';
+import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:nahaj/joinGroup.dart';
-import 'package:nahaj/signUp.dart';
-import 'addGroup2.dart';
+import 'package:nahaj/Group/joinGroup.dart';
+import 'package:nahaj/SignPages/signUp.dart';
+import 'Group/addGroup2.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {

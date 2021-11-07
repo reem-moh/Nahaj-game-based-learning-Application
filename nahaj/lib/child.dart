@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Child extends ChangeNotifier {
-  String username = "";
-  String email = "";
-  String avatar = "";
-  double level = 0;
-  Child(this.username, this.email, this.avatar, this.level);
+class User extends ChangeNotifier{
+   String userId;
+   String username;
+   String email;
+   String avatar;
+   double level;
+
+  User({required this.userId,required this.username,required this.email,required this.avatar,required this.level});
 }
 
 class Groups extends ChangeNotifier {

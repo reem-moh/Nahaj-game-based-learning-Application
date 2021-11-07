@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:nahaj/Signin.dart';
-import 'package:nahaj/homePage.dart';
-import 'database.dart';
+import 'package:nahaj/SignPages/Signin.dart';
+import 'package:nahaj/HomePage/homePage.dart';
+import '../database.dart';
 
 class SignUp extends StatefulWidget {
   final DataBase db;

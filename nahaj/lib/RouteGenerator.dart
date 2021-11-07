@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/Signin.dart';
-import 'package:nahaj/addGroup.dart';
-import 'package:nahaj/category.dart';
-import 'package:nahaj/group.dart';
-import 'package:nahaj/homePage.dart';
-import 'package:nahaj/joinGroup.dart';
+import 'package:nahaj/SignPages/Signin.dart';
+import 'package:nahaj/Group/addGroup.dart';
+import 'package:nahaj/HomePage/category.dart';
+import 'package:nahaj/Group/group.dart';
+import 'package:nahaj/HomePage/homePage.dart';
+import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/main.dart';
-import 'package:nahaj/signUp.dart';
+import 'package:nahaj/SignPages/signUp.dart';
 import 'database.dart';
 
 class RouteGenerator {

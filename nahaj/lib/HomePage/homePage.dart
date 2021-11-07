@@ -1,17 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:nahaj/Signin.dart';
-import 'package:nahaj/addGroup.dart';
+import 'package:nahaj/SignPages/Signin.dart';
+import 'package:nahaj/Group/addGroup.dart';
+import 'package:nahaj/Group/group.dart';
+import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/child.dart';
-import 'package:nahaj/joinGroup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/material.dart';
-import 'package:nahaj/category.dart';
-import 'package:nahaj/database.dart';
-import 'package:nahaj/AR.dart';
-import 'group.dart';
+import 'category.dart';
+import 'package:nahaj/HomePage/category.dart';
+import '../ARPages/AR.dart';
+import 'package:nahaj/ARPages/AR.dart';
+import '../database.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
@@ -34,9 +35,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
 
-  String avatar = "1";
-  String username = "1";
-  String userId = "1";
+  User user= User(userId: '1',username: '1',email: '1',avatar: '1',level: -1);
 
   @override
   void initState() {
@@ -60,25 +59,36 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
+    
     setState(() {
-      avatar = (prefs.getString('avatar') ?? "1");
-      username = (prefs.getString('username') ?? "1");
-      userId = (prefs.getString('id') ?? "1");
+      String avatar = (prefs.getString('avatar') ?? "1");
+      String username = (prefs.getString('username') ?? "1");
+      String userId = (prefs.getString('userId') ?? "1");
+      String email = (prefs.getString('email')?? "1");
+      double level = (prefs.getDouble('level')?? -1);
       print('username inside getinfo from homepage:' + username);
       print('avatar inside getinfo from homepage:' + avatar);
+
+
+      user = User(userId: userId,username: username,email: email,avatar: avatar,level: level);
     });
   }
 
   void _logout() async {
+    dispose();
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      prefs.setString('id', '');
+      prefs.setString('userId', '');
       prefs.setString('username', '');
       prefs.setString('avatar', '');
       prefs.setDouble('level', -1.0);
       prefs.setString('email', '');
-      avatar = "1";
-      username = "1";
+
+      user.userId = '';
+      user.username = "";
+      user.email = "";
+      user.avatar = "";
+      user.level = -1;
     });
 
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
@@ -102,7 +112,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
-    getGroups(userId);
+    getGroups(user.userId);
     return Scaffold(
       backgroundColor: backgroundColorOfSideBar,
       body: Stack(
@@ -131,10 +141,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   children: [
                     Container(
                       height: screenHeight * 0.08,
-                      child: username == "1"
+                      child: user.username == "1"
                           ? Text("...")
                           : Text(
-                              username,
+                              user.username,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Cairo',
@@ -148,10 +158,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 accountEmail: Text(""),
                 currentAccountPicture: CircleAvatar(
                   child: ClipOval(
-                    child: avatar == "1"
+                    child: user.avatar == "1"
                         ? CircularProgressIndicator()
                         : Image.network(
-                            avatar,
+                            user.avatar,
                             fit: BoxFit.fill,
                             alignment: Alignment.center,
                           ),
@@ -381,19 +391,19 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                avatar == "1"
+                                user.avatar == "1"
                                     ? CircularProgressIndicator()
                                     : Image.network(
-                                        avatar,
+                                        user.avatar,
                                         fit: BoxFit.cover,
                                       ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
-                                username == "1"
+                                user.username == "1"
                                     ? Text("...")
                                     : Text(
-                                        'أهلاً، $username',
+                                        'أهلاً، ${user.username}',
                                         style: TextStyle(
                                           fontFamily: 'Cairo',
                                           color: Colors.white,

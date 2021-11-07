@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nahaj/addGroup2.dart';
-import 'package:nahaj/homePage.dart';
+import 'package:nahaj/Group/addGroup2.dart';
+import 'package:nahaj/HomePage/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'database.dart';
+import '../database.dart';
 import 'dart:math';
 
 class AddGroup extends StatefulWidget {
