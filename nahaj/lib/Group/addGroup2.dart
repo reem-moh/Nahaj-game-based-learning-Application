@@ -17,9 +17,6 @@ class AddGroup2 extends StatefulWidget {
 class _AddGroup2 extends State<AddGroup2> {
   final _key = GlobalKey<FormState>();
 
-  String name = "";
-  bool validName = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

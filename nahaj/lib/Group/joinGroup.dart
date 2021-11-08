@@ -18,26 +18,9 @@ class _JoinGroup extends State<JoinGroup> {
 
   int groupCode = -1;
   bool validName = false;
-  String username = "1";
-  String uid = "0";
-  bool enter = true;
-
-  Future<void> _getInfoFromSession() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      username = (prefs.getString('username') ?? "1");
-      print('username inside getinfo from JoinGroup:' + username);
-      uid = (prefs.getString('id') ?? "1");
-      print('id inside getinfo from JoinGroup:' + uid);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (enter) {
-      _getInfoFromSession();
-      enter = false;
-    }
     return Scaffold(
       body: Stack(
         children: [
@@ -195,7 +178,7 @@ class _JoinGroup extends State<JoinGroup> {
 
   Future<String> joinGroup(int groupCode) async {
     //check if there is a group and if user in it .
-    String groupId = await widget.db.joinGroup(groupCode, uid, username);
+    String groupId = await widget.db.joinGroup(groupCode, widget.user.userId, widget.user.username);
     if (groupId == "-1") {
       return "there is no group has this code!!";
     }

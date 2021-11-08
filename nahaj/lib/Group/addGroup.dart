@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nahaj/Group/addGroup2.dart';
 import 'package:nahaj/HomePage/homePage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nahaj/database.dart';
 import 'dart:math';
 
@@ -21,36 +20,16 @@ class AddGroup extends StatefulWidget {
 
 class _AddGroup extends State<AddGroup> {
   final _key = GlobalKey<FormState>();
-
-  String name = "";
+  String groupName = "";
   bool validName = false;
-  String username = "1";
-  String uid = "0";
   File? pathOfImage;
   String image = "";
   String defaultImage =
       "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585";
   int code = 0;
-  //to let user enter _getInfoFromSession only one
-  bool enter = true;
-
-  Future<void> _getInfoFromSession() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      username = (prefs.getString('username') ?? "1");
-      print('username inside getinfo from addGroup:' + username);
-      uid = (prefs.getString('id') ?? "1");
-      print('id inside getinfo from addGroup:' + uid);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (enter) {
-      _getInfoFromSession();
-      enter = false;
-    }
-
     return Scaffold(
       body: Stack(
         children: [
@@ -178,7 +157,7 @@ class _AddGroup extends State<AddGroup> {
                           return 'الإسم يجب أن يكون من ثلاثة أحرف أو أكثر';
                         } else {
                           validName = true;
-                          name = val;
+                          groupName = val;
                         }
                         /*if (loginErr) {
                             return 'البريد الإلكتروني أو كلمة المرور خاطئة';
@@ -200,7 +179,7 @@ class _AddGroup extends State<AddGroup> {
                         side: BorderSide(
                             color: Color.fromARGB(255, 129, 190, 255))),
                     onPressed: () async {
-                      bool check = await createGroup(name, widget.db);
+                      bool check = await createGroup(groupName, widget.db);
                       if (check) {
                         setState(() {
                           Navigator.push(
@@ -253,12 +232,12 @@ class _AddGroup extends State<AddGroup> {
             await widget.db.storeImage('/GroupsAvatars/$code', pathOfImage!);
         //thats mean there is no error
         if (imageURL != "-1") {
-          widget.db.createGroup(code, groupName, username, uid, imageURL);
+          widget.db.createGroup(code, groupName, widget.user.username, widget.user.userId, imageURL);
         }
       } else {
         //using default image
         String imageUrl = await widget.db.loadImage('/Avatar/owl.png');
-        widget.db.createGroup(code, groupName, username, uid, imageUrl);
+        widget.db.createGroup(code, groupName, widget.user.username,  widget.user.userId, imageUrl);
         print("default image inside method createGrou, in addGroup class ");
       }
       return true;

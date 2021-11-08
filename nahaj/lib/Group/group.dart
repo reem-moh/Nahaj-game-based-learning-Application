@@ -26,33 +26,11 @@ class _Group extends State<Group> {
   final _key = GlobalKey<FormState>();
 
   String nameOfTheGroup = "مجموعة 1";
-
-  String name = "";
-  bool validName = false;
-  String username = "1";
-  String uid = "0";
-  bool entere = true;
   int numOfchate = 3;
-
-  Future<void> _getInfoFromSession() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      username = (prefs.getString('username') ?? "1");
-      print('username inside getinfo from Group:' + username);
-      uid = (prefs.getString('id') ?? "1");
-      print('id inside getinfo from Group:' + uid);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    if (entere) {
-      _getInfoFromSession();
-      entere = false;
-    }
-    getGroupName(uid);
-
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
