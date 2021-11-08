@@ -2,16 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../database.dart';
+import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:nahaj/child.dart';
 
 class Group extends StatefulWidget {
   //final DataBase db;
   //const Group({Key? key, /*required this.db*/}) : super(key: key);
- final DataBase db;
-  Group({Key? key, required this.db, required String groupName}) : super(key: key);
+  final String groupName;
+  final User user;
+  final DataBase db;
+  Group(
+      {Key? key, required this.db, required this.groupName, required this.user})
+      : super(key: key);
 
   @override
   _Group createState() => _Group();
@@ -27,7 +32,7 @@ class _Group extends State<Group> {
   String username = "1";
   String uid = "0";
   bool entere = true;
-  int numOfchate=3 ;
+  int numOfchate = 3;
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -41,11 +46,12 @@ class _Group extends State<Group> {
 
   @override
   Widget build(BuildContext context) {
-        Size size = MediaQuery.of(context).size;
-if(entere){
+    Size size = MediaQuery.of(context).size;
+    if (entere) {
       _getInfoFromSession();
-      entere=false;
-    }    getGroupName(uid);
+      entere = false;
+    }
+    getGroupName(uid);
 
     return Scaffold(
       body: Column(
@@ -69,28 +75,26 @@ if(entere){
                   ),
                   // ignore: deprecated_member_use
 
- TextButton(
+                  TextButton(
                     child: Padding(
-                  padding: EdgeInsets.only(top: 20, right: 720),
-                  child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 0),
-                  child: Icon(Icons.arrow_back, size: size.height * 0.08),
-                      ),),
+                      padding: EdgeInsets.only(top: 20, right: 720),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 0, left: 0),
+                        child: Icon(Icons.arrow_back, size: size.height * 0.08),
+                      ),
+                    ),
                     onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                db: widget.db,
-                              )),
-                    );
-                  });
-                },
-
-                
-              ),
-                  
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage(
+                                    db: widget.db,
+                                  )),
+                        );
+                      });
+                    },
+                  ),
 
                   Container(
                     margin: EdgeInsets.only(right: 30.0),
@@ -105,44 +109,39 @@ if(entere){
                     ),
                   ),
 
-  Padding(
-                  padding: EdgeInsets.only(top: 0, right: 50),
-                  child:
-                  Container(
-                    width: 120.0,
-                    height: 120.0,
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[350],
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                  Padding(
+                    padding: EdgeInsets.only(top: 0, right: 50),
+                    child: Container(
+                      width: 120.0,
+                      height: 120.0,
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey[350],
+                      ),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                      ),
                     ),
                   ),
-  ),
 
-  TextButton(
+                  TextButton(
                     child: Padding(
-                  padding: EdgeInsets.only(top: 0, right: 50),
-                  child: Image(
-                      image: AssetImage("assets/Group13.png"),
-                      alignment: Alignment.topLeft,
-                    ),
+                      padding: EdgeInsets.only(top: 0, right: 50),
+                      child: Image(
+                        image: AssetImage("assets/Group13.png"),
+                        alignment: Alignment.topLeft,
                       ),
+                    ),
                     onPressed: () {
 // description of the group
                     },
-                
-              ),
+                  ),
                 ],
               )
             ],
           ),
- 
-
-
           Stack(
             children: [
               /*
@@ -178,7 +177,7 @@ if(entere){
 ),
 */
               //list view
-              
+
               Container(
                 margin: EdgeInsets.only(left: 30.0, right: 30.0),
                 height: 550,
@@ -201,86 +200,82 @@ if(entere){
                 ),
               ),
               */
-            child:  ListView.builder(
-  itemCount: messages.length,
-  shrinkWrap: true,
-  padding: EdgeInsets.only(top: 10,bottom: 10),
-  physics: ClampingScrollPhysics(),
-  itemBuilder: (context, index){
-    return Container(
-      padding: EdgeInsets.only(left: 14,right: 14,top: 10,bottom: 10),
-       
-
-
-
-            child: Stack( children: [ 
-              
-        
-              Align(
-        alignment: (messages[index].messageType == "receiver"?Alignment.topLeft:Alignment.topRight),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Stack( children: [ 
-
-            
- if(messages[index].messageType == "receiver")(
-        Padding(
-                    padding:  (EdgeInsets.only(bottom: 0)),
-                    child:
-           Text("Reem", style: TextStyle(fontSize: 20 , fontWeight: FontWeight.w700 ),),
-           )
-         ),
-
-           Text(messages[index].messageContent, style: TextStyle(fontSize: 25),),
-        
-               Padding(
-                    padding: (messages[index].messageType == "receiver"?EdgeInsets.only(top: 35, left: 0):EdgeInsets.only(top: 35 ,right: 0)),
-                    child:
-           Text("5:10 PM", style: TextStyle(fontSize: 15),),
-           ),
-          ],
-          ),
-          
-        ),
-
-      ),
- 
-
-
-           
-        ],
-            ),
-    );
-
-  },
-),
-
-
+                      child: ListView.builder(
+                        itemCount: messages.length,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        physics: ClampingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.only(
+                                left: 14, right: 14, top: 10, bottom: 10),
+                            child: Stack(
+                              children: [
+                                Align(
+                                  alignment:
+                                      (messages[index].messageType == "receiver"
+                                          ? Alignment.topLeft
+                                          : Alignment.topRight),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: (messages[index].messageType ==
+                                              "receiver"
+                                          ? Colors.grey.shade200
+                                          : Colors.blue[200]),
+                                    ),
+                                    padding: EdgeInsets.all(16),
+                                    child: Stack(
+                                      children: [
+                                        if (messages[index].messageType ==
+                                            "receiver")
+                                          (Padding(
+                                            padding:
+                                                (EdgeInsets.only(bottom: 0)),
+                                            child: Text(
+                                              "Reem",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          )),
+                                        Text(
+                                          messages[index].messageContent,
+                                          style: TextStyle(fontSize: 25),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              (messages[index].messageType ==
+                                                      "receiver"
+                                                  ? EdgeInsets.only(
+                                                      top: 35, left: 0)
+                                                  : EdgeInsets.only(
+                                                      top: 35, right: 0)),
+                                          child: Text(
+                                            "5:10 PM",
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     );
                   },
                   scrollDirection: Axis.vertical,
                 ),
               ),
-
-              
             ],
           ),
-       
-
-
-
-
-
           Padding(
-                              padding: EdgeInsets.only(top: 0),
-
+            padding: EdgeInsets.only(top: 0),
             child: Stack(
               children: [
-                
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 80,
@@ -289,53 +284,44 @@ if(entere){
                     color: Color.fromARGB(255, 224, 224, 224),
                   ),
                 ),
-               Padding(
-                    padding: EdgeInsets.only(bottom: 0),
-                    child:
-                Row(
-                  children: [
-
- Flexible(
-                    child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: TextField(
-                            style: TextStyle(
-      fontSize: 30.0,
-      height: 2.0,
-      color: Colors.black                  
-    ),
-                        textDirection: TextDirection.rtl,
-
-  decoration: InputDecoration(
-   hintTextDirection: TextDirection.rtl,
-                 hintText: " اكتب ... ",
-                 hintStyle: TextStyle(fontWeight: FontWeight.w300, color: Colors.black , fontSize: 30 )
-                 
-                ),  
-                        
-                      ),
-                    )
-                    //container
-                  ],
-                )),
-
-     TextButton(
-                      child: Padding(
-                    padding: EdgeInsets.only(top: 0, left: 0),
-                    child: Icon(Icons.send, size: size.height * 0.08),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 0),
+                  child: Row(
+                    children: [
+                      Flexible(
+                          child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: TextField(
+                              style: TextStyle(
+                                  fontSize: 30.0,
+                                  height: 2.0,
+                                  color: Colors.black),
+                              textDirection: TextDirection.rtl,
+                              decoration: InputDecoration(
+                                  hintTextDirection: TextDirection.rtl,
+                                  hintText: " اكتب ... ",
+                                  hintStyle: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.black,
+                                      fontSize: 30)),
+                            ),
+                          )
+                          //container
+                        ],
+                      )),
+                      TextButton(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 0, left: 0),
+                          child: Icon(Icons.send, size: size.height * 0.08),
                         ),
-                      onPressed: () {
+                        onPressed: () {
 // description of the group
-                      },
-                  
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-
-
-                  ],
-                ),
-                ),
-                
               ],
             ),
           ),
@@ -344,13 +330,15 @@ if(entere){
     );
   }
 
-List<ChatMessage> messages = [
+  List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello", messageType: "receiver"),
     ChatMessage(messageContent: "HelloHelloHello", messageType: "receiver"),
     ChatMessage(messageContent: "Hello", messageType: "sender"),
-    ChatMessage(messageContent: "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello", messageType: "receiver"),
+    ChatMessage(
+        messageContent:
+            "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
+        messageType: "receiver"),
     ChatMessage(messageContent: "IHelloHelloHelloHello", messageType: "sender"),
-    
   ];
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 
@@ -376,7 +364,8 @@ List<ChatMessage> messages = [
     }
   }
 }
-class ChatMessage{
+
+class ChatMessage {
   String messageContent;
   String messageType;
   ChatMessage({required this.messageContent, required this.messageType});

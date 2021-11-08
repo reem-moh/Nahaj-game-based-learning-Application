@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/HomePage/homePage.dart';
-import '../database.dart';
+import 'package:nahaj/database.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   final DataBase db;
@@ -357,6 +358,14 @@ class _SignupState extends State<SignUp> {
         if (authResutl == null) {
           print("login error");
         } else {
+          final prefs = await SharedPreferences.getInstance();
+
+          prefs.setString('userId', '');
+          prefs.setString('username', '');
+          prefs.setString('avatar', '');
+          prefs.setDouble('level', -1.0);
+          prefs.setString('email', '');
+          
           print("log in Successuflly, signin page");
           await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
           Navigator.push(

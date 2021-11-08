@@ -7,11 +7,13 @@ import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/main.dart';
 import 'package:nahaj/SignPages/signUp.dart';
+import 'child.dart';
 import 'database.dart';
 
 class RouteGenerator {
   final DataBase db;
-  RouteGenerator(this.db);
+  final User user;
+  const RouteGenerator( this.db,  this.user);
   Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
@@ -33,11 +35,11 @@ class RouteGenerator {
                   db: db,
                 ));
       case '/JoinGroup':
-        return MaterialPageRoute(builder: (context) => JoinGroup(   db: this.db,));
+        return MaterialPageRoute(builder: (context) => JoinGroup(   db: this.db,user: user));
       case '/AddGroup':
-        return MaterialPageRoute(builder: (context) => AddGroup( db: this.db,));
+        return MaterialPageRoute(builder: (context) => AddGroup( db: this.db,user: user));
       case '/Group':
-        return MaterialPageRoute(builder: (context) => Group(groupName: 'مجموعة',db: this.db,));
+        return MaterialPageRoute(builder: (context) => Group(groupName: 'مجموعة',db: this.db,user: user));
       case '/Category':
         return MaterialPageRoute(builder: (context) => Category());
       default:

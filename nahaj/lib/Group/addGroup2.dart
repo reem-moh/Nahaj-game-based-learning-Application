@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/HomePage/homePage.dart';
-import '../database.dart';
+import 'package:nahaj/database.dart';
+
+import 'package:nahaj/child.dart';
 
 class AddGroup2 extends StatefulWidget {
   final DataBase db;
   final String nameoftheGroup;
-  AddGroup2({Key? key, required this.db,required this.nameoftheGroup}) : super(key: key);
+  final User user;
+  AddGroup2({Key? key, required this.db,required this.nameoftheGroup,required this.user}) : super(key: key);
 
   @override
   _AddGroup2 createState() => _AddGroup2();

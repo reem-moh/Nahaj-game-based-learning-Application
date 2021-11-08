@@ -10,9 +10,8 @@ import 'package:nahaj/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'category.dart';
 import 'package:nahaj/HomePage/category.dart';
-import '../ARPages/AR.dart';
 import 'package:nahaj/ARPages/AR.dart';
-import '../database.dart';
+import 'package:nahaj/database.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
@@ -35,7 +34,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
 
-  User user= User(userId: '1',username: '1',email: '1',avatar: '1',level: -1);
+  User user =
+      User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
 
   @override
   void initState() {
@@ -59,38 +59,25 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   Future<void> _getInfoFromSession() async {
     final prefs = await SharedPreferences.getInstance();
-    
-    setState(() {
-      String avatar = (prefs.getString('avatar') ?? "1");
-      String username = (prefs.getString('username') ?? "1");
-      String userId = (prefs.getString('userId') ?? "1");
-      String email = (prefs.getString('email')?? "1");
-      double level = (prefs.getDouble('level')?? -1);
-      print('username inside getinfo from homepage:' + username);
-      print('avatar inside getinfo from homepage:' + avatar);
-
-
-      user = User(userId: userId,username: username,email: email,avatar: avatar,level: level);
-    });
+    if (mounted) {
+      setState(() {
+        String avatar = (prefs.getString('avatar') ?? "1");
+        String username = (prefs.getString('username') ?? "1");
+        String userId = (prefs.getString('userId') ?? "1");
+        String email = (prefs.getString('email') ?? "1");
+        double level = (prefs.getDouble('level') ?? -1);
+        user = User(
+            userId: userId,
+            username: username,
+            email: email,
+            avatar: avatar,
+            level: level);
+          getGroups(userId);
+      });
+    }
   }
 
   void _logout() async {
-    dispose();
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      prefs.setString('userId', '');
-      prefs.setString('username', '');
-      prefs.setString('avatar', '');
-      prefs.setDouble('level', -1.0);
-      prefs.setString('email', '');
-
-      user.userId = '';
-      user.username = "";
-      user.email = "";
-      user.avatar = "";
-      user.level = -1;
-    });
-
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
     Navigator.push(
       context,
@@ -112,7 +99,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
-    getGroups(user.userId);
     return Scaffold(
       backgroundColor: backgroundColorOfSideBar,
       body: Stack(
@@ -234,6 +220,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 trailing: Icon(Icons.person, size: screenHeight * 0.032),
                 onTap: () {
                   setState(() {
+                    //Profile
                     //widget.db.addUser("reem", "reem", 90);
                     tappedIndex = 1;
                   });
@@ -512,7 +499,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               AddGroup(
-                                                                db: widget.db,
+                                                                db: widget.db,user: user,
                                                               )),
                                                     );
                                                   }),
@@ -531,7 +518,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               JoinGroup(
-                                                                db: widget.db,
+                                                                db: widget.db,user: user,
                                                               )),
                                                     );
                                                   }),
@@ -577,11 +564,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           },
                                           itemBuilder: (_, i) {
                                             return GroupsCard(
-                                                db: widget.db,
+                                              db: widget.db,
                                               groupName:
                                                   groups.elementAt(i).groupName,
-                                                  groupImage:
-                                                  groups.elementAt(i).pathOfImage,
+                                              groupImage: groups
+                                                  .elementAt(i)
+                                                  .pathOfImage,
+                                              user: user,
                                             );
                                           },
                                           scrollDirection: Axis.horizontal,
@@ -672,11 +661,16 @@ class CategoryCard extends StatelessWidget {
 }
 
 class GroupsCard extends StatefulWidget {
-
   final String groupName;
   final DataBase db;
   final String groupImage;
-  GroupsCard({Key? key, required this.db, required this.groupName, required this.groupImage})
+  final User user;
+  GroupsCard(
+      {Key? key,
+      required this.db,
+      required this.groupName,
+      required this.groupImage,
+      required this.user})
       : super(key: key);
   @override
   State<GroupsCard> createState() => _GroupsCardState();
@@ -693,7 +687,7 @@ class _GroupsCardState extends State<GroupsCard> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    Group(groupName: 'مجموعة', db: widget.db)),
+                    Group(groupName: 'مجموعة', db: widget.db, user: widget.user)),
           );
         });
       },
@@ -709,8 +703,7 @@ class _GroupsCardState extends State<GroupsCard> {
               color: Colors.grey[350],
             ),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  widget.groupImage),
+              backgroundImage: NetworkImage(widget.groupImage),
             ),
           ),
           Container(

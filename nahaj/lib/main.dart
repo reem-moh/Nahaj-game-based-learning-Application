@@ -9,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/SignPages/signUp.dart';
-import 'Group/addGroup2.dart';
+import 'package:nahaj/Group/addGroup2.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {

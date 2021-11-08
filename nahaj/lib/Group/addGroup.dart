@@ -5,12 +5,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nahaj/Group/addGroup2.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../database.dart';
+import 'package:nahaj/database.dart';
 import 'dart:math';
+
+import 'package:nahaj/child.dart';
 
 class AddGroup extends StatefulWidget {
   final DataBase db;
-  AddGroup({Key? key, required this.db}) : super(key: key);
+  final User user;
+  AddGroup({Key? key, required this.db,required this.user}) : super(key: key);
 
   @override
   _AddGroup createState() => _AddGroup();
@@ -206,6 +209,7 @@ class _AddGroup extends State<AddGroup> {
                                 builder: (context) => AddGroup2(
                                       db: widget.db,
                                       nameoftheGroup: "$code",
+                                      user: widget.user,
                                     )),
                           );
                         });

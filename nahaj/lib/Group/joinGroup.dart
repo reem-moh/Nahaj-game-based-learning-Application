@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nahaj/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../database.dart';
+import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 
 class JoinGroup extends StatefulWidget {
   final DataBase db;
-  const JoinGroup({Key? key, required this.db}) : super(key: key);
+  final User user;
+  const JoinGroup({Key? key, required this.db, required this.user}) : super(key: key);
 
   @override
   _JoinGroup createState() => _JoinGroup();
