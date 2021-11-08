@@ -1,0 +1,25 @@
+import 'package:arkit_plugin/arkit_plugin.dart';
+import 'package:arkit_plugin/widget/arkit_scene_view.dart';
+import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart';
+
+class Profile extends StatefulWidget {
+  final DataBase db;
+  final User user;
+
+  const Profile({Key? key, required this.db,required this.user}) : super(key: key);
+
+  @override
+  _Profile createState() => _Profile();
+}
+
+class _Profile extends State<Profile> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: container(
+        
+      ),
+    );
+  }
+}
