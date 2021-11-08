@@ -20,7 +20,6 @@
 		<type fullname="UnityEngine.MeshRenderer" preserve="nothing"/>
 		<type fullname="UnityEngine.AudioSource" preserve="nothing"/>
 		<type fullname="UnityEngine.AudioBehaviour" preserve="nothing"/>
-		<type fullname="UnityEngine.AudioListener" preserve="nothing"/>
 		<type fullname="UnityEngine.Rigidbody" preserve="nothing"/>
 		<type fullname="UnityEngine.Collider" preserve="nothing"/>
 		<type fullname="UnityEngine.MeshCollider" preserve="nothing"/>
@@ -55,15 +54,17 @@
 		<type fullname="UnityEngine.LightingSettings" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Assembly-CSharp">
+		<type fullname="ARTapToPlaceObject" preserve="nothing"/>
 		<type fullname="BottleSmash" preserve="nothing"/>
+		<type fullname="GameManager" preserve="nothing"/>
 		<type fullname="LiquidColor" preserve="nothing"/>
 		<type fullname="LiquidVolumeAnimator" preserve="nothing"/>
 		<type fullname="MeshLiquidEmission" preserve="nothing"/>
 		<type fullname="NextInstruction" preserve="nothing"/>
-		<type fullname="OnHit" preserve="nothing"/>
 		<type fullname="PS_Color" preserve="nothing"/>
 		<type fullname="ParticleColor" preserve="nothing"/>
 		<type fullname="ResetColors" preserve="nothing"/>
+		<type fullname="SceneLoader" preserve="nothing"/>
 		<type fullname="ShowBottleBakingSoda" preserve="nothing"/>
 		<type fullname="ShowBottleColor" preserve="nothing"/>
 		<type fullname="ShowBottleSoap" preserve="nothing"/>
@@ -85,6 +86,16 @@
 		<type fullname="TMPro.TMP_SpriteAsset" preserve="nothing"/>
 		<type fullname="TMPro.TMP_StyleSheet" preserve="nothing"/>
 	</assembly>
+	<assembly fullname="Unity.XR.ARFoundation">
+		<type fullname="UnityEngine.XR.ARFoundation.ARCameraBackground" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARCameraManager" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARInputManager" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARPlaneManager" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARPoseDriver" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARRaycastManager" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARSession" preserve="nothing"/>
+		<type fullname="UnityEngine.XR.ARFoundation.ARSessionOrigin" preserve="nothing"/>
+	</assembly>
 	<assembly fullname="UnityEngine.UI">
 		<type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing"/>
 		<type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="nothing"/>
@@ -93,15 +104,5 @@
 		<type fullname="UnityEngine.UI.GraphicRaycaster" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.Image" preserve="nothing"/>
 		<type fullname="UnityEngine.UI.RawImage" preserve="nothing"/>
-	</assembly>
-	<assembly fullname="Vuforia.Unity.Engine">
-		<type fullname="Vuforia.AnchorBehaviour" preserve="nothing"/>
-		<type fullname="Vuforia.AnchorInputListenerBehaviour" preserve="nothing"/>
-		<type fullname="Vuforia.ContentPositioningBehaviour" preserve="nothing"/>
-		<type fullname="Vuforia.PlaneFinderBehaviour" preserve="nothing"/>
-		<type fullname="Vuforia.VuforiaConfiguration" preserve="nothing"/>
-	</assembly>
-	<assembly fullname="VuforiaScripts">
-		<type fullname="DefaultObserverEventHandler" preserve="nothing"/>
 	</assembly>
 </linker>

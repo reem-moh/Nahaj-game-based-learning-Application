@@ -11,11 +11,11 @@ class ExperimentScene extends StatefulWidget {
 class _ExperimentScene extends State<ExperimentScene> {
   late UnityWidgetController _unityWidgetController;
 
-  late final void Function(SceneLoaded? scene)? onUnitySceneLoaded =
+  /*late final void Function(SceneLoaded? scene)? onUnitySceneLoaded =
       (SceneLoaded? scene) {
     print('Received scene loaded from unity: ${scene!.name}');
     print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
-  };
+  };*/
   @override
   void initState() {
     super.initState();
@@ -34,13 +34,15 @@ class _ExperimentScene extends State<ExperimentScene> {
         children: [
           Container(
             margin: EdgeInsets.all(0.0),
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2,
+            width: MediaQuery.of(context).size.width / 2,
             child: UnityWidget(
               borderRadius: BorderRadius.all(Radius.circular(0)),
+
               onUnityCreated: _onUnityCreated,
               onUnityMessage: onUnityMessage,
-              onUnitySceneLoaded: onUnitySceneLoaded,
+              //onUnitySceneLoaded:
+              //onUnitySceneLoaded as Function(SceneLoaded? scene)?,
             ),
           ),
         ],
@@ -48,16 +50,21 @@ class _ExperimentScene extends State<ExperimentScene> {
     );
   }
 
-  void setRotationSpeed(String speed) {
+  /*void setRotationSpeed(String speed) {
     _unityWidgetController.postMessage(
       'Cube',
       'SetRotationSpeed',
       speed,
     );
-  }
+  }*/
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
+  }
+
+  void onUnitySceneLoaded(SceneLoaded scene) {
+    print('Received scene loaded from unity: ${scene.name}');
+    print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
   }
 
   // Callback that connects the created controller to the unity controller

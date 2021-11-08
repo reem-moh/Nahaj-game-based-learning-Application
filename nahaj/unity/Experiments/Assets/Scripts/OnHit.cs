@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using Vuforia;
+//using Vuforia;
  
  public class OnHit : MonoBehaviour 
  {
@@ -9,9 +9,9 @@ using Vuforia;
      [SerializeField] private float timeToInvokeInstrucation;
      
 
-     public void OnInteractiveHitTest(HitTestResult result)
+     public void OnInteractiveHitTest(/*HitTestResult result*/)
     {
-        var listenerBehaviour = GetComponent<AnchorInputListenerBehaviour>();
+        /*var listenerBehaviour = GetComponent<AnchorInputListenerBehaviour>();
         if (listenerBehaviour != null)
         {
             listenerBehaviour.enabled = false;
@@ -19,7 +19,7 @@ using Vuforia;
             //clickOnScrean.SetActive(false);
             Destroy(clickOnScrean);
             Invoke("showInstruction",timeToInvokeInstrucation);
-        }
+        }*/
     }
 
     void showInstruction(){

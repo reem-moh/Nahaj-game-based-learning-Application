@@ -4703,6 +4703,8 @@ public:
 	RuntimeObject * ____rngAccess_12;
 	// System.Security.Cryptography.RandomNumberGenerator System.Guid::_rng
 	RandomNumberGenerator_t2CB5440F189986116A2FA9F907AE52644047AC50 * ____rng_13;
+	// System.Security.Cryptography.RandomNumberGenerator System.Guid::_fastRng
+	RandomNumberGenerator_t2CB5440F189986116A2FA9F907AE52644047AC50 * ____fastRng_14;
 
 public:
 	inline static int32_t get_offset_of_Empty_0() { return static_cast<int32_t>(offsetof(Guid_t_StaticFields, ___Empty_0)); }
@@ -4729,6 +4731,15 @@ public:
 	{
 		____rng_13 = value;
 		Il2CppCodeGenWriteBarrier((void**)(&____rng_13), (void*)value);
+	}
+
+	inline static int32_t get_offset_of__fastRng_14() { return static_cast<int32_t>(offsetof(Guid_t_StaticFields, ____fastRng_14)); }
+	inline RandomNumberGenerator_t2CB5440F189986116A2FA9F907AE52644047AC50 * get__fastRng_14() const { return ____fastRng_14; }
+	inline RandomNumberGenerator_t2CB5440F189986116A2FA9F907AE52644047AC50 ** get_address_of__fastRng_14() { return &____fastRng_14; }
+	inline void set__fastRng_14(RandomNumberGenerator_t2CB5440F189986116A2FA9F907AE52644047AC50 * value)
+	{
+		____fastRng_14 = value;
+		Il2CppCodeGenWriteBarrier((void**)(&____fastRng_14), (void*)value);
 	}
 };
 
@@ -14085,7 +14096,7 @@ IL_0040:
 		L_21 = JsonProperty_get_DeclaringType_m7DAC0A7C013AC13F21978FD7A002C1A33428DC86_inline(L_20, /*hidden argument*/NULL);
 		NullCheck(L_19);
 		bool L_22;
-		L_22 = VirtFuncInvoker1< bool, Type_t * >::Invoke(111 /* System.Boolean System.Type::IsSubclassOf(System.Type) */, L_19, L_21);
+		L_22 = VirtFuncInvoker1< bool, Type_t * >::Invoke(110 /* System.Boolean System.Type::IsSubclassOf(System.Type) */, L_19, L_21);
 		if (L_22)
 		{
 			goto IL_0095;
@@ -14140,7 +14151,7 @@ IL_009f:
 		L_36 = JsonProperty_get_DeclaringType_m7DAC0A7C013AC13F21978FD7A002C1A33428DC86_inline(L_35, /*hidden argument*/NULL);
 		NullCheck(L_34);
 		bool L_37;
-		L_37 = VirtFuncInvoker1< bool, Type_t * >::Invoke(111 /* System.Boolean System.Type::IsSubclassOf(System.Type) */, L_34, L_36);
+		L_37 = VirtFuncInvoker1< bool, Type_t * >::Invoke(110 /* System.Boolean System.Type::IsSubclassOf(System.Type) */, L_34, L_36);
 		if (L_37)
 		{
 			goto IL_00d2;
@@ -14303,7 +14314,7 @@ IL_000d:
 		JsonProperty_tFCBD447EB41531AB0EDFD1256C85D12A6F71DBB7 ** L_4 = ___item1;
 		NullCheck(L_2);
 		bool L_5;
-		L_5 = InterfaceFuncInvoker2< bool, String_t*, JsonProperty_tFCBD447EB41531AB0EDFD1256C85D12A6F71DBB7 ** >::Invoke(7 /* System.Boolean System.Collections.Generic.IDictionary`2<System.String,Newtonsoft.Json.Serialization.JsonProperty>::TryGetValue(!0,!1&) */, IDictionary_2_tDDB72C4F202849BA0983C4FE5113CD15EC6B95F4_il2cpp_TypeInfo_var, L_2, L_3, (JsonProperty_tFCBD447EB41531AB0EDFD1256C85D12A6F71DBB7 **)L_4);
+		L_5 = InterfaceFuncInvoker2< bool, String_t*, JsonProperty_tFCBD447EB41531AB0EDFD1256C85D12A6F71DBB7 ** >::Invoke(5 /* System.Boolean System.Collections.Generic.IDictionary`2<System.String,Newtonsoft.Json.Serialization.JsonProperty>::TryGetValue(!0,!1&) */, IDictionary_2_tDDB72C4F202849BA0983C4FE5113CD15EC6B95F4_il2cpp_TypeInfo_var, L_2, L_3, (JsonProperty_tFCBD447EB41531AB0EDFD1256C85D12A6F71DBB7 **)L_4);
 		return L_5;
 	}
 }
@@ -23622,7 +23633,7 @@ IL_011b:
 		L_60 = Object_GetType_m571FE8360C10B98C23AAF1F066D92C08CC94F45B(L_59, /*hidden argument*/NULL);
 		NullCheck(L_58);
 		bool L_61;
-		L_61 = VirtFuncInvoker1< bool, Type_t * >::Invoke(113 /* System.Boolean System.Type::IsAssignableFrom(System.Type) */, L_58, L_60);
+		L_61 = VirtFuncInvoker1< bool, Type_t * >::Invoke(112 /* System.Boolean System.Type::IsAssignableFrom(System.Type) */, L_58, L_60);
 		if (!L_61)
 		{
 			goto IL_0148;
@@ -25201,7 +25212,7 @@ IL_013b:
 		Type_t * L_64 = V_5;
 		NullCheck(L_63);
 		bool L_65;
-		L_65 = VirtFuncInvoker1< bool, Type_t * >::Invoke(113 /* System.Boolean System.Type::IsAssignableFrom(System.Type) */, L_63, L_64);
+		L_65 = VirtFuncInvoker1< bool, Type_t * >::Invoke(112 /* System.Boolean System.Type::IsAssignableFrom(System.Type) */, L_63, L_64);
 		if (L_65)
 		{
 			goto IL_0187;
@@ -31588,7 +31599,7 @@ IL_0586:
 		{
 			NullCheck(G_B91_0);
 			RuntimeObject* L_267;
-			L_267 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(9 /* System.Collections.IDictionaryEnumerator System.Collections.IDictionary::GetEnumerator() */, IDictionary_t99871C56B8EC2452AC5C4CF3831695E617B89D3A_il2cpp_TypeInfo_var, G_B91_0);
+			L_267 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(3 /* System.Collections.IDictionaryEnumerator System.Collections.IDictionary::GetEnumerator() */, IDictionary_t99871C56B8EC2452AC5C4CF3831695E617B89D3A_il2cpp_TypeInfo_var, G_B91_0);
 			V_32 = L_267;
 		}
 
@@ -39438,7 +39449,7 @@ IL_009c:
 		RuntimeObject* L_40 = ___values1;
 		NullCheck(L_40);
 		RuntimeObject* L_41;
-		L_41 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(9 /* System.Collections.IDictionaryEnumerator System.Collections.IDictionary::GetEnumerator() */, IDictionary_t99871C56B8EC2452AC5C4CF3831695E617B89D3A_il2cpp_TypeInfo_var, L_40);
+		L_41 = InterfaceFuncInvoker0< RuntimeObject* >::Invoke(3 /* System.Collections.IDictionaryEnumerator System.Collections.IDictionary::GetEnumerator() */, IDictionary_t99871C56B8EC2452AC5C4CF3831695E617B89D3A_il2cpp_TypeInfo_var, L_40);
 		V_3 = L_41;
 	}
 

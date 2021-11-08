@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //To communicate with flutter
-    public UnityMessageManager unityMsgMngr;
-    public SceneLoader sceneMngr;
+    //public UnityMessageManager unityMsgMngr;
+    //public SceneLoader sceneMngr;
     void Start()
     {
-        unityMsgMngr = gameObject.GetComponent<UnityMessageManager>();
-        sceneMngr.LoadScene(0);
+        /*unityMsgMngr = */gameObject.AddComponent<UnityMessageManager>();
+        //sceneMngr.LoadScene(0);
     }
 
     // Update is called once per frame
