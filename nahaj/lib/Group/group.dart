@@ -245,21 +245,23 @@ class _Group extends State<Group> {
                           child: Column(
                         children: <Widget>[
                           //text inside field 
-                          Container(
-                            child: TextField(
-                              style: TextStyle(
-                                  fontSize: 30.0,
-                                  height: 2.0,
-                                  color: Colors.black),
-                              textDirection: TextDirection.rtl,
-                              decoration: InputDecoration(
-                                  hintTextDirection: TextDirection.rtl,
-                                  hintText: " اكتب هنا... ",
-                                  hintStyle: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.black,
-                                      fontSize: 30)),
-                            ),
+                          Row(
+                            children: [Expanded(
+                              child: TextField(
+                                style: TextStyle(
+                                    fontSize: 30.0,
+                                    height: 2.0,
+                                    color: Colors.black),
+                                textDirection: TextDirection.rtl,
+                                decoration: InputDecoration(
+                                    hintTextDirection: TextDirection.rtl,
+                                    hintText: " اكتب هنا... ",
+                                    hintStyle: TextStyle(
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.black,
+                                        fontSize: 30)),
+                              ),
+                            ),]
                           )
                           
                         ],
