@@ -107,6 +107,13 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
+  //Signout
+  Future signOut() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    await _auth.signOut();
+
+  }
   //Get avatar image from Firestorage
   Future<String> loadImage(String path) async {
     //path is the folder after the root on storage firebase

@@ -72,20 +72,23 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
             email: email,
             avatar: avatar,
             level: level);
-          getGroups(userId);
+        getGroups(userId);
       });
     }
   }
 
-  void _logout() async {
+  _logout() {
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => Signin(
-                db: widget.db,
-              )),
-    );
+
+    widget.db.signOut().then((s) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Signin(
+                  db: widget.db,
+                )),
+      );
+    });
   }
 
   List<Groups> groups = [];
@@ -499,7 +502,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               AddGroup(
-                                                                db: widget.db,user: user,
+                                                                db: widget.db,
+                                                                user: user,
                                                               )),
                                                     );
                                                   }),
@@ -518,7 +522,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               JoinGroup(
-                                                                db: widget.db,user: user,
+                                                                db: widget.db,
+                                                                user: user,
                                                               )),
                                                     );
                                                   }),
@@ -565,8 +570,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           itemBuilder: (_, i) {
                                             return GroupsCard(
                                               db: widget.db,
-                                              group: groups
-                                                  .elementAt(i),
+                                              group: groups.elementAt(i),
                                               user: user,
                                             );
                                           },
@@ -662,10 +666,7 @@ class GroupsCard extends StatefulWidget {
   final Groups group;
   final User user;
   GroupsCard(
-      {Key? key,
-      required this.db,
-      required this.group,
-      required this.user})
+      {Key? key, required this.db, required this.group, required this.user})
       : super(key: key);
   @override
   State<GroupsCard> createState() => _GroupsCardState();
@@ -681,8 +682,8 @@ class _GroupsCardState extends State<GroupsCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    Group(db: widget.db,group: widget.group, user: widget.user)),
+                builder: (context) => Group(
+                    db: widget.db, group: widget.group, user: widget.user)),
           );
         });
       },
