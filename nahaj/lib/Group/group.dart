@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +10,7 @@ class Group extends StatefulWidget {
   final Groups group;
   final User user;
   final DataBase db;
-  Group(
-      {Key? key, required this.db, required this.group, required this.user})
+  Group({Key? key, required this.db, required this.group, required this.user})
       : super(key: key);
 
   @override
@@ -38,98 +38,85 @@ class _Group extends State<Group> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           //header
           Stack(
             children: [
-              //grey header
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 120,
+                height: 130,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Color.fromARGB(255, 224, 224, 224),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              
-              //items inside the header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.13,
-                  ),
-                  //back button
-                  TextButton(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 20, right: 620),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 0, left: 0),
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    
+                    //back button
+                    Container(
+                      alignment: AlignmentDirectional.center,
+                      margin: EdgeInsets.only(right: 850),
+                      child: TextButton(
                         child: Icon(Icons.arrow_back, size: size.height * 0.05),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                        db: widget.db,
+                                      )),
+                            );
+                          });
+                        },
                       ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage(
-                                    db: widget.db,
-                                  )),
-                        );
-                      });
-                    },
-                  ),
-                 
-                  //Name of Group
-                  Container(
-                    margin: EdgeInsets.only(right: 30.0),
-                    child: Text(
-                      widget.group.groupName,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 27,
+                    
+                    //Name of Group
+                    Container(
+                      //margin: EdgeInsets.only(left: 30.0),
+                      child: Text(
+                        widget.group.groupName,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 27,
+                        ),
                       ),
                     ),
-                  ),
-                  
-                  //Group Image
-                  Padding(
-                    padding: EdgeInsets.only(top: 0, right: 50),
-                    child: Container(
+
+                    //Group Image
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
                       width: 110.0,
                       height: 120.0,
-                      padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.grey[350],
                       ),
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            widget.group.pathOfImage),
+                        backgroundImage: NetworkImage(widget.group.pathOfImage),
                       ),
                     ),
-                  ),
-                  
-                  //three dots
-                  TextButton(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 0, right: 50),
+
+                    //three dots
+                    TextButton(
                       child: Image(
                         image: AssetImage("assets/Group13.png"),
                         alignment: Alignment.topLeft,
                       ),
+                      onPressed: () {},
                     ),
-                    onPressed: () {},
-                  ),
-                
-                ],
-              )
+                  ],
+                ),
+              ),
+
+              //items inside the header
             ],
           ),
-          
+
           //body
           Stack(
             children: [
@@ -217,76 +204,56 @@ class _Group extends State<Group> {
               ),
             ],
           ),
-          
-          //text field of send message
-          Padding(
-            padding: EdgeInsets.only(top: 0),
-            child: Stack(
-              children: [
 
-                //backgroung of text field
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Color.fromARGB(255, 224, 224, 224),
-                  ),
-                ),
-               
-               //text field 
-                Padding(
-                  padding: EdgeInsets.only(bottom: 0),
-                  child: Row(
-                    children: [
-                      
-                      //text inside field 
-                      Flexible(
-                          child: Column(
-                        children: <Widget>[
-                          //text inside field 
-                          Row(
-                            children: [Expanded(
-                              child: TextField(
-                                style: TextStyle(
-                                    fontSize: 30.0,
-                                    height: 2.0,
-                                    color: Colors.black),
-                                textDirection: TextDirection.rtl,
-                                decoration: InputDecoration(
-                                    hintTextDirection: TextDirection.rtl,
-                                    hintText: " اكتب هنا... ",
-                                    hintStyle: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        color: Colors.black,
-                                        fontSize: 30)),
-                              ),
-                            ),]
-                          )
-                          
-                        ],
-                      )),
-                      
-                      //send button
-                      TextButton(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 0, left: 0),
-                          child: Icon(Icons.send, size: size.height * 0.065),
+          //text field of send message
+          Row(
+            children: [
+              //text inside field
+              Flexible(
+                  child: Column(
+                children: [
+                  //text inside field
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 224, 224, 224),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                      ),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Row(children: [
+                      Expanded(
+                        child: TextField(
+                          style: TextStyle(
+                              fontSize: 30.0, height: 2.0, color: Colors.black),
+                          textDirection: TextDirection.rtl,
+                          decoration: InputDecoration(
+                              hintTextDirection: TextDirection.rtl,
+                              hintText: " اكتب هنا... ",
+                              hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black,
+                                  fontSize: 30),
+                              border: InputBorder.none),
                         ),
+                      ),
+                      TextButton(
+                        child: Icon(Icons.send, size: size.height * 0.065),
                         onPressed: () {},
                       ),
-                    ],
+                    ]),
                   ),
-                ),
-              ],
-            ),
+                ],
+              )),
+            ],
           ),
         ],
       ),
     );
   }
 
-  
   /*Future<void> getGroupName(String uid) async {
     nameOfTheGroup = "مجموعه١";
     /*await firestore
