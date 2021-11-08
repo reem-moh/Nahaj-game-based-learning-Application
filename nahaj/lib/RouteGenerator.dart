@@ -39,7 +39,7 @@ class RouteGenerator {
       case '/AddGroup':
         return MaterialPageRoute(builder: (context) => AddGroup( db: this.db,user: user));
       case '/Group':
-        return MaterialPageRoute(builder: (context) => Group(groupName: 'مجموعة',db: this.db,user: user));
+        return MaterialPageRoute(builder: (context) => Group(group: new Groups(0, 'groupName', 'leaderId', 'leaderName', ['memberId'], ['memberName'], 'pathOfImage'),db: this.db,user: user));
       case '/Category':
         return MaterialPageRoute(builder: (context) => Category());
       default:

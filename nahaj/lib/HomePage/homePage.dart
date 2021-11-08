@@ -565,11 +565,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           itemBuilder: (_, i) {
                                             return GroupsCard(
                                               db: widget.db,
-                                              groupName:
-                                                  groups.elementAt(i).groupName,
-                                              groupImage: groups
-                                                  .elementAt(i)
-                                                  .pathOfImage,
+                                              group: groups
+                                                  .elementAt(i),
                                               user: user,
                                             );
                                           },
@@ -661,15 +658,13 @@ class CategoryCard extends StatelessWidget {
 }
 
 class GroupsCard extends StatefulWidget {
-  final String groupName;
   final DataBase db;
-  final String groupImage;
+  final Groups group;
   final User user;
   GroupsCard(
       {Key? key,
       required this.db,
-      required this.groupName,
-      required this.groupImage,
+      required this.group,
       required this.user})
       : super(key: key);
   @override
@@ -687,7 +682,7 @@ class _GroupsCardState extends State<GroupsCard> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    Group(groupName: 'مجموعة', db: widget.db, user: widget.user)),
+                    Group(db: widget.db,group: widget.group, user: widget.user)),
           );
         });
       },
@@ -703,12 +698,12 @@ class _GroupsCardState extends State<GroupsCard> {
               color: Colors.grey[350],
             ),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(widget.groupImage),
+              backgroundImage: NetworkImage(widget.group.pathOfImage),
             ),
           ),
           Container(
             child: Text(
-              widget.groupName,
+              widget.group.groupName,
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,

@@ -1,21 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:nahaj/child.dart';
 
 class Group extends StatefulWidget {
-  //final DataBase db;
-  //const Group({Key? key, /*required this.db*/}) : super(key: key);
-  final String groupName;
+  final Groups group;
   final User user;
   final DataBase db;
   Group(
-      {Key? key, required this.db, required this.groupName, required this.user})
+      {Key? key, required this.db, required this.group, required this.user})
       : super(key: key);
 
   @override
@@ -24,9 +19,17 @@ class Group extends StatefulWidget {
 
 class _Group extends State<Group> {
   final _key = GlobalKey<FormState>();
-
-  String nameOfTheGroup = "مجموعة 1";
   int numOfchate = 3;
+  List<ChatMessage> messages = [
+    ChatMessage(messageContent: "Hello", messageType: "receiver"),
+    ChatMessage(messageContent: "HelloHelloHello", messageType: "receiver"),
+    ChatMessage(messageContent: "Hello", messageType: "sender"),
+    ChatMessage(
+        messageContent:
+            "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
+        messageType: "receiver"),
+    ChatMessage(messageContent: "IHelloHelloHelloHello", messageType: "sender"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +38,11 @@ class _Group extends State<Group> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
+          //header
           Stack(
             children: [
+              //grey header
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 120,
@@ -45,20 +51,21 @@ class _Group extends State<Group> {
                   color: Color.fromARGB(255, 224, 224, 224),
                 ),
               ),
+              
+              //items inside the header
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.13,
                   ),
-                  // ignore: deprecated_member_use
-
+                  //back button
                   TextButton(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 20, right: 720),
+                      padding: EdgeInsets.only(top: 20, right: 620),
                       child: Padding(
                         padding: EdgeInsets.only(top: 0, left: 0),
-                        child: Icon(Icons.arrow_back, size: size.height * 0.08),
+                        child: Icon(Icons.arrow_back, size: size.height * 0.05),
                       ),
                     ),
                     onPressed: () {
@@ -73,11 +80,12 @@ class _Group extends State<Group> {
                       });
                     },
                   ),
-
+                 
+                  //Name of Group
                   Container(
                     margin: EdgeInsets.only(right: 30.0),
                     child: Text(
-                      nameOfTheGroup,
+                      widget.group.groupName,
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Cairo',
@@ -86,11 +94,12 @@ class _Group extends State<Group> {
                       ),
                     ),
                   ),
-
+                  
+                  //Group Image
                   Padding(
                     padding: EdgeInsets.only(top: 0, right: 50),
                     child: Container(
-                      width: 120.0,
+                      width: 110.0,
                       height: 120.0,
                       padding: EdgeInsets.all(4),
                       decoration: BoxDecoration(
@@ -99,11 +108,12 @@ class _Group extends State<Group> {
                       ),
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'https://firebasestorage.googleapis.com:443/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fanimals.png?alt=media&token=734cf7d9-83e0-41d8-9249-c3b5b8144dc3'),
+                            widget.group.pathOfImage),
                       ),
                     ),
                   ),
-
+                  
+                  //three dots
                   TextButton(
                     child: Padding(
                       padding: EdgeInsets.only(top: 0, right: 50),
@@ -112,50 +122,17 @@ class _Group extends State<Group> {
                         alignment: Alignment.topLeft,
                       ),
                     ),
-                    onPressed: () {
-// description of the group
-                    },
+                    onPressed: () {},
                   ),
+                
                 ],
               )
             ],
           ),
+          
+          //body
           Stack(
             children: [
-              /*
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 540,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.white,
-                ),
-              ),
-              ListView.builder(
-  itemCount: messages.length,
-  shrinkWrap: true,
-  padding: EdgeInsets.only(top: 10,bottom: 10),
-  physics: ClampingScrollPhysics(),
-  itemBuilder: (context, index){
-    return Container(
-      padding: EdgeInsets.only(left: 14,right: 14,top: 10,bottom: 10),
-      child: Align(
-        alignment: (messages[index].messageType == "receiver"?Alignment.topLeft:Alignment.topRight),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: (messages[index].messageType  == "receiver"?Colors.grey.shade200:Colors.blue[200]),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Text(messages[index].messageContent, style: TextStyle(fontSize: 15),),
-        ),
-      ),
-    );
-  },
-),
-*/
-              //list view
-
               Container(
                 margin: EdgeInsets.only(left: 30.0, right: 30.0),
                 height: 550,
@@ -168,16 +145,6 @@ class _Group extends State<Group> {
                   },
                   itemBuilder: (_, i) {
                     return Container(
-/*
-           Container(
-                width: MediaQuery.of(context).size.width,
-                height: 540,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.white,
-                ),
-              ),
-              */
                       child: ListView.builder(
                         itemCount: messages.length,
                         shrinkWrap: true,
@@ -250,10 +217,14 @@ class _Group extends State<Group> {
               ),
             ],
           ),
+          
+          //text field of send message
           Padding(
             padding: EdgeInsets.only(top: 0),
             child: Stack(
               children: [
+
+                //backgroung of text field
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 80,
@@ -262,13 +233,18 @@ class _Group extends State<Group> {
                     color: Color.fromARGB(255, 224, 224, 224),
                   ),
                 ),
+               
+               //text field 
                 Padding(
                   padding: EdgeInsets.only(bottom: 0),
                   child: Row(
                     children: [
+                      
+                      //text inside field 
                       Flexible(
                           child: Column(
                         children: <Widget>[
+                          //text inside field 
                           Container(
                             child: TextField(
                               style: TextStyle(
@@ -278,24 +254,24 @@ class _Group extends State<Group> {
                               textDirection: TextDirection.rtl,
                               decoration: InputDecoration(
                                   hintTextDirection: TextDirection.rtl,
-                                  hintText: " اكتب ... ",
+                                  hintText: " اكتب هنا... ",
                                   hintStyle: TextStyle(
                                       fontWeight: FontWeight.w300,
                                       color: Colors.black,
                                       fontSize: 30)),
                             ),
                           )
-                          //container
+                          
                         ],
                       )),
+                      
+                      //send button
                       TextButton(
                         child: Padding(
                           padding: EdgeInsets.only(top: 0, left: 0),
-                          child: Icon(Icons.send, size: size.height * 0.08),
+                          child: Icon(Icons.send, size: size.height * 0.065),
                         ),
-                        onPressed: () {
-// description of the group
-                        },
+                        onPressed: () {},
                       ),
                     ],
                   ),
@@ -308,19 +284,8 @@ class _Group extends State<Group> {
     );
   }
 
-  List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello", messageType: "receiver"),
-    ChatMessage(messageContent: "HelloHelloHello", messageType: "receiver"),
-    ChatMessage(messageContent: "Hello", messageType: "sender"),
-    ChatMessage(
-        messageContent:
-            "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
-        messageType: "receiver"),
-    ChatMessage(messageContent: "IHelloHelloHelloHello", messageType: "sender"),
-  ];
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-
-  Future<void> getGroupName(String uid) async {
+  
+  /*Future<void> getGroupName(String uid) async {
     nameOfTheGroup = "مجموعه١";
     /*await firestore
         .collection('Groups')
@@ -340,7 +305,8 @@ class _Group extends State<Group> {
         nameOfTheGroup = await data['name'].toString();
       }
     }
-  }
+  }*/
+
 }
 
 class ChatMessage {
@@ -348,81 +314,3 @@ class ChatMessage {
   String messageType;
   ChatMessage({required this.messageContent, required this.messageType});
 }
-
-/*
-          Column(
-             children:[
-
-// description of the group
-Stack(
- children: [
-              //Background
-              Container(
-                width: MediaQuery.of(context).size.height,
-                alignment: Alignment.topRight,
-                decoration: BoxDecoration(
-                    color: Colors.red,),
-              ),
-
-              //Row(),
-
- ],
- 
-),
-
-
-
-//shat
-Stack(
- children: [
- Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/unnamed.jpg"),
-                        fit: BoxFit.cover)),
-              ),
-
-          Row(
-            children: [
-              ListView(
-                  
-                    
-              ),
-            ],
-          ),    
-
- ]
-),
-
-
-//send shat
-Stack(
-  children: [
-              //Background
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/Rectangle.png"),
-                        fit: BoxFit.fitWidth)),
-              ),
-
-Row(
-            children: [
-              ListView(
-                    
-              ),
-            ],
-          ),   
-
- ],
-),
-
-
-             ]
-
-
-
-
-          ),
-        
-*/
