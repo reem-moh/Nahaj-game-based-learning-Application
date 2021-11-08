@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+//import 'package:fl///utter_unity_widqget/flutter_unity_widget.dart';
 
 class ExperimentScene extends StatefulWidget {
   //ExperimentScene(/*{required Key key}*/) : super(key: key);
@@ -36,14 +37,14 @@ class _ExperimentScene extends State<ExperimentScene> {
             margin: EdgeInsets.all(0.0),
             height: MediaQuery.of(context).size.height / 2,
             width: MediaQuery.of(context).size.width / 2,
-            child: UnityWidget(
+            /*child: UnityWidget(
               borderRadius: BorderRadius.all(Radius.circular(0)),
 
               onUnityCreated: _onUnityCreated,
               onUnityMessage: onUnityMessage,
               //onUnitySceneLoaded:
               //onUnitySceneLoaded as Function(SceneLoaded? scene)?,
-            ),
+            ),*/
           ),
         ],
       ),
