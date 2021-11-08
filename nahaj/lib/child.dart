@@ -21,3 +21,17 @@ class Groups extends ChangeNotifier {
   Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
       this.memberId,this.memberName,this.pathOfImage);
 }
+
+class Message {
+  final String userId;
+  final String username;
+  final String message;
+  //final DateTime createdAt;
+
+  const Message({
+    required this.userId,
+    required this.username,
+    required this.message,
+    //required this.createdAt,
+  });
+}
