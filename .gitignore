@@ -403,3 +403,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+#from our side
+nahaj/ios/UnityLibrary/Data/sharedassets0.assets.resS
+nahaj/ios/UnityLibrary/Frameworks/com.ptc.vuforia.engine/Vuforia/Plugins/iOS/VuforiaEngine.framework/VuforiaEngine
+nahaj/ios/UnityLibrary/Libraries/libiPhone-lib.a
