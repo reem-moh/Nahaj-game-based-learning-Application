@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:nahaj/category.dart';
 
 class Experiment extends StatefulWidget {
   //SimpleScreen({Key key}) : super(key: key);
@@ -29,42 +30,42 @@ class _Experiment extends State<Experiment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      body: Card(
-          margin: const EdgeInsets.all(8),
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Stack(
-            children: [
-              UnityWidget(
+        key: _scaffoldKey,
+        body: Stack(
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                child: Image.asset(
+                  'assets/ExperimentBackButton.png',
+                  height: 20,
+                  width: 20,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Category()),
+                  );
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(0),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: UnityWidget(
                 borderRadius: BorderRadius.all(Radius.zero),
                 onUnityCreated: _onUnityCreated,
                 onUnityMessage: onUnityMessage,
-                //onUnitySceneLoaded: onUnitySceneLoaded,
               ),
-            ],
-          )),
-    );
-  }
-
-  void setRotationSpeed(String speed) {
-    _unityWidgetController.postMessage(
-      'Cube',
-      'SetRotationSpeed',
-      speed,
-    );
+            ),
+          ],
+        ));
   }
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
   }
-
-  /*void onUnitySceneLoaded(SceneLoaded scene) {
-    print('Received scene loaded from unity: ${scene.name}');
-    print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
-  }*/
 
   // Callback that connects the created controller to the unity controller
   void _onUnityCreated(controller) {
