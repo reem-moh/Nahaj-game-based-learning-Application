@@ -132,7 +132,7 @@ class DataBase extends ChangeNotifier {
       }
     }
     print("group info list in getGroups");
-    print(groupsInfo.last.creatorName);
+    // print(groupsInfo.last.creatorName);
     return groupsInfo;
   }
 }
