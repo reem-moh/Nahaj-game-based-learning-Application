@@ -85,6 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   crypto:
     dependency: transitive
     description:
@@ -247,6 +254,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.5"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.4+4"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.4"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.1"
   intl:
     dependency: transitive
     description:
@@ -387,13 +415,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  sizer:
-    dependency: "direct main"
-    description:
-      name: sizer
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.15"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -455,13 +476,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
-  universal_io:
-    dependency: transitive
+  uuid:
+    dependency: "direct main"
     description:
-      name: universal_io
+      name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "3.0.5"
   vector_math:
     dependency: transitive
     description:
@@ -498,5 +519,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
-  flutter: ">=2.0.0"
+  dart: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"

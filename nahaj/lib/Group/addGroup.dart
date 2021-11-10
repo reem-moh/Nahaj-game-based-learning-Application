@@ -12,7 +12,7 @@ import 'package:nahaj/child.dart';
 class AddGroup extends StatefulWidget {
   final DataBase db;
   final User user;
-  AddGroup({Key? key, required this.db,required this.user}) : super(key: key);
+  AddGroup({Key? key, required this.db, required this.user}) : super(key: key);
 
   @override
   _AddGroup createState() => _AddGroup();
@@ -232,12 +232,14 @@ class _AddGroup extends State<AddGroup> {
             await widget.db.storeImage('/GroupsAvatars/$code', pathOfImage!);
         //thats mean there is no error
         if (imageURL != "-1") {
-          widget.db.createGroup(code, groupName, widget.user.username, widget.user.userId, imageURL);
+          widget.db.createGroup(code, groupName, widget.user.username,
+              widget.user.userId, imageURL);
         }
       } else {
         //using default image
         String imageUrl = await widget.db.loadImage('/Avatar/owl.png');
-        widget.db.createGroup(code, groupName, widget.user.username,  widget.user.userId, imageUrl);
+        widget.db.createGroup(code, groupName, widget.user.username,
+            widget.user.userId, imageUrl);
         print("default image inside method createGrou, in addGroup class ");
       }
       return true;
