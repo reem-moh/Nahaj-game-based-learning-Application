@@ -69,6 +69,7 @@
 		<type fullname="ShowBottleSoap" preserve="nothing"/>
 		<type fullname="ShowBottleVinegar" preserve="nothing"/>
 		<type fullname="ShowBottlewater" preserve="nothing"/>
+		<type fullname="UnityMessageManager" preserve="nothing"/>
 		<type fullname="countdownController" preserve="nothing"/>
 		<type fullname="exitGame" preserve="nothing"/>
 		<type fullname="explosion" preserve="nothing"/>

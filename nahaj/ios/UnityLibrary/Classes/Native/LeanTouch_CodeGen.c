@@ -2154,18 +2154,18 @@ static const Il2CppTokenRangePair s_rgctxIndices[13] =
 };
 static const Il2CppRGCTXDefinition s_rgctxValues[40] = 
 {
-	{ (Il2CppRGCTXDataType)3, 24634 },
-	{ (Il2CppRGCTXDataType)3, 24636 },
-	{ (Il2CppRGCTXDataType)3, 24626 },
-	{ (Il2CppRGCTXDataType)3, 24632 },
-	{ (Il2CppRGCTXDataType)3, 24628 },
+	{ (Il2CppRGCTXDataType)3, 24635 },
+	{ (Il2CppRGCTXDataType)3, 24637 },
+	{ (Il2CppRGCTXDataType)3, 24627 },
+	{ (Il2CppRGCTXDataType)3, 24633 },
+	{ (Il2CppRGCTXDataType)3, 24629 },
 	{ (Il2CppRGCTXDataType)2, 289 },
 	{ (Il2CppRGCTXDataType)3, 23692 },
 	{ (Il2CppRGCTXDataType)2, 285 },
+	{ (Il2CppRGCTXDataType)3, 24626 },
+	{ (Il2CppRGCTXDataType)3, 24632 },
 	{ (Il2CppRGCTXDataType)3, 24625 },
 	{ (Il2CppRGCTXDataType)3, 24631 },
-	{ (Il2CppRGCTXDataType)3, 24624 },
-	{ (Il2CppRGCTXDataType)3, 24630 },
 	{ (Il2CppRGCTXDataType)3, 12828 },
 	{ (Il2CppRGCTXDataType)3, 12829 },
 	{ (Il2CppRGCTXDataType)2, 277 },
@@ -2192,8 +2192,8 @@ static const Il2CppRGCTXDefinition s_rgctxValues[40] =
 	{ (Il2CppRGCTXDataType)3, 20874 },
 	{ (Il2CppRGCTXDataType)3, 12839 },
 	{ (Il2CppRGCTXDataType)2, 284 },
-	{ (Il2CppRGCTXDataType)3, 24432 },
-	{ (Il2CppRGCTXDataType)3, 24725 },
+	{ (Il2CppRGCTXDataType)3, 24433 },
+	{ (Il2CppRGCTXDataType)3, 24726 },
 };
 extern const CustomAttributesCacheGenerator g_LeanTouch_AttributeGenerators[];
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_LeanTouch_CodeGenModule;

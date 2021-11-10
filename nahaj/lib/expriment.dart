@@ -10,12 +10,10 @@ class Experiment extends StatefulWidget {
 }
 
 class _Experiment extends State<Experiment> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
-
   late UnityWidgetController _unityWidgetController;
-  double _sliderValue = 0.0;
-
+  bool paused = false;
+  double buttonWidth = 0;
+  double buttonHeight = 0;
   @override
   void initState() {
     super.initState();
@@ -29,42 +27,80 @@ class _Experiment extends State<Experiment> {
 
   @override
   Widget build(BuildContext context) {
+    buttonWidth = MediaQuery.of(context).size.width;
+    buttonHeight = MediaQuery.of(context).size.width;
     return Scaffold(
-        key: _scaffoldKey,
-        body: Stack(
-          children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                child: Image.asset(
-                  'assets/ExperimentBackButton.png',
-                  height: 20,
-                  width: 20,
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Category()),
-                  );
-                },
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(0),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: UnityWidget(
+      body: Card(
+          margin: const EdgeInsets.all(0),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: Stack(
+            children: [
+              UnityWidget(
                 borderRadius: BorderRadius.all(Radius.zero),
                 onUnityCreated: _onUnityCreated,
                 onUnityMessage: onUnityMessage,
               ),
-            ),
-          ],
-        ));
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 10, top: 20),
+                child: InkWell(
+                  child: Image.asset(
+                    'assets/ExperimentBackButton.png',
+                    height: 60,
+                    width: 60,
+                  ),
+                  onTap: () {
+                    if (paused) {
+                      _unityWidgetController.resume()!.then((value) =>
+                          _unityWidgetController
+                              .unload()!
+                              .then((value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Category()),
+                                  )));
+                    } else {
+                      _unityWidgetController
+                          .unload()!
+                          .then((value) => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Category()),
+                              ));
+                    }
+                  },
+                ),
+              ),
+              /*Positioned(
+                  child: InkWell(
+                child: Container(
+                  width: buttonWidth,
+                  height: buttonHeight,
+                  color: Color.fromARGB(200, 145, 111, 170),
+                ),
+                onTap: () {
+                  _unityWidgetController.pause();
+                  _unityWidgetController.resume()!.then((value) => setState(() {
+                        buttonHeight = buttonHeight * 0;
+                        buttonWidth = 0;
+                      }));
+                  print('\n\nTapped to enable scene\n\n');
+                },
+              ))*/
+            ],
+          )),
+    );
   }
 
   void onUnityMessage(message) {
     print('Received message from unity: ${message.toString()}');
+    if (message.toString() == "END") {
+      //if quit shows error let user unload(), quit()
+      _unityWidgetController.pause()!.then((value) => paused = true);
+    }
   }
 
   // Callback that connects the created controller to the unity controller
