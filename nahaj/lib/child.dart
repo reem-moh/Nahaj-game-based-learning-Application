@@ -26,12 +26,25 @@ class Message {
   final String userId;
   final String username;
   final String message;
-  //final DateTime createdAt;
+  final String createdAt;
 
   const Message({
     required this.userId,
     required this.username,
     required this.message,
-    //required this.createdAt,
+    required this.createdAt,
   });
+}
+
+class Chatroom {
+  final String groupName;
+  final String groupId;
+  List<Message> chat;
+
+  Chatroom({
+    required this.groupName,
+    required this.groupId,
+    required this.chat,
+  });
+
 }

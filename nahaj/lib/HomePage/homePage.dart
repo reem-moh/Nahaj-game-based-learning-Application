@@ -10,7 +10,7 @@ import 'package:nahaj/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'category.dart';
 import 'package:nahaj/HomePage/category.dart';
-import 'package:nahaj/ARPages/AR.dart';
+//import 'package:nahaj/ARPages/AR.dart';
 import 'package:nahaj/database.dart';
 
 //#FDE9A9
@@ -254,13 +254,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   textDirection: TextDirection.rtl,
                 ),
                 onTap: () {
-                  setState(() {
+                  /*setState(() {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AR()),
                     );
+                    
+                  });*/
+                  setState(() { 
                     tappedIndex = 2;
                   });
+                  
                 },
               ),
             ),

@@ -176,7 +176,7 @@ class DataBase extends ChangeNotifier {
     //add to group collection
     final groupDocument = firestore.collection('Groups').doc();
     List<String> members = [leaderId];
-    List<String> MemberN = [leaderName];
+    List<String> memberN = [leaderName];
     /*members.add({
       "userId": leaderId,
       "userName": leaderName,
@@ -189,7 +189,7 @@ class DataBase extends ChangeNotifier {
           "leaderId": leaderId,
           "membersCounter": 1,
           "memberID": FieldValue.arrayUnion(members),
-          "memberName": FieldValue.arrayUnion(MemberN),
+          "memberName": FieldValue.arrayUnion(memberN),
           "pathOfImage": pathOfImage,
         })
         .then((value) => print("Group created"))

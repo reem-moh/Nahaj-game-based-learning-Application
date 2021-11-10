@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nahaj/database.dart';
@@ -18,7 +17,7 @@ class Group extends StatefulWidget {
 }
 
 class _Group extends State<Group> {
-  final _key = GlobalKey<FormState>();
+  //final _key = GlobalKey<FormState>();
   int numOfchate = 3;
   List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello", messageType: "receiver"),
