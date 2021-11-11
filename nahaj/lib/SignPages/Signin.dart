@@ -3,6 +3,8 @@ import 'package:nahaj/HomePage/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'SignUp.dart';
 import 'package:nahaj/database.dart';
+import 'package:sizer/sizer.dart';
+
 
 class Signin extends StatefulWidget {
   final DataBase db;
@@ -199,7 +201,7 @@ class _SigninState extends State<Signin> {
                           color: Colors.black,
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w600,
-                          fontSize: 27,
+                          fontSize: 2.7.w,
                         ),
                       ),
                     ),
@@ -218,7 +220,7 @@ class _SigninState extends State<Signin> {
                           color: Color.fromARGB(255, 6, 106, 212),
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w600,
-                          fontSize: 27,
+                          fontSize: 2.7.w,
                         ),
                       ),
                       onPressed: () async {
@@ -243,7 +245,7 @@ class _SigninState extends State<Signin> {
                             color: Color.fromARGB(255, 6, 106, 212),
                             fontFamily: 'Cairo',
                             fontWeight: FontWeight.w600,
-                            fontSize: 27,
+                            fontSize: 2.7.w,
                           ),
                         ),
                         onPressed: () {
@@ -270,7 +272,7 @@ class _SigninState extends State<Signin> {
                             color: Colors.black,
                             fontFamily: 'Cairo',
                             fontWeight: FontWeight.w600,
-                            fontSize: 27,
+                            fontSize: 2.7.w,
                           ),
                         ),
                       ),

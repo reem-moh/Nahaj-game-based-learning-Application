@@ -33,7 +33,7 @@ dependencies:
   flutter_unity_widget: ^4.2.3
   image_picker: ^0.8.4+4
   uuid: ^3.0.5
-
+  sizer: ^2.0.15
 
 
 dev_dependencies:

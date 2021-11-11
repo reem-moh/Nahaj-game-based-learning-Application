@@ -8,6 +8,7 @@ import 'package:nahaj/Group/group.dart';
 import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 import 'category.dart';
 import 'package:nahaj/HomePage/category.dart';
 //import 'package:nahaj/ARPages/AR.dart';
@@ -119,7 +120,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       child: ScaleTransition(
         scale: _menuScaleAnimation,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.7, 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(screenWidth * 0.07.h, 0, 0, 0),
           children: [
             //profile image and name
             SizedBox(
@@ -131,14 +132,19 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     Container(
                       height: screenHeight * 0.08,
                       child: user.username == "1"
-                          ? Text("...")
+                          ? Text("...",style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 2.7.w,
+                              ),)
                           : Text(
                               user.username,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Cairo',
                                 fontWeight: FontWeight.w600,
-                                fontSize: 27,
+                                fontSize: 2.7.w,
                               ),
                             ),
                     ),
@@ -181,7 +187,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     color: Colors.black,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w600,
-                    fontSize: 24,
+                    fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
                 ),
@@ -199,7 +205,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight * 0.012),
+            SizedBox(height: 0.012.w),
 
             //profile ملف شخصي
             Theme(
@@ -216,7 +222,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     color: Colors.black,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w600,
-                    fontSize: 24,
+                    fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
                 ),
@@ -231,7 +237,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight * 0.012),
+            SizedBox(height:0.012.w),
 
             //help مساعدة
             Theme(
@@ -249,7 +255,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     color: Colors.black,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w600,
-                    fontSize: 24,
+                    fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
                 ),
@@ -269,7 +275,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height: screenHeight * 0.34),
+            SizedBox(height: 36.w),
 
             //logout
             Theme(
@@ -285,7 +291,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     color: Colors.black,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w600,
-                    fontSize: 24,
+                    fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
                 ),
@@ -306,10 +312,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   Widget dashboard(context) {
     return AnimatedPositioned(
       duration: duration,
-      top: isCollapsed ? 0 : -0.09 * screenWidth,
-      bottom: isCollapsed ? 0 : 0.01 * screenWidth,
-      left: isCollapsed ? 0 : -0.2 * screenWidth,
-      right: isCollapsed ? 0 : 0.2 * screenWidth,
+      top: isCollapsed ? 0 : -9.h,
+      bottom: isCollapsed ? 0 : 0.9.h,
+      left: isCollapsed ? 0 : -9.9.h,
+      right: isCollapsed ? 0 : 10.h,
       child: ScaleTransition(
           scale: _scaleAnimation,
           child: Material(
@@ -342,7 +348,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                           child: InkWell(
                             child: AnimatedIcon(
                               icon: AnimatedIcons.menu_close,
-                              size: MediaQuery.of(context).size.width / 20,
+                              size: MediaQuery.of(context).size.width.h / 20.h,
                               progress: _controller,
                               color: Colors.grey[800],
                             ),
@@ -363,12 +369,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   Container(
                     child: Column(
                       children: <Widget>[
-                        SizedBox(height: 45),
+                        SizedBox(height: 4.5.w),
 
                         //profile column
                         Container(
-                            height: MediaQuery.of(context).size.height / 4.18,
-                            width: MediaQuery.of(context).size.height / 1,
+                            height: MediaQuery.of(context).size.height.w / 4.18.w,
+                            width: MediaQuery.of(context).size.height.w / 1.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(26),
                               color: Color.fromARGB(200, 145, 111, 170),
@@ -395,13 +401,18 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
                                 user.username == "1"
-                                    ? Text("...")
+                                    ? Text("...",style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          color: Colors.white,
+                                          fontSize: 3.6.w,
+                                          fontWeight: FontWeight.w700,
+                                        ),)
                                     : Text(
                                         'أهلاً، ${user.username}',
                                         style: TextStyle(
                                           fontFamily: 'Cairo',
                                           color: Colors.white,
-                                          fontSize: 36,
+                                          fontSize: 3.6.w,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -411,7 +422,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                           child: Stack(children: [
                             //background bottom
                             Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width.h,
                                 margin: EdgeInsets.only(
                                     top: MediaQuery.of(context).size.width *
                                         0.2),
@@ -421,7 +432,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         "assets/homeBottomBackground.png"))),
                             Column(
                               children: [
-                                //categories
+                                //name of categories
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -430,19 +441,20 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       style: TextStyle(
                                           fontFamily: 'Cairo',
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 30),
+                                          fontSize: 3.0.w),
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          800,
+                                      width: MediaQuery.of(context).size.width.h /
+                                          800.h,
                                     ),
                                     Image.asset('assets/TabsIndicator.png'),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          40,
+                                      width: MediaQuery.of(context).size.width.h /
+                                          40.h,
                                     ),
                                   ],
                                 ),
+                                //cards
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -477,7 +489,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           FocusedMenuHolder(
                                             child: Container(
                                               margin: EdgeInsets.only(
-                                                right: 900,
+                                                right: 9.00.h,
                                               ),
                                               child: Icon(
                                                 Icons.add,
@@ -496,6 +508,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                     "إنشاء مجموعة",
                                                     style: TextStyle(
                                                       fontFamily: 'Cairo',
+                                                      fontSize: 1.5.w,
                                                     ),
                                                   ),
                                                   trailingIcon:
@@ -516,6 +529,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                     "انضمام إلى مجموعة",
                                                     style: TextStyle(
                                                       fontFamily: 'Cairo',
+                                                      fontSize: 1.5.w,
                                                     ),
                                                   ),
                                                   trailingIcon:
@@ -533,18 +547,22 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                   }),
                                             ],
                                           ),
+                                          SizedBox(
+                                            width: 
+                                                65.h,
+                                          ),
                                           Text(
                                             ':المجموعات',
                                             style: TextStyle(
                                                 fontFamily: 'Cairo',
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 30),
+                                                fontSize: 3.0.w),
                                           ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                60,
+                                                4.h,
                                           ),
                                           Image.asset(
                                               'assets/TabsIndicator.png'),
@@ -552,7 +570,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                40,
+                                                4.h,
                                           ),
                                         ],
                                       ),
@@ -560,7 +578,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       Container(
                                         margin: EdgeInsets.only(
                                             left: 30.0, right: 30.0),
-                                        height: 180.0,
+                                        height: 18.00.h,
                                         child: ListView.separated(
                                           reverse: true,
                                           itemCount: groups.length,
@@ -625,7 +643,7 @@ class CategoryCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: cardColor, width: 2.0),
+          border: Border.all(color: cardColor, width: .20.h),
           color: cardColor,
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           boxShadow: [
@@ -637,9 +655,9 @@ class CategoryCard extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.all(8),
-        height: 250,
-        width: 300,
+        margin: EdgeInsets.all(0.08.w),
+        height: 30.0.w,
+        width: 30.0.h,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -651,15 +669,15 @@ class CategoryCard extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
+                      fontSize: 2.4.w,
                       color: Color.fromARGB(255, 114, 78, 140)),
                 ),
               ],
             ),
             Image.asset(
               image,
-              height: 201,
-              width: 250,
+              height: 15.1.w,
+              width: 15.0.h,
             ),
           ],
         ),
@@ -698,8 +716,8 @@ class _GroupsCardState extends State<GroupsCard> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 130.0,
-            height: 130.0,
+            width: 13.00.h,
+            height: 13.00.w,
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -715,7 +733,7 @@ class _GroupsCardState extends State<GroupsCard> {
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
-                  fontSize: 22,
+                  fontSize: 2.2.w,
                   color: Color.fromARGB(170, 0, 0, 0)),
             ),
           ),

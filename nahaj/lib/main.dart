@@ -7,6 +7,7 @@ import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 //import 'package:nahaj/Group/joinGroup.dart';
 //import 'package:nahaj/SignPages/signUp.dart';
 //import 'package:nahaj/Group/addGroup2.dart';
@@ -32,19 +33,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nahaj',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Signin(
-        //groupName: 'مجموعة',
-        db: this.database,
-      ),
-      /*AddGroup2(
-        db: this.database,
-      ),*/
-      //MyHomePage(title: 'Nahaj'),
+    return Sizer(
+      builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {  
+      return MaterialApp(
+        title: 'Nahaj',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Signin(
+          //groupName: 'مجموعة',
+          db: this.database,
+        ),
+        /*AddGroup2(
+          db: this.database,
+        ),*/
+        //MyHomePage(title: 'Nahaj'),
+      );
+      },
     );
   }
 }
