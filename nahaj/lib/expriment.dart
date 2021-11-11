@@ -3,7 +3,8 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:nahaj/HomePage/category.dart';
 
 class Experiment extends StatefulWidget {
-  //SimpleScreen({Key key}) : super(key: key);
+  final String category;
+  const Experiment({Key? key, required this.category}) : super(key: key);
 
   @override
   _Experiment createState() => _Experiment();
@@ -42,6 +43,7 @@ class _Experiment extends State<Experiment> {
                 borderRadius: BorderRadius.all(Radius.zero),
                 onUnityCreated: _onUnityCreated,
                 onUnityMessage: onUnityMessage,
+                onUnitySceneLoaded: onUnitySceneLoaded,
               ),
               Container(
                 alignment: Alignment.topLeft,
@@ -60,7 +62,8 @@ class _Experiment extends State<Experiment> {
                               .then((value) => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Category()),
+                                        builder: (context) => Category(
+                                            categoryTitle: widget.category)),
                                   )));
                     } else {
                       _unityWidgetController
@@ -68,28 +71,13 @@ class _Experiment extends State<Experiment> {
                           .then((value) => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Category()),
+                                    builder: (context) => Category(
+                                        categoryTitle: widget.category)),
                               ));
                     }
                   },
                 ),
               ),
-              /*Positioned(
-                  child: InkWell(
-                child: Container(
-                  width: buttonWidth,
-                  height: buttonHeight,
-                  color: Color.fromARGB(200, 145, 111, 170),
-                ),
-                onTap: () {
-                  _unityWidgetController.pause();
-                  _unityWidgetController.resume()!.then((value) => setState(() {
-                        buttonHeight = buttonHeight * 0;
-                        buttonWidth = 0;
-                      }));
-                  print('\n\nTapped to enable scene\n\n');
-                },
-              ))*/
             ],
           )),
     );
@@ -103,8 +91,17 @@ class _Experiment extends State<Experiment> {
     }
   }
 
+  // Communication from Unity when new scene is loaded to Flutter
+  void onUnitySceneLoaded(SceneLoaded? sceneInfo) {
+    print('Received scene loaded from unity: ${sceneInfo!.name}');
+    print(
+        'Received scene loaded from unity buildIndex: ${sceneInfo.buildIndex}');
+  }
+
   // Callback that connects the created controller to the unity controller
   void _onUnityCreated(controller) {
     this._unityWidgetController = controller;
+    _unityWidgetController.pause();
+    _unityWidgetController.resume();
   }
 }

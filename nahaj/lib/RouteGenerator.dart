@@ -13,7 +13,7 @@ import 'database.dart';
 class RouteGenerator {
   final DataBase db;
   final User user;
-  const RouteGenerator( this.db,  this.user);
+  const RouteGenerator(this.db, this.user);
   Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     //final args = settings.arguments;
@@ -35,13 +35,23 @@ class RouteGenerator {
                   db: db,
                 ));
       case '/JoinGroup':
-        return MaterialPageRoute(builder: (context) => JoinGroup(   db: this.db,user: user));
+        return MaterialPageRoute(
+            builder: (context) => JoinGroup(db: this.db, user: user));
       case '/AddGroup':
-        return MaterialPageRoute(builder: (context) => AddGroup( db: this.db,user: user));
+        return MaterialPageRoute(
+            builder: (context) => AddGroup(db: this.db, user: user));
       case '/Group':
-        return MaterialPageRoute(builder: (context) => Group(group: new Groups(0, 'groupName', 'leaderId', 'leaderName', ['memberId'], ['memberName'], 'pathOfImage'),db: this.db,user: user));
+        return MaterialPageRoute(
+            builder: (context) => Group(
+                group: new Groups(0, 'groupName', 'leaderId', 'leaderName',
+                    ['memberId'], ['memberName'], 'pathOfImage'),
+                db: this.db,
+                user: user));
       case '/Category':
-        return MaterialPageRoute(builder: (context) => Category());
+        return MaterialPageRoute(
+            builder: (context) => Category(
+                  categoryTitle: '',
+                ));
       default:
         // If there is no such named route in the switch statement, e.g. /third
         return _errorRoute();

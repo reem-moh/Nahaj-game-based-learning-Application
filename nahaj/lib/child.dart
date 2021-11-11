@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
-class User extends ChangeNotifier{
-   String userId;
-   String username;
-   String email;
-   String avatar;
-   double level;
+class User extends ChangeNotifier {
+  String userId;
+  String username;
+  String email;
+  String avatar;
+  double level;
 
-  User({required this.userId,required this.username,required this.email,required this.avatar,required this.level});
+  User(
+      {required this.userId,
+      required this.username,
+      required this.email,
+      required this.avatar,
+      required this.level});
 }
 
 class Groups extends ChangeNotifier {
@@ -19,7 +24,7 @@ class Groups extends ChangeNotifier {
   List<String> memberId = [];
   List<String> memberName = [];
   Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
-      this.memberId,this.memberName,this.pathOfImage);
+      this.memberId, this.memberName, this.pathOfImage);
 }
 
 class Message {
@@ -46,5 +51,38 @@ class Chatroom {
     required this.groupId,
     required this.chat,
   });
+}
 
+class ExperimentInfo {
+  String name;
+  String category;
+  String info;
+  String pathOfImage;
+  double totalScore;
+  double experimentScore;
+  List<Question> questions;
+
+  ExperimentInfo({
+    required this.name,
+    required this.category,
+    required this.info,
+    required this.pathOfImage,
+    required this.totalScore,
+    required this.experimentScore,
+    required this.questions,
+  });
+}
+
+class Question {
+  String question;
+  List<String> answers;
+  String correctAnswer;
+  double score;
+
+  Question({
+    required this.question,
+    required this.answers,
+    required this.correctAnswer,
+    required this.score,
+  });
 }
