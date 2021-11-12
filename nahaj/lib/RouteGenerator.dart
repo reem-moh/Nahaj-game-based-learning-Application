@@ -40,13 +40,13 @@ class RouteGenerator {
       case '/AddGroup':
         return MaterialPageRoute(
             builder: (context) => AddGroup(db: this.db, user: user));
-      case '/Group':
-        return MaterialPageRoute(
+      case '/Group': 
+       /* return MaterialPageRoute(
             builder: (context) => Group(
-                group: new Groups(0, 'groupName', 'leaderId', 'leaderName',
-                    ['memberId'], ['memberName'], 'pathOfImage'),
+                //group: new Groups(1, 'groupName', 'leaderId', 'leaderName', 'pathOfImage',{'id': 'dd'}),
+                group: new Groups(groupId: 1,groupName: 'groupName',leaderId: 'leaderId',leaderName: 'leaderName',pathOfImage: 'pathOfImage',members: {'id': 'dd'},),
                 db: this.db,
-                user: user));
+                user: user));*/
       case '/Category':
         return MaterialPageRoute(
             builder: (context) => Category(

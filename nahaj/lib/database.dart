@@ -137,34 +137,26 @@ class DataBase extends ChangeNotifier {
   }
 
   //get groups of the user
-  Future<List<Groups>> getGroups(String uid) async {
+  Future<List<Groups>> getGroups(String uid,String uName) async {
+    print("inside getGroups");
+
+    Map member ={'userName': uName,'userId' : uid};
     List<Groups> groupsInfo = [];
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
         .collection('Groups')
-        .where('memberID', arrayContains: uid)
+        .where('members', arrayContains: member)
         .get();
 
     List<QueryDocumentSnapshot> docs = snapshot.docs;
-
     for (var doc in docs) {
       if (doc.data() != null) {
         var data = doc.data() as Map<String, dynamic>;
         print("in (getGroups, DB) : groupName ->" + data['groupName']!);
-        List.from(data['memberID']).forEach((element) {
-          print('(db) group members Id -> '+element);
-        });
-        Groups g = Groups(
-          data['code'],
-          data['groupName'].toString(),
-          data['leaderId'].toString(),
-          data['leaderName'].toString(),
-          List.castFrom(data['memberID'] as List),
-          List.castFrom(data['memberName'] as List),
-          data['pathOfImage'],
-        );
-        g.memberId.forEach((element) {
-          print('(g) group members Id ->'+element);
-        });
+        List membersInDB = data['members'] ?? [{}];
+          membersInDB.forEach((map) {
+            print("$map:");
+          });
+        Groups g = new Groups.fromJson(data);
         groupsInfo.add(g);
       }
     }
@@ -175,23 +167,23 @@ class DataBase extends ChangeNotifier {
       String leaderId, String pathOfImage) async {
     //add to group collection
     final groupDocument = firestore.collection('Groups').doc();
-    List<String> members = [leaderId];
-    List<String> memberN = [leaderName];
-    /*members.add({
-      "userId": leaderId,
-      "userName": leaderName,
-    });*/
+    
+    List<Map> members = [{
+    'userId': leaderId,
+    'userName': leaderName, 
+    }];
+
+    Groups _Obj = new Groups(
+      goupCode: code, 
+      groupName: groupName,
+      leaderId: leaderId,
+      leaderName: leaderName,
+      pathOfImage: pathOfImage,
+      members: members
+    );
+
     groupDocument
-        .set({
-          "code": code,
-          "groupName": groupName,
-          "leaderName": leaderName,
-          "leaderId": leaderId,
-          "membersCounter": 1,
-          "memberID": FieldValue.arrayUnion(members),
-          "memberName": FieldValue.arrayUnion(memberN),
-          "pathOfImage": pathOfImage,
-        })
+        .set(_Obj.toJson())
         .then((value) => print("Group created"))
         .catchError((error) => print("Failed to create group: $error"));
     //to add more on members array using groupDocument.updateData rather than groupDocument.set
@@ -229,19 +221,33 @@ class DataBase extends ChangeNotifier {
 
     var doc = await docRef.get();
     var data = doc.data() as Map<String, dynamic>;
+    var inGroup = false;
 
-    List<String> newMemberI = [userId];
-    List<String> newMemberN = [userName];
-    //first check if user in the group
-    if(!List.castFrom(data['memberID']).contains(userId)){
+    List<Map> members = [{
+      'userId': userId,
+      'userName': userName, 
+    }];
+
+    List membersInDB = data['members'] ?? [{}];
+    print("****************************");
+    membersInDB.forEach((map) {
+      print("$map:");
+      if(map['userId'] == userId){
+        print("inside if v == userId value");
+        inGroup = true;
+      }
+      members.add(map);
+    });
+    
+    print("****************************");
+
+    if(!inGroup){
+      print("inside !inGroup");
       docRef.update({
-        "memberID": FieldValue.arrayUnion(newMemberI),
-        "memberName": FieldValue.arrayUnion(newMemberN),
-        "membersCounter": ++data['membersCounter'],
+          "members": members,
+          //"membersCounter": ++data['membersCounter'],
       });
     }
-    
-
     return 'join group success';
   }
 

@@ -15,16 +15,37 @@ class User extends ChangeNotifier {
       required this.level});
 }
 
-class Groups extends ChangeNotifier {
-  int groupId = -1;
-  String groupName = "";
-  String leaderId = "";
+class Groups{
+  int goupCode = -1; //Code 
+  String groupName ="";
+  String leaderId ="";
   String leaderName = "";
   String pathOfImage = "";
-  List<String> memberId = [];
-  List<String> memberName = [];
-  Groups(this.groupId, this.groupName, this.leaderId, this.leaderName,
-      this.memberId, this.memberName, this.pathOfImage);
+  List members =[{}];
+
+  Groups({required this.goupCode,required this.groupName,required this.leaderId, required this.leaderName,required this.pathOfImage,required this.members});
+
+  Groups.fromJson(Map parsedJson) { 
+    goupCode = parsedJson['code'] ?? -1;
+    groupName = parsedJson['groupName'] ?? '';
+    leaderId = parsedJson['leaderId'] ?? '';
+    leaderName = parsedJson['leaderName'] ?? '';
+    pathOfImage = parsedJson['pathOfImage'] ?? '';
+    members = parsedJson['members'] ?? [{}];
+  }
+  
+  Map<String, dynamic> toJson() =>
+  {
+    'code': goupCode,
+    'groupName': groupName,
+    'leaderId': leaderId,
+    'leaderName': leaderName,
+    'pathOfImage': pathOfImage,
+    'members': members,
+  };
+
+  
+
 }
 
 class Message {
