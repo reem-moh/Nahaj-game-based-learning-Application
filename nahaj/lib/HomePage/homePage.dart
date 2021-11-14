@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -94,7 +95,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   List<Groups> groups = [];
   Future<void> getGroups(String uid) async {
-    groups = await widget.db.getGroups(uid,user.username);
+    groups = await widget.db.getGroups(uid, user.username);
     print(groups);
   }
 
@@ -132,12 +133,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     Container(
                       height: screenHeight * 0.08,
                       child: user.username == "1"
-                          ? Text("...",style: TextStyle(
+                          ? Text(
+                              "...",
+                              style: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Cairo',
                                 fontWeight: FontWeight.w600,
                                 fontSize: 2.7.w,
-                              ),)
+                              ),
+                            )
                           : Text(
                               user.username,
                               style: TextStyle(
@@ -237,7 +241,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
               ),
             ),
 
-            SizedBox(height:0.012.w),
+            SizedBox(height: 0.012.w),
 
             //help مساعدة
             Theme(
@@ -267,10 +271,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     );
                     
                   });*/
-                  setState(() { 
+                  setState(() {
                     tappedIndex = 2;
                   });
-                  
                 },
               ),
             ),
@@ -373,7 +376,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
                         //profile column
                         Container(
-                            height: MediaQuery.of(context).size.height.w / 4.18.w,
+                            height:
+                                MediaQuery.of(context).size.height.w / 4.18.w,
                             width: MediaQuery.of(context).size.height.w / 1.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(26),
@@ -401,12 +405,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
                                 user.username == "1"
-                                    ? Text("...",style: TextStyle(
+                                    ? Text(
+                                        "...",
+                                        style: TextStyle(
                                           fontFamily: 'Cairo',
                                           color: Colors.white,
                                           fontSize: 3.6.w,
                                           fontWeight: FontWeight.w700,
-                                        ),)
+                                        ),
+                                      )
                                     : Text(
                                         'أهلاً، ${user.username}',
                                         style: TextStyle(
@@ -444,13 +451,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           fontSize: 3.0.w),
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width.h /
-                                          800.h,
+                                      width:
+                                          MediaQuery.of(context).size.width.h /
+                                              800.h,
                                     ),
                                     Image.asset('assets/TabsIndicator.png'),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width.h /
-                                          40.h,
+                                      width:
+                                          MediaQuery.of(context).size.width.h /
+                                              40.h,
                                     ),
                                   ],
                                 ),
@@ -460,21 +469,25 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     CategoryCard(
-                                        cardColor:
-                                            Color.fromARGB(255, 223, 221, 223),
-                                        title: 'الكيمياء',
-                                        image: 'assets/chemistry.gif'),
+                                      cardColor:
+                                          Color.fromARGB(255, 223, 221, 223),
+                                      title: 'الكيمياء',
+                                      image: 'assets/chemistry.gif',
+                                      db: widget.db,
+                                    ),
                                     CategoryCard(
                                       cardColor:
                                           Color.fromARGB(255, 202, 203, 203),
                                       title: 'النباتات',
                                       image: 'assets/plants.gif',
+                                      db: widget.db,
                                     ),
                                     CategoryCard(
                                       cardColor:
                                           Color.fromARGB(255, 230, 230, 230),
                                       title: 'الحيوانات',
                                       image: 'assets/animals.png',
+                                      db: widget.db,
                                     ),
                                   ],
                                 ),
@@ -548,8 +561,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                             ],
                                           ),
                                           SizedBox(
-                                            width: 
-                                                65.h,
+                                            width: 65.h,
                                           ),
                                           Text(
                                             ':المجموعات',
@@ -617,16 +629,24 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 }
 
+// ignore: must_be_immutable
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({
+  CategoryCard({
     this.cardColor = Colors.grey,
     this.title = 'Title',
     this.image = 'assets/plants.gif',
+    this.size1 = 30.0,
+    this.size2 = 20.0,
+    this.size3 = 30.0,
+    this.fontSize = 2.4,
+    required this.db,
   });
 
-  final Color cardColor;
-  final String title;
-  final String image;
+  Color cardColor;
+  String title;
+  String image;
+  double size1, size2, size3, fontSize;
+  DataBase db;
 
   @override
   Widget build(BuildContext context) {
@@ -638,6 +658,7 @@ class CategoryCard extends StatelessWidget {
           MaterialPageRoute(
               builder: (context) => Category(
                     categoryTitle: title,
+                    db: db,
                   )),
         );
       },
@@ -656,8 +677,8 @@ class CategoryCard extends StatelessWidget {
           ],
         ),
         margin: EdgeInsets.all(0.08.w),
-        height: 30.0.w,
-        width: 30.0.h,
+        height: size1.w,
+        width: size3.h,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -669,15 +690,15 @@ class CategoryCard extends StatelessWidget {
                   style: TextStyle(
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.bold,
-                      fontSize: 2.4.w,
+                      fontSize: fontSize.w,
                       color: Color.fromARGB(255, 114, 78, 140)),
                 ),
               ],
             ),
             Image.asset(
               image,
-              height: 15.1.w,
-              width: 15.0.h,
+              height: size2.w,
+              width: size2.h,
             ),
           ],
         ),

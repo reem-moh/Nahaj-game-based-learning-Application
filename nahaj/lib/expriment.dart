@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:nahaj/HomePage/category.dart';
+import 'package:nahaj/child.dart';
+import 'database.dart';
 
 class Experiment extends StatefulWidget {
   final String category;
-  const Experiment({Key? key, required this.category}) : super(key: key);
+  final DataBase db;
+  final ExperimentInfo exp;
+  final List<ExperimentInfo> experiments;
+  const Experiment(
+      {Key? key,
+      required this.category,
+      required this.db,
+      required this.exp,
+      required this.experiments})
+      : super(key: key);
 
   @override
   _Experiment createState() => _Experiment();
@@ -63,7 +74,9 @@ class _Experiment extends State<Experiment> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Category(
-                                            categoryTitle: widget.category)),
+                                              categoryTitle: widget.category,
+                                              db: widget.db,
+                                            )),
                                   )));
                     } else {
                       _unityWidgetController
@@ -72,7 +85,9 @@ class _Experiment extends State<Experiment> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Category(
-                                        categoryTitle: widget.category)),
+                                          categoryTitle: widget.category,
+                                          db: widget.db,
+                                        )),
                               ));
                     }
                   },
