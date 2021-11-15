@@ -283,19 +283,23 @@ class MessageWidget extends StatelessWidget {
         Column(
           children: [
             if(!isMe)
-            Text(
-                              userName,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Cairo',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 2.4.w,
-              ),textAlign: TextAlign.start,),
+            Container(
+              padding: EdgeInsets.only(top:16),
+              margin: EdgeInsets.only(top:16),
+              child: Text(
+                                userName,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 2.w,
+                ),textAlign: TextAlign.start,textDirection: TextDirection.rtl),
+            ),
             
           
             Container(
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.all(16),
+              padding: isMe? EdgeInsets.all(16):EdgeInsets.only(bottom:16,left: 16,right: 16),
+              margin: isMe? EdgeInsets.all(16):EdgeInsets.only(bottom:16,left: 16,right: 16),
               constraints: BoxConstraints(maxWidth: 140),
               decoration: BoxDecoration(
                 color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,

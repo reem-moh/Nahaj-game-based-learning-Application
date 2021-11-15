@@ -5,14 +5,13 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/Group/addGroup.dart';
-import 'package:nahaj/Group/group.dart';
+import 'package:nahaj/Group/groupChat.dart';
 import 'package:nahaj/Group/joinGroup.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'category.dart';
 import 'package:nahaj/HomePage/category.dart';
-//import 'package:nahaj/ARPages/AR.dart';
 import 'package:nahaj/database.dart';
 
 //#FDE9A9
@@ -74,7 +73,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
             email: email,
             avatar: avatar,
             level: level);
-        getGroups(userId);
       });
     }
   }
@@ -91,12 +89,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 )),
       );
     });
-  }
-
-  List<Groups> groups = [];
-  Future<void> getGroups(String uid) async {
-    groups = await widget.db.getGroups(uid, user.username);
-    print(groups);
   }
 
   @override
@@ -591,25 +583,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         margin: EdgeInsets.only(
                                             left: 30.0, right: 30.0),
                                         height: 18.00.h,
-                                        child: ListView.separated(
-                                          reverse: true,
-                                          itemCount: groups.length,
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return SizedBox(
-                                              width: 25,
-                                            );
-                                          },
-                                          itemBuilder: (_, i) {
-                                            return GroupsCard(
-                                              db: widget.db,
-                                              group: groups.elementAt(i),
-                                              user: user,
-                                            );
-                                          },
-                                          scrollDirection: Axis.horizontal,
-                                        ),
+                                        child: CardsOfGroup(db: widget.db,
+                                              user: user,)
                                       ),
                                     ],
                                   ),
@@ -707,31 +682,27 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class GroupsCard extends StatefulWidget {
+class GroupsCard extends StatelessWidget {
   final DataBase db;
   final Groups group;
   final User user;
   GroupsCard(
       {Key? key, required this.db, required this.group, required this.user})
       : super(key: key);
-  @override
-  State<GroupsCard> createState() => _GroupsCardState();
-}
 
-class _GroupsCardState extends State<GroupsCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
+        
           print('مجموعة');
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => Group(
-                    db: widget.db, group: widget.group, user: widget.user)),
+                    db: db, group: group, user: user)),
           );
-        });
+   
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -744,13 +715,19 @@ class _GroupsCardState extends State<GroupsCard> {
               shape: BoxShape.circle,
               color: Colors.grey[350],
             ),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(widget.group.pathOfImage),
-            ),
+            child: 
+            CircleAvatar(radius: 45,
+        child: ClipOval(
+                    child: Image.network(
+                            group.pathOfImage,
+                            fit: BoxFit.fill,
+                            alignment: Alignment.center,
+                          ),
+             )),
           ),
           Container(
             child: Text(
-              widget.group.groupName,
+              group.groupName,
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
@@ -762,4 +739,59 @@ class _GroupsCardState extends State<GroupsCard> {
       ),
     );
   }
+}
+
+class CardsOfGroup extends StatelessWidget {
+  final User user;
+  final DataBase db;
+  //final Groups group;
+
+  const CardsOfGroup({
+    required this.user,
+    required this.db,
+    Key? key,
+  }) : super(key: key);
+
+
+
+  @override
+ Widget build(BuildContext context) => StreamBuilder<List<Groups>>(
+        stream: db.getGroupsList(user.userId,user.username),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError) {
+                return buildText('Something Went Wrong Try later ${snapshot.hasError}');
+              } else {
+                final allGroups = snapshot.data;
+                return allGroups == null
+                    ? buildText('لا يوجد لديك مجموعات!')
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        reverse: true,
+                        itemCount: allGroups.length,
+                        itemBuilder: (context, index) {
+                          final group = allGroups[index];//[index];
+
+                          return GroupsCard(
+                                        db: db,
+                                              group: group,
+                                              user: user,
+                                            );
+                        },
+                         scrollDirection: Axis.horizontal,
+                      );
+              }
+          }
+        },
+      );
+  
+  Widget buildText(String text) => Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24),
+        ),
+  );
 }

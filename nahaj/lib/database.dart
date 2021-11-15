@@ -139,30 +139,17 @@ class DataBase extends ChangeNotifier {
   }
 
   //get groups of the user
-  Future<List<Groups>> getGroups(String uid, String uName) async {
-    print("inside getGroups");
 
+  Stream<List<Groups>> getGroupsList(String uid, String uName) {
     Map member = {'userName': uName, 'userId': uid};
-    List<Groups> groupsInfo = [];
-    QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
-        .collection('Groups')
+    
+    return firestore.collection('Groups')
         .where('members', arrayContains: member)
-        .get();
-
-    List<QueryDocumentSnapshot> docs = snapshot.docs;
-    for (var doc in docs) {
-      if (doc.data() != null) {
-        var data = doc.data() as Map<String, dynamic>;
-        print("in (getGroups, DB) : groupName ->" + data['groupName']!);
-        List membersInDB = data['members'] ?? [{}];
-        membersInDB.forEach((map) {
-          print("$map:");
-        });
-        Groups g = new Groups.fromJson(data);
-        groupsInfo.add(g);
-      }
-    }
-    return groupsInfo;
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+        .map((document) => Groups.fromJson(document.data()))
+        .toList());
+  
   }
 
   Future<void> createGroup(int code, String groupName, String leaderName,
@@ -321,9 +308,6 @@ class DataBase extends ChangeNotifier {
     
   }
   
-  getMessages(String groupId){
-
-  }
   Stream<List<Chat>> getMessagesList(String groupId) {
     return firestore.collection('Chats').doc(groupId).collection('Messages')
         .orderBy('createdAt', descending: true)
@@ -333,4 +317,6 @@ class DataBase extends ChangeNotifier {
         .toList());
   
   }
+
+  
 }
