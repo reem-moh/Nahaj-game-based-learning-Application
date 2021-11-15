@@ -17,6 +17,7 @@ class User extends ChangeNotifier {
 
 class Groups {
   int goupCode = -1; //Code
+  String groupId = '';
   String groupName = "";
   String leaderId = "";
   String leaderName = "";
@@ -25,6 +26,7 @@ class Groups {
 
   Groups(
       {required this.goupCode,
+      required this.groupId,
       required this.groupName,
       required this.leaderId,
       required this.leaderName,
@@ -33,6 +35,7 @@ class Groups {
 
   Groups.fromJson(Map parsedJson) {
     goupCode = parsedJson['code'] ?? -1;
+    groupId = parsedJson['groupId'] ??'';
     groupName = parsedJson['groupName'] ?? '';
     leaderId = parsedJson['leaderId'] ?? '';
     leaderName = parsedJson['leaderName'] ?? '';
@@ -42,38 +45,13 @@ class Groups {
 
   Map<String, dynamic> toJson() => {
         'code': goupCode,
+        'groupId': groupId,
         'groupName': groupName,
         'leaderId': leaderId,
         'leaderName': leaderName,
         'pathOfImage': pathOfImage,
         'members': members,
       };
-}
-
-class Message {
-  final String userId;
-  final String username;
-  final String message;
-  final String createdAt;
-
-  const Message({
-    required this.userId,
-    required this.username,
-    required this.message,
-    required this.createdAt,
-  });
-}
-
-class Chatroom {
-  final String groupName;
-  final String groupId;
-  List<Message> chat;
-
-  Chatroom({
-    required this.groupName,
-    required this.groupId,
-    required this.chat,
-  });
 }
 
 class ExperimentInfo {

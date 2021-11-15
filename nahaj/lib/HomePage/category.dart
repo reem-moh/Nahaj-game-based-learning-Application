@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/expriment.dart';
 import 'package:sizer/sizer.dart';
-import '../child.dart';
+import '../NahajClasses/child.dart';
 import '../database.dart';
 import 'homePage.dart';
 

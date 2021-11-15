@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 

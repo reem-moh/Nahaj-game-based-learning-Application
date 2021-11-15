@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 
 class AddGroup2 extends StatefulWidget {
   final DataBase db;

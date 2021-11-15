@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:nahaj/HomePage/category.dart';
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 import 'database.dart';
 
 class Experiment extends StatefulWidget {

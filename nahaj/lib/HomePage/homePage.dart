@@ -7,7 +7,7 @@ import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/group.dart';
 import 'package:nahaj/Group/joinGroup.dart';
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'category.dart';

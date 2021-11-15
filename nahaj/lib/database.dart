@@ -5,7 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/chats.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -177,6 +178,7 @@ class DataBase extends ChangeNotifier {
 
     Groups _Obj = new Groups(
         goupCode: code,
+        groupId: groupDocument.id,
         groupName: groupName,
         leaderId: leaderId,
         leaderName: leaderName,
@@ -213,7 +215,7 @@ class DataBase extends ChangeNotifier {
     print(
         "in (joinGroup,DB) groupId: $groupCode, userID: $userId, userName: $userName");
 
-    String groupId = await findGroup(groupCode, userId);
+    String groupId = await findGroup(groupCode);
 
     if (groupId == '-1') {
       return '-1';
@@ -256,7 +258,7 @@ class DataBase extends ChangeNotifier {
     return 'join group success';
   }
 
-  Future<String> findGroup(int groupCode, String uid) async {
+  Future<String> findGroup(int groupCode) async {
     var collection =
         firestore.collection('Groups').where('code', isEqualTo: groupCode);
 
@@ -269,7 +271,7 @@ class DataBase extends ChangeNotifier {
     return querySnapshot.docs[0].reference.id;
   }
 
-  removeUserFromGroup(String groupId, String userId, String userName) {
+ /* removeUserFromGroup(String groupId, String userId, String userName) {
     var docRef = firestore.collection('Groups').doc(groupId);
     List deletedMember = [];
     deletedMember.add({
@@ -279,5 +281,8 @@ class DataBase extends ChangeNotifier {
     docRef.update({
       "members": FieldValue.arrayRemove(deletedMember),
     });
+  }*/
+  getMessages(String groupId){
+
   }
 }

@@ -7,7 +7,7 @@ import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 import 'dart:math';
 
-import 'package:nahaj/child.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 
 class AddGroup extends StatefulWidget {
   final DataBase db;
