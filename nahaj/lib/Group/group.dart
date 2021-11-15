@@ -110,9 +110,16 @@ class ProfileHeaderWidget extends StatelessWidget {
           color: Colors.grey[200],
           ): BoxDecoration(),
 
-        child: type == 1? CircleAvatar(
-              radius: 45,   backgroundImage: 
-              NetworkImage(image,)): Image(image: AssetImage("assets/Group13.png"),),
+        child: type == 1? 
+        CircleAvatar(radius: 45,
+        child: ClipOval(
+                    child: Image.network(
+                            image,
+                            fit: BoxFit.fill,
+                            alignment: Alignment.center,
+                          ),
+             ),
+        ):Image(image: AssetImage("assets/Group13.png"),),
   );
 }
 
@@ -153,6 +160,7 @@ class MessagesWidget extends StatelessWidget {
 
                           return MessageWidget(
                             message: message,
+                            userName: message.username,
                             isMe: message.userId == user.userId,
                           );
                         },
@@ -253,11 +261,13 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
 
 //Styling of chat body
 class MessageWidget extends StatelessWidget {
+  final String userName;
   final Chat message;
   final bool isMe;
 
   const MessageWidget({
     required this.message,
+    required this.userName,
     required this.isMe,
   });
 
@@ -269,18 +279,33 @@ class MessageWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: <Widget>[
-
-        Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.all(16),
-          constraints: BoxConstraints(maxWidth: 140),
-          decoration: BoxDecoration(
-            color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,
-            borderRadius: isMe
-                ? borderRadius.subtract(BorderRadius.only(bottomRight: radius))
-                : borderRadius.subtract(BorderRadius.only(bottomLeft: radius)),
-          ),
-          child: buildMessage(),
+      
+        Column(
+          children: [
+            if(!isMe)
+            Text(
+                              userName,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 2.4.w,
+              ),textAlign: TextAlign.start,),
+            
+          
+            Container(
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.all(16),
+              constraints: BoxConstraints(maxWidth: 140),
+              decoration: BoxDecoration(
+                color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,
+                borderRadius: isMe
+                    ? borderRadius.subtract(BorderRadius.only(bottomRight: radius))
+                    : borderRadius.subtract(BorderRadius.only(bottomLeft: radius)),
+              ),
+              child: buildMessage(),
+            ),
+          ],
         ),
       ],
     );
@@ -290,9 +315,10 @@ class MessageWidget extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
+          
           Text(
             message.message,
-            style: TextStyle(color: isMe ? Colors.black : Colors.white),
+            style: TextStyle(fontFamily: 'Cairo',fontWeight: FontWeight.w600,color: isMe ? Colors.black : Colors.white),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],
