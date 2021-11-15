@@ -291,14 +291,15 @@ class DataBase extends ChangeNotifier {
       return ;
     }
     final chatDocument = firestore.collection('Chats').doc(groupId);
-    List<Map> messages = [];
+    var addChat = Map<String,dynamic>();
+    addChat['groupId'] = groupId;
+    addChat['groupName'] = groupName;
 
-    Message mssg = new Message(groupId: groupId,groupName: groupName, messages: messages);
-
+  
     chatDocument
-        .set(mssg.toJson())
-        .then((value) => print("Group created"))
-        .catchError((error) => print("Failed to create group: $error"));
+        .set(addChat)
+        .then((value) => print("Groupchat created"))
+        .catchError((error) => print("Failed to create groupchat: $error"));
   }
   
   Future uploadMessage(String groupId,String userId,String userName, String message) async {
@@ -307,72 +308,29 @@ class DataBase extends ChangeNotifier {
       return ;
     }
 
-    var refMessages = firestore.collection('Chats').doc(groupId);
+    var refMessages = firestore.collection('Chats').doc(groupId).collection('Messages').doc();
     print('docRef: $refMessages');
 
     Chat c= new Chat(userId: userId, username: userName, message: message, createdAt: DateTime.now());
     List<Map> chattt = [c.toJson()];
 
-    refMessages.update({
-     "messages":  FieldValue.arrayUnion(chattt)
-    });
+    refMessages
+        .set(c.toJson())
+        .then((value) => print("Groupchat created"))
+        .catchError((error) => print("Failed to create groupchat: $error"));
     
   }
   
-  
-  
-  
-  
-  void /*Stream<Message>*/ getChat(int groupCode,String groupId,String groupName) {
-  
-    //return retriveMessages(groupCode, groupId,groupName);
-  }
-
-  /*Stream<Message> retriveMessages(int goupCode,String groupId,String groupName) =>
-        FirebaseFirestore
-        .instance
-        .collection('Chats/$groupId')
-        .orderBy('createdAt', descending: true)
-        .snapshots().transform(Utils.transformer(Chat.fromJson) as StreamTransformer<QuerySnapshot<Map<String, dynamic>>, Message>);
-  *//*{
-
-    var snapshot = FirebaseFirestore
-        .instance
-        .collection('Chats/$groupId')
-        .orderBy('createdAt', descending: true)
-        .snapshots().transform(Utils.transformer(Chat.fromJson));
-        //.get() as QuerySnapshot<Map<String, dynamic>>;
-
-    List chats = [{}];
-    
-    List<QueryDocumentSnapshot> docs = snapshot.docs;
-    for (var doc in docs) {
-      if (doc.data() != null) {
-        var data = doc.data() as Map<String, dynamic>;
-        print("in (getGroups, DB) : groupName ->" + data['groupName']!);
-        chats = data['messages'] ?? [{}];
-          chats.forEach((map) {
-            print("$map:");
-          });
-        Chat c = new Chat.fromJson(data['messages']);
-        chats.add(c.toJson());
-      }
-    }
-
-    return Message(groupId: groupId,messages:chats);
-  }*/
-
   getMessages(String groupId){
 
   }
-  /*static Stream<List<Message>> getMessages(String groupId) {
-    Message m = Message.fromJson(); 
-    Stream<QuerySnapshot<Map<String, dynamic>>> mssgfirestore
-            .collection('Chats')
-            .doc(groupId)
-            .collection('messages')
-            .orderBy('createdAt', descending: true)
-            .snapshots();
-
-  }*/
+  Stream<List<Chat>> getMessagesList(String groupId) {
+    return firestore.collection('Chats').doc(groupId).collection('Messages')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+        .map((document) => Chat.fromJson(document.data()))
+        .toList());
+  
+  }
 }

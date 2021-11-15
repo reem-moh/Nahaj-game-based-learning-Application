@@ -1,30 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-class Message {
-  String groupId = '';
-  String groupName= '';
-  List messages =[{}]; //chat
-
-  Message({
-    required this.groupId,
-    required this.groupName,
-    required this.messages,
-  });
-
-  Message.fromJson(Map<String, dynamic> parsedJson){ 
-        groupId = parsedJson['groupId'] ?? '';
-        groupName = parsedJson['groupName'] ?? '';
-        messages = parsedJson['messages'] ?? [{}];
-   }
-  
-   Map<String, dynamic> toJson() =>
-  { 'groupId': groupId,
-    'groupName': groupName,
-    'messages': messages,
-  };
-
-
-}
 
 class Chat {
   String userId = '';
@@ -43,7 +18,7 @@ class Chat {
         userId = parsedJson['userId']?? "";
         username = parsedJson['username'] ??"";
         message = parsedJson['message'] ?? '';
-        createdAt = parsedJson['createdAt'].toUtc();
+        //createdAt = parsedJson['createdAt'].toUtc();
   }
   
   Map<String, dynamic> toJson() =>

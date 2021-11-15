@@ -38,7 +38,7 @@ class _Group extends State<Group> {
                       topRight: Radius.circular(25),
                     ),
                   ),
-                  child: Container(),//MessagesWidget(group: widget.group, user: widget.user,db: widget.db),
+                  child: MessagesWidget(group: widget.group, user: widget.user,db: widget.db),
                 ),
               ),
               NewMessageWidget(user: widget.user, db: widget.db, groupId: widget.group.groupId)
@@ -131,15 +131,15 @@ class MessagesWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
- /* Widget build(BuildContext context) => StreamBuilder<Message>(
-        stream: db.getChat(group.goupCode,group.groupId,group.groupName),
+ Widget build(BuildContext context) => StreamBuilder<List<Chat>>(
+        stream: db.getMessagesList(group.groupId),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
-                return buildText('Something Went Wrong Try later');
+                return buildText('Something Went Wrong Try later ${snapshot.hasError}');
               } else {
                 final allMessages = snapshot.data;
                 return allMessages == null
@@ -147,9 +147,9 @@ class MessagesWidget extends StatelessWidget {
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
-                        itemCount: allMessages.messages.length,
+                        itemCount: allMessages.length,
                         itemBuilder: (context, index) {
-                          final message = allMessages.messages[index];//[index];
+                          final message = allMessages[index];//[index];
 
                           return MessageWidget(
                             message: message,
@@ -161,19 +161,13 @@ class MessagesWidget extends StatelessWidget {
           }
         },
       );
-  */
+  
   Widget buildText(String text) => Center(
         child: Text(
           text,
           style: TextStyle(fontSize: 24),
         ),
       );
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
 }
 
 
@@ -193,6 +187,7 @@ class NewMessageWidget extends StatefulWidget {
   @override
   _NewMessageWidgetState createState() => _NewMessageWidgetState();
 }
+
 class _NewMessageWidgetState extends State<NewMessageWidget> {
   final _controller = TextEditingController();
   String message = '';
@@ -274,9 +269,7 @@ class MessageWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: <Widget>[
-        if (!isMe)
-          /*CircleAvatar(
-              radius: 16, backgroundImage: NetworkImage(message.urlAvatar)),*/
+
         Container(
           padding: EdgeInsets.all(16),
           margin: EdgeInsets.all(16),
@@ -303,5 +296,5 @@ class MessageWidget extends StatelessWidget {
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],
-      );
+  );
 }
