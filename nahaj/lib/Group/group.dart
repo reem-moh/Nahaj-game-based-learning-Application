@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nahaj/NahajClasses/Chats.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/NahajClasses/chats.dart';
 import 'package:sizer/sizer.dart';
 
 class Group extends StatefulWidget {
@@ -38,7 +38,7 @@ class _Group extends State<Group> {
                       topRight: Radius.circular(25),
                     ),
                   ),
-                  child: MessagesWidget(groupId: widget.group.groupId, user: widget.user,db: widget.db),
+                  child: Container(),//MessagesWidget(group: widget.group, user: widget.user,db: widget.db),
                 ),
               ),
               NewMessageWidget(user: widget.user, db: widget.db, groupId: widget.group.groupId)
@@ -118,21 +118,21 @@ class ProfileHeaderWidget extends StatelessWidget {
 
 //read messages form db
 class MessagesWidget extends StatelessWidget {
-  final String groupId;
+  final Groups group;
   final User user;
   final DataBase db;
   //final Groups group;
 
   const MessagesWidget({
-    required this.groupId,
+    required this.group,
     required this.user,
     required this.db,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => StreamBuilder<List<Message>>(
-        stream: db.getMessages(groupId),
+ /* Widget build(BuildContext context) => StreamBuilder<Message>(
+        stream: db.getChat(group.goupCode,group.groupId,group.groupName),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -141,18 +141,18 @@ class MessagesWidget extends StatelessWidget {
               if (snapshot.hasError) {
                 return buildText('Something Went Wrong Try later');
               } else {
-                final allMessages = new Chat(userId: 'userId', username: 'username', message: 'message', createdAt: DateTime.now());//new C{'userId': 'userId', 'username': 'username', 'message': 'message', 'createdAt': new DateTime.now()};//snapshot.data;
-                return /*allMessages.isEmpty
+                final allMessages = snapshot.data;
+                return allMessages == null
                     ? buildText('Say Hi..')
-                    : */ListView.builder(
+                    : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
-                        itemCount: 1,//allMessages.length,
+                        itemCount: allMessages.messages.length,
                         itemBuilder: (context, index) {
-                          final message = allMessages;//[index];
+                          final message = allMessages.messages[index];//[index];
 
                           return MessageWidget(
-                            message: allMessages,
+                            message: message,
                             isMe: message.userId == user.userId,
                           );
                         },
@@ -161,13 +161,19 @@ class MessagesWidget extends StatelessWidget {
           }
         },
       );
-
+  */
   Widget buildText(String text) => Center(
         child: Text(
           text,
           style: TextStyle(fontSize: 24),
         ),
       );
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
 
 
@@ -195,9 +201,8 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
     // down the keyboard
     FocusScope.of(context).unfocus();
 
-    //await widget.db.uploadMessage(widget.groupId,widget.user.userId,widget.user.username, message)
-    //.then((value) => print("added success"));
-
+    await widget.db.uploadMessage(widget.groupId,widget.user.userId,widget.user.username, message)
+    .then((value) => print("added success"));
     _controller.clear();
   }
 
