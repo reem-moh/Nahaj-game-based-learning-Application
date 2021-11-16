@@ -50,6 +50,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     tappedIndex = 0;
 
     _getInfoFromSession();
+
+    widget.db.getExperiments().then((value) => experiments = value);
   }
 
   @override

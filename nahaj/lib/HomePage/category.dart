@@ -7,6 +7,8 @@ import '../NahajClasses/child.dart';
 import '../database.dart';
 import 'homePage.dart';
 
+List<ExperimentInfo> experiments = [];
+
 class Category extends StatefulWidget {
   final DataBase db;
   final String categoryTitle;
@@ -21,17 +23,11 @@ class Category extends StatefulWidget {
 }
 
 class _Category extends State<Category> {
-  List<ExperimentInfo> experiments = [
-    ExperimentInfo(
-        name: 'تجربة البركان',
-        category: "الكيمياء",
-        info: 'تجربة كيميائية توضع طريقة التفاعل الكيميائي',
-        pathOfImage: "",
-        totalScore: 15,
-        experimentScore: 7,
-        questions: [],
-        userScore: 2)
-  ];
+  @override
+  void initState() {
+    super.initState();
+    //print(experiments.first.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +60,6 @@ class _Category extends State<Category> {
                       category: widget.categoryTitle,
                       db: widget.db,
                       exp: experiments.elementAt(i),
-                      experiments: experiments,
                     );
                   },
                   scrollDirection: Axis.horizontal,
@@ -96,25 +91,15 @@ class _Category extends State<Category> {
           ),
           //Category
           Container(
-            padding: EdgeInsets.only(top: 3.5.w),
+            padding: EdgeInsets.only(top: 8.5.w),
             alignment: Alignment.topCenter,
-            child: CategoryCard(
-              cardColor: widget.categoryTitle == 'الكيمياء'
-                  ? Color.fromARGB(255, 223, 221, 223)
-                  : widget.categoryTitle == 'النباتات'
-                      ? Color.fromARGB(255, 202, 203, 203)
-                      : Color.fromARGB(255, 230, 230, 230),
-              title: widget.categoryTitle,
-              image: widget.categoryTitle == 'الكيمياء'
-                  ? 'assets/chemistry.gif'
-                  : widget.categoryTitle == 'النباتات'
-                      ? 'assets/plants.gif'
-                      : 'assets/animals.png',
-              size1: 23.0,
-              size2: 15.0,
-              size3: 20.0,
-              fontSize: 2,
-              db: widget.db,
+            child: Text(
+              widget.categoryTitle,
+              style: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 5.w,
+                  color: Color.fromARGB(255, 114, 78, 140)),
             ),
           ),
         ],
@@ -127,12 +112,11 @@ class ExperimentCard extends StatefulWidget {
   final String category;
   final DataBase db;
   final ExperimentInfo exp;
-  final List<ExperimentInfo> experiments;
-  const ExperimentCard(
-      {required this.category,
-      required this.db,
-      required this.exp,
-      required this.experiments});
+  const ExperimentCard({
+    required this.category,
+    required this.db,
+    required this.exp,
+  });
   @override
   State<ExperimentCard> createState() => _ExperimentCardState();
 }
@@ -149,10 +133,10 @@ class _ExperimentCardState extends State<ExperimentCard> {
                     category: widget.category,
                     db: widget.db,
                     exp: widget.exp,
-                    experiments: widget.experiments,
                   )),
         );
       },
+      //white container
       child: Container(
         margin: EdgeInsets.only(top: 0, bottom: 10, left: 20, right: 10),
         width: MediaQuery.of(context).size.width / 3.4,
@@ -170,50 +154,54 @@ class _ExperimentCardState extends State<ExperimentCard> {
           ],
         ),
         child: Stack(children: [
+          //image container
           Container(
-            //margin: EdgeInsets.only(left: 2.0.h),
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width / 3.4,
-            height: MediaQuery.of(context).size.height / 3.8,
+            alignment: Alignment.topCenter,
+            width: (MediaQuery.of(context).size.width / 3.4).h,
+            height: (MediaQuery.of(context).size.height / 3.8).w,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 230, 230, 230),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            child: Image.asset(
-              "assets/VolcanoExperimebt.png",
-              width: MediaQuery.of(context).size.width / 4,
+            child: Image.network(
+              widget.exp.pathOfImage,
+              width: 200.0.h,
             ),
           ),
+          //info container
           Container(
-            width: MediaQuery.of(context).size.width / 3.4,
-            height: MediaQuery.of(context).size.height / 9,
+            width: (MediaQuery.of(context).size.width / 3.4).h,
+            height: (MediaQuery.of(context).size.height / 9).w,
             margin: EdgeInsets.only(top: 25.0.w),
             padding: EdgeInsets.only(top: 1.0.w, left: 1.0.h, right: 1.0.h),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             child: Column(
               children: [
+                //experiment name and score stars
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    //stars
+                    ScoreStars(widget.exp.userScore, widget.exp.totalScore),
+                    //name
                     Text(
                       widget.exp.name,
                       style: TextStyle(
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w600,
                           fontSize: 2.2.w,
-                          color: Color.fromARGB(170, 0, 0, 0)),
+                          color: Color.fromARGB(255, 114, 78, 140)),
                     ),
                   ],
                 ),
                 SizedBox(
                   height: 1.6.w,
                 ),
+                //experiment info
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -234,5 +222,79 @@ class _ExperimentCardState extends State<ExperimentCard> {
         ]),
       ),
     );
+  }
+}
+
+// ignore: must_be_immutable
+class ScoreStars extends StatelessWidget {
+  var userScore, totalScore;
+  String star1 = 'assets/EmptyRatingStar.png';
+  String star2 = 'assets/EmptyRatingStar.png';
+  String star3 = 'assets/EmptyRatingStar.png';
+
+  ScoreStars(us, ts) {
+    userScore = us;
+    totalScore = ts;
+    setStars();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(
+            star1,
+            width: 3.h,
+            height: 3.w,
+          ),
+          Image.asset(
+            star2,
+            width: 3.h,
+            height: 3.w,
+          ),
+          Image.asset(
+            star3,
+            width: 3.h,
+            height: 3.w,
+          ),
+        ],
+      ),
+    );
+  }
+
+  setStars() {
+    var result = userScore * 3 / totalScore;
+//FullRatingStar
+    if (result == 0) {
+      star1 = 'assets/EmptyRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 0 && result < 1) {
+      star1 = 'assets/HalfRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result == 1) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 1 && result < 2) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/HalfRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result == 2) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 2 && result < 3) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/HalfRatingStar.png';
+    } else if (result == 3) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/FullRatingStar.png';
+    }
   }
 }

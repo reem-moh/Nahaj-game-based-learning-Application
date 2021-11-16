@@ -8,13 +8,8 @@ class Experiment extends StatefulWidget {
   final String category;
   final DataBase db;
   final ExperimentInfo exp;
-  final List<ExperimentInfo> experiments;
   const Experiment(
-      {Key? key,
-      required this.category,
-      required this.db,
-      required this.exp,
-      required this.experiments})
+      {Key? key, required this.category, required this.db, required this.exp})
       : super(key: key);
 
   @override

@@ -55,6 +55,7 @@ class Groups {
 }
 
 class ExperimentInfo {
+  String id = '';
   String name = '';
   String category = '';
   String info = '';

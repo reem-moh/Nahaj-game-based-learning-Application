@@ -11,15 +11,18 @@ class Group extends StatefulWidget {
   final Groups group;
   final User user;
   final DataBase db;
-  Group({Key? key, required this.db, required this.group, required this.user,})
-      : super(key: key);
+  Group({
+    Key? key,
+    required this.db,
+    required this.group,
+    required this.user,
+  }) : super(key: key);
 
   @override
   _Group createState() => _Group();
 }
 
 class _Group extends State<Group> {
-
   @override
   Widget build(BuildContext context) => Scaffold(
         extendBodyBehindAppBar: true,
@@ -38,10 +41,14 @@ class _Group extends State<Group> {
                       topRight: Radius.circular(25),
                     ),
                   ),
-                  child: MessagesWidget(group: widget.group, user: widget.user,db: widget.db),
+                  child: MessagesWidget(
+                      group: widget.group, user: widget.user, db: widget.db),
                 ),
               ),
-              NewMessageWidget(user: widget.user, db: widget.db, groupId: widget.group.groupId)
+              NewMessageWidget(
+                  user: widget.user,
+                  db: widget.db,
+                  groupId: widget.group.groupId)
             ],
           ),
         ),
@@ -59,7 +66,7 @@ class ProfileHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 80,
+        height: 84,
         padding: EdgeInsets.all(16).copyWith(left: 0),
         child: Column(
           children: [
@@ -68,31 +75,38 @@ class ProfileHeaderWidget extends StatelessWidget {
               children: [
                 BackButton(color: Colors.blue[600]),
                 Expanded(
-                      child: 
-                      Text(
-                        group.groupName,
-                        textDirection:TextDirection.rtl,
-                        style: TextStyle(
-                          fontSize: 2.4.w,
-                          color: Colors.blue[800],
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                  child: Text(
+                    group.groupName,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      fontSize: 2.4.w,
+                      color: Colors.blue[800],
+                      fontWeight: FontWeight.bold,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    SizedBox(height: 6.2.w ,width: 8.0.h,child: buildIcon(1,AssetImage(''),group.pathOfImage),),
+                    SizedBox(
+                      height: 6.2.w,
+                      width: 8.0.h,
+                      child: buildIcon(1, AssetImage(''), group.pathOfImage),
+                    ),
                     //group image
-                    
-                    SizedBox(width: 4.0.h,child: GestureDetector(
-                      onTap: (){print("hi");},
-                      child: buildIcon(0,AssetImage("assets/Group13.png"),''),
-                    ),),
+
+                    SizedBox(
+                      width: 4.0.h,
+                      child: GestureDetector(
+                        onTap: () {
+                          print("hi");
+                        },
+                        child:
+                            buildIcon(0, AssetImage("assets/Group13.png"), ''),
+                      ),
+                    ),
                     //three dots
-                    
-                    
                   ],
                 ),
                 SizedBox(width: 4),
@@ -102,25 +116,30 @@ class ProfileHeaderWidget extends StatelessWidget {
         ),
       );
 
-  Widget buildIcon(int type,AssetImage assetImage,String image) => Container(
+  Widget buildIcon(int type, AssetImage assetImage, String image) => Container(
         padding: EdgeInsets.all(3),
         height: 40,
-        decoration:type ==1 ?BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.grey[200],
-          ): BoxDecoration(),
-
-        child: type == 1? 
-        CircleAvatar(radius: 45,
-        child: ClipOval(
-                    child: Image.network(
-                            image,
-                            fit: BoxFit.fill,
-                            alignment: Alignment.center,
-                          ),
-             ),
-        ):Image(image: AssetImage("assets/Group13.png"),),
-  );
+        decoration: type == 1
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey[200],
+              )
+            : BoxDecoration(),
+        child: type == 1
+            ? CircleAvatar(
+                radius: 45,
+                child: ClipOval(
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.fill,
+                    alignment: Alignment.center,
+                  ),
+                ),
+              )
+            : Image(
+                image: AssetImage("assets/Group13.png"),
+              ),
+      );
 }
 
 //read messages form db
@@ -138,7 +157,7 @@ class MessagesWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
- Widget build(BuildContext context) => StreamBuilder<List<Chat>>(
+  Widget build(BuildContext context) => StreamBuilder<List<Chat>>(
         stream: db.getMessagesList(group.groupId),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -146,7 +165,8 @@ class MessagesWidget extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
-                return buildText('Something Went Wrong Try later ${snapshot.hasError}');
+                return buildText(
+                    'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
                 final allMessages = snapshot.data;
                 return allMessages == null
@@ -156,7 +176,7 @@ class MessagesWidget extends StatelessWidget {
                         reverse: true,
                         itemCount: allMessages.length,
                         itemBuilder: (context, index) {
-                          final message = allMessages[index];//[index];
+                          final message = allMessages[index]; //[index];
 
                           return MessageWidget(
                             message: message,
@@ -169,7 +189,7 @@ class MessagesWidget extends StatelessWidget {
           }
         },
       );
-  
+
   Widget buildText(String text) => Center(
         child: Text(
           text,
@@ -177,7 +197,6 @@ class MessagesWidget extends StatelessWidget {
         ),
       );
 }
-
 
 //send message tstyle
 class NewMessageWidget extends StatefulWidget {
@@ -204,8 +223,10 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
     // down the keyboard
     FocusScope.of(context).unfocus();
 
-    await widget.db.uploadMessage(widget.groupId,widget.user.userId,widget.user.username, message)
-    .then((value) => print("added success"));
+    await widget.db
+        .uploadMessage(
+            widget.groupId, widget.user.userId, widget.user.username, message)
+        .then((value) => print("added success"));
     _controller.clear();
   }
 
@@ -215,12 +236,11 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
         padding: EdgeInsets.all(8),
         child: Row(
           children: <Widget>[
-
             //text field
             Expanded(
               child: TextField(
                 controller: _controller,
-                textDirection:TextDirection.rtl,
+                textDirection: TextDirection.rtl,
                 textCapitalization: TextCapitalization.sentences,
                 autocorrect: true,
                 enableSuggestions: true,
@@ -279,33 +299,42 @@ class MessageWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: <Widget>[
-      
         Column(
+          mainAxisAlignment:
+              isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          crossAxisAlignment:
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            if(!isMe)
+            if (!isMe)
+              Container(
+                padding: EdgeInsets.only(top: 16),
+                margin: EdgeInsets.only(top: 16, left: 16),
+                child: Text(userName,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 2.w,
+                    ),
+                    textAlign: TextAlign.start,
+                    textDirection: TextDirection.rtl),
+              ),
             Container(
-              padding: EdgeInsets.only(top:16),
-              margin: EdgeInsets.only(top:16),
-              child: Text(
-                                userName,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Cairo',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 2.w,
-                ),textAlign: TextAlign.start,textDirection: TextDirection.rtl),
-            ),
-            
-          
-            Container(
-              padding: isMe? EdgeInsets.all(16):EdgeInsets.only(bottom:16,left: 16,right: 16),
-              margin: isMe? EdgeInsets.all(16):EdgeInsets.only(bottom:16,left: 16,right: 16),
+              padding: isMe
+                  ? EdgeInsets.all(16)
+                  : EdgeInsets.only(bottom: 16, left: 16, right: 16),
+              margin: isMe
+                  ? EdgeInsets.all(16)
+                  : EdgeInsets.only(bottom: 16, left: 16, right: 16),
               constraints: BoxConstraints(maxWidth: 140),
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,
                 borderRadius: isMe
-                    ? borderRadius.subtract(BorderRadius.only(bottomRight: radius))
-                    : borderRadius.subtract(BorderRadius.only(bottomLeft: radius)),
+                    ? borderRadius
+                        .subtract(BorderRadius.only(bottomRight: radius))
+                    : borderRadius
+                        .subtract(BorderRadius.only(bottomLeft: radius)),
               ),
               child: buildMessage(),
             ),
@@ -318,13 +347,17 @@ class MessageWidget extends StatelessWidget {
   Widget buildMessage() => Column(
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        mainAxisAlignment:
+            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: <Widget>[
-          
           Text(
             message.message,
-            style: TextStyle(fontFamily: 'Cairo',fontWeight: FontWeight.w600,color: isMe ? Colors.black : Colors.white),
+            style: TextStyle(
+                fontFamily: 'Cairo',
+                fontWeight: FontWeight.w600,
+                color: isMe ? Colors.black : Colors.white),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
         ],
-  );
+      );
 }

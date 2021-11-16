@@ -142,14 +142,14 @@ class DataBase extends ChangeNotifier {
 
   Stream<List<Groups>> getGroupsList(String uid, String uName) {
     Map member = {'userName': uName, 'userId': uid};
-    
-    return firestore.collection('Groups')
+
+    return firestore
+        .collection('Groups')
         .where('members', arrayContains: member)
         .snapshots()
         .map((snapShot) => snapShot.docs
-        .map((document) => Groups.fromJson(document.data()))
-        .toList());
-  
+            .map((document) => Groups.fromJson(document.data()))
+            .toList());
   }
 
   Future<void> createGroup(int code, String groupName, String leaderName,
@@ -199,7 +199,8 @@ class DataBase extends ChangeNotifier {
     return isFound;
   }
 
-  Future<String> joinGroup(int groupCode, String userId, String userName) async {
+  Future<String> joinGroup(
+      int groupCode, String userId, String userName) async {
     print(
         "in (joinGroup,DB) groupId: $groupCode, userID: $userId, userName: $userName");
 
@@ -259,7 +260,7 @@ class DataBase extends ChangeNotifier {
     return querySnapshot.docs[0].reference.id;
   }
 
- /* removeUserFromGroup(String groupId, String userId, String userName) {
+  /* removeUserFromGroup(String groupId, String userId, String userName) {
     var docRef = firestore.collection('Groups').doc(groupId);
     List deletedMember = [];
     deletedMember.add({
@@ -271,52 +272,77 @@ class DataBase extends ChangeNotifier {
     });
   }*/
 
-                 /* for Chat */
-  void createChat(String groupId, String groupName)  {
+  /* for Chat */
+  void createChat(String groupId, String groupName) {
     //add to group collection
     if (groupId == '-1') {
-      return ;
+      return;
     }
     final chatDocument = firestore.collection('Chats').doc(groupId);
-    var addChat = Map<String,dynamic>();
+    var addChat = Map<String, dynamic>();
     addChat['groupId'] = groupId;
     addChat['groupName'] = groupName;
 
-  
     chatDocument
         .set(addChat)
         .then((value) => print("Groupchat created"))
         .catchError((error) => print("Failed to create groupchat: $error"));
   }
-  
-  Future uploadMessage(String groupId,String userId,String userName, String message) async {
 
+  Future uploadMessage(
+      String groupId, String userId, String userName, String message) async {
     if (groupId == '-1') {
-      return ;
+      return;
     }
 
-    var refMessages = firestore.collection('Chats').doc(groupId).collection('Messages').doc();
+    var refMessages =
+        firestore.collection('Chats').doc(groupId).collection('Messages').doc();
     print('docRef: $refMessages');
 
-    Chat c= new Chat(userId: userId, username: userName, message: message, createdAt: DateTime.now());
+    Chat c = new Chat(
+        userId: userId,
+        username: userName,
+        message: message,
+        createdAt: DateTime.now());
     List<Map> chattt = [c.toJson()];
 
     refMessages
         .set(c.toJson())
         .then((value) => print("Groupchat created"))
         .catchError((error) => print("Failed to create groupchat: $error"));
-    
   }
-  
+
   Stream<List<Chat>> getMessagesList(String groupId) {
-    return firestore.collection('Chats').doc(groupId).collection('Messages')
+    return firestore
+        .collection('Chats')
+        .doc(groupId)
+        .collection('Messages')
         .orderBy('createdAt', descending: true)
         .snapshots()
         .map((snapShot) => snapShot.docs
-        .map((document) => Chat.fromJson(document.data()))
-        .toList());
-  
+            .map((document) => Chat.fromJson(document.data()))
+            .toList());
   }
 
-  
+  Future<List<ExperimentInfo>> getExperiments() async {
+    List<ExperimentInfo> experiments = [];
+    QuerySnapshot querySnapshot =
+        await firestore.collection('Experiments').get();
+
+    // Get data from docs and convert map to List
+    var docs = querySnapshot.docs;
+    for (var doc in docs) {
+      if (doc.data() != null) {
+        var data = doc.data() as Map<String, dynamic>;
+        print("in (getExperiments, DB) : name ->" + data['Name']!);
+
+        ExperimentInfo exp = new ExperimentInfo.fromJson(data);
+        exp.id = doc.id;
+        experiments.add(exp);
+      }
+    }
+
+    print(experiments.isNotEmpty ? experiments.first.category : "empty");
+    return experiments;
+  }
 }
