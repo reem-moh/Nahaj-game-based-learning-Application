@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:nahaj/Profile/profile.dart';
 import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/groupChat.dart';
@@ -227,8 +228,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 trailing: Icon(Icons.person, size: screenHeight * 0.032),
                 onTap: () {
                   setState(() {
-                    //Profile
-                    //widget.db.addUser("reem", "reem", 90);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage(db: widget.db, user: user,)),
+                    );
                     tappedIndex = 1;
                   });
                 },
