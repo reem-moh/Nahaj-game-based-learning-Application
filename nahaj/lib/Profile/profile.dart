@@ -32,36 +32,56 @@ class _ProfilePageState extends State<ProfilePage> {
           ListView(
             physics: BouncingScrollPhysics(),
             children: [
-              ElevatedButton(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 0),
-                  child: Image(
-                    image: AssetImage("assets/PreviosButton.png"),
-                    alignment: Alignment.topLeft,
+              //Back butoon
+              Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white.withOpacity(0),
+                      onPrimary: Colors.white.withOpacity(0),
+                      //minimumSize: Size(30, 40),
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(800.0)),
+                      alignment: Alignment.topLeft,
+                      elevation: 0.0,
+                      
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/PreviosButton.png"),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage(
+                                    db: widget.db,
+                                  )),
+                        );
+                      });
+                    },
                   ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                db: widget.db,
-                              )),
-                    );
-                  });
-                },
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      child: ProfileWidget(
+                        imagePath: user.avatar,
+                        onClicked: () async {},
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              ProfileWidget(
-                imagePath: user.avatar,
-                onClicked: () async {},
-              ),
+
               const SizedBox(height: 24),
+
               buildName(user),
               const SizedBox(height: 24),
-              NumbersWidget(),
-              const SizedBox(height: 48),
+              // NumbersWidget(),
+              // const SizedBox(height: 48),
               buildAbout(user),
+              const SizedBox(height: 24),
+              Center(child: buildUpgradeButton()),
             ],
           ),
         ],
@@ -99,6 +119,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
+      );
+
+  Widget buildUpgradeButton() => ButtonWidget(
+        text: 'حفظ التغييرات',
+        onClicked: () {},
       );
 }
 
@@ -226,5 +251,27 @@ class ProfileWidget extends StatelessWidget {
           color: color,
           child: child,
         ),
+      );
+}
+
+class ButtonWidget extends StatelessWidget {
+  final String text;
+  final VoidCallback onClicked;
+
+  const ButtonWidget({
+    Key? key,
+    required this.text,
+    required this.onClicked,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+          onPrimary: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(text),
+        onPressed: onClicked,
       );
 }

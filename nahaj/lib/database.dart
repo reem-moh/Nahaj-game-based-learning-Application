@@ -141,7 +141,7 @@ class DataBase extends ChangeNotifier {
   //get groups of the user
 
   Stream<List<Groups>> getGroupsList(String uid, String uName) {
-    Map member = {'userName': uName, 'userId': uid};
+    Map member = {'userId': uid};
 
     return firestore
         .collection('Groups')
@@ -160,7 +160,6 @@ class DataBase extends ChangeNotifier {
     List<Map> members = [
       {
         'userId': leaderId,
-        'userName': leaderName,
       }
     ];
 
@@ -220,7 +219,6 @@ class DataBase extends ChangeNotifier {
     List<Map> members = [
       {
         'userId': userId,
-        'userName': userName,
       }
     ];
 

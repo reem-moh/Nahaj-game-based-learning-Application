@@ -719,6 +719,7 @@ class GroupsCard extends StatelessWidget {
               color: Colors.grey[350],
             ),
             child: CircleAvatar(
+              backgroundColor:Colors.white.withOpacity(0),
                 radius: 45,
                 child: ClipOval(
                   child: Image.network(

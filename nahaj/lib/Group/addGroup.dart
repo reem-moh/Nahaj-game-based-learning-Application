@@ -73,45 +73,47 @@ class _AddGroup extends State<AddGroup> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //change the image of group
-                    TextButton(
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(13.0),
-                            //Group Image
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        120.0) //                 <--- border radius here
-                                    ),
-                                border: Border.all(color: Colors.grey)),
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: pathOfImage != null
-                                  ? ClipOval(
-                                      child: Image.file(pathOfImage!,
-                                          fit: BoxFit.cover),
-                                    )
-                                  : ClipOval(
-                                      child: Image.asset("assets/owl1.png",
-                                          fit: BoxFit.cover)),
+                    Expanded(
+                      child: TextButton(
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(13.0),
+                              //Group Image
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(
+                                          120.0) //                 <--- border radius here
+                                      ),
+                                  border: Border.all(color: Colors.grey)),
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: pathOfImage != null
+                                    ? ClipOval(
+                                        child: Image.file(pathOfImage!,
+                                            fit: BoxFit.cover),
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset("assets/owl1.png",
+                                            fit: BoxFit.cover)),
+                              ),
                             ),
-                          ),
-                          //Camera Iamge
-                          ClipRRect(
-                            borderRadius: new BorderRadius.circular(40.0),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 160, right: 120),
-                              child: Image.asset("assets/EditImage.png",
-                                  height: 150, width: 1000),
+                            //Camera Iamge
+                            ClipRRect(
+                              borderRadius: new BorderRadius.circular(40.0),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 160, right: 120),
+                                child: Image.asset("assets/EditImage.png",
+                                    height: 150, width: 1000),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                        onPressed: () {
+                          pickImage();
+                        },
                       ),
-                      onPressed: () {
-                        pickImage();
-                      },
                     ),
                   ],
                 ),
@@ -122,7 +124,7 @@ class _AddGroup extends State<AddGroup> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 0, left: 950),
                   child: Text(
-                    ": الاسم ",
+                    ": الاسم",
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Cairo',
