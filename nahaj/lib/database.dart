@@ -324,13 +324,20 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
-  Future<List<ExperimentInfo>> getExperiments() async {
-    List<ExperimentInfo> experiments = [];
+  Stream<List<ExperimentInfo>> getExperiments(String category) {
+    /*List<ExperimentInfo> experiments = [];
     QuerySnapshot querySnapshot =
-        await firestore.collection('Experiments').get();
+        await */
+    return firestore
+        .collection('Experiments')
+        .where('Category', isEqualTo: category)
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+            .map((document) => ExperimentInfo.fromJson(document.data()))
+            .toList());
 
     // Get data from docs and convert map to List
-    var docs = querySnapshot.docs;
+    /*var docs = querySnapshot.docs;
     for (var doc in docs) {
       if (doc.data() != null) {
         var data = doc.data() as Map<String, dynamic>;
@@ -342,7 +349,7 @@ class DataBase extends ChangeNotifier {
       }
     }
 
-    print(experiments.isNotEmpty ? experiments.first.category : "empty");
-    return experiments;
+    print(experiments.isNotEmpty ? experiments.first.sceneIndex : "empty");
+    return experiments;*/
   }
 }

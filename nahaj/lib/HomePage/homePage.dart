@@ -52,7 +52,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
     _getInfoFromSession();
 
-    widget.db.getExperiments().then((value) => experiments = value);
+    //widget.db.getExperiments().then((value) => experiments = value);
   }
 
   @override
@@ -585,12 +585,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       ),
                                       //list view
                                       Container(
-                                        margin: EdgeInsets.only(
-                                            left: 30.0, right: 30.0),
-                                        height: 18.00.h,
-                                        child: CardsOfGroup(db: widget.db,
-                                              user: user,)
-                                      ),
+                                          margin: EdgeInsets.only(
+                                              left: 30.0, right: 30.0),
+                                          height: 18.00.h,
+                                          child: CardsOfGroup(
+                                            db: widget.db,
+                                            user: user,
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -699,15 +700,12 @@ class GroupsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        
-          print('مجموعة');
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Group(
-                    db: db, group: group, user: user)),
-          );
-   
+        print('مجموعة');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Group(db: db, group: group, user: user)),
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -720,15 +718,15 @@ class GroupsCard extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey[350],
             ),
-            child: 
-            CircleAvatar(radius: 45,
-        child: ClipOval(
-                    child: Image.network(
-                            group.pathOfImage,
-                            fit: BoxFit.fill,
-                            alignment: Alignment.center,
-                          ),
-             )),
+            child: CircleAvatar(
+                radius: 45,
+                child: ClipOval(
+                  child: Image.network(
+                    group.pathOfImage,
+                    fit: BoxFit.fill,
+                    alignment: Alignment.center,
+                  ),
+                )),
           ),
           Container(
             child: Text(
@@ -757,18 +755,17 @@ class CardsOfGroup extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
-
   @override
- Widget build(BuildContext context) => StreamBuilder<List<Groups>>(
-        stream: db.getGroupsList(user.userId,user.username),
+  Widget build(BuildContext context) => StreamBuilder<List<Groups>>(
+        stream: db.getGroupsList(user.userId, user.username),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
-                return buildText('Something Went Wrong Try later ${snapshot.hasError}');
+                return buildText(
+                    'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
                 final allGroups = snapshot.data;
                 return allGroups == null
@@ -778,25 +775,25 @@ class CardsOfGroup extends StatelessWidget {
                         reverse: true,
                         itemCount: allGroups.length,
                         itemBuilder: (context, index) {
-                          final group = allGroups[index];//[index];
+                          final group = allGroups[index]; //[index];
 
                           return GroupsCard(
-                                        db: db,
-                                              group: group,
-                                              user: user,
-                                            );
+                            db: db,
+                            group: group,
+                            user: user,
+                          );
                         },
-                         scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.horizontal,
                       );
               }
           }
         },
       );
-  
+
   Widget buildText(String text) => Center(
         child: Text(
           text,
           style: TextStyle(fontSize: 24),
         ),
-  );
+      );
 }

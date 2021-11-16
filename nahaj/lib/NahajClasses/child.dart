@@ -35,7 +35,7 @@ class Groups {
 
   Groups.fromJson(Map parsedJson) {
     goupCode = parsedJson['code'] ?? -1;
-    groupId = parsedJson['groupId'] ??'';
+    groupId = parsedJson['groupId'] ?? '';
     groupName = parsedJson['groupName'] ?? '';
     leaderId = parsedJson['leaderId'] ?? '';
     leaderName = parsedJson['leaderName'] ?? '';
@@ -56,6 +56,7 @@ class Groups {
 
 class ExperimentInfo {
   String id = '';
+  int sceneIndex = 0;
   String name = '';
   String category = '';
   String info = '';
@@ -78,6 +79,8 @@ class ExperimentInfo {
 
   ExperimentInfo.fromJson(Map parsedJson) {
     name = parsedJson['Name'] ?? '';
+    id = parsedJson['ExpID'] ?? '';
+    sceneIndex = parsedJson['SceneIndex'] ?? 0;
     category = parsedJson['Category'] ?? '';
     info = parsedJson['Info'] ?? '';
     pathOfImage = parsedJson['PathOfImage'] ?? '';
@@ -89,6 +92,7 @@ class ExperimentInfo {
 
   Map<String, dynamic> toJson() => {
         'Name': name,
+        'SceneIndex': sceneIndex,
         'Category': category,
         'Info': info,
         'PathOfImage': pathOfImage,

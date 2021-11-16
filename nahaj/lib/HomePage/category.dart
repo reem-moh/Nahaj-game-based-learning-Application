@@ -47,7 +47,11 @@ class _Category extends State<Category> {
               Container(
                 margin: EdgeInsets.only(left: 30.0, right: 30.0, top: 25),
                 height: MediaQuery.of(context).size.height / 2.5,
-                child: ListView.separated(
+                child: ExperimentsWidget(
+                  category: widget.categoryTitle,
+                  db: widget.db,
+                ),
+                /*ListView.separated(
                   reverse: true,
                   itemCount: experiments.length,
                   separatorBuilder: (BuildContext context, int index) {
@@ -63,7 +67,7 @@ class _Category extends State<Category> {
                     );
                   },
                   scrollDirection: Axis.horizontal,
-                ),
+                ),*/
               ),
             ],
           ),
@@ -106,6 +110,59 @@ class _Category extends State<Category> {
       ),
     );
   }
+}
+
+//Experiments stream builder
+class ExperimentsWidget extends StatelessWidget {
+  final String category;
+  final DataBase db;
+
+  const ExperimentsWidget({
+    required this.db,
+    required this.category,
+  });
+
+  @override
+  Widget build(BuildContext context) => StreamBuilder<List<ExperimentInfo>>(
+        stream: db.getExperiments(category),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError) {
+                return buildText(
+                    'Something Went Wrong Try later ${snapshot.hasError}');
+              } else {
+                final allExperiments = snapshot.data;
+                return allExperiments == null
+                    ? buildText('Say Hi..')
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        reverse: true,
+                        itemCount: allExperiments.length,
+                        itemBuilder: (context, index) {
+                          final exp = allExperiments[index]; //[index];
+
+                          return ExperimentCard(
+                            category: category,
+                            db: db,
+                            exp: exp,
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                      );
+              }
+          }
+        },
+      );
+
+  Widget buildText(String text) => Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24),
+        ),
+      );
 }
 
 class ExperimentCard extends StatefulWidget {
