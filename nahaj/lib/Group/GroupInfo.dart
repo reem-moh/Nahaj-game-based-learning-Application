@@ -44,63 +44,70 @@ class _GroupInfo extends State<GroupInfo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //back button
-              TextButton(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20, right: 1050),
-                  child: Image(
-                    image: AssetImage("assets/PreviosButton.png"),
-                    alignment: Alignment.topLeft,
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                db: widget.db,
-                              )),
-                    );
-                  });
-                },
-              ),
+            
+                  SizedBox(     height: MediaQuery.of(context).size.height * 0.02,),
 
               //image of group
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                 // mainAxisSize: MainAxisSize.max,
+                 // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //change the image of group
-                    Stack(
-                      alignment: Alignment.topCenter,
-                      children: <Widget>[
-                        Container(
-                          margin: const EdgeInsets.all(15.0),
-                          padding: const EdgeInsets.all(13.0),
-                          //Group Image
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                      120.0) //                 <--- border radius here
-                                  ),
-                              border: Border.all(color: Colors.grey)),
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: pathOfImage != null
-                                ? ClipOval(
-                                    child: Image.file(pathOfImage!,
-                                        fit: BoxFit.cover),
-                                  )
-                                : ClipOval(
-                                    child: Image.asset(
-                                        //widget.group.pathOfImage
-                                        "assets/owl1.png",
-                                        fit: BoxFit.cover)),
+
+  Container(   padding: EdgeInsets.all(0).copyWith(right: 450 ,bottom: 40),
+    child: TextButton(
+                  child: Image(
+                      image: AssetImage("assets/PreviosButton.png"),
+                      alignment: Alignment.topCenter
+                      ,
+                    ),
+                  
+                  onPressed: () {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                  db: widget.db,
+                                )),
+                      );
+                    });
+                  },
+                ),
+  ),
+
+
+                    Container(     alignment: Alignment.topCenter,
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: <Widget>[
+                          Container(
+                            margin: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(13.0),
+                            //Group Image
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        120.0) //                 <--- border radius here
+                                    ),
+                                border: Border.all(color: Colors.grey)),
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: pathOfImage != null
+                                  ? ClipOval(
+                                      child: Image.file(pathOfImage!,
+                                          fit: BoxFit.cover),
+                                    )
+                                  : ClipOval(
+                                      child: Image.asset(
+                                          //widget.group.pathOfImage
+                                          "assets/owl1.png",
+                                          fit: BoxFit.cover)),
+                            ),
                           ),
-                        ),
-                        //Camera Iamge
-                      ],
+                          //Camera Iamge
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -119,6 +126,9 @@ class _GroupInfo extends State<GroupInfo> {
                   ),
                 ),
               ),
+
+                                SizedBox(     height: MediaQuery.of(context).size.height * 0.02,),
+
 
 //2
                //cards
@@ -146,7 +156,7 @@ class _GroupInfo extends State<GroupInfo> {
                       user: widget.user,
                     ),
                   )),
-                  SizedBox(     height: MediaQuery.of(context).size.height * 0.03,),
+                  SizedBox(     height: MediaQuery.of(context).size.height * 0.05,),
 
 //3
                 // delete group
@@ -301,10 +311,54 @@ class CardsOfGroup extends StatelessWidget {
       ),
     ],
   ),
-                      child: MembersCard(
-                        db: db,
-                        group: group,
-                        user: user,
+                      child: InkWell(
+                        onTap: () {
+    
+      },
+                        child: Row(
+                          children: [
+                      
+                      
+                                Container(     alignment: Alignment.topCenter,
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(13.0),
+                              //Group Image
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(
+                                          120.0) //                 <--- border radius here
+                                      ),
+                                  border: Border.all(color: Colors.grey)),
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: ClipOval(
+                                        child: Image.asset(
+                                            //widget.group.pathOfImage
+                                            "assets/owl1.png",
+                                            fit: BoxFit.cover)),
+                              ),
+                            ),
+                            //Camera Iamge
+                          ],
+                        ),
+                                          ),
+                         
+                            MembersCard(
+                              db: db,
+                              group: group,
+                              user: user,
+                            ),
+                      
+                             
+                           
+                           
+                           
+                           // Image.asset("assets/owl1.png")
+                          ],
+                        ),
                       ),
                     );
                   },

@@ -43,12 +43,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Signin(db: this.database,)
+        home: //Signin(db: this.database,)
         
         
-         /*GroupInfo(
+         GroupInfo(
           //groupName: 'مجموعة',
-          db: this.database, group:  Groups(goupCode: 2, groupId: "2", groupName: "groupName", leaderId: "leaderId", leaderName: "leaderName", pathOfImage: "pathOfImage", members: [{}]), user: new User(userId: "userId", username: "ريم", email: "email", avatar: "avatar", level: 1),) */
+          db: this.database, group:  Groups(goupCode: 2, groupId: "2", groupName: "groupName", leaderId: "leaderId", leaderName: "leaderName", pathOfImage: "pathOfImage", members: [{}]), user: new User(userId: "userId", username: "ريم", email: "email", avatar: "avatar", level: 1),) 
         /*AddGroup2(
           db: this.database,
         ),*/
