@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:nahaj/Group/GroupInfo.dart';
+import 'package:nahaj/HomePage/homePage.dart';
+import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/SignPages/Signin.dart';
 //import 'package:nahaj/Group/addGroup.dart';
 //import 'package:nahaj/Group/group.dart';
@@ -40,10 +43,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Signin(
+        home: Signin(db: this.database,)
+        
+        
+         /*GroupInfo(
           //groupName: 'مجموعة',
-          db: this.database,
-        ),
+          db: this.database, group:  Groups(goupCode: 2, groupId: "2", groupName: "groupName", leaderId: "leaderId", leaderName: "leaderName", pathOfImage: "pathOfImage", members: [{}]), user: new User(userId: "userId", username: "ريم", email: "email", avatar: "avatar", level: 1),) */
         /*AddGroup2(
           db: this.database,
         ),*/
