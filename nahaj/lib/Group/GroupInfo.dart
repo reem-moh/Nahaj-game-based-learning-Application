@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
+
+import 'addGroup.dart';
 
 class GroupInfo extends StatefulWidget {
   final DataBase db;
@@ -311,11 +315,12 @@ class CardsOfGroup extends StatelessWidget {
       ),
     ],
   ),
-                      child: InkWell(
-                        onTap: () {
-    
-      },
-                        child: Row(
+                        child:    FocusedMenuHolder(
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                right: 9.00.h,
+                                              ),
+                                              child:  Row(
                           children: [
                       
                       
@@ -345,22 +350,63 @@ class CardsOfGroup extends StatelessWidget {
                           ],
                         ),
                                           ),
-                         
-                            MembersCard(
+
+
+                                          MembersCard(
                               db: db,
                               group: group,
                               user: user,
                             ),
                       
+
+                    
+                         
+
+
+
+
+
+
+                          
+
+
+
+
+                         
+                         
                              
-                           
                            
                            
                            // Image.asset("assets/owl1.png")
                           ],
-                        ),
-                      ),
+                        ), 
+                                            ),
+                                            onPressed: () {},
+                                            openWithTap: true,
+                                            menuWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.30,
+                                            menuItems: [
+                                           
+                                              FocusedMenuItem(
+                                                  title: Text(
+                                                    "حذف العضو",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                      fontSize: 1.5.w,
+                                                    ),
+                                                  ),
+                                                  trailingIcon:
+                                                      Icon(Icons.group),
+                                                  onPressed: () {
+                                                 
+                                                  }),
+                                            ],
+                                          ),
+                      
                     );
+                    
                   },
                   scrollDirection: Axis.vertical,
                 );
