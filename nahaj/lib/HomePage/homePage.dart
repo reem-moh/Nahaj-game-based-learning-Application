@@ -230,7 +230,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   setState(() {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfilePage(db: widget.db, user: user,)),
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                                db: widget.db,
+                                user: user,
+                              )),
                     );
                     tappedIndex = 1;
                   });
@@ -712,22 +716,19 @@ class GroupsCard extends StatelessWidget {
         children: [
           Container(
             width: 13.00.h,
-            height: 13.00.w,
+            height: 13.00.h,
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.grey[350],
             ),
-            child: CircleAvatar(
-              backgroundColor:Colors.white.withOpacity(0),
-                radius: 45,
-                child: ClipOval(
-                  child: Image.network(
-                    group.pathOfImage,
-                    fit: BoxFit.fill,
-                    alignment: Alignment.center,
-                  ),
-                )),
+            child: ClipOval(
+              child: Image.network(
+                group.pathOfImage,
+                fit: BoxFit.fill,
+                alignment: Alignment.center,
+              ),
+            ),
           ),
           Container(
             child: Text(
@@ -778,10 +779,13 @@ class CardsOfGroup extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final group = allGroups[index]; //[index];
 
-                          return GroupsCard(
-                            db: db,
-                            group: group,
-                            user: user,
+                          return Padding(
+                            padding: const EdgeInsets.only(left:30.0),
+                            child: GroupsCard(
+                              db: db,
+                              group: group,
+                              user: user,
+                            ),
                           );
                         },
                         scrollDirection: Axis.horizontal,

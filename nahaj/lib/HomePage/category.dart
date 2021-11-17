@@ -44,32 +44,30 @@ class _Category extends State<Category> {
                       fit: BoxFit.fill,
                       image: AssetImage("assets/CategoryBackground.png"))),
               //list view
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(left: 30.0, right: 30.0, top: 25),
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: ExperimentsWidget(
-                    category: widget.categoryTitle,
-                    db: widget.db,
-                  ),
-                  /*ListView.separated(
-                    reverse: true,
-                    itemCount: experiments.length,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        width: 25,
-                      );
-                    },
-                    itemBuilder: (_, i) {
-                      return ExperimentCard(
-                        category: widget.categoryTitle,
-                        db: widget.db,
-                        exp: experiments.elementAt(i),
-                      );
-                    },
-                    scrollDirection: Axis.horizontal,
-                  ),*/
+              Container(
+                margin: EdgeInsets.only(left: 30.0, right: 30.0, top: 25),
+                height: MediaQuery.of(context).size.height / 2.5,
+                child: ExperimentsWidget(
+                  category: widget.categoryTitle,
+                  db: widget.db,
                 ),
+                /*ListView.separated(
+                  reverse: true,
+                  itemCount: experiments.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: 25,
+                    );
+                  },
+                  itemBuilder: (_, i) {
+                    return ExperimentCard(
+                      category: widget.categoryTitle,
+                      db: widget.db,
+                      exp: experiments.elementAt(i),
+                    );
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),*/
               ),
             ],
           ),
@@ -261,18 +259,21 @@ class _ExperimentCardState extends State<ExperimentCard> {
                   height: 1.6.w,
                 ),
                 //experiment info
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Wrap(
+                  
+                  //mainAxisAlignment: MainAxisAlignment.end,
+                  spacing: 8.0, // gap between adjacent chips
+                  runSpacing: 4.0, // gap between lines
+                   direction: Axis.vertical, // main axis (rows or columns)
                   children: [
-                    Expanded(
-                      child: Text(
-                        widget.exp.info,
-                        style: TextStyle(
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 1.5.w,
-                          color: Color.fromARGB(170, 0, 0, 0),
-                        ),
+                    Text(
+                      widget.exp.info,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 1.5.w,
+                        color: Color.fromARGB(170, 0, 0, 0),
                       ),
                     ),
                   ],
