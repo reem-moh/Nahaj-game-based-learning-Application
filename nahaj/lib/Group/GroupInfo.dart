@@ -187,9 +187,9 @@ class _GroupInfo extends State<GroupInfo> {
 
   Widget buildUpgradeButton() => ButtonWidget(
   
-   text: '',
-  isleader: '',
-  userId
+    text: '',
+  isleader: '', //check if the userId ==leaderId
+  
     onClicked: () { 
 
     if( isleader == true){
