@@ -178,9 +178,11 @@ class _GroupInfo extends State<GroupInfo> {
   }
 
   Widget buildUpgradeButton() => ButtonWidget(
-        text: 'حذف القروب',
+        text: widget.group.leaderId == widget.user.userId ? 'الخروج من المجموعة': 'حذف المجموعة',
         onClicked: () {
-          //delet Group
+          widget.group.leaderId == widget.user.userId ? widget.db.removeGroup(widget.group.groupId) :
+          widget.db.removeUserFromGroup(widget.group.groupId,widget.user.userId);
+          //move to homePage with alarm you delete the group succusfully!
         },
       );
   List getMembers(List members) {
@@ -195,6 +197,7 @@ class _GroupInfo extends State<GroupInfo> {
       });
     });
     print("get members in group info list: $users member: $members");
+    print("userId in user: ${widget.user.userId}\n leaderId in group: ${widget.group.leaderId}");
     return users;
   }
 }

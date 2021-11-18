@@ -272,17 +272,28 @@ class DataBase extends ChangeNotifier {
     return querySnapshot.docs[0].reference.id;
   }
 
-  /* removeUserFromGroup(String groupId, String userId, String userName) {
+  removeUserFromGroup(String groupId, String userId) {
     var docRef = firestore.collection('Groups').doc(groupId);
     List deletedMember = [];
     deletedMember.add({
       "userId": userId,
-      "userName": userName,
     });
     docRef.update({
       "members": FieldValue.arrayRemove(deletedMember),
     });
-  }*/
+  }
+
+  removeGroup(String groupId) {
+    //remove from collection chat
+    firestore.collection('Chats').doc(groupId).delete() // <-- Delete
+    .then((_) => print('Deleted from chat collection'))
+    .catchError((error) => print('Delete failed: $error'));
+
+    //remove from collection Group
+    firestore.collection('Groups').doc(groupId).delete() // <-- Delete
+    .then((_) => print('Deleted from group collection'))
+    .catchError((error) => print('Delete failed: $error'));
+  }
 
   /* for Chat */
   void createChat(String groupId, String groupName) {
@@ -399,5 +410,7 @@ class DataBase extends ChangeNotifier {
     print("inside getMembers: \n members list after fetch: ${x}");
     return x;
   }
+
+
 
 }
