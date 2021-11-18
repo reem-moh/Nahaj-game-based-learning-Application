@@ -136,7 +136,7 @@ class ExperimentsWidget extends StatelessWidget {
               } else {
                 final allExperiments = snapshot.data;
                 return allExperiments == null
-                    ? buildText('Say Hi..')
+                    ? buildText('لا توجد تجارب')
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
@@ -260,11 +260,10 @@ class _ExperimentCardState extends State<ExperimentCard> {
                 ),
                 //experiment info
                 Wrap(
-                  
                   //mainAxisAlignment: MainAxisAlignment.end,
                   spacing: 8.0, // gap between adjacent chips
                   runSpacing: 4.0, // gap between lines
-                   direction: Axis.vertical, // main axis (rows or columns)
+                  direction: Axis.vertical, // main axis (rows or columns)
                   children: [
                     Text(
                       widget.exp.info,

@@ -64,7 +64,6 @@ class ExperimentInfo {
   int totalScore = 0;
   int userScore = 0;
   int experimentScore = 0;
-  List questions = [{}];
 
   ExperimentInfo({
     required this.name,
@@ -74,7 +73,6 @@ class ExperimentInfo {
     required this.totalScore,
     required this.userScore,
     required this.experimentScore,
-    required this.questions,
   });
 
   ExperimentInfo.fromJson(Map parsedJson) {
@@ -87,7 +85,6 @@ class ExperimentInfo {
     totalScore = parsedJson['TotlaScore'] ?? 0;
     userScore = parsedJson['UserScore'] ?? 0;
     experimentScore = parsedJson['ExperimentScore'] ?? 0;
-    questions = [{}];
   }
 
   Map<String, dynamic> toJson() => {
@@ -103,15 +100,45 @@ class ExperimentInfo {
 }
 
 class Question {
-  String question;
-  List<String> answers;
-  String correctAnswer;
-  double score;
+  String question = '';
+  //String id = '';
+  String expID = '';
+  List answers = [{}];
+  String correctAnswer = '';
+  int score = 0;
 
   Question({
+    //required this.id,
+    required this.expID,
     required this.question,
     required this.answers,
     required this.correctAnswer,
     required this.score,
   });
+
+  Question.fromJson(Map parsedJson) {
+    question = parsedJson['Question'] ?? '';
+    //id = parsedJson['QID'] ?? '';
+    expID = parsedJson['ExpID'] ?? '';
+    correctAnswer = parsedJson['CorrectAnswer'] ?? '';
+    score = parsedJson['Score'] ?? 0;
+    answers = [
+      parsedJson['Answer1'] ?? '',
+      parsedJson['Answer2'] ?? '',
+      parsedJson['Answer3'] ?? '',
+      parsedJson['Answer4'] ?? ''
+    ];
+  }
+
+  Map<String, dynamic> toJson() => {
+        'Question': question,
+        //'QID': id,
+        'ExpID': expID,
+        'CorrectAnswer': correctAnswer,
+        'Score': score,
+        'Answer1': answers[0],
+        'Answer2': answers[1],
+        'Answer3': answers[2],
+        'Answer4': answers[3],
+      };
 }

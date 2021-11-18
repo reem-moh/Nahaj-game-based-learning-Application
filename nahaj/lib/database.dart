@@ -336,9 +336,6 @@ class DataBase extends ChangeNotifier {
   }
 
   Stream<List<ExperimentInfo>> getExperiments(String category) {
-    /*List<ExperimentInfo> experiments = [];
-    QuerySnapshot querySnapshot =
-        await */
     return firestore
         .collection('Experiments')
         .where('Category', isEqualTo: category)
@@ -346,21 +343,46 @@ class DataBase extends ChangeNotifier {
         .map((snapShot) => snapShot.docs
             .map((document) => ExperimentInfo.fromJson(document.data()))
             .toList());
+  }
 
-    // Get data from docs and convert map to List
-    /*var docs = querySnapshot.docs;
-    for (var doc in docs) {
-      if (doc.data() != null) {
-        var data = doc.data() as Map<String, dynamic>;
-        print("in (getExperiments, DB) : name ->" + data['Name']!);
+  Stream<List<Question>> getQuestions(String expID) {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+            .map((document) => Question.fromJson(document.data()))
+            .toList());
+  }
 
-        ExperimentInfo exp = new ExperimentInfo.fromJson(data);
-        exp.id = doc.id;
-        experiments.add(exp);
-      }
-    }
-
-    print(experiments.isNotEmpty ? experiments.first.sceneIndex : "empty");
-    return experiments;*/
+  //sign up 2 (add the user in Firestore)
+  Future<void> addNewQuestion(
+      String question,
+      String correctAnswer,
+      String answer1,
+      String answer2,
+      String answer3,
+      String answer4,
+      int score,
+      String expID) async {
+    // Call the user's CollectionReference to add a new user
+    return await firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .add({
+          'Question': question,
+          'ExpID': expID,
+          'CorrectAnswer': correctAnswer,
+          'Score': score,
+          'Answer1': answer1,
+          'Answer2': answer2,
+          'Answer3': answer3,
+          'Answer4': answer4,
+        })
+        .then((value) => print("User Added, database page"))
+        .catchError(
+            (error) => print("database page, Failed to add user: $error"));
   }
 }
