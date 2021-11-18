@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nahaj/Group/GroupInfo.dart';
 import 'package:nahaj/NahajClasses/Chats.dart';
 import 'package:nahaj/database.dart';
 import 'package:nahaj/HomePage/homePage.dart';
@@ -30,7 +31,7 @@ class _Group extends State<Group> {
         body: SafeArea(
           child: Column(
             children: [
-              ProfileHeaderWidget(group: widget.group),
+              ProfileHeaderWidget(group: widget.group,db: widget.db, user: widget.user),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(10),
@@ -58,9 +59,13 @@ class _Group extends State<Group> {
 //header
 class ProfileHeaderWidget extends StatelessWidget {
   final Groups group;
+  final DataBase db;
+  final User user;
 
   const ProfileHeaderWidget({
     required this.group,
+    required this.db,
+    required this.user,
     Key? key,
   }) : super(key: key);
 
@@ -100,7 +105,12 @@ class ProfileHeaderWidget extends StatelessWidget {
                       width: 4.0.h,
                       child: GestureDetector(
                         onTap: () {
-                          print("hi");
+                          print("pressed group info");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GroupInfo(db: db,group: group, user: user)),
+                          );
                         },
                         child:
                             buildIcon(0, AssetImage("assets/Group13.png"), ''),

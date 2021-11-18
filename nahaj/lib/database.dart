@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/child.dart' as child;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NahajClasses/Chats.dart';
 
@@ -54,6 +54,7 @@ class DataBase extends ChangeNotifier {
           'avatar':
               "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585",
           'level': 0.0,
+          'userId':uid,
         })
         .then((value) => print("User Added, database page"))
         .catchError(
@@ -153,7 +154,7 @@ class DataBase extends ChangeNotifier {
 
   //get groups of the user
 
-  Stream<List<Groups>> getGroupsList(String uid, String uName) {
+  Stream<List<child.Groups>> getGroupsList(String uid, String uName) {
     Map member = {'userId': uid};
 
     return firestore
@@ -161,7 +162,7 @@ class DataBase extends ChangeNotifier {
         .where('members', arrayContains: member)
         .snapshots()
         .map((snapShot) => snapShot.docs
-            .map((document) => Groups.fromJson(document.data()))
+            .map((document) => child.Groups.fromJson(document.data()))
             .toList());
   }
 
@@ -176,7 +177,7 @@ class DataBase extends ChangeNotifier {
       }
     ];
 
-    Groups _Obj = new Groups(
+    child.Groups _Obj = new child.Groups(
         goupCode: code,
         groupId: groupDocument.id,
         groupName: groupName,
@@ -335,24 +336,24 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
-  Stream<List<ExperimentInfo>> getExperiments(String category) {
+  Stream<List<child.ExperimentInfo>> getExperiments(String category) {
     return firestore
         .collection('Experiments')
         .where('Category', isEqualTo: category)
         .snapshots()
         .map((snapShot) => snapShot.docs
-            .map((document) => ExperimentInfo.fromJson(document.data()))
+            .map((document) => child.ExperimentInfo.fromJson(document.data()))
             .toList());
   }
 
-  Stream<List<Question>> getQuestions(String expID) {
+  Stream<List<child.Question>> getQuestions(String expID) {
     return firestore
         .collection('Experiments')
         .doc(expID)
         .collection('Questions')
         .snapshots()
         .map((snapShot) => snapShot.docs
-            .map((document) => Question.fromJson(document.data()))
+            .map((document) => child.Question.fromJson(document.data()))
             .toList());
   }
 
@@ -385,4 +386,18 @@ class DataBase extends ChangeNotifier {
         .catchError(
             (error) => print("database page, Failed to add user: $error"));
   }
+
+  Stream<List<child.User>> getMembers(List members){
+    print("inside getMembers: \n members list before fetch: $members");
+    var x= firestore
+        .collection('user')
+        .where('userId', whereIn: members)
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+            .map((document) => child.User.fromJson(document.data()))
+            .toList());
+    print("inside getMembers: \n members list after fetch: ${x}");
+    return x;
+  }
+
 }

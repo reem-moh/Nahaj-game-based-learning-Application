@@ -85,6 +85,7 @@ class _SigninState extends State<Signin> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
+                      initialValue: "reem@gmail.com",
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       textDirection: TextDirection.rtl,
                       decoration: InputDecoration(
@@ -140,6 +141,7 @@ class _SigninState extends State<Signin> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
+                        initialValue:'12345678',
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         textDirection: TextDirection.rtl,
                         obscureText: true,

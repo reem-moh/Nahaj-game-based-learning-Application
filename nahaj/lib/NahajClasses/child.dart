@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class User extends ChangeNotifier {
-  String userId;
-  String username;
-  String email;
-  String avatar;
-  double level;
+  String userId= '';
+  String username= '';
+  String email= '';
+  String avatar= '';
+  double level= -1;
 
   User(
       {required this.userId,
@@ -13,6 +13,14 @@ class User extends ChangeNotifier {
       required this.email,
       required this.avatar,
       required this.level});
+
+  User.fromJson(Map parsedJson) {
+    userId = parsedJson['userId'] ?? '';
+    username = parsedJson['name'] ?? '';
+    email = parsedJson['email'] ?? '';
+    avatar = parsedJson['avatar'] ?? '';
+    level = parsedJson['level'] ?? -1;
+  }
 }
 
 class Groups {

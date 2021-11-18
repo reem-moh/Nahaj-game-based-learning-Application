@@ -44,45 +44,45 @@ class _GroupInfo extends State<GroupInfo> {
           //
           //
           //list view container
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Wrap(
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //back button
-            
-                  SizedBox(     height: MediaQuery.of(context).size.height * 0.02,),
+
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
 
               //image of group
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Row(
-                 // mainAxisSize: MainAxisSize.max,
-                 // mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisSize: MainAxisSize.max,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-  Container(   padding: EdgeInsets.all(0).copyWith(right: 450 ,bottom: 40),
-    child: TextButton(
-                  child: Image(
-                      image: AssetImage("assets/PreviosButton.png"),
-                      alignment: Alignment.topCenter
-                      ,
+                    Container(
+                      padding:
+                          EdgeInsets.all(0).copyWith(right: 450, bottom: 40),
+                      child: TextButton(
+                        child: Image(
+                          image: AssetImage("assets/PreviosButton.png"),
+                          alignment: Alignment.topCenter,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage(
+                                        db: widget.db,
+                                      )),
+                            );
+                          });
+                        },
+                      ),
                     ),
-                  
-                  onPressed: () {
-                    setState(() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                  db: widget.db,
-                                )),
-                      );
-                    });
-                  },
-                ),
-  ),
-
-
-                    Container(     alignment: Alignment.topCenter,
+                    Container(
+                      alignment: Alignment.topCenter,
                       child: Stack(
                         alignment: Alignment.topCenter,
                         children: <Widget>[
@@ -117,8 +117,7 @@ class _GroupInfo extends State<GroupInfo> {
                 ),
               ),
 
-
-                // name of group
+              // name of group
               Center(
                 child: Text(
                   widget.group.groupName,
@@ -131,39 +130,45 @@ class _GroupInfo extends State<GroupInfo> {
                 ),
               ),
 
-                                SizedBox(     height: MediaQuery.of(context).size.height * 0.02,),
-
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
 
 //2
-               //cards
+              //cards
               Container(
-                   padding: EdgeInsets.all(0).copyWith(left: 500),height: 430,width: 1180,
-                    decoration: BoxDecoration(
-    border: Border.all(color: Colors.grey) ,
-     borderRadius: BorderRadius.only(
-      
-       bottomLeft: Radius.circular(5),
-        //bottomRight: Radius.circular(10)
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.05),
-       spreadRadius: 2,
-        blurRadius: 2,
-        //offset: Offset(0, 0), // changes position of shadow
-      ),
-    ],
-  ), 
+                  padding: EdgeInsets.all(0).copyWith(left: 500),
+                  height: 430,
+                  width: 1180,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(5),
+                      //bottomRight: Radius.circular(10)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.05),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        //offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Center(
                     child: CardsOfGroup(
                       db: widget.db,
                       user: widget.user,
+                      group: widget.group,
+                      members: getMembers(widget.group.members),
                     ),
                   )),
-                  SizedBox(     height: MediaQuery.of(context).size.height * 0.05,),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
 
 //3
-                // delete group
+              // delete group
               Center(child: buildUpgradeButton()),
             ],
           ),
@@ -178,6 +183,20 @@ class _GroupInfo extends State<GroupInfo> {
           //delet Group
         },
       );
+  List getMembers(List members) {
+    var users = [];
+
+    members.forEach((member) {
+      final list = member.values.toList();
+      list.forEach((w) {
+        print("Key: ${w} ");
+        users.add(w);
+
+      });
+    });
+    print("get members in group info list: $users member: $members");
+    return users;
+  }
 }
 
 class ButtonWidget extends StatelessWidget {
@@ -206,18 +225,83 @@ class ButtonWidget extends StatelessWidget {
 class CardsOfGroup extends StatelessWidget {
   final User user;
   final DataBase db;
-  //final Groups group;
+  final Groups group;
+  final List members;
 
-  const CardsOfGroup({
+  CardsOfGroup({
     required this.user,
     required this.db,
     Key? key,
+    required this.group,
+    required this.members,
   }) : super(key: key);
 
+  List members11 = [
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+    {
+      'userId': 'leaderId',
+      'userName': 'leaderName',
+    },
+  ];
   @override
   //change to Map
-  Widget build(BuildContext context) => StreamBuilder<List<Groups>>(
-        stream: db.getGroupsList(user.userId, user.username),
+  Widget build(BuildContext context) => StreamBuilder<List<User>>(
+        stream: db.getMembers(members),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -227,189 +311,101 @@ class CardsOfGroup extends StatelessWidget {
                 return buildText(
                     'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
-                final allGroups = [
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                  {
-                    'userId': 'leaderId',
-                    'userName': 'leaderName',
-                  },
-                ]; //snapshot.data;
-                return /*allGroups == null
+                final allMembers = snapshot.data;
+                return allMembers == null
                     ? buildText('لا يوجد لديك مجموعات!')
-                    : */
-                    ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  reverse: true,
-                  itemCount: allGroups.length,
-                  itemBuilder: (context, index) {
-                    final group = allGroups[index]; //[index];
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        reverse: true,
+                        itemCount: allMembers.length,
+                        itemBuilder: (context, index) {
+                          final member = allMembers[index]; //[index];
 
-                    return Container( height: 80,width: 5000, decoration: BoxDecoration(
-    
-    borderRadius: BorderRadius.only(
-      
-       bottomLeft: Radius.circular(5),
-        //bottomRight: Radius.circular(10)
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.05),
-       spreadRadius: 2,
-        blurRadius: 2,
-        //offset: Offset(0, 0), // changes position of shadow
-      ),
-    ],
-  ),
-                        child:    FocusedMenuHolder(
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                right: 9.00.h,
-                                              ),
-                                              child:  Row(
-                          children: [
-                      
-                      
-                                Container(     alignment: Alignment.topCenter,
-                        child: Stack(
-                          alignment: Alignment.topCenter,
-                          children: <Widget>[
-                            Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(13.0),
-                              //Group Image
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(
-                                          120.0) //                 <--- border radius here
-                                      ),
-                                  border: Border.all(color: Colors.grey)),
-                              child: AspectRatio(
-                                aspectRatio: 1,
-                                child: ClipOval(
-                                        child: Image.asset(
-                                            //widget.group.pathOfImage
-                                            "assets/owl1.png",
-                                            fit: BoxFit.cover)),
+                          return Container(
+                            height: 80,
+                            width: 5000,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(5),
+                                //bottomRight: Radius.circular(10)
                               ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.05),
+                                  spreadRadius: 2,
+                                  blurRadius: 2,
+                                  //offset: Offset(0, 0), // changes position of shadow
+                                ),
+                              ],
                             ),
-                            //Camera Iamge
-                          ],
-                        ),
-                                          ),
-
-
-                                          MembersCard(
-                              db: db,
-                              group: group,
-                              user: user,
-                            ),
-                      
-
-                    
-                         
-
-
-
-
-
-
-                          
-
-
-
-
-                         
-                         
-                             
-                           
-                           
-                           // Image.asset("assets/owl1.png")
-                          ],
-                        ), 
-                                            ),
-                                            onPressed: () {},
-                                            openWithTap: true,
-                                            menuWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.30,
-                                            menuItems: [
-                                           
-                                              FocusedMenuItem(
-                                                  title: Text(
-                                                    "حذف العضو",
-                                                    style: TextStyle(
-                                                      fontFamily: 'Cairo',
-                                                      fontSize: 1.5.w,
+                            child: FocusedMenuHolder(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  right: 9.00.h,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topCenter,
+                                      child: Stack(
+                                        alignment: Alignment.topCenter,
+                                        children: <Widget>[
+                                          Container(
+                                            margin: const EdgeInsets.all(15.0),
+                                            padding: const EdgeInsets.all(13.0),
+                                            //Group Image
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(
+                                                        120.0) //                 <--- border radius here
                                                     ),
-                                                  ),
-                                                  trailingIcon:
-                                                      Icon(Icons.group),
-                                                  onPressed: () {
-                                                 
-                                                  }),
-                                            ],
+                                                border: Border.all(
+                                                    color: Colors.grey)),
+                                            child: AspectRatio(
+                                              aspectRatio: 1,
+                                              child: ClipOval(
+                                                  child: Image.asset(
+                                                      //widget.group.pathOfImage
+                                                      "assets/owl1.png",
+                                                      fit: BoxFit.cover)),
+                                            ),
                                           ),
-                      
-                    );
-                    
-                  },
-                  scrollDirection: Axis.vertical,
-                );
+                                          //Camera Iamge
+                                        ],
+                                      ),
+                                    ),
+
+                                    MembersCard(
+                                      db: db,
+                                      member: member,
+                                      user: user,
+                                    ),
+
+                                    // Image.asset("assets/owl1.png")
+                                  ],
+                                ),
+                              ),
+                              onPressed: () {},
+                              openWithTap: true,
+                              menuWidth:
+                                  MediaQuery.of(context).size.width * 0.30,
+                              menuItems: [
+                                FocusedMenuItem(
+                                    title: Text(
+                                      "حذف العضو",
+                                      style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontSize: 1.5.w,
+                                      ),
+                                    ),
+                                    trailingIcon: Icon(Icons.group),
+                                    onPressed: () {}),
+                              ],
+                            ),
+                          );
+                        },
+                        scrollDirection: Axis.vertical,
+                      );
               }
           }
         },
@@ -425,10 +421,10 @@ class CardsOfGroup extends StatelessWidget {
 
 class MembersCard extends StatelessWidget {
   final DataBase db;
-  final Map group;
+  final User member;
   final User user;
   MembersCard(
-      {Key? key, required this.db, required this.group, required this.user})
+      {Key? key, required this.db, required this.member, required this.user})
       : super(key: key);
 
   @override
@@ -455,7 +451,7 @@ class MembersCard extends StatelessWidget {
           ),
           Container(
             child: Text(
-              group['userName'],
+              member.username,
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
