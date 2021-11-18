@@ -10,6 +10,7 @@ import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
 
 import 'addGroup.dart';
+import 'groupChat.dart';
 
 class GroupInfo extends StatefulWidget {
   final DataBase db;
@@ -29,6 +30,16 @@ class _GroupInfo extends State<GroupInfo> {
   get itemBuilder => null;
   File? pathOfImage;
 
+  get db => null;
+
+  get group => null;
+
+  get user => null;
+
+  get text => null;
+
+  get isleader => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +58,6 @@ class _GroupInfo extends State<GroupInfo> {
           Wrap(
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //back button
 
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
@@ -70,13 +80,11 @@ class _GroupInfo extends State<GroupInfo> {
                         ),
                         onPressed: () {
                           setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                        db: widget.db,
-                                      )),
-                            );
+                             Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Group(db: db, group: group, user: user)),
+        );;
                           });
                         },
                       ),
@@ -104,8 +112,8 @@ class _GroupInfo extends State<GroupInfo> {
                                     )
                                   : ClipOval(
                                       child: Image.asset(
-                                          //widget.group.pathOfImage
-                                          "assets/owl1.png",
+                                          widget.group.pathOfImage,
+                                          //"assets/owl1.png",
                                           fit: BoxFit.cover)),
                             ),
                           ),
@@ -178,10 +186,26 @@ class _GroupInfo extends State<GroupInfo> {
   }
 
   Widget buildUpgradeButton() => ButtonWidget(
-        text: 'حذف القروب',
-        onClicked: () {
-          //delet Group
-        },
+  
+   text: '',
+  isleader: '',
+  userId
+    onClicked: () { 
+
+    if( isleader == true){
+        text: 'حذف المجموعة';
+                //method delet Group
+
+    }
+    else
+    {
+ text: 'الخروج من المجموعة ';
+                 //method delet member
+
+
+    }
+     }, 
+  
       );
   List getMembers(List members) {
     var users = [];
@@ -200,13 +224,16 @@ class _GroupInfo extends State<GroupInfo> {
 }
 
 class ButtonWidget extends StatelessWidget {
-  final String text;
+  final String text; 
+    final String isleader; 
+
+  
   final VoidCallback onClicked;
 
   const ButtonWidget({
     Key? key,
     required this.text,
-    required this.onClicked,
+    required this.onClicked, child, required this.isleader,
   }) : super(key: key);
 
   @override
