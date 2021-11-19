@@ -26,7 +26,14 @@ class _ProfilePageState extends State<ProfilePage> {
   bool validRePass = false;
   bool loginErr = false;
   bool changes = false;
+  List avatars = [];
 
+  @override
+  void initState() {
+    super.initState();
+    getAvatarImages();
+  }
+  
   @override
   Widget build(BuildContext context) {
     final user = widget.user;
@@ -48,6 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
               //header
               Stack(
                 children: [
+                  //back button
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white.withOpacity(0),
@@ -63,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onPressed: () {
                       setState(() {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => HomePage(
@@ -73,11 +81,22 @@ class _ProfilePageState extends State<ProfilePage> {
                       });
                     },
                   ),
+                  //avatar and level
                   Container(
                     alignment: Alignment.topCenter,
                     child: ProfileWidget(
                       imagePath: user.avatar,
-                      onClicked: () async {},
+                      onClicked: () async {
+                        showDialog(
+                          builder: (BuildContext context) {
+                            return CupertinoAlertDialog(
+                              title: Text('تغيير صورة العرض'),
+                              content: Center(child: buildListOfAvatars()),
+                            );
+                          },
+                          context: context,
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -364,6 +383,46 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       );
 
+  Widget buildListOfAvatars() => Container(
+        padding: EdgeInsets.symmetric(vertical: 50),
+        child: Wrap(
+          children: [
+            for (int i = 0; i < avatars.length; i++)
+              if (avatars[i] != null)
+                Column(
+                  children: [
+                    SizedBox(
+                      width: 10.0.w,
+                      height: 10.0.w,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(26),
+                          color: Colors.white54,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade400,
+                              blurRadius: 7,
+                              spreadRadius: 0,
+                              offset: Offset(4, 4),
+                            ),
+                          ],
+                        ),
+                        child: FadeInImage.assetNetwork(
+                          placeholder: 'assets/loading.gif',
+                          image: avatars[i],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      //width: 7.w,
+                      height: 2.w,
+                    ),
+                  ],
+                ),
+          ],
+        ),
+      );
+
   Widget buildUpgradeButton() => ButtonWidget(
         text: 'حفظ التغييرات',
         onClicked: () {
@@ -381,6 +440,7 @@ class _ProfilePageState extends State<ProfilePage> {
           }
         },
       );
+
   bool updateUser(String name, String email, String password) {
     bool changed = false;
     bool passChanged = false;
@@ -419,6 +479,10 @@ class _ProfilePageState extends State<ProfilePage> {
     if (passChanged || changed) return true;
 
     return false;
+  }
+
+  getAvatarImages(){
+    widget.db.listOfAvatars().then((value) => avatars=value);
   }
 }
 

@@ -28,16 +28,6 @@ class GroupInfo extends StatefulWidget {
 
 class _GroupInfo extends State<GroupInfo> {
   get itemBuilder => null;
-  File? pathOfImage;
-
-  get db => null;
-
-  get group => null;
-
-  get user => null;
-
-  get text => null;
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +47,6 @@ class _GroupInfo extends State<GroupInfo> {
           Wrap(
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
@@ -79,11 +68,14 @@ class _GroupInfo extends State<GroupInfo> {
                         ),
                         onPressed: () {
                           setState(() {
-                             Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Group(db: db, group: group, user: user)),
-        );;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Group(
+                                      db: widget.db,
+                                      group: widget.group,
+                                      user: widget.user)),
+                            );
                           });
                         },
                       ),
@@ -104,16 +96,10 @@ class _GroupInfo extends State<GroupInfo> {
                                 border: Border.all(color: Colors.grey)),
                             child: AspectRatio(
                               aspectRatio: 1,
-                              child: pathOfImage != null
-                                  ? ClipOval(
-                                      child: Image.file(pathOfImage!,
-                                          fit: BoxFit.cover),
-                                    )
-                                  : ClipOval(
-                                      child: Image.network(
-                                          widget.group.pathOfImage,
-                                          //"assets/owl1.png",
-                                          fit: BoxFit.cover)),
+                              child: ClipOval(
+                                  child: Image.network(widget.group.pathOfImage,
+                                      //"assets/owl1.png",
+                                      fit: BoxFit.cover)),
                             ),
                           ),
                           //Camera Iamge
@@ -136,7 +122,7 @@ class _GroupInfo extends State<GroupInfo> {
                   ),
                 ),
               ),
-  SizedBox(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
 
@@ -144,7 +130,7 @@ class _GroupInfo extends State<GroupInfo> {
               //cards
               Center(
                 child: Container(
-                   alignment: Alignment.center,
+                    alignment: Alignment.center,
                     height: 500,
                     width: 700,
                     decoration: BoxDecoration(
@@ -183,8 +169,6 @@ class _GroupInfo extends State<GroupInfo> {
 //3
               // delete group
               Center(child: buildUpgradeButton()),
-
-              
             ],
           ),
         ],
@@ -193,28 +177,24 @@ class _GroupInfo extends State<GroupInfo> {
   }
 
   Widget buildUpgradeButton() => ButtonWidget(
-  
-    text:( widget.user.userId == widget.group.leaderId)?
-        ( 'حذف المجموعة'): 
-( 'الخروج من المجموعة '),
-
- 
-  
-  
-    onClicked: () { 
-
-    if( text == 'حذف المجموعة'){
-                //method delet Group
-
-    }
-    else
-    {
-                 //method delet member
-
-
-    }
-     }, 
-  
+        text: widget.group.leaderId == widget.user.userId
+            ? 'الخروج من المجموعة'
+            : 'حذف المجموعة',
+        onClicked: () {
+          //delet Group
+          widget.group.leaderId == widget.user.userId
+              ? widget.db.removeGroup(widget.group.groupId)
+              : widget.db.removeUserFromGroup(
+                  widget.group.groupId, widget.user.userId);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      db: widget.db,
+                    )),
+          );
+          //move to homePage with alarm you delete the group succusfully!
+        },
       );
   List getMembers(List members) {
     var users = [];
@@ -224,7 +204,6 @@ class _GroupInfo extends State<GroupInfo> {
       list.forEach((w) {
         print("Key: ${w} ");
         users.add(w);
-
       });
     });
     print("get members in group info list: $users member: $members");
@@ -233,15 +212,15 @@ class _GroupInfo extends State<GroupInfo> {
 }
 
 class ButtonWidget extends StatelessWidget {
-  final String text; 
+  final String text;
 
-  
   final VoidCallback onClicked;
 
   const ButtonWidget({
     Key? key,
     required this.text,
-    required this.onClicked, child, 
+    required this.onClicked,
+    child,
   }) : super(key: key);
 
   @override
@@ -263,11 +242,9 @@ class CardsOfGroup extends StatelessWidget {
   final Groups group;
   final List members;
 
-
   //get group => null;
 
- // get user => null;
-
+  // get user => null;
 
   CardsOfGroup({
     required this.user,
@@ -363,7 +340,8 @@ class CardsOfGroup extends StatelessWidget {
                           final member = allMembers[index]; //[index];
 
                           return Center(
-                            child: Container( alignment: Alignment.center,
+                            child: Container(
+                              alignment: Alignment.center,
                               height: 90,
                               width: 700,
                               decoration: BoxDecoration(
@@ -385,113 +363,147 @@ class CardsOfGroup extends StatelessWidget {
                                   margin: EdgeInsets.only(
                                     left: 15.00.h,
                                   ),
-                                  child: Row( // if ranking == 1 || ranking == 2 || ranking == 3
-                                    children: [ 
-                                      
-                                      
-                                      
+                                  child: Row(
+                                    // if ranking == 1 || ranking == 2 || ranking == 3
+                                    children: [
                                       Center(
-                                      child: (/*member.level==1*/true)?
-                                        Container(
-  padding:
-                            EdgeInsets.all(0).copyWith(left: 0),                                      child: Stack(
-                                            //alignment: Alignment.topCenter,
-                                            children: <Widget>[
-                                              Container(
-                                                margin: const EdgeInsets.all(10.0),
-                                                padding: const EdgeInsets.all(3.0),
-                                                //Group Image
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(
-                                                            50.0) //                 <--- border radius here
+                                        child: (/*member.level==1*/ true)
+                                            ? Container(
+                                                padding: EdgeInsets.all(0)
+                                                    .copyWith(left: 0),
+                                                child: Stack(
+                                                  //alignment: Alignment.topCenter,
+                                                  children: <Widget>[
+                                                    Container(
+                                                        margin: const EdgeInsets
+                                                            .all(10.0),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(3.0),
+                                                        //Group Image
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius.all(
+                                                                        Radius.circular(
+                                                                            50.0) //                 <--- border radius here
+                                                                        ),
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .white)),
+                                                        child: Image.asset(
+                                                          ("assets/Ranking.png"),
+                                                          /* num1 */
+                                                          fit: BoxFit.cover,
+                                                        )),
+                                                    //Camera Iamge
+                                                  ],
+                                                ),
+                                                // ignore: dead_code
+                                              )
+                                            : ((member.level == 2)
+                                                ? (Container(
+                                                    padding: EdgeInsets.all(0)
+                                                        .copyWith(left: 0),
+                                                    child: Stack(
+                                                      //alignment: Alignment.topCenter,
+                                                      children: <Widget>[
+                                                        Container(
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(3.0),
+                                                            //Group Image
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(
+                                                                                50.0) //                 <--- border radius here
+                                                                            ),
+                                                                    border: Border.all(
+                                                                        color: Colors
+                                                                            .white)),
+                                                            child: Image.asset(
+                                                              ("assets/Ranking.png"),
+                                                              /* num2 */
+                                                              fit: BoxFit.cover,
+                                                            )),
+                                                        //Camera Iamge
+                                                      ],
+                                                    ),
+                                                  ))
+                                                : ((member.level == 3)
+                                                    ? (Container(
+                                                        padding:
+                                                            EdgeInsets.all(0)
+                                                                .copyWith(
+                                                                    left: 0),
+                                                        child: Stack(
+                                                          //    alignment: Alignment.topCenter,
+                                                          children: <Widget>[
+                                                            Container(
+                                                                margin:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        10.0),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        3.0),
+                                                                //Group Image
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                        borderRadius: BorderRadius.all(
+                                                                            Radius.circular(
+                                                                                50.0) //                 <--- border radius here
+                                                                            ),
+                                                                        border: Border.all(
+                                                                            color: Colors
+                                                                                .white)),
+                                                                child:
+                                                                    Image.asset(
+                                                                  ("assets/Ranking.png"),
+                                                                  /* num3 */
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                )),
+                                                            //Camera Iamge
+                                                          ],
                                                         ),
-                                                    border: Border.all(
-                                                        color: Colors.white)),
-                                              
-                                                      child: Image.asset(
-                                                          ("assets/Ranking.png"), /* num1 */
-                                                          fit: BoxFit.cover ,)
-                                                
-                                              ),
-                                              //Camera Iamge
-                                            ],
-                                          ),
-                                        // ignore: dead_code
-                                        ):((member.level==2)?( Container(
-  padding:
-                            EdgeInsets.all(0).copyWith(left: 0),                                      child: Stack(
-                                            //alignment: Alignment.topCenter,
-                                            children: <Widget>[
-                                              Container(
-                                                margin: const EdgeInsets.all(10.0),
-                                                padding: const EdgeInsets.all(3.0),
-                                                //Group Image
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(
-                                                            50.0) //                 <--- border radius here
-                                                        ),
-                                                    border: Border.all(
-                                                        color: Colors.white)),
-                                              
-                                                      child: Image.asset(
-                                                          ("assets/Ranking.png"), /* num2 */
-                                                          fit: BoxFit.cover ,)
-                                                
-                                              ),
-                                              //Camera Iamge
-                                            ],
-                                          ),
-                                        )):((member.level==3)?( Container(
-                                           padding:
-                            EdgeInsets.all(0).copyWith(left: 0),
-                                          child: Stack(
-                                        //    alignment: Alignment.topCenter,
-                                            children: <Widget>[
-                                              Container(
-                                                margin: const EdgeInsets.all(10.0),
-                                                padding: const EdgeInsets.all(3.0),
-                                                //Group Image
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(
-                                                            50.0) //                 <--- border radius here
-                                                        ),
-                                                    border: Border.all(
-                                                        color: Colors.white)),
-                                              
-                                                      child: Image.asset(
-                                                          ("assets/Ranking.png"), /* num3 */
-                                                          fit: BoxFit.cover ,)
-                                                
-                                              ),
-                                              //Camera Iamge
-                                            ],
-                                          ),
-                                        )):(Container(/* without */)))),
-                                    ),
-  SizedBox(
-                width: MediaQuery.of(context).size.height * 0.05 ,
-              ),
+                                                      ))
+                                                    : (Container(
+                                                        /* without */)))),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.height *
+                                                0.05,
+                                      ),
 
-(member.userId==group.leaderId)?Center(
-  child:   (   Container(          alignment: Alignment.center,
+                                      (member.userId == group.leaderId)
+                                          ? Center(
+                                              child: (Container(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  "Leader",
+                                                  style: TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 3.2.w,
+                                                      color: Color.fromARGB(
+                                                          170, 0, 0, 0)),
+                                                ),
+                                              )),
+                                            )
+                                          : (Container()),
 
-              child: Text(
-                "Leader",
-                style: TextStyle(
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 3.2.w,
-                    color: Color.fromARGB(170, 0, 0, 0)),
-              ),
-            )),
-):(Container()),
-
-                                      Container(   padding:
-                            EdgeInsets.all(0).copyWith(right: 0),
-
+                                      Container(
+                                        padding: EdgeInsets.all(0)
+                                            .copyWith(right: 0),
                                         child: MembersCard(
                                           db: db,
                                           member: member,
@@ -508,15 +520,15 @@ class CardsOfGroup extends StatelessWidget {
                                 menuWidth:
                                     MediaQuery.of(context).size.width * 0.30,
                                 menuItems: [
-                                   FocusedMenuItem(
+                                  FocusedMenuItem(
                                       title: Text(
-                                          member.username,
+                                        member.username,
                                         style: TextStyle(
                                           fontFamily: 'Cairo',
                                           fontSize: 1.5.w,
                                         ),
                                       ),
-                                    //  trailingIcon: Icon(Icons.group),
+                                      //  trailingIcon: Icon(Icons.group),
                                       onPressed: () {}),
                                   FocusedMenuItem(
                                       title: Text(

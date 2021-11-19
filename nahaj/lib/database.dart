@@ -454,4 +454,16 @@ class DataBase extends ChangeNotifier {
     print("inside getMembers: \n members list after fetch: ${x}");
     return x;
   }
+
+  Future<List> listOfAvatars() async {
+    List avatar = [];
+
+    for(int i =1 ; i<=25 ; i++){
+      await firestorage.ref('/Avatar/owl$i.png').getDownloadURL().then((value) =>
+        avatar.add(value)
+      );      
+    }
+    print("avatar inside db: $avatar");
+    return avatar;
+  }
 }

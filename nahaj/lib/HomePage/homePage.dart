@@ -154,11 +154,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   child: ClipOval(
                     child: user.avatar == "1"
                         ? CircularProgressIndicator()
-                        : Image.network(
-                            user.avatar,
+                        : FadeInImage.assetNetwork(
+                            placeholder: 'assets/loading.gif',
+                            image: user.avatar,
                             fit: BoxFit.fill,
                             alignment: Alignment.center,
                           ),
+                    /*
+                          
+                           */
                   ),
                   backgroundColor: Colors.grey[400],
                 ),
@@ -398,8 +402,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                               children: [
                                 user.avatar == "1"
                                     ? CircularProgressIndicator()
-                                    : Image.network(
-                                        user.avatar,
+                                    : FadeInImage.assetNetwork(
+                                        placeholder: 'assets/loading.gif',
+                                        image: user.avatar,
                                         fit: BoxFit.cover,
                                       ),
                                 SizedBox(
@@ -723,8 +728,9 @@ class GroupsCard extends StatelessWidget {
               color: Colors.grey[350],
             ),
             child: ClipOval(
-              child: Image.network(
-                group.pathOfImage,
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/loading.gif',
+                image: group.pathOfImage,
                 fit: BoxFit.fill,
                 alignment: Alignment.center,
               ),
@@ -780,7 +786,7 @@ class CardsOfGroup extends StatelessWidget {
                           final group = allGroups[index]; //[index];
 
                           return Padding(
-                            padding: const EdgeInsets.only(left:30.0),
+                            padding: const EdgeInsets.only(left: 30.0),
                             child: GroupsCard(
                               db: db,
                               group: group,
