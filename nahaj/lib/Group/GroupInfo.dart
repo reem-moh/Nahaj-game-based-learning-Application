@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -8,8 +6,6 @@ import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
-
-import 'addGroup.dart';
 import 'groupChat.dart';
 
 class GroupInfo extends StatefulWidget {
@@ -41,134 +37,129 @@ class _GroupInfo extends State<GroupInfo> {
                     image: AssetImage("assets/SignUpSignInbackground.png"),
                     fit: BoxFit.cover)),
           ),
-          //
-          //
+
           //list view container
           Wrap(
-            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
+              Column(
+                children: [
+                  //Space between avatar and the screen
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
 
-              //image of group
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Row(
-                  // mainAxisSize: MainAxisSize.max,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding:
-                          EdgeInsets.all(0).copyWith(right: 450, bottom: 40),
-                      child: TextButton(
-                        child: Image(
-                          image: AssetImage("assets/PreviosButton.png"),
-                          alignment: Alignment.topCenter,
+                  //Header
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: Row(
+                      children: [
+                        //back button
+                        Container(
+                          // padding:
+                          //   EdgeInsets.all(0).copyWith(right: 450, bottom: 40),
+                          child: TextButton(
+                            child: Image(
+                              image: AssetImage("assets/PreviosButton.png"),
+                              alignment: Alignment.topCenter,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Group(
+                                          db: widget.db,
+                                          group: widget.group,
+                                          user: widget.user)),
+                                );
+                              });
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Group(
-                                      db: widget.db,
-                                      group: widget.group,
-                                      user: widget.user)),
-                            );
-                          });
-                        },
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(3.0),
-                            //Group Image
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        120.0) //                 <--- border radius here
-                                    ),
-                                border: Border.all(color: Colors.grey)),
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: ClipOval(
-                                  child: Image.network(widget.group.pathOfImage,
-                                      //"assets/owl1.png",
-                                      fit: BoxFit.cover)),
+
+                        //image of group
+                        Expanded(
+                          child: Center(
+                            child: Container(
+                              margin: const EdgeInsets.all(15.0),
+                              padding: const EdgeInsets.all(3.0),
+                              //Group Image
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          120.0) //                 <--- border radius here
+                                      ),
+                                  border: Border.all(color: Colors.grey)),
+
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: ClipOval(
+                                    child:
+                                        Image.network(widget.group.pathOfImage,
+                                            //"assets/owl1.png",
+                                            fit: BoxFit.cover)),
+                              ),
                             ),
                           ),
-                          //Camera Iamge
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // name of group
-              Center(
-                child: Text(
-                  widget.group.groupName,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 27,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-              ),
-
-//2
-              //cards
-              Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    height: 500,
-                    width: 700,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        //bottomRight: Radius.circular(10)
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.05),
-                          spreadRadius: 2,
-                          blurRadius: 2,
-                          //offset: Offset(0, 0), // changes position of shadow
                         ),
                       ],
                     ),
-                    child: Container(
+                  ),
+
+                  // name of group
+                  Center(
+                    child: Text(
+                      widget.group.groupName,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 27,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+
+                  //list of members
+                  Container(
+                      alignment: Alignment.center,
+                      height: 400,
+                      width: 700,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(5),
+                          //bottomRight: Radius.circular(10)
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.05),
+                            spreadRadius: 2,
+                            blurRadius: 2,
+                            //offset: Offset(0, 0), // changes position of shadow
+                          ),
+                        ],
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Center(
-                          child: CardsOfGroup(
+                          child: CardsOfMembers(
                             db: widget.db,
                             user: widget.user,
                             group: widget.group,
                             members: getMembers(widget.group.members),
                           ),
                         ),
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.63,
-              ),
+                      )),
 
 //3
-              // delete group
-              Center(child: buildUpgradeButton()),
+                  // delete group
+                  Center(child: buildUpgradeButton()),
+                ],
+              ),
             ],
           ),
         ],
@@ -178,10 +169,10 @@ class _GroupInfo extends State<GroupInfo> {
 
   Widget buildUpgradeButton() => ButtonWidget(
         text: widget.group.leaderId == widget.user.userId
-            ? 'الخروج من المجموعة'
-            : 'حذف المجموعة',
+            ? 'حذف المجموعة'
+            : 'الخروج من المجموعة',
         onClicked: () {
-          //delet Group
+          //delete Group
           widget.group.leaderId == widget.user.userId
               ? widget.db.removeGroup(widget.group.groupId)
               : widget.db.removeUserFromGroup(
@@ -236,17 +227,13 @@ class ButtonWidget extends StatelessWidget {
       );
 }
 
-class CardsOfGroup extends StatelessWidget {
+class CardsOfMembers extends StatelessWidget {
   final User user;
   final DataBase db;
   final Groups group;
   final List members;
 
-  //get group => null;
-
-  // get user => null;
-
-  CardsOfGroup({
+  CardsOfMembers({
     required this.user,
     required this.db,
     Key? key,
@@ -254,68 +241,6 @@ class CardsOfGroup extends StatelessWidget {
     required this.members,
   }) : super(key: key);
 
-  List members11 = [
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-  ];
   @override
   //change to Map
   Widget build(BuildContext context) => StreamBuilder<List<User>>(
@@ -339,8 +264,7 @@ class CardsOfGroup extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final member = allMembers[index]; //[index];
 
-                          return Center(
-                            child: Container(
+                          return Container(
                               alignment: Alignment.center,
                               height: 90,
                               width: 700,
@@ -354,196 +278,10 @@ class CardsOfGroup extends StatelessWidget {
                                     color: Colors.grey.withOpacity(0.05),
                                     spreadRadius: 2,
                                     blurRadius: 2,
-                                    //offset: Offset(0, 0), // changes position of shadow
                                   ),
                                 ],
                               ),
-                              child: FocusedMenuHolder(
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 15.00.h,
-                                  ),
-                                  child: Row(
-                                    // if ranking == 1 || ranking == 2 || ranking == 3
-                                    children: [
-                                      Center(
-                                        child: (/*member.level==1*/ true)
-                                            ? Container(
-                                                padding: EdgeInsets.all(0)
-                                                    .copyWith(left: 0),
-                                                child: Stack(
-                                                  //alignment: Alignment.topCenter,
-                                                  children: <Widget>[
-                                                    Container(
-                                                        margin: const EdgeInsets
-                                                            .all(10.0),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(3.0),
-                                                        //Group Image
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius.all(
-                                                                        Radius.circular(
-                                                                            50.0) //                 <--- border radius here
-                                                                        ),
-                                                                border: Border.all(
-                                                                    color: Colors
-                                                                        .white)),
-                                                        child: Image.asset(
-                                                          ("assets/Ranking.png"),
-                                                          /* num1 */
-                                                          fit: BoxFit.cover,
-                                                        )),
-                                                    //Camera Iamge
-                                                  ],
-                                                ),
-                                                // ignore: dead_code
-                                              )
-                                            : ((member.level == 2)
-                                                ? (Container(
-                                                    padding: EdgeInsets.all(0)
-                                                        .copyWith(left: 0),
-                                                    child: Stack(
-                                                      //alignment: Alignment.topCenter,
-                                                      children: <Widget>[
-                                                        Container(
-                                                            margin:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(3.0),
-                                                            //Group Image
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(
-                                                                                50.0) //                 <--- border radius here
-                                                                            ),
-                                                                    border: Border.all(
-                                                                        color: Colors
-                                                                            .white)),
-                                                            child: Image.asset(
-                                                              ("assets/Ranking.png"),
-                                                              /* num2 */
-                                                              fit: BoxFit.cover,
-                                                            )),
-                                                        //Camera Iamge
-                                                      ],
-                                                    ),
-                                                  ))
-                                                : ((member.level == 3)
-                                                    ? (Container(
-                                                        padding:
-                                                            EdgeInsets.all(0)
-                                                                .copyWith(
-                                                                    left: 0),
-                                                        child: Stack(
-                                                          //    alignment: Alignment.topCenter,
-                                                          children: <Widget>[
-                                                            Container(
-                                                                margin:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        10.0),
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        3.0),
-                                                                //Group Image
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                        borderRadius: BorderRadius.all(
-                                                                            Radius.circular(
-                                                                                50.0) //                 <--- border radius here
-                                                                            ),
-                                                                        border: Border.all(
-                                                                            color: Colors
-                                                                                .white)),
-                                                                child:
-                                                                    Image.asset(
-                                                                  ("assets/Ranking.png"),
-                                                                  /* num3 */
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                )),
-                                                            //Camera Iamge
-                                                          ],
-                                                        ),
-                                                      ))
-                                                    : (Container(
-                                                        /* without */)))),
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.height *
-                                                0.05,
-                                      ),
-
-                                      (member.userId == group.leaderId)
-                                          ? Center(
-                                              child: (Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  "Leader",
-                                                  style: TextStyle(
-                                                      fontFamily: 'Cairo',
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 3.2.w,
-                                                      color: Color.fromARGB(
-                                                          170, 0, 0, 0)),
-                                                ),
-                                              )),
-                                            )
-                                          : (Container()),
-
-                                      Container(
-                                        padding: EdgeInsets.all(0)
-                                            .copyWith(right: 0),
-                                        child: MembersCard(
-                                          db: db,
-                                          member: member,
-                                          user: user,
-                                        ),
-                                      ),
-
-                                      // Image.asset("assets/owl1.png")
-                                    ],
-                                  ),
-                                ),
-                                onPressed: () {},
-                                openWithTap: true,
-                                menuWidth:
-                                    MediaQuery.of(context).size.width * 0.30,
-                                menuItems: [
-                                  FocusedMenuItem(
-                                      title: Text(
-                                        member.username,
-                                        style: TextStyle(
-                                          fontFamily: 'Cairo',
-                                          fontSize: 1.5.w,
-                                        ),
-                                      ),
-                                      //  trailingIcon: Icon(Icons.group),
-                                      onPressed: () {}),
-                                  FocusedMenuItem(
-                                      title: Text(
-                                        "حذف العضو",
-                                        style: TextStyle(
-                                          fontFamily: 'Cairo',
-                                          fontSize: 1.5.w,
-                                        ),
-                                      ),
-                                      trailingIcon: Icon(Icons.group),
-                                      onPressed: () {}),
-                                ],
-                              ),
-                            ),
-                          );
+                              child: buildList(context, member));
                         },
                         scrollDirection: Axis.vertical,
                       );
@@ -558,50 +296,171 @@ class CardsOfGroup extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       );
+
+  Widget buildList(BuildContext context, User member) => Container(
+        margin: EdgeInsets.only(
+          left: 15.00.h,
+        ),
+        child: MemberCard(
+          db: db,
+          member: member,
+          group: group,
+          me: user,
+        ),
+      );
 }
 
-class MembersCard extends StatelessWidget {
+class MemberCard extends StatelessWidget {
   final DataBase db;
   final User member;
-  final User user;
-  MembersCard(
-      {Key? key, required this.db, required this.member, required this.user})
+  final Groups group;
+  final User me;
+  MemberCard(
+      {Key? key,
+      required this.db,
+      required this.member,
+      required this.group,
+      required this.me})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print('مجموعة');
-        /* Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Group(db: db, group: group, user: user)),
-        );*/
-      },
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 5.00.h,
-            height: 5.00.w,
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
+    return me.userId == group.leaderId
+        ? FocusedMenuHolder(
+            menuWidth: 40.0.w,
+            menuItems: [
+              FocusedMenuItem(
+                  title: Text(
+                    member.username,
+                    style: TextStyle(
+                      fontFamily: 'Cairo',
+                      fontSize: 1.5.w,
+                    ),
+                  ),
+                  //  trailingIcon: Icon(Icons.group),
+                  onPressed: () {
+                    db.removeUserFromGroup(group.groupId, member.userId);
+                  }),
+              FocusedMenuItem(
+                  title: Text(
+                    "حذف العضو",
+                    style: TextStyle(
+                      fontFamily: 'Cairo',
+                      fontSize: 1.5.w,
+                    ),
+                  ),
+                  trailingIcon: Icon(Icons.group),
+                  onPressed: () {}),
+            ],
+            openWithTap: member.userId == group.leaderId ? false : true,
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //Image of rank
+                Container(
+                  padding: EdgeInsets.all(0).copyWith(left: 0),
+                  child: Stack(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(3.0),
+                          //Group Image
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(
+                                      50.0) //                 <--- border radius here
+                                  ),
+                              border: Border.all(color: Colors.white)),
+                          child: Image.asset(
+                            ("assets/Ranking.png"),
+                            fit: BoxFit.cover,
+                          )),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.height * 0.05,
+                ),
+                //member name
+                Container(
+                  child: Text(
+                    member.username,
+                    style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 3.w,
+                        color: Color.fromARGB(170, 0, 0, 0)),
+                  ),
+                ),
+                //leader name
+                Container(
+                  child: Text(
+                    member.userId == group.leaderId
+                        ? "\t\t\t\t(رئيس المجوعة)"
+                        : "",
+                    style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 2.w,
+                        color: Color.fromARGB(170, 0, 0, 0)),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            child: Text(
-              member.username,
-              style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 3.2.w,
-                  color: Color.fromARGB(170, 0, 0, 0)),
-            ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //Image of rank
+              Container(
+                padding: EdgeInsets.all(0).copyWith(left: 0),
+                child: Stack(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(3.0),
+                        //Group Image
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                    50.0) //                 <--- border radius here
+                                ),
+                            border: Border.all(color: Colors.white)),
+                        child: Image.asset(
+                          ("assets/Ranking.png"),
+                          fit: BoxFit.cover,
+                        )),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.height * 0.05,
+              ),
+
+              //member name
+              Container(
+                child: Text(
+                  member.username,
+                  style: TextStyle(
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 3.w,
+                      color: Color.fromARGB(170, 0, 0, 0)),
+                ),
+              ),
+              //leader
+              Container(
+                child: Text(
+                  member.userId == group.leaderId
+                      ? "\t\t\t\t(رئيس المجوعة)"
+                      : "",
+                  style: TextStyle(
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 2.w,
+                      color: Color.fromARGB(170, 0, 0, 0)),
+                ),
+              ),
+            ],
+          );
   }
 }
