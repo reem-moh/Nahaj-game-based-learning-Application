@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
@@ -9,13 +7,9 @@ import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
 
-import 'addGroup.dart';
-import 'groupChat.dart';
-
 class GroupInfo extends StatefulWidget {
   final DataBase db;
   final User user;
-
   final Groups group;
 
   GroupInfo(
@@ -27,19 +21,6 @@ class GroupInfo extends StatefulWidget {
 }
 
 class _GroupInfo extends State<GroupInfo> {
-  get itemBuilder => null;
-  File? pathOfImage;
-
-  get db => null;
-
-  get group => null;
-
-  get user => null;
-
-  get text => null;
-
-  get isleader => null;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +39,6 @@ class _GroupInfo extends State<GroupInfo> {
           Wrap(
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
@@ -73,21 +53,7 @@ class _GroupInfo extends State<GroupInfo> {
                     Container(
                       padding:
                           EdgeInsets.all(0).copyWith(right: 450, bottom: 40),
-                      child: TextButton(
-                        child: Image(
-                          image: AssetImage("assets/PreviosButton.png"),
-                          alignment: Alignment.topCenter,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                             Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Group(db: db, group: group, user: user)),
-        );;
-                          });
-                        },
-                      ),
+                      child: BackButton(color: Colors.blue[600]),
                     ),
                     Container(
                       alignment: Alignment.topCenter,
@@ -105,16 +71,11 @@ class _GroupInfo extends State<GroupInfo> {
                                 border: Border.all(color: Colors.grey)),
                             child: AspectRatio(
                               aspectRatio: 1,
-                              child: pathOfImage != null
-                                  ? ClipOval(
-                                      child: Image.file(pathOfImage!,
-                                          fit: BoxFit.cover),
-                                    )
-                                  : ClipOval(
-                                      child: Image.asset(
-                                          widget.group.pathOfImage,
-                                          //"assets/owl1.png",
-                                          fit: BoxFit.cover)),
+                              child: ClipOval(
+                                  child: Image(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(widget.group.pathOfImage),
+                              )),
                             ),
                           ),
                           //Camera Iamge
@@ -175,7 +136,7 @@ class _GroupInfo extends State<GroupInfo> {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
 
-//3
+              //3
               // delete group
               Center(child: buildUpgradeButton()),
             ],
@@ -186,36 +147,34 @@ class _GroupInfo extends State<GroupInfo> {
   }
 
   Widget buildUpgradeButton() => ButtonWidget(
-  
-    text: '',
-  isleader: '', //check if the userId ==leaderId
-  
-    onClicked: () { 
-
-    if( isleader == true){
-        text: 'حذف المجموعة';
-                //method delet Group
-
-    }
-    else
-    {
- text: 'الخروج من المجموعة ';
-                 //method delet member
-
-
-    }
-     }, 
-  
+        text: widget.group.leaderId == widget.user.userId
+            ? 'الخروج من المجموعة'
+            : 'حذف المجموعة',
+        onClicked: () {
+          //delet Group
+          widget.group.leaderId == widget.user.userId
+              ? widget.db.removeGroup(widget.group.groupId)
+              : widget.db.removeUserFromGroup(
+                  widget.group.groupId, widget.user.userId);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      db: widget.db,
+                    )),
+          );
+          //move to homePage with alarm you delete the group succusfully!
+        },
       );
+
   List getMembers(List members) {
     var users = [];
 
     members.forEach((member) {
       final list = member.values.toList();
       list.forEach((w) {
-        print("Key: ${w} ");
+        print("Key: $w ");
         users.add(w);
-
       });
     });
     print("get members in group info list: $users member: $members");
@@ -224,16 +183,13 @@ class _GroupInfo extends State<GroupInfo> {
 }
 
 class ButtonWidget extends StatelessWidget {
-  final String text; 
-    final String isleader; 
-
-  
+  final String text;
   final VoidCallback onClicked;
 
   const ButtonWidget({
     Key? key,
     required this.text,
-    required this.onClicked, child, required this.isleader,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
@@ -263,68 +219,6 @@ class CardsOfGroup extends StatelessWidget {
     required this.members,
   }) : super(key: key);
 
-  List members11 = [
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-    {
-      'userId': 'leaderId',
-      'userName': 'leaderName',
-    },
-  ];
   @override
   //change to Map
   Widget build(BuildContext context) => StreamBuilder<List<User>>(

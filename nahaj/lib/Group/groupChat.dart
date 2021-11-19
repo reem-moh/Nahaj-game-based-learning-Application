@@ -71,14 +71,35 @@ class ProfileHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: 84,
+        height: 14.w,
         padding: EdgeInsets.all(16).copyWith(left: 0),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BackButton(color: Colors.blue[600]),
+                Wrap(
+                  children: [
+                    TextButton(
+                            child: Image(
+                              image: AssetImage("assets/PreviosButton.png"),
+                              alignment: Alignment.topCenter,
+                            ),
+                            onPressed: () {
+                             
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage(
+                                        db: db,
+                                      )),
+                                );
+                              
+                            },
+                          ),
+                  ],
+                ),
+                //BackButton(color: Colors.blue[600]),
                 Expanded(
                   child: Text(
                     group.groupName,
@@ -91,8 +112,8 @@ class ProfileHeaderWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
+                Wrap(
+                  //mainAxisSize: MainAxisSize.max,
                   children: [
                     SizedBox(
                       height: 6.2.w,
