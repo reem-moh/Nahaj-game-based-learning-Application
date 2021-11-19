@@ -41,11 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: AssetImage("assets/profileBackground.png"),
                     fit: BoxFit.cover)),
           ),
-          
+
           Column(
             children: [
               const SizedBox(height: 30),
-              //header 
+              //header
               Stack(
                 children: [
                   ElevatedButton(
@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     buildInfo(user),
                     const SizedBox(height: 24),
-                    changes? Center(child: buildUpgradeButton()): Center(),
+                    changes ? Center(child: buildUpgradeButton()) : Center(),
                     const SizedBox(height: 90),
                   ],
                 ),
@@ -102,9 +102,9 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
   Widget buildName(User user) => Column(
         children: [
-          
           const SizedBox(height: 20),
           Text(
             "المستوى: ${user.level}",
@@ -243,6 +243,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
                     child: TextFormField(
+                      textDirection: TextDirection.rtl,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -252,12 +253,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         changes = true;
                         if (val!.length <= 0) {
                           validPass = false;
-                          return 'هذا الحقل مطلوب';
+                          return '  ';
                         } else if (val.length <= 7) {
                           validPass = false;
                           print("pass is not valid");
                           return 'كلمة المرور يجب أن تكون من ٨ أرقام أو أحرف أو أكثر';
-                        } else {
+                        } else if (val.length >= 7) {
                           validPass = true;
                           password = val;
                         }
@@ -299,6 +300,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 0),
                       child: TextFormField(
+                        textDirection: TextDirection.rtl,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -341,7 +343,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           const SizedBox(height: 40),
-           ],
+        ],
       );
 
   Widget buildAbout(User user) => Container(
@@ -365,53 +367,59 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildUpgradeButton() => ButtonWidget(
         text: 'حفظ التغييرات',
         onClicked: () {
-                  // var validate = _key.currentState.validate();
-                  //if (validate) {
-                  //createUser(name, email, password);
-                  //}
-                
+          if (updateUser(name, email, password)) {
+            print("inside dialog!");
+            showDialog(
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  title: Text('تم تحديث البيانات بنجاح'),
+                  content: Image.asset("assets/party.png", fit: BoxFit.cover),
+                );
+              },
+              context: context,
+            );
+          }
         },
       );
-}
+  bool updateUser(String name, String email, String password) {
+    bool changed = false;
+    bool passChanged = false;
+    if (validPass && validRePass) {
+      widget.db.changePassword(password);
+      print(password);
+      print("user changes the pass");
+      validPass = false;
+      validRePass = false;
+      passChanged = true;
+    }
+    if (validName) {
+      if (widget.user.username == name) {
+        print("user did not change the name!");
+      } else {
+        widget.db.changeUserName(name, widget.user.userId);
+        widget.user.username = name;
+        print("user changes the name");
+        validName = false;
+        changed = true;
+      }
+    }
+    if (validEmail) {
+      if (widget.user.email == email) {
+        print("user did not change the email!");
+      } else {
+        widget.db.changeEmail(email, widget.user.userId);
+        widget.user.username = email;
+        print("user changes the email");
+        validEmail = false;
+        changed = true;
+      }
+    }
+    if (changed) widget.db.userInfo(widget.user.userId).then((value) {});
 
-class NumbersWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          buildButton(context, '4.8', 'Ranking'),
-          buildDivider(),
-          buildButton(context, '35', 'Following'),
-          buildDivider(),
-          buildButton(context, '50', 'Followers'),
-        ],
-      );
-  Widget buildDivider() => Container(
-        height: 24,
-        child: VerticalDivider(),
-      );
+    if (passChanged || changed) return true;
 
-  Widget buildButton(BuildContext context, String value, String text) =>
-      MaterialButton(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        onPressed: () {},
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              value,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            SizedBox(height: 2),
-            Text(
-              text,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
+    return false;
+  }
 }
 
 class ProfileWidget extends StatelessWidget {
