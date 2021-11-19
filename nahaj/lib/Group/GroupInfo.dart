@@ -38,7 +38,6 @@ class _GroupInfo extends State<GroupInfo> {
 
   get text => null;
 
-  get isleader => null;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +95,7 @@ class _GroupInfo extends State<GroupInfo> {
                         children: <Widget>[
                           Container(
                             margin: const EdgeInsets.all(15.0),
-                            padding: const EdgeInsets.all(13.0),
+                            padding: const EdgeInsets.all(3.0),
                             //Group Image
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(
@@ -111,7 +110,7 @@ class _GroupInfo extends State<GroupInfo> {
                                           fit: BoxFit.cover),
                                     )
                                   : ClipOval(
-                                      child: Image.asset(
+                                      child: Image.network(
                                           widget.group.pathOfImage,
                                           //"assets/owl1.png",
                                           fit: BoxFit.cover)),
@@ -137,47 +136,55 @@ class _GroupInfo extends State<GroupInfo> {
                   ),
                 ),
               ),
-
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.02,
+  SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
               ),
 
 //2
               //cards
-              Container(
-                  padding: EdgeInsets.all(0).copyWith(left: 500),
-                  height: 430,
-                  width: 1180,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(5),
-                      //bottomRight: Radius.circular(10)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.05),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        //offset: Offset(0, 0), // changes position of shadow
+              Center(
+                child: Container(
+                   alignment: Alignment.center,
+                    height: 500,
+                    width: 700,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(5),
+                        //bottomRight: Radius.circular(10)
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: CardsOfGroup(
-                      db: widget.db,
-                      user: widget.user,
-                      group: widget.group,
-                      members: getMembers(widget.group.members),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.05),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          //offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
                     ),
-                  )),
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Center(
+                          child: CardsOfGroup(
+                            db: widget.db,
+                            user: widget.user,
+                            group: widget.group,
+                            members: getMembers(widget.group.members),
+                          ),
+                        ),
+                      ),
+                    )),
+              ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
+                height: MediaQuery.of(context).size.height * 0.63,
               ),
 
 //3
               // delete group
               Center(child: buildUpgradeButton()),
+
+              
             ],
           ),
         ],
@@ -187,19 +194,21 @@ class _GroupInfo extends State<GroupInfo> {
 
   Widget buildUpgradeButton() => ButtonWidget(
   
-    text: '',
-  isleader: '', //check if the userId ==leaderId
+    text:( widget.user.userId == widget.group.leaderId)?
+        ( 'حذف المجموعة'): 
+( 'الخروج من المجموعة '),
+
+ 
+  
   
     onClicked: () { 
 
-    if( isleader == true){
-        text: 'حذف المجموعة';
+    if( text == 'حذف المجموعة'){
                 //method delet Group
 
     }
     else
     {
- text: 'الخروج من المجموعة ';
                  //method delet member
 
 
@@ -225,7 +234,6 @@ class _GroupInfo extends State<GroupInfo> {
 
 class ButtonWidget extends StatelessWidget {
   final String text; 
-    final String isleader; 
 
   
   final VoidCallback onClicked;
@@ -233,7 +241,7 @@ class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
     Key? key,
     required this.text,
-    required this.onClicked, child, required this.isleader,
+    required this.onClicked, child, 
   }) : super(key: key);
 
   @override
@@ -254,6 +262,12 @@ class CardsOfGroup extends StatelessWidget {
   final DataBase db;
   final Groups group;
   final List members;
+
+
+  //get group => null;
+
+ // get user => null;
+
 
   CardsOfGroup({
     required this.user,
@@ -348,86 +362,174 @@ class CardsOfGroup extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final member = allMembers[index]; //[index];
 
-                          return Container(
-                            height: 80,
-                            width: 5000,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(5),
-                                //bottomRight: Radius.circular(10)
+                          return Center(
+                            child: Container( alignment: Alignment.center,
+                              height: 90,
+                              width: 700,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(5),
+                                  //bottomRight: Radius.circular(10)
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.05),
+                                    spreadRadius: 2,
+                                    blurRadius: 2,
+                                    //offset: Offset(0, 0), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.05),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  //offset: Offset(0, 0), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: FocusedMenuHolder(
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  right: 9.00.h,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topCenter,
-                                      child: Stack(
-                                        alignment: Alignment.topCenter,
-                                        children: <Widget>[
-                                          Container(
-                                            margin: const EdgeInsets.all(15.0),
-                                            padding: const EdgeInsets.all(13.0),
-                                            //Group Image
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                        120.0) //                 <--- border radius here
-                                                    ),
-                                                border: Border.all(
-                                                    color: Colors.grey)),
-                                            child: AspectRatio(
-                                              aspectRatio: 1,
-                                              child: ClipOval(
-                                                  child: Image.asset(
-                                                      //widget.group.pathOfImage
-                                                      "assets/owl1.png",
-                                                      fit: BoxFit.cover)),
-                                            ),
+                              child: FocusedMenuHolder(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: 15.00.h,
+                                  ),
+                                  child: Row( // if ranking == 1 || ranking == 2 || ranking == 3
+                                    children: [ 
+                                      
+                                      
+                                      
+                                      Center(
+                                      child: (/*member.level==1*/true)?
+                                        Container(
+  padding:
+                            EdgeInsets.all(0).copyWith(left: 0),                                      child: Stack(
+                                            //alignment: Alignment.topCenter,
+                                            children: <Widget>[
+                                              Container(
+                                                margin: const EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(3.0),
+                                                //Group Image
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(
+                                                            50.0) //                 <--- border radius here
+                                                        ),
+                                                    border: Border.all(
+                                                        color: Colors.white)),
+                                              
+                                                      child: Image.asset(
+                                                          ("assets/Ranking.png"), /* num1 */
+                                                          fit: BoxFit.cover ,)
+                                                
+                                              ),
+                                              //Camera Iamge
+                                            ],
                                           ),
-                                          //Camera Iamge
-                                        ],
+                                        // ignore: dead_code
+                                        ):((member.level==2)?( Container(
+  padding:
+                            EdgeInsets.all(0).copyWith(left: 0),                                      child: Stack(
+                                            //alignment: Alignment.topCenter,
+                                            children: <Widget>[
+                                              Container(
+                                                margin: const EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(3.0),
+                                                //Group Image
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(
+                                                            50.0) //                 <--- border radius here
+                                                        ),
+                                                    border: Border.all(
+                                                        color: Colors.white)),
+                                              
+                                                      child: Image.asset(
+                                                          ("assets/Ranking.png"), /* num2 */
+                                                          fit: BoxFit.cover ,)
+                                                
+                                              ),
+                                              //Camera Iamge
+                                            ],
+                                          ),
+                                        )):((member.level==3)?( Container(
+                                           padding:
+                            EdgeInsets.all(0).copyWith(left: 0),
+                                          child: Stack(
+                                        //    alignment: Alignment.topCenter,
+                                            children: <Widget>[
+                                              Container(
+                                                margin: const EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(3.0),
+                                                //Group Image
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(
+                                                            50.0) //                 <--- border radius here
+                                                        ),
+                                                    border: Border.all(
+                                                        color: Colors.white)),
+                                              
+                                                      child: Image.asset(
+                                                          ("assets/Ranking.png"), /* num3 */
+                                                          fit: BoxFit.cover ,)
+                                                
+                                              ),
+                                              //Camera Iamge
+                                            ],
+                                          ),
+                                        )):(Container(/* without */)))),
+                                    ),
+  SizedBox(
+                width: MediaQuery.of(context).size.height * 0.05 ,
+              ),
+
+(member.userId==group.leaderId)?Center(
+  child:   (   Container(          alignment: Alignment.center,
+
+              child: Text(
+                "Leader",
+                style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 3.2.w,
+                    color: Color.fromARGB(170, 0, 0, 0)),
+              ),
+            )),
+):(Container()),
+
+                                      Container(   padding:
+                            EdgeInsets.all(0).copyWith(right: 0),
+
+                                        child: MembersCard(
+                                          db: db,
+                                          member: member,
+                                          user: user,
+                                        ),
                                       ),
-                                    ),
 
-                                    MembersCard(
-                                      db: db,
-                                      member: member,
-                                      user: user,
-                                    ),
-
-                                    // Image.asset("assets/owl1.png")
-                                  ],
+                                      // Image.asset("assets/owl1.png")
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              onPressed: () {},
-                              openWithTap: true,
-                              menuWidth:
-                                  MediaQuery.of(context).size.width * 0.30,
-                              menuItems: [
-                                FocusedMenuItem(
-                                    title: Text(
-                                      "حذف العضو",
-                                      style: TextStyle(
-                                        fontFamily: 'Cairo',
-                                        fontSize: 1.5.w,
+                                onPressed: () {},
+                                openWithTap: true,
+                                menuWidth:
+                                    MediaQuery.of(context).size.width * 0.30,
+                                menuItems: [
+                                   FocusedMenuItem(
+                                      title: Text(
+                                          member.username,
+                                        style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 1.5.w,
+                                        ),
                                       ),
-                                    ),
-                                    trailingIcon: Icon(Icons.group),
-                                    onPressed: () {}),
-                              ],
+                                    //  trailingIcon: Icon(Icons.group),
+                                      onPressed: () {}),
+                                  FocusedMenuItem(
+                                      title: Text(
+                                        "حذف العضو",
+                                        style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                          fontSize: 1.5.w,
+                                        ),
+                                      ),
+                                      trailingIcon: Icon(Icons.group),
+                                      onPressed: () {}),
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -482,7 +584,7 @@ class MembersCard extends StatelessWidget {
               style: TextStyle(
                   fontFamily: 'Cairo',
                   fontWeight: FontWeight.w600,
-                  fontSize: 2.2.w,
+                  fontSize: 3.2.w,
                   color: Color.fromARGB(170, 0, 0, 0)),
             ),
           ),
