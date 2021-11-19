@@ -54,7 +54,7 @@ class DataBase extends ChangeNotifier {
           'avatar':
               "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585",
           'level': 0.0,
-          'userId':uid,
+          'userId': uid,
         })
         .then((value) => print("User Added, database page"))
         .catchError(
@@ -79,6 +79,44 @@ class DataBase extends ChangeNotifier {
     } catch (e) {
       print('database page, ' + e.toString());
     }
+  }
+
+  void changePassword(String password) async {
+    var currentUser = _auth.currentUser;
+    currentUser!.updatePassword(password).then((_) {
+      print("Successfully changed password");
+    }).catchError((error) {
+      print("Password can't be changed" + error.toString());
+    });
+  }
+
+  void changeEmail(String email, String userId) async {
+    var currentUser = _auth.currentUser;
+    currentUser!.updateEmail(email).then((_) {
+      //change in user collection
+
+      var docRef = firestore.collection('user').doc(userId);
+      print('docRef: $docRef');
+
+      docRef.update({
+        "email": email,
+      });
+
+      print("Successfully changed email");
+    }).catchError((error) {
+      print("email can't be changed" + error.toString());
+    });
+  }
+
+  void changeUserName(String userName, String userId) async {
+    var docRef = firestore.collection('user').doc(userId);
+    print('docRef: $docRef');
+
+    docRef.update({
+      "name": userName,
+    });
+
+    print("Successfully changed userName");
   }
 
   //Store user info in session
@@ -285,14 +323,20 @@ class DataBase extends ChangeNotifier {
 
   removeGroup(String groupId) {
     //remove from collection chat
-    firestore.collection('Chats').doc(groupId).delete() // <-- Delete
-    .then((_) => print('Deleted from chat collection'))
-    .catchError((error) => print('Delete failed: $error'));
+    firestore
+        .collection('Chats')
+        .doc(groupId)
+        .delete() // <-- Delete
+        .then((_) => print('Deleted from chat collection'))
+        .catchError((error) => print('Delete failed: $error'));
 
     //remove from collection Group
-    firestore.collection('Groups').doc(groupId).delete() // <-- Delete
-    .then((_) => print('Deleted from group collection'))
-    .catchError((error) => print('Delete failed: $error'));
+    firestore
+        .collection('Groups')
+        .doc(groupId)
+        .delete() // <-- Delete
+        .then((_) => print('Deleted from group collection'))
+        .catchError((error) => print('Delete failed: $error'));
   }
 
   /* for Chat */
@@ -398,9 +442,9 @@ class DataBase extends ChangeNotifier {
             (error) => print("database page, Failed to add user: $error"));
   }
 
-  Stream<List<child.User>> getMembers(List members){
+  Stream<List<child.User>> getMembers(List members) {
     print("inside getMembers: \n members list before fetch: $members");
-    var x= firestore
+    var x = firestore
         .collection('user')
         .where('userId', whereIn: members)
         .snapshots()
@@ -410,5 +454,4 @@ class DataBase extends ChangeNotifier {
     print("inside getMembers: \n members list after fetch: ${x}");
     return x;
   }
-
 }
