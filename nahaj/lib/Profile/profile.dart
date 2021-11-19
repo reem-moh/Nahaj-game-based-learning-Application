@@ -258,7 +258,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           validPass = false;
                           print("pass is not valid");
                           return 'كلمة المرور يجب أن تكون من ٨ أرقام أو أحرف أو أكثر';
-                        } else if (val.length >= 7){
+                        } else if (val.length >= 7) {
                           validPass = true;
                           password = val;
                         }
@@ -367,16 +367,30 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildUpgradeButton() => ButtonWidget(
         text: 'حفظ التغييرات',
         onClicked: () {
-          updateUser(name, email, password);
+          if (updateUser(name, email, password)) {
+            print("inside dialog!");
+            showDialog(
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  title: Text('تم تحديث البيانات بنجاح'),
+                  content: Image.asset("assets/party.png", fit: BoxFit.cover),
+                );
+              },
+              context: context,
+            );
+          }
         },
       );
-  void updateUser(String name, String email, String password) async {
+  bool updateUser(String name, String email, String password) {
     bool changed = false;
+    bool passChanged = false;
     if (validPass && validRePass) {
       widget.db.changePassword(password);
       print(password);
       print("user changes the pass");
-      validPass = false; validRePass = false;
+      validPass = false;
+      validRePass = false;
+      passChanged = true;
     }
     if (validName) {
       if (widget.user.username == name) {
@@ -386,7 +400,7 @@ class _ProfilePageState extends State<ProfilePage> {
         widget.user.username = name;
         print("user changes the name");
         validName = false;
-        changed =true;
+        changed = true;
       }
     }
     if (validEmail) {
@@ -397,10 +411,14 @@ class _ProfilePageState extends State<ProfilePage> {
         widget.user.username = email;
         print("user changes the email");
         validEmail = false;
-        changed =true;
+        changed = true;
       }
     }
-    await widget.db.userInfo(widget.user.userId).then((value) {});
+    if (changed) widget.db.userInfo(widget.user.userId).then((value) {});
+
+    if (passChanged || changed) return true;
+
+    return false;
   }
 }
 
