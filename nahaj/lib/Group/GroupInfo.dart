@@ -397,9 +397,9 @@ class MemberCard extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 )
                               : (index == 1 //rank 2
-                                  ? Image.asset("assets/animals.png")
+                                  ? Image.asset("assets/Ranking2.png")
                                   : (index == 2 //rank3
-                                      ? Image.asset("assets/owl.png")
+                                      ? Image.asset("assets/Ranking3.png")
                                       : SizedBox(width: 5.h,)//other
                                   ))),
                     ],
@@ -452,9 +452,9 @@ class MemberCard extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )
                             : (index == 1 //rank 2
-                                ? Image.asset("assets/animals.png")
+                                ? Image.asset("assets/Ranking2.png")
                                 : (index == 2 //rank3
-                                    ? Image.asset("assets/owl.png")
+                                    ? Image.asset("assets/anking3.png")
                                     : SizedBox(width: 5.h,)//other
                                 ))),
                   ],
