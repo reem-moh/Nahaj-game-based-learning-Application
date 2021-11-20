@@ -148,19 +148,6 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
-  //changeEmail
-  /*Future resetEmail(String newEmail) async {
-    var message;
-    FirebaseUser firebaseUser = await _auth.currentUser!();
-    firebaseUser
-        .updateEmail(newEmail)
-        .then(
-          (value) => message = 'Success',
-        )
-        .catchError((onError) => message = 'error');
-    return message;
-  }*/
-
   //Signout
   Future signOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

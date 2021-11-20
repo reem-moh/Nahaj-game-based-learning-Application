@@ -254,13 +254,14 @@ class CardsOfMembers extends StatelessWidget {
                 return buildText(
                     'Something Went Wrong Try later \n ${snapshot.data}');
               } else {
-                final allMembers = snapshot.data;// snapshot.data.sort((a, b) => a.level.compareTo(b.level));
-                allMembers!= null? allMembers.sort((a, b) => a.level.compareTo(b.level)): "";
+                final allMembers = snapshot.data;
+                allMembers != null
+                    ? allMembers.sort((a, b) => b.level.compareTo(a.level))
+                    : "";
                 return allMembers == null
                     ? buildText('لا يوجد لديك مجموعات!')
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        reverse: true,
                         itemCount: allMembers.length,
                         itemBuilder: (context, index) {
                           final member = allMembers[index]; //[index];
@@ -276,13 +277,13 @@ class CardsOfMembers extends StatelessWidget {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.05),
+                                    color: user.userId == member.userId ?Colors.yellow.withOpacity(0.08):Colors.grey.withOpacity(0.05) ,
                                     spreadRadius: 2,
                                     blurRadius: 2,
                                   ),
                                 ],
                               ),
-                              child: buildList(context, member));
+                              child: buildList(context, member, index));
                         },
                         scrollDirection: Axis.vertical,
                       );
@@ -298,7 +299,7 @@ class CardsOfMembers extends StatelessWidget {
         ),
       );
 
-  Widget buildList(BuildContext context, User member) => Container(
+  Widget buildList(BuildContext context, User member, int index) => Container(
         margin: EdgeInsets.only(
           left: 15.00.h,
         ),
@@ -307,6 +308,7 @@ class CardsOfMembers extends StatelessWidget {
           member: member,
           group: group,
           me: user,
+          index: index,
         ),
       );
 }
@@ -316,12 +318,14 @@ class MemberCard extends StatelessWidget {
   final User member;
   final Groups group;
   final User me;
+  final int index;
   MemberCard(
       {Key? key,
       required this.db,
       required this.member,
       required this.group,
-      required this.me})
+      required this.me,
+      required this.index})
       : super(key: key);
 
   @override
@@ -387,16 +391,17 @@ class MemberCard extends StatelessWidget {
                       Container(
                           margin: const EdgeInsets.all(10.0),
                           padding: const EdgeInsets.all(3.0),
-                          //Group Image
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                      50.0) //                 <--- border radius here
-                                  ),
-                              border: Border.all(color: Colors.white)),
-                          child: Image.asset(
-                            ("assets/Ranking.png"),
-                            fit: BoxFit.cover,
-                          )),
+                          child: index == 0 //rank 1
+                              ? Image.asset(
+                                  ("assets/Ranking.png"),
+                                  fit: BoxFit.cover,
+                                )
+                              : (index == 1 //rank 2
+                                  ? Image.asset("assets/animals.png")
+                                  : (index == 2 //rank3
+                                      ? Image.asset("assets/owl.png")
+                                      : Image.asset("assets/party.png") //other
+                                  ))),
                     ],
                   ),
                 ),
@@ -441,16 +446,17 @@ class MemberCard extends StatelessWidget {
                     Container(
                         margin: const EdgeInsets.all(10.0),
                         padding: const EdgeInsets.all(3.0),
-                        //Group Image
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(
-                                    50.0) //                 <--- border radius here
-                                ),
-                            border: Border.all(color: Colors.white)),
-                        child: Image.asset(
-                          ("assets/Ranking.png"),
-                          fit: BoxFit.cover,
-                        )),
+                        child: index == 0 //rank 1
+                            ? Image.asset(
+                                ("assets/Ranking.png"),
+                                fit: BoxFit.cover,
+                              )
+                            : (index == 1 //rank 2
+                                ? Image.asset("assets/animals.png")
+                                : (index == 2 //rank3
+                                    ? Image.asset("assets/owl.png")
+                                    : Image.asset("assets/party.png") //other
+                                ))),
                   ],
                 ),
               ),
