@@ -53,7 +53,7 @@ class DataBase extends ChangeNotifier {
           //default avatar values:
           'avatar':
               "https://firebasestorage.googleapis.com/v0/b/nahaj-6104c.appspot.com/o/Avatar%2Fowl.png?alt=media&token=1e5f590d-ce96-4f4a-82d0-5a455d197585",
-          'level': 0.0,
+          'level': 0,
           'userId': uid,
         })
         .then((value) => print("User Added, database page"))
@@ -124,7 +124,7 @@ class DataBase extends ChangeNotifier {
     String name = '1';
     String email = '1';
     String avatar = '1';
-    double level = 0.0;
+    int level = 0;
 
     await user.doc(uid).get().then((value) {
       print('read from firestore: \n ' +
@@ -143,7 +143,7 @@ class DataBase extends ChangeNotifier {
     prefs.setString('userId', uid);
     prefs.setString('username', name);
     prefs.setString('avatar', avatar);
-    prefs.setDouble('level', level);
+    prefs.setInt('level', level);
     prefs.setString('email', email);
     return true;
   }

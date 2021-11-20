@@ -69,7 +69,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         String username = (prefs.getString('username') ?? "1");
         String userId = (prefs.getString('userId') ?? "1");
         String email = (prefs.getString('email') ?? "1");
-        double level = (prefs.getDouble('level') ?? -1);
+        int level = (prefs.getInt('level') ?? -1);
         user = User(
             userId: userId,
             username: username,

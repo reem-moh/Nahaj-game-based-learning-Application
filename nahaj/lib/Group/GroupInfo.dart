@@ -252,9 +252,10 @@ class CardsOfMembers extends StatelessWidget {
             default:
               if (snapshot.hasError) {
                 return buildText(
-                    'Something Went Wrong Try later ${snapshot.hasError}');
+                    'Something Went Wrong Try later \n ${snapshot.data}');
               } else {
-                final allMembers = snapshot.data;
+                final allMembers = snapshot.data;// snapshot.data.sort((a, b) => a.level.compareTo(b.level));
+                allMembers!= null? allMembers.sort((a, b) => a.level.compareTo(b.level)): "";
                 return allMembers == null
                     ? buildText('لا يوجد لديك مجموعات!')
                     : ListView.builder(
@@ -338,9 +339,7 @@ class MemberCard extends StatelessWidget {
                     ),
                   ),
                   //  trailingIcon: Icon(Icons.group),
-                  onPressed: () {
-                    db.removeUserFromGroup(group.groupId, member.userId);
-                  }),
+                  onPressed: () {}),
               FocusedMenuItem(
                   title: Text(
                     "حذف العضو",
@@ -350,7 +349,30 @@ class MemberCard extends StatelessWidget {
                     ),
                   ),
                   trailingIcon: Icon(Icons.group),
-                  onPressed: () {}),
+                  onPressed: () {
+                    db.removeUserFromGroup(group.groupId, member.userId);
+                    showDialog(
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: Text("تم حذف العضو بنجاح"),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage(
+                                              db: db,
+                                            )),
+                                  );
+                                },
+                                child: Text("OK")),
+                          ],
+                        );
+                      },
+                      context: context,
+                    );
+                  }),
             ],
             openWithTap: member.userId == group.leaderId ? false : true,
             onPressed: () {},

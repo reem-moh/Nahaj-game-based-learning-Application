@@ -5,7 +5,7 @@ class User extends ChangeNotifier {
   String username= '';
   String email= '';
   String avatar= '';
-  double level= -1;
+  int level= -1;
 
   User(
       {required this.userId,
