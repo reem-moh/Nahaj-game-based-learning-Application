@@ -60,13 +60,7 @@ class _SignupState extends State<SignUp> {
                         ),
                         onPressed: () {
                           setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Signin(
-                                        db: widget.db,
-                                      )),
-                            );
+                            Navigator.of(context).pop();
                           });
                         },
                       ),
@@ -368,13 +362,7 @@ class _SignupState extends State<SignUp> {
           
           print("log in Successuflly, signin page");
           await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomePage(
-                      db: widget.db,
-                    )),
-          );
+          Navigator.of(context).pushNamed('/HomePage');
         }
       }
     }

@@ -71,13 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onPressed: () {
                       setState(() {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage(
-                                    db: widget.db,
-                                  )),
-                        );
+                        Navigator.of(context).pop();
                       });
                     },
                   ),
@@ -399,7 +393,9 @@ class _ProfilePageState extends State<ProfilePage> {
               if (avatars[i] != null)
                 Column(
                   children: [
-                    SizedBox(width: 12.0.w,),
+                    SizedBox(
+                      width: 12.0.w,
+                    ),
                     SizedBox(
                       width: 10.0.w,
                       height: 10.0.w,
@@ -416,19 +412,32 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                         child: widget.user.level < avatars[i]['level']
-                            ? Stack(
-                                alignment: AlignmentDirectional.center,
-                                children: [
-                                  FadeInImage.assetNetwork(
-                                    placeholder: 'assets/loading.gif',
-                                    image: avatars[i]['url'],
-                                  ),
-                                  Image.asset(
-                                    "assets/lock.png",
-                                    fit: BoxFit.contain,
-                                    scale: 10,
-                                  ),
-                                ],
+                            ? Scaffold(
+                                body: Stack(
+                                  alignment: AlignmentDirectional.center,
+                                  children: [
+                                    FadeInImage.assetNetwork(
+                                      placeholder: 'assets/loading.gif',
+                                      image: avatars[i]['url'],
+                                    ),
+                                    IconButton(
+                                      alignment: Alignment.center,
+                                      iconSize: 6.w,
+                                      icon: Icon(Icons.lock),
+                                      onPressed: () {
+                                        showDialog(
+                                          builder: (BuildContext context) {
+                                            return CupertinoAlertDialog(
+                                              title: Text(
+                                                  'سيتم فتح صورة العرض عندما تصل الى مستوى ${avatars[i]['level']}'),
+                                            );
+                                          },
+                                          context: context,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               )
                             : ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -443,21 +452,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                               builder: (BuildContext context) {
                                                 return CupertinoAlertDialog(
                                                   title: Text(
-                                                      'تم تحديث صورة العرض بنجاح'),
-                                                  
+                                                    'تم تحديث صورة العرض بنجاح',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontFamily: 'Cairo',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 27,
+                                                    ),
+                                                  ),
                                                   actions: [
                                                     ElevatedButton(
                                                         onPressed: () {
-                                                          Navigator
-                                                              .pushReplacement(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        HomePage(
-                                                                          db: widget.db,
-                                                                        )),
-                                                          );
+                                                          Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
                                                         },
                                                         child: Text("OK")),
                                                   ],

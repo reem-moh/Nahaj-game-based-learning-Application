@@ -465,6 +465,7 @@ class DataBase extends ChangeNotifier {
         avatar.add({'url':querySnapshot.docs[i]['url'],'level':querySnapshot.docs[i]['level']});    
     }
     print("avatar inside db: $avatar");
+    avatar.sort((a, b) => a['level'].compareTo(b['level']));
     return avatar;
   }
 

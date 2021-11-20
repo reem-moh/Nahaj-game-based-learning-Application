@@ -94,13 +94,7 @@ class _AddGroup2 extends State<AddGroup2> {
                             color: Color.fromARGB(255, 129, 190, 255))),
                     onPressed: () {
                       setState(() {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage(
-                                    db: widget.db,
-                                  )),
-                        );
+                        Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
                       });
                       //createGroup(name);
                     },

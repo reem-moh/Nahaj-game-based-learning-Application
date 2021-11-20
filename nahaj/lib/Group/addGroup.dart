@@ -55,13 +55,7 @@ class _AddGroup extends State<AddGroup> {
                 ),
                 onPressed: () {
                   setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                db: widget.db,
-                              )),
-                    );
+                    Navigator.of(context).pop();
                   });
                 },
               ),

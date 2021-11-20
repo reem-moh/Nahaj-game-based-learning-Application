@@ -64,14 +64,7 @@ class _GroupInfo extends State<GroupInfo> {
                             ),
                             onPressed: () {
                               setState(() {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Group(
-                                          db: widget.db,
-                                          group: widget.group,
-                                          user: widget.user)),
-                                );
+                                Navigator.of(context).pop();
                               });
                             },
                           ),
@@ -177,13 +170,7 @@ class _GroupInfo extends State<GroupInfo> {
               ? widget.db.removeGroup(widget.group.groupId)
               : widget.db.removeUserFromGroup(
                   widget.group.groupId, widget.user.userId);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomePage(
-                      db: widget.db,
-                    )),
-          );
+          Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
           //move to homePage with alarm you delete the group succusfully!
         },
       );
@@ -362,13 +349,7 @@ class MemberCard extends StatelessWidget {
                           actions: [
                             ElevatedButton(
                                 onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage(
-                                              db: db,
-                                            )),
-                                  );
+                                  Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
                                 },
                                 child: Text("OK")),
                           ],

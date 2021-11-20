@@ -84,13 +84,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
 
     widget.db.signOut().then((s) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Signin(
-                  db: widget.db,
-                )),
-      );
+      Navigator.of(context).pushNamed('/HomePage');
     });
   }
 

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nahaj/Group/GroupInfo.dart';
-import 'package:nahaj/HomePage/homePage.dart';
-import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/SignPages/Signin.dart';
 //import 'package:nahaj/Group/addGroup.dart';
 //import 'package:nahaj/Group/group.dart';
@@ -11,6 +8,9 @@ import 'package:nahaj/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
+
+import 'HomePage/homePage.dart';
+import 'SignPages/signUp.dart';
 //import 'package:nahaj/Group/joinGroup.dart';
 //import 'package:nahaj/SignPages/signUp.dart';
 //import 'package:nahaj/Group/addGroup2.dart';
@@ -37,23 +37,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {  
-      return MaterialApp(
-        title: 'Nahaj',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Signin(db: this.database,)
-        
-        
-         /*GroupInfo(
-          //groupName: 'مجموعة',
-          db: this.database, group:  Groups(goupCode: 2, groupId: "2", groupName: "groupName", leaderId: "leaderId", leaderName: "leaderName", pathOfImage: "pathOfImage", members: [{}]), user: new User(userId: "userId", username: "ريم", email: "email", avatar: "avatar", level: 1),) 
-        *//*AddGroup2(
-          db: this.database,
-        ),*/
-        //MyHomePage(title: 'Nahaj'),
-      );
+      builder: (BuildContext context, Orientation orientation,
+          DeviceType deviceType) {
+        return MaterialApp(
+          title: 'Nahaj',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: Signin(
+            db: this.database,
+          ),
+          routes: <String, WidgetBuilder>{
+            '/SignUp': (BuildContext context) => new SignUp(db: this.database,),
+            '/HomePage': (BuildContext context) => new HomePage(db: this.database,),
+            '/Signin': (BuildContext context) => new Signin(db: this.database,),
+          },
+        );
       },
     );
   }

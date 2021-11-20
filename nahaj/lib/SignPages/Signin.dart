@@ -181,13 +181,7 @@ class _SigninState extends State<Signin> {
                         if (valid) {
                           if (await loginUser()) {
                             setState(() {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage(
-                                          db: widget.db,
-                                        )),
-                              );
+                              Navigator.of(context).pushNamed('/HomePage');
                             });
                           } else {
                             loginErr = true;
@@ -252,13 +246,7 @@ class _SigninState extends State<Signin> {
                         ),
                         onPressed: () {
                           setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUp(
-                                        db: widget.db,
-                                      )),
-                            );
+                            Navigator.of(context).pushNamed('/SignUp');
                           });
                         },
                       ),

@@ -87,13 +87,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                              
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePage(
-                                        db: db,
-                                      )),
-                                );
+                                Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
                               
                             },
                           ),

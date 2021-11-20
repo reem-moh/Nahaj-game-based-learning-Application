@@ -45,13 +45,7 @@ class _JoinGroup extends State<JoinGroup> {
                 ),
                 onPressed: () {
                   setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                                db: widget.db,
-                              )),
-                    );
+                    Navigator.of(context).pop();
                   });
                 },
               ),
@@ -141,13 +135,7 @@ class _JoinGroup extends State<JoinGroup> {
                         //1 means added to the group
                         if (check == '1') {
                           setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage(
-                                        db: widget.db,
-                                      )),
-                            );
+                            Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );                            
                           });
                         }
                       }
