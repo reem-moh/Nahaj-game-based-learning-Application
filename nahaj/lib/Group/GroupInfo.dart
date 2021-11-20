@@ -400,7 +400,7 @@ class MemberCard extends StatelessWidget {
                                   ? Image.asset("assets/animals.png")
                                   : (index == 2 //rank3
                                       ? Image.asset("assets/owl.png")
-                                      : Image.asset("assets/party.png") //other
+                                      : SizedBox(width: 5.h,)//other
                                   ))),
                     ],
                   ),
@@ -455,7 +455,7 @@ class MemberCard extends StatelessWidget {
                                 ? Image.asset("assets/animals.png")
                                 : (index == 2 //rank3
                                     ? Image.asset("assets/owl.png")
-                                    : Image.asset("assets/party.png") //other
+                                    : SizedBox(width: 5.h,)//other
                                 ))),
                   ],
                 ),
