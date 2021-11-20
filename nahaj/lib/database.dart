@@ -119,6 +119,18 @@ class DataBase extends ChangeNotifier {
     print("Successfully changed userName");
   }
 
+  Future<bool> changeAvatar(String urlAvatar,String userId) async{
+    var docRef = firestore.collection('user').doc(userId);
+    print('docRef: $docRef');
+
+    await docRef.update({
+      "avatar": urlAvatar,
+    });
+
+    print("Successfully changed avatar");
+    return true;
+  }
+
   //Store user info in session
   Future<dynamic> userInfo(String uid) async {
     String name = '1';
@@ -444,13 +456,16 @@ class DataBase extends ChangeNotifier {
 
   Future<List> listOfAvatars() async {
     List avatar = [];
+    var collection =
+        firestore.collection('AvatarImages');
 
-    for(int i =1 ; i<=25 ; i++){
-      await firestorage.ref('/Avatar/owl$i.png').getDownloadURL().then((value) =>
-        avatar.add(value)
-      );      
+    var querySnapshot = await collection.get();
+    
+    for(int i =0 ; i<querySnapshot.size ; i++){
+        avatar.add({'url':querySnapshot.docs[i]['url'],'level':querySnapshot.docs[i]['level']});    
     }
     print("avatar inside db: $avatar");
     return avatar;
   }
+
 }

@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     getAvatarImages();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     final user = widget.user;
@@ -88,9 +88,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       imagePath: user.avatar,
                       onClicked: () async {
                         showDialog(
-                          builder: (BuildContext context) {
+                          builder: (context) {
                             return CupertinoAlertDialog(
-                              title: Text('تغيير صورة العرض'),
+                              title: Text(
+                                'تغيير صورة العرض',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 2.7.w,
+                                ),
+                              ),
                               content: Center(child: buildListOfAvatars()),
                             );
                           },
@@ -391,26 +399,82 @@ class _ProfilePageState extends State<ProfilePage> {
               if (avatars[i] != null)
                 Column(
                   children: [
+                    SizedBox(width: 12.0.w,),
                     SizedBox(
                       width: 10.0.w,
                       height: 10.0.w,
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(26),
-                          color: Colors.white54,
+                          //borderRadius: BorderRadius.circular(26),
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.shade400,
                               blurRadius: 7,
                               spreadRadius: 0,
-                              offset: Offset(4, 4),
                             ),
                           ],
                         ),
-                        child: FadeInImage.assetNetwork(
-                          placeholder: 'assets/loading.gif',
-                          image: avatars[i],
-                        ),
+                        child: widget.user.level < avatars[i]['level']
+                            ? Stack(
+                                alignment: AlignmentDirectional.center,
+                                children: [
+                                  FadeInImage.assetNetwork(
+                                    placeholder: 'assets/loading.gif',
+                                    image: avatars[i]['url'],
+                                  ),
+                                  Image.asset(
+                                    "assets/lock.png",
+                                    fit: BoxFit.contain,
+                                    scale: 10,
+                                  ),
+                                ],
+                              )
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                ),
+                                onPressed: () {
+                                  widget.db
+                                      .changeAvatar(
+                                          avatars[i]['url'], widget.user.userId)
+                                      .then((value) => {
+                                            showDialog(
+                                              builder: (BuildContext context) {
+                                                return CupertinoAlertDialog(
+                                                  title: Text(
+                                                      'تم تحديث صورة العرض بنجاح'),
+                                                  
+                                                  actions: [
+                                                    ElevatedButton(
+                                                        onPressed: () {
+                                                          Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        HomePage(
+                                                                          db: widget.db,
+                                                                        )),
+                                                          );
+                                                        },
+                                                        child: Text("OK")),
+                                                  ],
+                                                );
+                                              },
+                                              context: context,
+                                            ),
+                                            widget.db
+                                                .userInfo(widget.user.userId)
+                                                .then((value) {})
+                                          });
+                                },
+                                child: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/loading.gif',
+                                  image: avatars[i]['url'],
+                                ),
+                              ),
                       ),
                     ),
                     SizedBox(
@@ -468,7 +532,7 @@ class _ProfilePageState extends State<ProfilePage> {
         print("user did not change the email!");
       } else {
         widget.db.changeEmail(email, widget.user.userId);
-        widget.user.username = email;
+        widget.user.email = email;
         print("user changes the email");
         validEmail = false;
         changed = true;
@@ -481,8 +545,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return false;
   }
 
-  getAvatarImages(){
-    widget.db.listOfAvatars().then((value) => avatars=value);
+  getAvatarImages() {
+    widget.db.listOfAvatars().then((value) => avatars = value);
   }
 }
 
@@ -506,13 +570,9 @@ class ProfileWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              //borderRadius: BorderRadius.all(Radius.circular(
-              //                   120.0),),
               shape: BoxShape.circle,
               border: Border.all(color: Colors.grey),
-              //borderRadius: BorderRadius.circular(26),
-              color: Colors.white,
-              //border: RoundedRectangleBorder,
+              color: Colors.white38,
             ),
             child: buildImage(),
           ),
@@ -535,7 +595,7 @@ class ProfileWidget extends StatelessWidget {
         color: Colors.transparent,
         child: Ink.image(
           image: image,
-          fit: BoxFit.fill,
+          fit: BoxFit.contain,
           width: 128,
           height: 128,
           child: InkWell(onTap: onClicked),

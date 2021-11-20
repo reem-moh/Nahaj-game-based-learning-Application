@@ -151,20 +151,15 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 ),
                 accountEmail: Text(""),
                 currentAccountPicture: CircleAvatar(
-                  child: ClipOval(
-                    child: user.avatar == "1"
-                        ? CircularProgressIndicator()
-                        : FadeInImage.assetNetwork(
-                            placeholder: 'assets/loading.gif',
-                            image: user.avatar,
-                            fit: BoxFit.fill,
-                            alignment: Alignment.center,
-                          ),
-                    /*
-                          
-                           */
-                  ),
-                  backgroundColor: Colors.grey[400],
+                  child: user.avatar == "1"
+                      ? CircularProgressIndicator()
+                      : FadeInImage.assetNetwork(
+                          placeholder: 'assets/loading.gif',
+                          image: user.avatar,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center,
+                        ),
+                  backgroundColor: Colors.white54,
                 ),
                 currentAccountPictureSize:
                     Size(screenHeight * 0.38, screenWidth * 0.1),
@@ -405,7 +400,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                     : FadeInImage.assetNetwork(
                                         placeholder: 'assets/loading.gif',
                                         image: user.avatar,
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.contain,
                                       ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
@@ -725,13 +720,13 @@ class GroupsCard extends StatelessWidget {
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.grey[350],
+              color: Colors.white54,
             ),
             child: ClipOval(
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/loading.gif',
                 image: group.pathOfImage,
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
                 alignment: Alignment.center,
               ),
             ),
