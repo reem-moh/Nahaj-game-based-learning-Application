@@ -129,7 +129,10 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 20),
           Text(
             "المستوى: ${user.level}",
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 2.7.w,
+            ),
           )
         ],
       );
@@ -139,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
           //Name
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            //crossAxisAlignment: MainAxisAlignment,
+            //crossAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               //Name
               Expanded(
@@ -464,7 +467,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   actions: [
                                                     ElevatedButton(
                                                         onPressed: () {
-                                                          Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
+                                                          Navigator.of(context)
+                                                              .pushNamedAndRemoveUntil(
+                                                                  '/HomePage',
+                                                                  (Route<dynamic>
+                                                                          route) =>
+                                                                      false);
                                                         },
                                                         child: Text("OK")),
                                                   ],

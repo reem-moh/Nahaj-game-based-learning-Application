@@ -81,10 +81,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 
   _logout() {
-    //Navigator.pushNamedAndRemoveUntil(context, "/SigninPage", (r) => false);
-
     widget.db.signOut().then((s) {
-      Navigator.of(context).pushNamed('/HomePage');
+      Navigator.of(context).pushNamed('/Signin');
     });
   }
 
@@ -229,7 +227,9 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                 user: user,
                               )),
                     );
-                    tappedIndex = 1;
+                    //tappedIndex = 1;
+                    _controller.reverse();
+                    isCollapsed = !isCollapsed;
                   });
                 },
               ),
@@ -266,7 +266,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     
                   });*/
                   setState(() {
-                    tappedIndex = 2;
+                   // tappedIndex = 2;
                   });
                 },
               ),
