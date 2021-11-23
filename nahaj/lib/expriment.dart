@@ -20,6 +20,7 @@ class Experiment extends StatefulWidget {
 class _Experiment extends State<Experiment> {
   late UnityWidgetController _unityWidgetController;
   bool paused = false;
+  bool showQuestions = false;
   double buttonWidth = 0;
   double buttonHeight = 0;
   @override
@@ -62,7 +63,8 @@ class _Experiment extends State<Experiment> {
                     width: 60,
                   ),
                   onTap: () {
-                    if (paused) {
+                    exitExperiment();
+                    /*if (paused) {
                       _unityWidgetController.resume()!.then((value) =>
                           _unityWidgetController
                               .unload()!
@@ -85,7 +87,7 @@ class _Experiment extends State<Experiment> {
                                           db: widget.db,
                                         )),
                               ));
-                    }
+                    }*/
                   },
                 ),
               ),
@@ -99,6 +101,8 @@ class _Experiment extends State<Experiment> {
     if (message.toString() == "END") {
       //if quit shows error let user unload(), quit()
       _unityWidgetController.pause()!.then((value) => paused = true);
+      print(paused);
+
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -123,6 +127,29 @@ class _Experiment extends State<Experiment> {
     this._unityWidgetController = controller;
     _unityWidgetController.pause();
     _unityWidgetController.resume();
+  }
+
+  void exitExperiment() {
+    if (paused) {
+      _unityWidgetController.resume()!.then((value) =>
+          _unityWidgetController.unload()!.then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Category(
+                          categoryTitle: widget.category,
+                          db: widget.db,
+                        )),
+              )));
+    } else {
+      _unityWidgetController.unload()!.then((value) => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Category(
+                      categoryTitle: widget.category,
+                      db: widget.db,
+                    )),
+          ));
+    }
   }
 }
 
@@ -158,6 +185,8 @@ class QuestionsWidget extends StatelessWidget {
                     : QuestionCard(
                         db: db,
                         questions: allQuestions,
+                        expID: expID,
+                        exp: exp,
                       );
               }
           }
@@ -173,115 +202,324 @@ class QuestionsWidget extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends StatefulWidget {
   final List<Question>? questions;
+  final String expID;
+  final ExperimentInfo exp;
   final DataBase db;
-  int i = 0;
-  int chosenAnswer = -1;
 
-  QuestionCard({required this.questions, required this.db});
+  QuestionCard({
+    required this.questions,
+    required this.db,
+    required this.expID,
+    required this.exp,
+  });
+
+  @override
+  State<QuestionCard> createState() => _QuestionCardState();
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  int i = 0;
+  int chosenAnswer = 0;
+  int userScore = 0;
+  double fontSize = 6;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 70.h,
-      height: MediaQuery.of(context).size.height / 2,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.asset(
-            'assets/QuestionBackground.png',
-            width: 70.h,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                questions![i].question,
-                style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 5.w,
-                  color: Color.fromARGB(170, 0, 0, 0),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+    return Card(
+      color: Color.fromARGB(0, 0, 0, 0),
+      shadowColor: Color.fromARGB(0, 0, 0, 0),
+      child: Container(
+        margin: EdgeInsets.only(left: 14.5.h, top: 35.w),
+        width: 70.h,
+        height: 50.h,
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/QuestionBackground.png',
+              width: 70.h,
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 14.5.h),
+              child: Column(
                 children: [
-                  ButtonBar(
+                  Container(
+                    margin: EdgeInsets.only(top: 3.w),
+                    alignment: Alignment.topCenter,
+                    width: 70.h,
+                    child: Text(
+                      widget.questions![i].question,
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontSize.sp,
+                        color: Color.fromARGB(170, 0, 0, 0),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(questions![i].answers[0]),
-                      Radio(
-                          value: 0,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                      Text(questions![i].answers[1]),
-                      Radio(
-                          value: 1,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
+                      Container(
+                        margin: EdgeInsets.only(
+                            right: 15.h,
+                            top: widget.questions![i].answers[2] != ""
+                                ? 0
+                                : 6.w),
+                        child: ButtonBar(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 0, right: 0),
+                              alignment: Alignment.centerRight,
+                              width: 20.h,
+                              height: 5.w,
+                              child: Text(
+                                widget.questions![i].answers[0],
+                                style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: fontSize.sp,
+                                  color: Color.fromARGB(170, 0, 0, 0),
+                                ),
+                              ),
+                            ),
+                            Radio(
+                                value: 1,
+                                groupValue: chosenAnswer,
+                                onChanged: onChanged),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 0, right: 0),
+                              alignment: Alignment.centerRight,
+                              width: 20.h,
+                              height: 5.w,
+                              child: Text(
+                                widget.questions![i].answers[1],
+                                style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: fontSize.sp,
+                                  color: Color.fromARGB(170, 0, 0, 0),
+                                ),
+                              ),
+                            ),
+                            Radio(
+                                value: 2,
+                                groupValue: chosenAnswer,
+                                onChanged: onChanged),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
+                  //if true and false question we don't need 4 answers
+                  widget.questions![i].answers[2] != ""
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 15.h),
+                              child: ButtonBar(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: 0, bottom: 0, left: 0, right: 0),
+                                    alignment: Alignment.centerRight,
+                                    width: 20.h,
+                                    height: 5.w,
+                                    child: Text(
+                                      widget.questions![i].answers[2],
+                                      style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: fontSize.sp,
+                                        color: Color.fromARGB(170, 0, 0, 0),
+                                      ),
+                                    ),
+                                  ),
+                                  Radio(
+                                      value: 3,
+                                      groupValue: chosenAnswer,
+                                      onChanged: onChanged),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: 0, bottom: 0, left: 0, right: 0),
+                                    alignment: Alignment.centerRight,
+                                    width: 20.h,
+                                    height: 5.w,
+                                    child: Text(
+                                      widget.questions![i].answers[3],
+                                      style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: fontSize.sp,
+                                        color: Color.fromARGB(170, 0, 0, 0),
+                                      ),
+                                    ),
+                                  ),
+                                  Radio(
+                                      value: 4,
+                                      groupValue: chosenAnswer,
+                                      onChanged: onChanged),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ButtonBar(
-                    children: [
-                      Text(questions![i].answers[2]),
-                      Radio(
-                          value: 2,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                      Text(questions![i].answers[3]),
-                      Radio(
-                          value: 3,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                    ],
-                  ),
-                ],
-              ),
-              InkWell(
+            ),
+            //next/ send button
+            Container(
+              margin: i == widget.questions!.length - 1
+                  ? EdgeInsets.only(left: 5.h, top: 17.w)
+                  : EdgeInsets.only(left: 4.h, top: 19.w),
+              child: InkWell(
                 onTap: () {
-                  if (i < questions!.length) {
-                    if (i == questions!.length - 1) {
-                      //update score
-                      //alert of score
-                    }
-                    if (chosenAnswer == -1) {
-                      //error message
-                    } else {
-                      if (questions![i].answers[chosenAnswer] ==
-                          questions![i].correctAnswer) {
-                        //banner correct answer
-                        i++;
-                      } else {
-                        //banner wrong answer
-                        i++;
-                      }
-                    }
-                  }
+                  nextQuestion();
                 },
                 child: Image.asset(
-                  i == questions!.length - 1
+                  i == widget.questions!.length - 1
                       ? 'assets/start_button.png'
                       : 'assets/ExperimentBackButton.png',
-                  width: MediaQuery.of(context).size.width / 10,
-                  height: MediaQuery.of(context).size.width / 10,
+                  width: i == widget.questions!.length - 1
+                      ? MediaQuery.of(context).size.width / 10
+                      : MediaQuery.of(context).size.width / 20,
+                  height: i == widget.questions!.length - 1
+                      ? MediaQuery.of(context).size.width / 10
+                      : MediaQuery.of(context).size.width / 20,
                 ),
-              )
-            ],
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   void onChanged(int? value) {
-    chosenAnswer = value!;
+    setState(() {
+      chosenAnswer = value!;
+    });
+  }
+
+  void nextQuestion() {
+//check if i is within array bounds
+    if (i < widget.questions!.length) {
+      //check if answer is chosen
+      if (chosenAnswer == 0) {
+        //banner error message
+
+      } else {
+        //check if last question
+        if (i == widget.questions!.length - 1) {
+          sendScore();
+          //if not the last question
+        } else {
+          //if answered correctly
+          if (widget.questions![i].answers[chosenAnswer - 1] ==
+              widget.questions![i].correctAnswer) {
+            //banner correct answer
+            //update score
+            userScore += widget.questions![i].score;
+            print(widget.questions![i].correctAnswer +
+                "  " +
+                widget.questions![i].answers[chosenAnswer - 1] +
+                " " +
+                userScore.toString());
+            //reset radio button group value and increment i
+            setState(() {
+              chosenAnswer = 0;
+              i++;
+            });
+          } else {
+            //answer wrong
+            //banner wrong answer
+            //reset radio button group value and increment i
+            setState(() {
+              chosenAnswer = 0;
+              i++;
+            });
+          }
+        }
+      }
+    }
+  }
+
+  void sendScore() {
+    _Experiment _experiment = _Experiment();
+//check answer of last question
+    if (widget.questions![i].answers[chosenAnswer - 1] ==
+        widget.questions![i].correctAnswer) {
+      //banner correct answer
+      userScore += widget.questions![i].score;
+    } else {
+      //banner wrong answer
+    }
+    //update score with experiment score
+    userScore += widget.exp.experimentScore;
+
+    widget.db.updateExpScore(widget.expID, userScore);
+
+    //alert of score
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Color.fromARGB(0, 0, 0, 0),
+            content: Container(
+              width: 30.h,
+              height: 30.h,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/ScoreBackground.png'),
+                  scale: 0.5,
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '🎊',
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSize.sp,
+                            color: Color.fromARGB(255, 0, 71, 147),
+                          ),
+                        ),
+                        Text(
+                          'لقد أجبت على جميع الأسئلة بنجاح',
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSize.sp,
+                            color: Color.fromARGB(255, 0, 71, 147),
+                          ),
+                        ),
+                        InkWell(
+                          child: Image.asset(
+                            'assets/ٍReturnButton.png',
+                            width: 10.h,
+                          ),
+                          onTap: () {
+                            _experiment.exitExperiment();
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

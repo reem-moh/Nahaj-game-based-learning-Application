@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nahaj/NahajClasses/child.dart' as child;
+import 'package:nahaj/NahajClasses/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NahajClasses/Chats.dart';
 
@@ -119,7 +120,7 @@ class DataBase extends ChangeNotifier {
     print("Successfully changed userName");
   }
 
-  Future<bool> changeAvatar(String urlAvatar,String userId) async{
+  Future<bool> changeAvatar(String urlAvatar, String userId) async {
     var docRef = firestore.collection('user').doc(userId);
     print('docRef: $docRef');
 
@@ -456,17 +457,22 @@ class DataBase extends ChangeNotifier {
 
   Future<List> listOfAvatars() async {
     List avatar = [];
-    var collection =
-        firestore.collection('AvatarImages');
+    var collection = firestore.collection('AvatarImages');
 
     var querySnapshot = await collection.get();
-    
-    for(int i =0 ; i<querySnapshot.size ; i++){
-        avatar.add({'url':querySnapshot.docs[i]['url'],'level':querySnapshot.docs[i]['level']});    
+
+    for (int i = 0; i < querySnapshot.size; i++) {
+      avatar.add({
+        'url': querySnapshot.docs[i]['url'],
+        'level': querySnapshot.docs[i]['level']
+      });
     }
     print("avatar inside db: $avatar");
     avatar.sort((a, b) => a['level'].compareTo(b['level']));
     return avatar;
   }
 
+  Future updateExpScore(String expID, int score) async {
+    firestore.collection('Experiments').doc(expID).update({'UserScore': score});
+  }
 }
