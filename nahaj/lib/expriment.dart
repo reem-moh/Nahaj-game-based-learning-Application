@@ -110,6 +110,7 @@ class _Experiment extends State<Experiment> {
               db: widget.db,
               expID: widget.exp.id,
               exp: widget.exp,
+              unityWidgetController: _unityWidgetController,
             );
           });
     }
@@ -156,6 +157,7 @@ class _Experiment extends State<Experiment> {
 //Experiments stream builder
 // ignore: must_be_immutable
 class QuestionsWidget extends StatelessWidget {
+  late UnityWidgetController unityWidgetController;
   final String expID;
   final ExperimentInfo exp;
   final DataBase db;
@@ -165,6 +167,7 @@ class QuestionsWidget extends StatelessWidget {
     required this.db,
     required this.expID,
     required this.exp,
+    required this.unityWidgetController,
   });
 
   @override
@@ -187,6 +190,7 @@ class QuestionsWidget extends StatelessWidget {
                         questions: allQuestions,
                         expID: expID,
                         exp: exp,
+                        unityWidgetController: unityWidgetController,
                       );
               }
           }
@@ -203,27 +207,32 @@ class QuestionsWidget extends StatelessWidget {
 
 // ignore: must_be_immutable
 class QuestionCard extends StatefulWidget {
+  late UnityWidgetController unityWidgetController;
   final List<Question>? questions;
   final String expID;
   final ExperimentInfo exp;
   final DataBase db;
 
-  QuestionCard({
-    required this.questions,
-    required this.db,
-    required this.expID,
-    required this.exp,
-  });
+  QuestionCard(
+      {required this.questions,
+      required this.db,
+      required this.expID,
+      required this.exp,
+      required this.unityWidgetController});
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
-class _QuestionCardState extends State<QuestionCard> {
+class _QuestionCardState extends State<QuestionCard>
+    with SingleTickerProviderStateMixin {
   int i = 0;
   int chosenAnswer = 0;
   int userScore = 0;
   double fontSize = 5;
+  var star1 = '';
+  var star2 = '';
+  var star3 = '';
 
   @override
   Widget build(BuildContext context) {
@@ -450,7 +459,6 @@ class _QuestionCardState extends State<QuestionCard> {
   }
 
   void sendScore() {
-    _Experiment _experiment = _Experiment();
 //check answer of last question
     if (widget.questions![i].answers[chosenAnswer - 1] ==
         widget.questions![i].correctAnswer) {
@@ -463,6 +471,9 @@ class _QuestionCardState extends State<QuestionCard> {
     userScore += widget.exp.experimentScore;
 
     widget.db.updateExpScore(widget.expID, userScore);
+    setStars();
+    //questions widget disapear
+    //Navigator.pop(context);
 
     //alert of score
     showDialog(
@@ -471,6 +482,7 @@ class _QuestionCardState extends State<QuestionCard> {
           return AlertDialog(
             backgroundColor: Color.fromARGB(0, 0, 0, 0),
             content: Container(
+              alignment: Alignment.center,
               width: 30.h,
               height: 30.h,
               decoration: BoxDecoration(
@@ -482,19 +494,47 @@ class _QuestionCardState extends State<QuestionCard> {
               child: Stack(
                 children: [
                   Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    margin: EdgeInsets.only(top: 5.w),
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      star2,
+                      width: 10.h,
+                      height: 10.w,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.w),
+                    alignment: Alignment.topCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '🎊',
-                          style: TextStyle(
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.bold,
-                            fontSize: fontSize.sp,
-                            color: Color.fromARGB(255, 0, 71, 147),
+                        Container(
+                          margin: EdgeInsets.all(0),
+                          child: Image.asset(
+                            star1,
+                            width: 5.h,
+                            height: 5.w,
                           ),
                         ),
+                        SizedBox(
+                          width: 3.h,
+                        ),
+                        Container(
+                          child: Image.asset(
+                            star3,
+                            width: 5.h,
+                            height: 5.w,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 7.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Text(
                           'لقد أجبت على جميع الأسئلة بنجاح',
                           style: TextStyle(
@@ -504,13 +544,41 @@ class _QuestionCardState extends State<QuestionCard> {
                             color: Color.fromARGB(255, 0, 71, 147),
                           ),
                         ),
+                        SizedBox(
+                          height: 2.w,
+                        ),
+                        Text(
+                          userScore.toString() +
+                              "/" +
+                              widget.exp.totalScore.toString(),
+                          style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSize.sp,
+                            color: Color.fromARGB(255, 0, 71, 147),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2.w,
+                        ),
                         InkWell(
                           child: Image.asset(
                             'assets/ٍReturnButton.png',
                             width: 10.h,
                           ),
                           onTap: () {
-                            _experiment.exitExperiment();
+                            widget.unityWidgetController.resume()!.then(
+                                (value) => widget.unityWidgetController
+                                    .unload()!
+                                    .then((value) => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Category(
+                                                    categoryTitle:
+                                                        widget.exp.category,
+                                                    db: widget.db,
+                                                  )),
+                                        )));
                           },
                         )
                       ],
@@ -521,5 +589,39 @@ class _QuestionCardState extends State<QuestionCard> {
             ),
           );
         });
+  }
+
+  setStars() {
+    var result = userScore * 3 / widget.exp.totalScore;
+//FullRatingStar
+    if (result == 0) {
+      star1 = 'assets/EmptyRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 0 && result < 1) {
+      star1 = 'assets/HalfRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result == 1) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/EmptyRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 1 && result < 2) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/HalfRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result == 2) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/EmptyRatingStar.png';
+    } else if (result > 2 && result < 3) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/HalfRatingStar.png';
+    } else if (result == 3) {
+      star1 = 'assets/FullRatingStar.png';
+      star2 = 'assets/FullRatingStar.png';
+      star3 = 'assets/FullRatingStar.png';
+    }
   }
 }
