@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:nahaj/Group/GroupInfo.dart';
 import 'package:nahaj/NahajClasses/Chats.dart';
 import 'package:nahaj/database.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:sizer/sizer.dart';
@@ -31,7 +30,8 @@ class _Group extends State<Group> {
         body: SafeArea(
           child: Column(
             children: [
-              ProfileHeaderWidget(group: widget.group,db: widget.db, user: widget.user),
+              ProfileHeaderWidget(
+                  group: widget.group, db: widget.db, user: widget.user),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(10),
@@ -76,64 +76,60 @@ class ProfileHeaderWidget extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Wrap(
-                  children: [
-                    TextButton(
-                            child: Image(
-                              image: AssetImage("assets/PreviosButton.png"),
-                              alignment: Alignment.topCenter,
-                            ),
-                            onPressed: () {
-                             
-                                Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
-                              
-                            },
-                          ),
-                  ],
+                TextButton(
+                  child: Image(
+                    image: AssetImage("assets/PreviosButton.png"),
+                    alignment: Alignment.topLeft,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/HomePage', (Route<dynamic> route) => false);
+                  },
                 ),
                 //BackButton(color: Colors.blue[600]),
-                Expanded(
-                  child: Text(
-                    group.groupName,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: 2.4.w,
-                      color: Colors.blue[800],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Wrap(
-                  //mainAxisSize: MainAxisSize.max,
+                Spacer(), 
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Text(
+                      group.groupName,
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(
+                        fontSize: 2.4.w,
+                        color: Colors.blue[800],
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     SizedBox(
-                      height: 6.2.w,
-                      width: 8.0.h,
+                      height: 9.w,
+                      width: 9.h,
                       child: buildIcon(1, AssetImage(''), group.pathOfImage),
                     ),
                     //group image
-
                     SizedBox(
-                      width: 4.0.h,
+                      width: 9.0.h,
+                      height: 4.0.h,
                       child: GestureDetector(
                         onTap: () {
                           print("pressed group info");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => GroupInfo(db: db,group: group, user: user)),
+                                builder: (context) => GroupInfo(
+                                    db: db, group: group, user: user)),
                           );
                         },
                         child:
                             buildIcon(0, AssetImage("assets/Group13.png"), ''),
                       ),
                     ),
-                    //three dots
                   ],
                 ),
+                
                 SizedBox(width: 4),
               ],
             )
@@ -142,26 +138,15 @@ class ProfileHeaderWidget extends StatelessWidget {
       );
 
   Widget buildIcon(int type, AssetImage assetImage, String image) => Container(
-        padding: EdgeInsets.all(3),
-        height: 40,
         decoration: type == 1
             ? BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey[200],
-              )
+                image:
+                    DecorationImage(fit: BoxFit.scaleDown, image: NetworkImage(image)))
             : BoxDecoration(),
         child: type == 1
-            ? CircleAvatar(
-                radius: 45,
-                child: ClipOval(
-                  child: Image.network(
-                    image,
-                    fit: BoxFit.fill,
-                    alignment: Alignment.center,
-                  ),
-                ),
-              )
-            : Image(
+            ? Container(): Image(
                 image: AssetImage("assets/Group13.png"),
               ),
       );
@@ -351,7 +336,7 @@ class MessageWidget extends StatelessWidget {
               margin: isMe
                   ? EdgeInsets.all(16)
                   : EdgeInsets.only(bottom: 16, left: 16, right: 16),
-              constraints: BoxConstraints(maxWidth: 140),
+              constraints: BoxConstraints(maxWidth: 600),
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
                 color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,

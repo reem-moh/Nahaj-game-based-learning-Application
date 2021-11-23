@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
-import 'groupChat.dart';
 
 class GroupInfo extends StatefulWidget {
   final DataBase db;
@@ -150,7 +148,10 @@ class _GroupInfo extends State<GroupInfo> {
 
 //3
                   // delete group
-                  Center(child: buildUpgradeButton()),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(10),
+                      child: buildUpgradeButton()),
                 ],
               ),
             ],
@@ -165,13 +166,46 @@ class _GroupInfo extends State<GroupInfo> {
             ? 'حذف المجموعة'
             : 'الخروج من المجموعة',
         onClicked: () {
-          //delete Group
-          widget.group.leaderId == widget.user.userId
-              ? widget.db.removeGroup(widget.group.groupId)
-              : widget.db.removeUserFromGroup(
-                  widget.group.groupId, widget.user.userId);
-          Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
-          //move to homePage with alarm you delete the group succusfully!
+          showDialog(
+            builder: (BuildContext context) {
+              return CupertinoAlertDialog(
+                title: Text("هل انت متاكد ؟"),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        //delete Group
+                        widget.group.leaderId == widget.user.userId
+                            ? widget.db.removeGroup(widget.group.groupId)
+                            : widget.db.removeUserFromGroup(
+                                widget.group.groupId, widget.user.userId);
+
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/HomePage', (Route<dynamic> route) => false);
+                      },
+                      child: Text(
+                        "نعم",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("لا", style: TextStyle(color: Colors.black)),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                ],
+              );
+            },
+            context: context,
+          );
         },
       );
   List getMembers(List members) {
@@ -264,7 +298,9 @@ class CardsOfMembers extends StatelessWidget {
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: user.userId == member.userId ?Colors.yellow.withOpacity(0.08):Colors.grey.withOpacity(0.05) ,
+                                    color: user.userId == member.userId
+                                        ? Colors.purple.withOpacity(0.08)
+                                        : Colors.grey.withOpacity(0.05),
                                     spreadRadius: 2,
                                     blurRadius: 2,
                                   ),
@@ -341,17 +377,46 @@ class MemberCard extends StatelessWidget {
                   ),
                   trailingIcon: Icon(Icons.group),
                   onPressed: () {
-                    db.removeUserFromGroup(group.groupId, member.userId);
                     showDialog(
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: Text("تم حذف العضو بنجاح"),
+                          title: Text("هل انت متاكد؟"),
                           actions: [
                             ElevatedButton(
                                 onPressed: () {
-                                  Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
+                                  db.removeUserFromGroup(
+                                      group.groupId, member.userId);
+                                  showDialog(
+                                    builder: (BuildContext context) {
+                                      return CupertinoAlertDialog(
+                                        title: Text("تم حذف العضو بنجاح"),
+                                      );
+                                    },
+                                    context: context,
+                                  );
                                 },
-                                child: Text("OK")),
+                                child: Text(
+                                  "نعم",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "لا",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
                           ],
                         );
                       },
@@ -381,7 +446,9 @@ class MemberCard extends StatelessWidget {
                                   ? Image.asset("assets/Ranking2.png")
                                   : (index == 2 //rank3
                                       ? Image.asset("assets/Ranking3.png")
-                                      : SizedBox(width: 5.h,)//other
+                                      : SizedBox(
+                                          width: 5.h,
+                                        ) //other
                                   ))),
                     ],
                   ),
@@ -436,7 +503,9 @@ class MemberCard extends StatelessWidget {
                                 ? Image.asset("assets/Ranking2.png")
                                 : (index == 2 //rank3
                                     ? Image.asset("assets/anking3.png")
-                                    : SizedBox(width: 5.h,)//other
+                                    : SizedBox(
+                                        width: 5.h,
+                                      ) //other
                                 ))),
                   ],
                 ),

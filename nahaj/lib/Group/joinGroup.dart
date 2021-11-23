@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 
 class JoinGroup extends StatefulWidget {
   final DataBase db;
   final User user;
-  const JoinGroup({Key? key, required this.db, required this.user}) : super(key: key);
+  const JoinGroup({Key? key, required this.db, required this.user})
+      : super(key: key);
 
   @override
   _JoinGroup createState() => _JoinGroup();
@@ -34,14 +34,19 @@ class _JoinGroup extends State<JoinGroup> {
           ListView(
             key: _key,
             children: [
-              //backbutton
-              TextButton(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20, right: 1050),
-                  child: Image(
-                    image: AssetImage("assets/PreviosButton.png"),
-                    alignment: Alignment.topLeft,
-                  ),
+              //back button
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white.withOpacity(0),
+                  onPrimary: Colors.white.withOpacity(0),
+                  //minimumSize: Size(30, 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(800.0)),
+                  alignment: Alignment.topLeft,
+                  elevation: 0.0,
+                ),
+                child: Image(
+                  image: AssetImage("assets/PreviosButton.png"),
                 ),
                 onPressed: () {
                   setState(() {
@@ -67,7 +72,7 @@ class _JoinGroup extends State<JoinGroup> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 900),
+                  padding: EdgeInsets.only(top: 0, left: 750),
                   child: Text(
                     ": رمز المجموعة ",
                     style: TextStyle(
@@ -135,7 +140,8 @@ class _JoinGroup extends State<JoinGroup> {
                         //1 means added to the group
                         if (check == '1') {
                           setState(() {
-                            Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );                            
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/HomePage', (Route<dynamic> route) => false);
                           });
                         }
                       }
@@ -165,7 +171,8 @@ class _JoinGroup extends State<JoinGroup> {
 
   Future<String> joinGroup(int groupCode) async {
     //check if there is a group and if user in it .
-    String groupId = await widget.db.joinGroup(groupCode, widget.user.userId, widget.user.username);
+    String groupId = await widget.db
+        .joinGroup(groupCode, widget.user.userId, widget.user.username);
     if (groupId == "-1") {
       return "there is no group has this code!!";
     }
