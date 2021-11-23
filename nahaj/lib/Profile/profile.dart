@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
@@ -137,190 +136,136 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       );
 
-  Widget buildInfo(User user) => Column(
-        children: [
-          //Name
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            //crossAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              //Name
-              Expanded(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-                      child: TextFormField(
-                        textDirection: TextDirection.rtl,
-                        initialValue: user.username,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        cursorRadius: Radius.circular(50),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (val) {
-                          changes = true;
-                          if (val!.length <= 0) {
-                            validName = false;
-                            return 'هذا الحقل مطلوب';
-                          } else if (val.length <= 2) {
-                            validName = false;
-                            print("name is not valid");
-                            return 'الإسم يجب أن يكون من ثلاثة أحرف أو أكثر';
-                          } else {
-                            validName = true;
-                            name = val;
-                          }
-                          return null;
-                        },
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
-                  child: Text(
-                    ": اسم المستخدم",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 2.7.w,
-                    ),
+  Widget buildInfo(User user) => Container(
+        margin: EdgeInsets.only(left: 10.h),
+        child: Column(
+          children: [
+            //Name
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              //crossAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                //Name
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        child: TextFormField(
+                          textDirection: TextDirection.rtl,
+                          initialValue: user.username,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          cursorRadius: Radius.circular(50),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (val) {
+                            changes = true;
+                            if (val!.length <= 0) {
+                              validName = false;
+                              return 'هذا الحقل مطلوب';
+                            } else if (val.length <= 2) {
+                              validName = false;
+                              print("name is not valid");
+                              return 'الإسم يجب أن يكون من ثلاثة أحرف أو أكثر';
+                            } else {
+                              validName = true;
+                              name = val;
+                            }
+                            return null;
+                          },
+                        )),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          //Email
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: SizedBox(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-                      child: TextFormField(
-                        textDirection: TextDirection.rtl,
-                        initialValue: user.email,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (val) {
-                          changes = true;
-                          bool emailValid = RegExp(
-                                  r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-                              .hasMatch(val!);
-                          if (val.length <= 0) {
-                            validEmail = false;
-                            return 'هذا الحقل مطلوب';
-                          } else if (!emailValid) {
-                            validEmail = false;
-                            print("email is not valid");
-                            return 'الرجاء إدخال بريد إلكتروني صحيح';
-                          } else if (emailValid) {
-                            validEmail = true;
-                            email = val;
-                          }
-                          return null;
-                        },
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
-                  child: Text(
-                    ":البريد الإلكتروني ",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 2.7.w,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          //Password
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              //Password text field
-              Expanded(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-                    child: TextFormField(
-                      textDirection: TextDirection.rtl,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    child: Text(
+                      ": اسم المستخدم",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
-                      validator: (val) {
-                        changes = true;
-                        if (val!.length <= 0) {
-                          validPass = false;
-                          return '  ';
-                        } else if (val.length <= 7) {
-                          validPass = false;
-                          print("pass is not valid");
-                          return 'كلمة المرور يجب أن تكون من ٨ أرقام أو أحرف أو أكثر';
-                        } else if (val.length >= 7) {
-                          validPass = true;
-                          password = val;
-                        }
-                        return null;
-                      },
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
-                  child: Text(
-                    ":كلمة السر الجديدة",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 2.7.w,
-                    ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            //Email
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        child: TextFormField(
+                          textDirection: TextDirection.rtl,
+                          initialValue: user.email,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (val) {
+                            changes = true;
+                            bool emailValid = RegExp(
+                                    r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                                .hasMatch(val!);
+                            if (val.length <= 0) {
+                              validEmail = false;
+                              return 'هذا الحقل مطلوب';
+                            } else if (!emailValid) {
+                              validEmail = false;
+                              print("email is not valid");
+                              return 'الرجاء إدخال بريد إلكتروني صحيح';
+                            } else if (emailValid) {
+                              validEmail = true;
+                              email = val;
+                            }
+                            return null;
+                          },
+                        )),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-          //Repeat password
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              //Repeat password text field
-              Expanded(
-                child: SizedBox(
+                SizedBox(
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    child: Text(
+                      ":البريد الإلكتروني ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            //Password
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                //Password text field
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 0),
                       child: TextFormField(
@@ -333,41 +278,99 @@ class _ProfilePageState extends State<ProfilePage> {
                         validator: (val) {
                           changes = true;
                           if (val!.length <= 0) {
-                            validRePass = false;
-                            return 'هذا الحقل مطلوب';
-                          } else if (val != password) {
-                            validRePass = false;
-                            print("repass is not valid");
-                            return 'كلمة المرور غير متطابقة';
-                          } else if (val == password) {
-                            validRePass = true;
-                            repeatedPassword = val;
+                            validPass = false;
+                            return '  ';
+                          } else if (val.length <= 7) {
+                            validPass = false;
+                            print("pass is not valid");
+                            return 'كلمة المرور يجب أن تكون من ٨ أرقام أو أحرف أو أكثر';
+                          } else if (val.length >= 7) {
+                            validPass = true;
+                            password = val;
                           }
                           return null;
                         },
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
-                  child: Text(
-                    ":إعادة كلمة السر ",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 2.7.w,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 40),
-        ],
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    child: Text(
+                      ":كلمة السر الجديدة",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            //Repeat password
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                //Repeat password text field
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        child: TextFormField(
+                          textDirection: TextDirection.rtl,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (val) {
+                            changes = true;
+                            if (val!.length <= 0) {
+                              validRePass = false;
+                              return 'هذا الحقل مطلوب';
+                            } else if (val != password) {
+                              validRePass = false;
+                              print("repass is not valid");
+                              return 'كلمة المرور غير متطابقة';
+                            } else if (val == password) {
+                              validRePass = true;
+                              repeatedPassword = val;
+                            }
+                            return null;
+                          },
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    child: Text(
+                      ":إعادة كلمة السر ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
       );
 
   Widget buildAbout(User user) => Container(
