@@ -223,7 +223,7 @@ class _QuestionCardState extends State<QuestionCard> {
   int i = 0;
   int chosenAnswer = 0;
   int userScore = 0;
-  double fontSize = 6;
+  double fontSize = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +263,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(
-                            right: 15.h,
+                            right: 10.h,
                             top: widget.questions![i].answers[2] != ""
                                 ? 0
                                 : 6.w),
@@ -320,7 +320,7 @@ class _QuestionCardState extends State<QuestionCard> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(right: 15.h),
+                              margin: EdgeInsets.only(right: 10.h),
                               child: ButtonBar(
                                 children: [
                                   Container(
@@ -386,7 +386,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       ? 'assets/start_button.png'
                       : 'assets/ExperimentBackButton.png',
                   width: i == widget.questions!.length - 1
-                      ? MediaQuery.of(context).size.width / 10
+                      ? MediaQuery.of(context).size.width / 11
                       : MediaQuery.of(context).size.width / 20,
                   height: i == widget.questions!.length - 1
                       ? MediaQuery.of(context).size.width / 10
