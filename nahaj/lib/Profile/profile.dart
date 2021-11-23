@@ -182,7 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
                   child: Text(
                     ": اسم المستخدم",
                     style: TextStyle(
@@ -240,7 +240,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
                   child: Text(
                     ":البريد الإلكتروني ",
                     style: TextStyle(
@@ -296,7 +296,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
                   child: Text(
                     ":كلمة السر الجديدة",
                     style: TextStyle(
@@ -352,7 +352,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: MediaQuery.of(context).size.height * 0.08,
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
                   child: Text(
                     ":إعادة كلمة السر ",
                     style: TextStyle(
