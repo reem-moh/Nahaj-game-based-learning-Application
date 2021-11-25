@@ -64,30 +64,6 @@ class _Experiment extends State<Experiment> {
                   ),
                   onTap: () {
                     exitExperiment();
-                    /*if (paused) {
-                      _unityWidgetController.resume()!.then((value) =>
-                          _unityWidgetController
-                              .unload()!
-                              .then((value) => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Category(
-                                              categoryTitle: widget.category,
-                                              db: widget.db,
-                                            )),
-                                  )));
-                    } else {
-                      _unityWidgetController
-                          .unload()!
-                          .then((value) => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Category(
-                                          categoryTitle: widget.category,
-                                          db: widget.db,
-                                        )),
-                              ));
-                    }*/
                   },
                 ),
               ),
@@ -104,6 +80,7 @@ class _Experiment extends State<Experiment> {
       print(paused);
 
       showDialog(
+          barrierColor: Color.fromARGB(0, 0, 0, 0),
           context: context,
           builder: (BuildContext context) {
             return QuestionsWidget(
@@ -161,6 +138,7 @@ class QuestionsWidget extends StatelessWidget {
   final String expID;
   final ExperimentInfo exp;
   final DataBase db;
+
   int i = 0;
 
   QuestionsWidget({
@@ -213,19 +191,19 @@ class QuestionCard extends StatefulWidget {
   final ExperimentInfo exp;
   final DataBase db;
 
-  QuestionCard(
-      {required this.questions,
-      required this.db,
-      required this.expID,
-      required this.exp,
-      required this.unityWidgetController});
+  QuestionCard({
+    required this.questions,
+    required this.db,
+    required this.expID,
+    required this.exp,
+    required this.unityWidgetController,
+  });
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
 }
 
-class _QuestionCardState extends State<QuestionCard>
-    with SingleTickerProviderStateMixin {
+class _QuestionCardState extends State<QuestionCard> {
   int i = 0;
   int chosenAnswer = 0;
   int userScore = 0;
@@ -421,7 +399,12 @@ class _QuestionCardState extends State<QuestionCard>
       //check if answer is chosen
       if (chosenAnswer == 0) {
         //banner error message
-
+        showBanner(
+            'يجب اختيار إجابة للانتقال للسؤال التالي',
+            Icons.dnd_forwardslash_rounded,
+            Colors.red,
+            17.sp,
+            EdgeInsets.only(left: 1.8.h, right: 2.h));
       } else {
         //check if last question
         if (i == widget.questions!.length - 1) {
@@ -432,6 +415,8 @@ class _QuestionCardState extends State<QuestionCard>
           if (widget.questions![i].answers[chosenAnswer - 1] ==
               widget.questions![i].correctAnswer) {
             //banner correct answer
+            showBanner('أحسنت، الإجابة صحيحة', Icons.check_circle_rounded,
+                Colors.green, 17.sp, EdgeInsets.only(left: 1.8.h, right: 2.h));
             //update score
             userScore += widget.questions![i].score;
             print(widget.questions![i].correctAnswer +
@@ -446,7 +431,13 @@ class _QuestionCardState extends State<QuestionCard>
             });
           } else {
             //answer wrong
-            //banner wrong answer
+            //banner wrong answer  + ' إجابة خاطئة، الإجابة هي'
+            showBanner(
+                "إجابة خاطئة، الإجابة هي " + widget.questions![i].correctAnswer,
+                Icons.cancel_rounded,
+                Colors.red,
+                17.sp,
+                EdgeInsets.only(left: 1.8.h, right: 2.h));
             //reset radio button group value and increment i
             setState(() {
               chosenAnswer = 0;
@@ -463,9 +454,17 @@ class _QuestionCardState extends State<QuestionCard>
     if (widget.questions![i].answers[chosenAnswer - 1] ==
         widget.questions![i].correctAnswer) {
       //banner correct answer
+      showBanner('أحسنت، الإجابة صحيحة', Icons.check_circle_rounded, Colors.red,
+          17.sp, EdgeInsets.only(left: 1.8.h, right: 2.h));
       userScore += widget.questions![i].score;
     } else {
       //banner wrong answer
+      showBanner(
+          "إجابة خاطئة، الإجابة هي " + widget.questions![i].correctAnswer,
+          Icons.cancel_rounded,
+          Colors.red,
+          17.sp,
+          EdgeInsets.only(left: 1.8.h, right: 2.h));
     }
     //update score with experiment score
     userScore += widget.exp.experimentScore;
@@ -473,10 +472,11 @@ class _QuestionCardState extends State<QuestionCard>
     widget.db.updateExpScore(widget.expID, userScore);
     setStars();
     //questions widget disapear
-    //Navigator.pop(context);
+    Navigator.pop(context);
 
     //alert of score
     showDialog(
+        barrierColor: Color.fromARGB(0, 0, 0, 0),
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -623,5 +623,87 @@ class _QuestionCardState extends State<QuestionCard>
       star2 = 'assets/FullRatingStar.png';
       star3 = 'assets/FullRatingStar.png';
     }
+  }
+
+  void showBanner(String msg, IconData icon, Color iconColor, double iconSize,
+      EdgeInsetsGeometry iconMargin) {
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+      // width: 43.h,
+      elevation: 0,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Banner(
+            msg: msg,
+            icon: icon,
+            iconColor: iconColor,
+            iconSize: iconSize,
+            iconMargin: iconMargin,
+          ),
+        ],
+      ),
+      backgroundColor: Color.fromARGB(0, 255, 255, 255),
+      behavior: SnackBarBehavior.floating,
+      /*shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
+      ),*/
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 170),
+    ));
+  }
+}
+
+class Banner extends StatefulWidget {
+  final String msg;
+  final IconData icon;
+  final Color iconColor;
+  final double iconSize;
+  final EdgeInsetsGeometry iconMargin;
+  const Banner(
+      {Key? key,
+      required this.msg,
+      required this.icon,
+      required this.iconColor,
+      required this.iconSize,
+      required this.iconMargin})
+      : super(key: key);
+  @override
+  State<Banner> createState() => _BannerState();
+}
+
+class _BannerState extends State<Banner> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: 44.h,
+      height: 10.h,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage('assets/QuestionsBanner.png')),
+      ),
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                widget.msg,
+                style: TextStyle(
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 6.sp,
+                  color: Color.fromARGB(255, 0, 71, 147),
+                ),
+              ),
+              Container(
+                margin: widget.iconMargin,
+                child: Icon(widget.icon,
+                    color: widget.iconColor, size: widget.iconSize),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
