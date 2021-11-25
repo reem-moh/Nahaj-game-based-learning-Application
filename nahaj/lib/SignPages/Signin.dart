@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'SignUp.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
 

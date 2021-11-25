@@ -5,7 +5,6 @@ import 'package:nahaj/expriment.dart';
 import 'package:sizer/sizer.dart';
 import '../NahajClasses/child.dart';
 import '../database.dart';
-import 'homePage.dart';
 
 List<ExperimentInfo> experiments = [];
 
@@ -83,13 +82,7 @@ class _Category extends State<Category> {
             ),
             onPressed: () {
               setState(() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage(
-                            db: widget.db,
-                          )),
-                );
+                Navigator.of(context).pop();
               });
             },
           ),

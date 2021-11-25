@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 
 import 'package:nahaj/NahajClasses/child.dart';
@@ -48,8 +47,9 @@ class _AddGroup2 extends State<AddGroup2> {
               //Name
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 450),
+                child: Container(
+                  alignment: Alignment.center,
+                 // padding: EdgeInsets.only(top: 0, left: 280),
                   child: Text(
                     " تم إنشاء المجموعة بنجاح",
                     style: TextStyle(
@@ -65,8 +65,8 @@ class _AddGroup2 extends State<AddGroup2> {
               //Name
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
-                child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 530),
+                child: Container(
+                  alignment: Alignment.center,
                   child: Text(
                     widget.nameoftheGroup + "",
                     style: TextStyle(

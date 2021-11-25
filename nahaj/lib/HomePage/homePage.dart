@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:nahaj/Profile/profile.dart';
-import 'package:nahaj/SignPages/Signin.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/groupChat.dart';
 import 'package:nahaj/Group/joinGroup.dart';
@@ -82,7 +81,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
 
   _logout() {
     widget.db.signOut().then((s) {
-      Navigator.of(context).pushNamed('/Signin');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/Signin', (Route<dynamic> route) => false);
     });
   }
 
@@ -111,52 +111,57 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           padding: EdgeInsets.fromLTRB(screenWidth * 0.07.h, 0, 0, 0),
           children: [
             //profile image and name
-            SizedBox(
-              height: screenHeight * 0.3,
-              child: UserAccountsDrawerHeader(
-                accountName: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: screenHeight * 0.08,
-                      child: user.username == "1"
-                          ? Text(
-                              "...",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Cairo',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 2.7.w,
+            Container(
+              alignment: Alignment.topRight,
+              height: 23.h,
+              width: 5.h,
+              child: SizedBox(
+                height: screenHeight * 0.9,
+                child: UserAccountsDrawerHeader(
+                  accountName: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: screenHeight * 0.08,
+                        child: user.username == "1"
+                            ? Text(
+                                "...",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 2.7.w,
+                                ),
+                              )
+                            : Text(
+                                user.username,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 2.7.w,
+                                ),
                               ),
-                            )
-                          : Text(
-                              user.username,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Cairo',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 2.7.w,
-                              ),
-                            ),
-                    ),
-                  ],
-                ),
-                accountEmail: Text(""),
-                currentAccountPicture: CircleAvatar(
-                  child: user.avatar == "1"
-                      ? CircularProgressIndicator()
-                      : FadeInImage.assetNetwork(
-                          placeholder: 'assets/loading.gif',
-                          image: user.avatar,
-                          fit: BoxFit.contain,
-                          alignment: Alignment.center,
-                        ),
-                  backgroundColor: Colors.white54,
-                ),
-                currentAccountPictureSize:
-                    Size(screenHeight * 0.38, screenWidth * 0.1),
-                decoration: BoxDecoration(
-                  color: backgroundColorOfSideBar,
+                      ),
+                    ],
+                  ),
+                  accountEmail: Text(""),
+                  currentAccountPicture: CircleAvatar(
+                    child: user.avatar == "1"
+                        ? CircularProgressIndicator()
+                        : FadeInImage.assetNetwork(
+                            placeholder: 'assets/loading.gif',
+                            image: user.avatar,
+                            fit: BoxFit.contain,
+                            alignment: Alignment.center,
+                          ),
+                    backgroundColor: Colors.white54,
+                  ),
+                  currentAccountPictureSize:
+                      Size(screenHeight * 0.38, screenWidth * 0.1),
+                  decoration: BoxDecoration(
+                    color: backgroundColorOfSideBar,
+                  ),
                 ),
               ),
             ),
@@ -266,7 +271,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     
                   });*/
                   setState(() {
-                   // tappedIndex = 2;
+                    // tappedIndex = 2;
                   });
                 },
               ),
@@ -294,8 +299,41 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                 ),
                 onTap: () {
                   setState(() {
-                    tappedIndex = 3;
-                    _logout();
+                    showDialog(
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: Text("هل تريد تسجيل الخروج ؟"),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  tappedIndex = 3;
+                                  _logout();
+                                },
+                                child: Text(
+                                  "نعم",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("لا",
+                                    style: TextStyle(color: Colors.black)),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
+                          ],
+                        );
+                      },
+                      context: context,
+                    );
                   });
                 },
               ),
@@ -496,12 +534,22 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         children: [
                                           FocusedMenuHolder(
                                             child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255,
+                                                    114,
+                                                    78,
+                                                    140), //Color.fromARGB(255, 202, 203, 203),
+                                                shape: BoxShape.circle,
+                                              ),
                                               margin: EdgeInsets.only(
                                                 right: 9.00.h,
                                               ),
                                               child: Icon(
                                                 Icons.add,
-                                                size: 40,
+                                                size: 45,
+                                                color: Colors.white
+                                                    .withOpacity(.80),
                                               ),
                                             ),
                                             onPressed: () {},
@@ -720,7 +768,7 @@ class GroupsCard extends StatelessWidget {
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/loading.gif',
                 image: group.pathOfImage,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 alignment: Alignment.center,
               ),
             ),
@@ -761,8 +809,7 @@ class CardsOfGroup extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
-                return buildText(
-                    'Something Went Wrong Try later ${snapshot.hasError}');
+                return buildText('حدث خطأ ما، حاول في المره القادمه.');
               } else {
                 final allGroups = snapshot.data;
                 return allGroups == null

@@ -70,7 +70,53 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     onPressed: () {
                       setState(() {
-                        Navigator.of(context).pop();
+                        if (changes) {
+                          showDialog(
+                            builder: (BuildContext context) {
+                              return CupertinoAlertDialog(
+                                title:
+                                    Text("هل تريد الخروج بدون حفظ التغييرات؟"),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamedAndRemoveUntil(
+                                                '/HomePage',
+                                                (Route<dynamic> route) =>
+                                                    false);
+                                      },
+                                      child: Text(
+                                        "نعم",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white.withOpacity(0),
+                                        shadowColor:
+                                            Colors.white.withOpacity(0),
+                                        onPrimary: Colors.white,
+                                      )),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text(
+                                        "لا",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white.withOpacity(0),
+                                        shadowColor:
+                                            Colors.white.withOpacity(0),
+                                        onPrimary: Colors.white,
+                                      )),
+                                ],
+                              );
+                            },
+                            context: context,
+                          );
+                        } else {
+                          Navigator.of(context).pop();
+                        }
                       });
                     },
                   ),
@@ -464,7 +510,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       fontFamily: 'Cairo',
                                                       fontWeight:
                                                           FontWeight.w500,
-                                                      fontSize: 27,
+                                                      fontSize: 2.3.w,
                                                     ),
                                                   ),
                                                   actions: [
@@ -477,7 +523,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                                                           route) =>
                                                                       false);
                                                         },
-                                                        child: Text("OK")),
+                                                        child: Text(
+                                                          "حسنا",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black),
+                                                        ),
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          primary: Colors.white
+                                                              .withOpacity(0),
+                                                          shadowColor: Colors
+                                                              .white
+                                                              .withOpacity(0),
+                                                          onPrimary:
+                                                              Colors.white,
+                                                        )),
                                                   ],
                                                 );
                                               },

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nahaj/Group/addGroup2.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 import 'dart:math';
-
 import 'package:nahaj/NahajClasses/child.dart';
 
 class AddGroup extends StatefulWidget {
@@ -45,13 +43,18 @@ class _AddGroup extends State<AddGroup> {
             key: _key,
             children: [
               //back button
-              TextButton(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20, right: 1050),
-                  child: Image(
-                    image: AssetImage("assets/PreviosButton.png"),
-                    alignment: Alignment.topLeft,
-                  ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white.withOpacity(0),
+                  onPrimary: Colors.white.withOpacity(0),
+                  //minimumSize: Size(30, 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(800.0)),
+                  alignment: Alignment.topLeft,
+                  elevation: 0.0,
+                ),
+                child: Image(
+                  image: AssetImage("assets/PreviosButton.png"),
                 ),
                 onPressed: () {
                   setState(() {
@@ -59,6 +62,7 @@ class _AddGroup extends State<AddGroup> {
                   });
                 },
               ),
+
               //image of group
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.3,
@@ -77,7 +81,8 @@ class _AddGroup extends State<AddGroup> {
                               padding: const EdgeInsets.all(13.0),
                               //Group Image
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
                                           120.0) //                 <--- border radius here
                                       ),
                                   border: Border.all(color: Colors.grey)),
@@ -116,7 +121,7 @@ class _AddGroup extends State<AddGroup> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 0, left: 950),
+                  padding: EdgeInsets.only(top: 0, left: 750),
                   child: Text(
                     ": الاسم",
                     style: TextStyle(
@@ -140,9 +145,6 @@ class _AddGroup extends State<AddGroup> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      /*onChanged: (val) {
-                          name = val;
-                        },*/
                       validator: (val) {
                         if (val!.length <= 0) {
                           validName = false;
@@ -155,9 +157,6 @@ class _AddGroup extends State<AddGroup> {
                           validName = true;
                           groupName = val;
                         }
-                        /*if (loginErr) {
-                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
-                          }*/
                         return null;
                       },
                     )),

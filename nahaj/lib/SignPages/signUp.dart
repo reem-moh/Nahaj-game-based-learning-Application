@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/SignPages/Signin.dart';
-import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,15 +46,19 @@ class _SignupState extends State<SignUp> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //Back button
-                      // ignore: deprecated_member_use
-                      FlatButton(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 0, left: 0),
-                          child: Image(
-                            image: AssetImage("assets/PreviosButton.png"),
-                            alignment: Alignment.topLeft,
-                          ),
+                      //back button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white.withOpacity(0),
+                          onPrimary: Colors.white.withOpacity(0),
+                          //minimumSize: Size(30, 40),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(800.0)),
+                          alignment: Alignment.topLeft,
+                          elevation: 0.0,
+                        ),
+                        child: Image(
+                          image: AssetImage("assets/PreviosButton.png"),
                         ),
                         onPressed: () {
                           setState(() {
@@ -359,7 +361,7 @@ class _SignupState extends State<SignUp> {
           prefs.setString('avatar', '');
           prefs.setDouble('level', -1.0);
           prefs.setString('email', '');
-          
+
           print("log in Successuflly, signin page");
           await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
           Navigator.of(context).pushNamed('/HomePage');
