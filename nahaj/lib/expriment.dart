@@ -109,10 +109,13 @@ class _Experiment extends State<Experiment> {
 
   void exitExperiment() {
     if (paused) {
-      _unityWidgetController.resume()!.then((value) =>
-          _unityWidgetController.unload()!.then((value) => Navigator.of(context).pop()));
+      _unityWidgetController.resume()!.then((value) => _unityWidgetController
+          .unload()!
+          .then((value) => Navigator.of(context).pop()));
     } else {
-      _unityWidgetController.unload()!.then((value) => Navigator.of(context).pop());
+      _unityWidgetController
+          .unload()!
+          .then((value) => Navigator.of(context).pop());
     }
   }
 }
