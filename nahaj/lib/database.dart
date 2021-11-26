@@ -401,6 +401,13 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
+  Stream<List<child.ExperimentInfo>> getExp() {
+    return firestore.collection('Experiments').snapshots().map((snapShot) =>
+        snapShot.docs
+            .map((document) => child.ExperimentInfo.fromJson(document.data()))
+            .toList());
+  }
+
   Stream<List<child.Question>> getQuestions(String expID) {
     return firestore
         .collection('Experiments')
@@ -410,6 +417,118 @@ class DataBase extends ChangeNotifier {
         .map((snapShot) => snapShot.docs
             .map((document) => child.Question.fromJson(document.data()))
             .toList());
+  }
+
+  Future updateExpName(String expID, String name) async {
+    firestore.collection('Experiments').doc(expID).update({'Name': name});
+  }
+
+  Future updateExpCategory(String expID, String category) async {
+    firestore
+        .collection('Experiments')
+        .doc(expID)
+        .update({'Category': category});
+  }
+
+  Future updateExpInfo(String expID, String info) async {
+    firestore.collection('Experiments').doc(expID).update({'Info': info});
+  }
+
+  Future updateExpScor(String expID, int score) async {
+    firestore
+        .collection('Experiments')
+        .doc(expID)
+        .update({'ExperimentScore': score});
+  }
+
+  Future updateQuestion(String expID, String quesID, String ques) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Question': ques});
+  }
+
+  Future updateQuesAns(
+      String expID,
+      String quesID,
+      String ques,
+      String ans1,
+      String ans2,
+      String ans3,
+      String ans4,
+      String correctAns,
+      int score) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({
+      'Question': ques,
+      'Answer1': ans1,
+      'Answer2': ans2,
+      'Answer3': ans3,
+      'Answer4': ans4,
+      'CorrectAnswer': correctAns,
+      'Score': score
+    });
+  }
+
+  Future updateQuesAns1(String expID, String quesID, String ans1) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Answer1': ans1});
+  }
+
+  Future updateQuesAns2(String expID, String quesID, String ans2) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Answer1': ans2});
+  }
+
+  Future updateQuesAns3(String expID, String quesID, String ans3) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Answer1': ans3});
+  }
+
+  Future updateQuesAns4(String expID, String quesID, String ans4) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Answer1': ans4});
+  }
+
+  Future updateQuesCorrectAns(
+      String expID, String quesID, String correctAns) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'CorrectAnswer': correctAns});
+  }
+
+  Future updateQuesScore(String expID, String quesID, int score) async {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .update({'Score': score});
   }
 
   //sign up 2 (add the user in Firestore)

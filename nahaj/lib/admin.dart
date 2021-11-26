@@ -255,115 +255,6 @@ class _Admin extends State<Admin> with SingleTickerProviderStateMixin {
   }
 }
 
-class expQuestion extends StatelessWidget {
-  final DataBase db;
-  final ExperimentInfo exp;
-  //final User user;
-  expQuestion({Key? key, required this.db, required this.exp})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      /* onTap: () {
-        print('مجموعة');
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Group(db: db, group: group)),
-        );
-      },*/
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: 13.00.h,
-            height: 13.00.h,
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white54,
-            ),
-            child: ClipOval(
-              child: FadeInImage.assetNetwork(
-                placeholder: 'assets/loading.gif',
-                image: exp.pathOfImage,
-                fit: BoxFit.contain,
-                alignment: Alignment.center,
-              ),
-            ),
-          ),
-          Container(
-            child: Text(
-              exp.name,
-              style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 2.2.w,
-                  color: Color.fromARGB(170, 0, 0, 0)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CardsOfQuestion extends StatelessWidget {
-  final DataBase db;
-  //final ExperimentInfo exp;
-
-  const CardsOfQuestion({
-    required this.db,
-    Key? key,
-    // required this.exp,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => StreamBuilder<List<ExperimentInfo>>(
-        stream: db.getExp(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return buildText(
-                    'Something Went Wrong Try later ${snapshot.hasError}');
-              } else {
-                final allExps = snapshot.data;
-                return allExps == null
-                    ? buildText('لا توجد تجارب!')
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        reverse: true,
-                        itemCount: allExps.length,
-                        itemBuilder: (context, index) {
-                          final exp = allExps[index]; //[index];
-
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 30.0),
-                            child: expQuestion(
-                              db: db,
-                              exp: exp,
-                            ),
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
-                      );
-              }
-          }
-        },
-      );
-
-  Widget buildText(String text) => Center(
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 24),
-        ),
-      );
-}
-
 class ExpCard extends StatelessWidget {
   final DataBase db;
   final ExperimentInfo exp;
@@ -428,8 +319,8 @@ class CardsOfExp extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => StreamBuilder<List<Question>>(
-        stream: db.getQuestions("EC9BomGkVs0EGBodta1W"),
+  Widget build(BuildContext context) => StreamBuilder<List<ExperimentInfo>>(
+        stream: db.getExp(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -439,12 +330,25 @@ class CardsOfExp extends StatelessWidget {
                 return buildText(
                     'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
-                final allQuestions = snapshot.data;
-                return allQuestions == null
-                    ? buildText('لا توجد أسئلة')
-                    : QuestionCard(
-                        db: db,
-                        questions: allQuestions,
+                final allExps = snapshot.data;
+                return allExps == null
+                    ? buildText('لا توجد تجارب!')
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        reverse: true,
+                        itemCount: allExps.length,
+                        itemBuilder: (context, index) {
+                          final exp = allExps[index]; //[index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 30.0),
+                            child: ExpCard(
+                              db: db,
+                              exp: exp,
+                            ),
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
                       );
               }
           }
@@ -457,118 +361,4 @@ class CardsOfExp extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       );
-}
-
-// ignore: must_be_immutable
-class QuestionCard extends StatelessWidget {
-  final List<Question>? questions;
-  final DataBase db;
-  int i = 0;
-  int chosenAnswer = -1;
-
-  QuestionCard({required this.questions, required this.db});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: 70.h,
-      height: MediaQuery.of(context).size.height / 2,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.asset(
-            'assets/QuestionBackground.png',
-            width: 70.h,
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                questions![i].question,
-                style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 5.w,
-                  color: Color.fromARGB(170, 0, 0, 0),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ButtonBar(
-                    children: [
-                      Text(questions![i].answers[0]),
-                      Radio(
-                          value: 0,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                      Text(questions![i].answers[1]),
-                      Radio(
-                          value: 1,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ButtonBar(
-                    children: [
-                      Text(questions![i].answers[2]),
-                      Radio(
-                          value: 2,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                      Text(questions![i].answers[3]),
-                      Radio(
-                          value: 3,
-                          groupValue: chosenAnswer,
-                          onChanged: onChanged),
-                    ],
-                  ),
-                ],
-              ),
-              InkWell(
-                onTap: () {
-                  if (i < questions!.length) {
-                    if (i == questions!.length - 1) {
-                      //update score
-                      //alert of score
-                    }
-                    if (chosenAnswer == -1) {
-                      //error message
-                    } else {
-                      if (questions![i].answers[chosenAnswer] ==
-                          questions![i].correctAnswer) {
-                        //banner correct answer
-                        i++;
-                      } else {
-                        //banner wrong answer
-                        i++;
-                      }
-                    }
-                  }
-                },
-                child: Image.asset(
-                  i == questions!.length - 1
-                      ? 'assets/start_button.png'
-                      : 'assets/ExperimentBackButton.png',
-                  width: MediaQuery.of(context).size.width / 10,
-                  height: MediaQuery.of(context).size.width / 10,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  void onChanged(int? value) {
-    chosenAnswer = value!;
-  }
 }
