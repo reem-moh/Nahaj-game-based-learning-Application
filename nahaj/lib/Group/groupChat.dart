@@ -34,7 +34,7 @@ class _Group extends State<Group> {
                   group: widget.group, db: widget.db, user: widget.user),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(1.0.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -72,7 +72,7 @@ class ProfileHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         height: 14.w,
-        padding: EdgeInsets.all(16).copyWith(left: 0),
+        padding: EdgeInsets.all(1.6.w).copyWith(left: 0),
         child: Column(
           children: [
             Row(
@@ -203,7 +203,7 @@ class MessagesWidget extends StatelessWidget {
   Widget buildText(String text) => Center(
         child: Text(
           text,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 2.4.w),
         ),
       );
 }
@@ -243,7 +243,7 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
   @override
   Widget build(BuildContext context) => Container(
         color: Colors.white,
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(.8.h),
         child: Row(
           children: <Widget>[
             //text field
@@ -261,7 +261,7 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
                   hintText: 'اكتب رسالتك..',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(width: 0),
-                    gapPadding: 10,
+                    gapPadding: 1.0.h,
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
@@ -271,12 +271,12 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
               ),
             ),
             //space
-            SizedBox(width: 20),
+            SizedBox(width: 2.0.h),
             //send icon
             GestureDetector(
               onTap: message.trim().isEmpty ? null : sendMessage,
               child: Container(
-                padding: EdgeInsets.all(15),
+                padding: EdgeInsets.all(1.5.h),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.blue,
@@ -317,8 +317,8 @@ class MessageWidget extends StatelessWidget {
           children: [
             if (!isMe)
               Container(
-                padding: EdgeInsets.only(top: 16),
-                margin: EdgeInsets.only(top: 16, left: 16),
+                padding: EdgeInsets.only(top: 1.6.w),
+                margin: EdgeInsets.only(top: 1.6.w, left: 1.6.h),
                 child: Text(userName,
                     style: TextStyle(
                       color: Colors.black,
@@ -331,8 +331,8 @@ class MessageWidget extends StatelessWidget {
               ),
             Container(
               padding: isMe
-                  ? EdgeInsets.all(16)
-                  : EdgeInsets.only(bottom: 16, left: 16, right: 16),
+                  ? EdgeInsets.all(1.6.w)
+                  : EdgeInsets.only(bottom: 1.6.w, left: 1.6.h, right: 1.6.h),
               margin: isMe
                   ? EdgeInsets.all(16)
                   : EdgeInsets.only(bottom: 16, left: 16, right: 16),

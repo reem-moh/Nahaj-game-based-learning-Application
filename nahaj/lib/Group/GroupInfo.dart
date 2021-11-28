@@ -53,8 +53,7 @@ class _GroupInfo extends State<GroupInfo> {
                       children: [
                         //back button
                         Container(
-                          // padding:
-                          //   EdgeInsets.all(0).copyWith(right: 450, bottom: 40),
+                          alignment:Alignment.topLeft,
                           child: TextButton(
                             child: Image(
                               image: AssetImage("assets/PreviosButton.png"),
@@ -67,29 +66,25 @@ class _GroupInfo extends State<GroupInfo> {
                             },
                           ),
                         ),
-
+                        SizedBox(width: 46.w),
                         //image of group
-                        Expanded(
-                          child: Center(
-                            child: Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              //Group Image
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          120.0) //                 <--- border radius here
-                                      ),
-                                  border: Border.all(color: Colors.grey)),
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.all(1.h),
+                            //Group Image
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                        120.0) //                 <--- border radius here
+                                    ),
+                                border: Border.all(color: Colors.grey)),
 
-                              child: AspectRatio(
-                                aspectRatio: 1,
-                                child: ClipOval(
-                                    child:
-                                        Image.network(widget.group.pathOfImage,
-                                            //"assets/owl1.png",
-                                            fit: BoxFit.cover)),
-                              ),
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: ClipOval(
+                                  child:
+                                      Image.network(widget.group.pathOfImage,
+                                          fit: BoxFit.cover)),
                             ),
                           ),
                         ),
@@ -104,8 +99,8 @@ class _GroupInfo extends State<GroupInfo> {
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 27,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
                     ),
                   ),
@@ -127,8 +122,8 @@ class _GroupInfo extends State<GroupInfo> {
                   //list of members
                   Container(
                       alignment: Alignment.center,
-                      height: 400,
-                      width: 700,
+                      height: 50.0.w,
+                      width: 70.0.h,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.white),
                         borderRadius: BorderRadius.only(
@@ -145,7 +140,7 @@ class _GroupInfo extends State<GroupInfo> {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: EdgeInsets.all(1.8.w),
                         child: Center(
                           child: CardsOfMembers(
                             db: widget.db,
@@ -160,8 +155,11 @@ class _GroupInfo extends State<GroupInfo> {
                   // delete group
                   Container(
                       alignment: Alignment.center,
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(5.0.w),
                       child: buildUpgradeButton()),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
                 ],
               ),
             ],
@@ -224,7 +222,7 @@ class _GroupInfo extends State<GroupInfo> {
     members.forEach((member) {
       final list = member.values.toList();
       list.forEach((w) {
-        print("Key: ${w} ");
+        print("Key: $w ");
         users.add(w);
       });
     });
@@ -251,7 +249,7 @@ class ButtonWidget extends StatelessWidget {
           primary: Colors.red,
           shape: StadiumBorder(),
           onPrimary: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+          padding: EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 1.5.h),
         ),
         child: Text(text),
         onPressed: onClicked,
@@ -273,7 +271,6 @@ class CardsOfMembers extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  //change to Map
   Widget build(BuildContext context) => StreamBuilder<List<User>>(
         stream: db.getMembers(members),
         builder: (context, snapshot) {
@@ -283,14 +280,14 @@ class CardsOfMembers extends StatelessWidget {
             default:
               if (snapshot.hasError) {
                 return buildText(
-                    'Something Went Wrong Try later \n ${snapshot.data}');
+                    'حدث خطا ما الرجاء المحاوله مره اخرى \n');
               } else {
                 final allMembers = snapshot.data;
                 allMembers != null
                     ? allMembers.sort((a, b) => b.level.compareTo(a.level))
                     : "";
                 return allMembers == null
-                    ? buildText('لا يوجد لديك مجموعات!')
+                    ? buildText('لا يوجد لديك اعضاء!')
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         itemCount: allMembers.length,
@@ -299,8 +296,8 @@ class CardsOfMembers extends StatelessWidget {
 
                           return Container(
                               alignment: Alignment.center,
-                              height: 90,
-                              width: 700,
+                              height: 12.0.w,
+                              width: 70.0.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(5),
@@ -328,7 +325,7 @@ class CardsOfMembers extends StatelessWidget {
   Widget buildText(String text) => Center(
         child: Text(
           text,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 2.4.w),
         ),
       );
 
@@ -445,8 +442,8 @@ class MemberCard extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                          margin: const EdgeInsets.all(10.0),
-                          padding: const EdgeInsets.all(3.0),
+                          margin: EdgeInsets.all(1.0.w),
+                          padding: EdgeInsets.all(.3.w),
                           child: index == 0 //rank 1
                               ? Image.asset(
                                   ("assets/Ranking.png"),
@@ -502,8 +499,8 @@ class MemberCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                        margin: const EdgeInsets.all(10.0),
-                        padding: const EdgeInsets.all(3.0),
+                        margin: EdgeInsets.all(1.0.h),
+                        padding: EdgeInsets.all(.3.h),
                         child: index == 0 //rank 1
                             ? Image.asset(
                                 ("assets/Ranking.png"),
