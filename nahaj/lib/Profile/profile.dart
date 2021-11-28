@@ -26,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool loginErr = false;
   bool changes = false;
   List avatars = [];
+  bool savedChanges = true;
 
   @override
   void initState() {
@@ -47,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: AssetImage("assets/profileBackground.png"),
                     fit: BoxFit.cover)),
           ),
-          
+
           //user information
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     //level
-                    buildName(user),
+                    buildLevel(user),
                     SizedBox(height: 13.1.w),
                     buildInfo(user),
                     SizedBox(height: 2.4.w),
@@ -96,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
-          
+
           //back button
           Column(
             children: [
@@ -116,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    if (changes) {
+                    if (changes && !savedChanges) {
                       showDialog(
                         builder: (BuildContext context) {
                           return CupertinoAlertDialog(
@@ -168,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildLevel(User user) => Column(
         children: [
           SizedBox(height: 2.0.w),
           Text(
@@ -208,6 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           validator: (val) {
                             changes = true;
+                            savedChanges = false;
                             if (val!.length <= 0) {
                               validName = false;
                               return 'هذا الحقل مطلوب';
@@ -264,6 +266,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           validator: (val) {
                             changes = true;
+                            savedChanges = false;
                             bool emailValid = RegExp(
                                     r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
                                 .hasMatch(val!);
@@ -324,6 +327,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         validator: (val) {
                           changes = true;
+                          savedChanges = false;
                           if (val!.length <= 0) {
                             validPass = false;
                             return '  ';
@@ -382,6 +386,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           validator: (val) {
                             changes = true;
+                            savedChanges = false;
                             if (val!.length <= 0) {
                               validRePass = false;
                               return 'هذا الحقل مطلوب';
@@ -556,6 +561,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onClicked: () {
           if (updateUser(name, email, password)) {
             print("inside dialog!");
+            savedChanges = true;
             showDialog(
               builder: (BuildContext context) {
                 return CupertinoAlertDialog(
