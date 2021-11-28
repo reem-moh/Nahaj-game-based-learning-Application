@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUp extends StatefulWidget {
   final DataBase db;
@@ -38,8 +39,8 @@ class _SignupState extends State<SignUp> {
             ),
             //list view container
             ListView(
-              key: _key,
               children: [
+                //header
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: Row(
@@ -47,24 +48,26 @@ class _SignupState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       //back button
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white.withOpacity(0),
-                          onPrimary: Colors.white.withOpacity(0),
-                          //minimumSize: Size(30, 40),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(800.0)),
-                          alignment: Alignment.topLeft,
-                          elevation: 0.0,
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white.withOpacity(0),
+                            onPrimary: Colors.white.withOpacity(0),
+                            //minimumSize: Size(30, 40),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(800.0)),
+                            alignment: Alignment.topLeft,
+                            elevation: 0.0,
+                          ),
+                          child: Image(
+                            image: AssetImage("assets/PreviosButton.png"),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.of(context).pop();
+                            });
+                          },
                         ),
-                        child: Image(
-                          image: AssetImage("assets/PreviosButton.png"),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.of(context).pop();
-                          });
-                        },
                       ),
                       //Nahaj logo
                       Image(
@@ -74,27 +77,24 @@ class _SignupState extends State<SignUp> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    //Name
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 150, vertical: 0),
-                        child: Text(
-                          ": الاسم ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                          ),
-                        ),
+               
+               //Name
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    child: Text(
+                      ": الاسم ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 //Name text field
                 SizedBox(
@@ -131,26 +131,22 @@ class _SignupState extends State<SignUp> {
                       )),
                 ),
                 //Email
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 150, vertical: 0),
-                        child: Text(
-                          ":البريد الإلكتروني ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                          ),
-                        ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    child: Text(
+                      ":البريد الإلكتروني ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 //Email text field
                 SizedBox(
@@ -189,26 +185,22 @@ class _SignupState extends State<SignUp> {
                       )),
                 ),
                 //Password
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 150, vertical: 0),
-                        child: Text(
-                          ":كلمة السر",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                          ),
-                        ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    child: Text(
+                      ":كلمة السر",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 //Password text field
                 SizedBox(
@@ -245,26 +237,22 @@ class _SignupState extends State<SignUp> {
                   ),
                 ),
                 //Repeat password
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.08,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 130, vertical: 0),
-                        child: Text(
-                          ":إعادة كلمة السر ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 27,
-                          ),
-                        ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 130, vertical: 0),
+                    child: Text(
+                      ":إعادة كلمة السر ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.7.w,
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 //Repeat password text field
                 SizedBox(
@@ -278,9 +266,6 @@ class _SignupState extends State<SignUp> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        /*onChanged: (val) {
-                            repeatedPassword = val;
-                          },*/
                         validator: (val) {
                           if (val!.length <= 0) {
                             validRePass = false;
@@ -293,9 +278,6 @@ class _SignupState extends State<SignUp> {
                             validRePass = true;
                             repeatedPassword = val;
                           }
-                          /*if (loginErr) {
-                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
-                          }*/
                           return null;
                         },
                       )),
@@ -313,10 +295,7 @@ class _SignupState extends State<SignUp> {
                           side: BorderSide(
                               color: Color.fromARGB(255, 129, 190, 255))),
                       onPressed: () {
-                        // var validate = _key.currentState.validate();
-                        //if (validate) {
                         createUser(name, email, password);
-                        //}
                       },
                       padding: EdgeInsets.all(0.0),
                       color: Color.fromARGB(255, 129, 190, 255),
@@ -327,7 +306,7 @@ class _SignupState extends State<SignUp> {
                           color: Colors.black,
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w600,
-                          fontSize: 27,
+                          fontSize: 2.7.w,
                         ),
                       ),
                     ),

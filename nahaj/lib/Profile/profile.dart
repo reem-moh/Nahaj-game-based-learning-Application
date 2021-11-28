@@ -47,120 +47,119 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: AssetImage("assets/profileBackground.png"),
                     fit: BoxFit.cover)),
           ),
-
+          
+          //user information
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
-              //header
-              Stack(
-                children: [
-                  //back button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white.withOpacity(0),
-                      onPrimary: Colors.white.withOpacity(0),
-                      //minimumSize: Size(30, 40),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(800.0)),
-                      alignment: Alignment.topLeft,
-                      elevation: 0.0,
-                    ),
-                    child: Image(
-                      image: AssetImage("assets/PreviosButton.png"),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        if (changes) {
-                          showDialog(
-                            builder: (BuildContext context) {
-                              return CupertinoAlertDialog(
-                                title:
-                                    Text("هل تريد الخروج بدون حفظ التغييرات؟"),
-                                actions: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pushNamedAndRemoveUntil(
-                                                '/HomePage',
-                                                (Route<dynamic> route) =>
-                                                    false);
-                                      },
-                                      child: Text(
-                                        "نعم",
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.white.withOpacity(0),
-                                        shadowColor:
-                                            Colors.white.withOpacity(0),
-                                        onPrimary: Colors.white,
-                                      )),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text(
-                                        "لا",
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.white.withOpacity(0),
-                                        shadowColor:
-                                            Colors.white.withOpacity(0),
-                                        onPrimary: Colors.white,
-                                      )),
-                                ],
-                              );
-                            },
-                            context: context,
-                          );
-                        } else {
-                          Navigator.of(context).pop();
-                        }
-                      });
-                    },
-                  ),
-                  //avatar and level
-                  Container(
-                    alignment: Alignment.topCenter,
-                    child: ProfileWidget(
-                      imagePath: user.avatar,
-                      onClicked: () async {
-                        showDialog(
-                          builder: (context) {
-                            return CupertinoAlertDialog(
-                              title: Text(
-                                'تغيير صورة العرض',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Cairo',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 2.7.w,
-                                ),
-                              ),
-                              content: Center(child: buildListOfAvatars()),
-                            );
-                          },
-                          context: context,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              buildName(user),
-              const SizedBox(height: 110),
+              SizedBox(height: 2.0.w),
               //info
               Expanded(
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   children: [
+                    //avatar
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: ProfileWidget(
+                        imagePath: user.avatar,
+                        onClicked: () async {
+                          showDialog(
+                            builder: (context) {
+                              return CupertinoAlertDialog(
+                                title: Text(
+                                  'تغيير صورة العرض',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 2.7.w,
+                                  ),
+                                ),
+                                content: Center(child: buildListOfAvatars()),
+                              );
+                            },
+                            context: context,
+                          );
+                        },
+                      ),
+                    ),
+                    //level
+                    buildName(user),
+                    SizedBox(height: 13.1.w),
                     buildInfo(user),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 2.4.w),
                     changes ? Center(child: buildUpgradeButton()) : Center(),
-                    const SizedBox(height: 90),
+                    SizedBox(height: 9.0.w),
                   ],
                 ),
+              ),
+            ],
+          ),
+          
+          //back button
+          Column(
+            children: [
+              SizedBox(height: 5.0.w),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white.withOpacity(0),
+                  onPrimary: Colors.white.withOpacity(0),
+                  //minimumSize: Size(30, 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(800.0)),
+                  alignment: Alignment.topLeft,
+                  elevation: 0.0,
+                ),
+                child: Image(
+                  image: AssetImage("assets/PreviosButton.png"),
+                ),
+                onPressed: () {
+                  setState(() {
+                    if (changes) {
+                      showDialog(
+                        builder: (BuildContext context) {
+                          return CupertinoAlertDialog(
+                            title: Text("هل تريد الخروج بدون حفظ التغييرات؟"),
+                            actions: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/HomePage',
+                                            (Route<dynamic> route) => false);
+                                  },
+                                  child: Text(
+                                    "نعم",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.white.withOpacity(0),
+                                    shadowColor: Colors.white.withOpacity(0),
+                                    onPrimary: Colors.white,
+                                  )),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    "لا",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.white.withOpacity(0),
+                                    shadowColor: Colors.white.withOpacity(0),
+                                    onPrimary: Colors.white,
+                                  )),
+                            ],
+                          );
+                        },
+                        context: context,
+                      );
+                    } else {
+                      Navigator.of(context).pop();
+                    }
+                  });
+                },
               ),
             ],
           ),
@@ -171,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildName(User user) => Column(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 2.0.w),
           Text(
             "المستوى: ${user.level}",
             style: TextStyle(
@@ -197,8 +196,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 5.0.h, vertical: 0),
                         child: TextFormField(
                           textDirection: TextDirection.rtl,
                           initialValue: user.username,
@@ -229,7 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
                     child: Text(
                       ": اسم المستخدم",
                       style: TextStyle(
@@ -243,7 +243,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 4.0.w),
             //Email
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -253,8 +253,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 5.0.h, vertical: 0),
                         child: TextFormField(
                           textDirection: TextDirection.rtl,
                           initialValue: user.email,
@@ -287,7 +287,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
                     child: Text(
                       ":البريد الإلكتروني ",
                       style: TextStyle(
@@ -301,7 +302,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 4.0.w),
             //Password
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -313,7 +314,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                          EdgeInsets.symmetric(horizontal: 5.0.h, vertical: 0),
                       child: TextFormField(
                         textDirection: TextDirection.rtl,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -344,7 +345,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
                     child: Text(
                       ":كلمة السر الجديدة",
                       style: TextStyle(
@@ -358,7 +360,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 4.0.w),
             //Repeat password
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -369,8 +371,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 5.0.h, vertical: 0),
                         child: TextFormField(
                           textDirection: TextDirection.rtl,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -400,7 +402,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
                     child: Text(
                       ":إعادة كلمة السر ",
                       style: TextStyle(
@@ -414,31 +417,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ],
             ),
-            const SizedBox(height: 40),
-          ],
-        ),
-      );
-
-  Widget buildAbout(User user) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'level',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              "${user.level}",
-              style: TextStyle(fontSize: 16, height: 1.4),
-            ),
+            SizedBox(height: 4.0.w),
           ],
         ),
       );
 
   Widget buildListOfAvatars() => Container(
-        padding: EdgeInsets.symmetric(vertical: 50),
+        padding: EdgeInsets.symmetric(vertical: 5.0.w),
         child: Wrap(
           children: [
             for (int i = 0; i < avatars.length; i++)
@@ -657,7 +642,7 @@ class ProfileWidget extends StatelessWidget {
           ),
           Positioned(
             bottom: 0,
-            right: 4,
+            right: .4.w,
             child: buildEditIcon(color),
           ),
         ],
@@ -675,8 +660,8 @@ class ProfileWidget extends StatelessWidget {
         child: Ink.image(
           image: image,
           fit: BoxFit.contain,
-          width: 128,
-          height: 128,
+          width: 12.8.h,
+          height: 12.8.h,
           child: InkWell(onTap: onClicked),
         ),
       ),
@@ -686,14 +671,14 @@ class ProfileWidget extends StatelessWidget {
   //avatar change icon
   Widget buildEditIcon(Color color) => buildCircle(
         color: Colors.white,
-        all: 3,
+        all: .3.h,
         child: buildCircle(
           color: color,
-          all: 8,
+          all: .8.h,
           child: Icon(
             Icons.edit,
             color: Colors.white,
-            size: 20,
+            size: 2.0.w,
           ),
         ),
       );
@@ -727,7 +712,7 @@ class ButtonWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: StadiumBorder(),
           onPrimary: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 3.2.h, vertical: 1.2.w),
         ),
         child: Text(text),
         onPressed: onClicked,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nahaj/database.dart';
@@ -89,9 +90,6 @@ class _SigninState extends State<Signin> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      /*onChanged: (val) {
-                        email = val;
-                      },*/
                       validator: (val) {
                         if (val!.length <= 0) {
                           valid = false;
@@ -217,9 +215,31 @@ class _SigninState extends State<Signin> {
                           fontSize: 2.7.w,
                         ),
                       ),
-                      onPressed: () async {
+                      onPressed: () {
                         if (vaildEmail && email.isNotEmpty) {
-                          await widget.db.resetPassword(email);
+                          print("inside forget pass");
+                          widget.db.resetPassword(email).then(
+                                (value) => showDialog(
+                                  builder: (BuildContext context) {
+                                    return CupertinoAlertDialog(
+                                      title: Text(
+                                          'تم ارسال اعادة تعيين كلمة المرور الى الايميل'),
+                                    );
+                                  },
+                                  context: context,
+                                ),
+                              );
+                        } else {
+                          print("inside forget pass2");
+                          showDialog(
+                            builder: (BuildContext context) {
+                              return CupertinoAlertDialog(
+                                title: Text(
+                                    'الرجاء ادخال البريد الالكتروني'),
+                              );
+                            },
+                            context: context,
+                          );
                         }
                       },
                     ),

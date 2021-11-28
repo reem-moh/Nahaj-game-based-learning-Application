@@ -109,6 +109,16 @@ class _GroupInfo extends State<GroupInfo> {
                       ),
                     ),
                   ),
+                  //goupCode
+                  Center(
+                    child: Text(
+                      "${widget.group.goupCode} :رمز المجموعة ",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 2.2.w,
+                      ),
+                    ),
+                  ),
 
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
