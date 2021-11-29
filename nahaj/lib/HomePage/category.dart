@@ -214,7 +214,7 @@ class _ExperimentCardState extends State<ExperimentCard> {
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
             child: Image.network(
-              widget.exp.pathOfImage,
+              widget.exp.expImage,
               width: 200.0.h,
             ),
           ),

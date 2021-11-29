@@ -53,7 +53,7 @@ class _GroupInfo extends State<GroupInfo> {
                       children: [
                         //back button
                         Container(
-                          alignment:Alignment.topLeft,
+                          alignment: Alignment.topLeft,
                           child: TextButton(
                             child: Image(
                               image: AssetImage("assets/PreviosButton.png"),
@@ -73,8 +73,7 @@ class _GroupInfo extends State<GroupInfo> {
                             margin: EdgeInsets.all(1.h),
                             //Group Image
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(
+                                borderRadius: BorderRadius.all(Radius.circular(
                                         120.0) //                 <--- border radius here
                                     ),
                                 border: Border.all(color: Colors.grey)),
@@ -82,9 +81,8 @@ class _GroupInfo extends State<GroupInfo> {
                             child: AspectRatio(
                               aspectRatio: 1,
                               child: ClipOval(
-                                  child:
-                                      Image.network(widget.group.pathOfImage,
-                                          fit: BoxFit.cover)),
+                                  child: Image.network(widget.group.groupImage,
+                                      fit: BoxFit.cover)),
                             ),
                           ),
                         ),
@@ -279,8 +277,7 @@ class CardsOfMembers extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
-                return buildText(
-                    'حدث خطا ما الرجاء المحاوله مره اخرى \n');
+                return buildText('حدث خطا ما الرجاء المحاوله مره اخرى \n');
               } else {
                 final allMembers = snapshot.data;
                 allMembers != null

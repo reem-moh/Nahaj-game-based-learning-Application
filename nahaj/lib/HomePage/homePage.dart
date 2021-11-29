@@ -87,8 +87,8 @@ final _key = GlobalKey();
 
   _logout() {
     widget.db.signOut().then((s) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/Signin', (Route<dynamic> route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/Signin', (Route<dynamic> route) => false);
     });
   }
 
@@ -920,7 +920,7 @@ class GroupsCard extends StatelessWidget {
             child: ClipOval(
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/loading.gif',
-                image: group.pathOfImage,
+                image: group.groupImage,
                 fit: BoxFit.cover,
                 alignment: Alignment.center,
               ),

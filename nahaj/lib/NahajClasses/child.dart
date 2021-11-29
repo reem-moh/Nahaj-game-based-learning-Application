@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class User extends ChangeNotifier {
-  String userId= '';
-  String username= '';
-  String email= '';
-  String avatar= '';
-  int level= -1;
+  String userId = '';
+  String username = '';
+  String email = '';
+  String avatar = '';
+  int level = -1;
 
   User(
       {required this.userId,
@@ -29,7 +29,7 @@ class Groups {
   String groupName = "";
   String leaderId = "";
   String leaderName = "";
-  String pathOfImage = "";
+  String groupImage = "";
   List members = [{}];
 
   Groups(
@@ -38,7 +38,7 @@ class Groups {
       required this.groupName,
       required this.leaderId,
       required this.leaderName,
-      required this.pathOfImage,
+      required this.groupImage,
       required this.members});
 
   Groups.fromJson(Map parsedJson) {
@@ -47,7 +47,7 @@ class Groups {
     groupName = parsedJson['groupName'] ?? '';
     leaderId = parsedJson['leaderId'] ?? '';
     leaderName = parsedJson['leaderName'] ?? '';
-    pathOfImage = parsedJson['pathOfImage'] ?? '';
+    groupImage = parsedJson['pathOfImage'] ?? '';
     members = parsedJson['members'] ?? [{}];
   }
 
@@ -57,7 +57,7 @@ class Groups {
         'groupName': groupName,
         'leaderId': leaderId,
         'leaderName': leaderName,
-        'pathOfImage': pathOfImage,
+        'pathOfImage': groupImage,
         'members': members,
       };
 }
@@ -68,7 +68,7 @@ class ExperimentInfo {
   String name = '';
   String category = '';
   String info = '';
-  String pathOfImage = '';
+  String expImage = '';
   int totalScore = 0;
   int userScore = 0;
   int experimentScore = 0;
@@ -77,7 +77,7 @@ class ExperimentInfo {
     required this.name,
     required this.category,
     required this.info,
-    required this.pathOfImage,
+    required this.expImage,
     required this.totalScore,
     required this.userScore,
     required this.experimentScore,
@@ -89,7 +89,7 @@ class ExperimentInfo {
     sceneIndex = parsedJson['SceneIndex'] ?? 0;
     category = parsedJson['Category'] ?? '';
     info = parsedJson['Info'] ?? '';
-    pathOfImage = parsedJson['PathOfImage'] ?? '';
+    expImage = parsedJson['PathOfImage'] ?? '';
     totalScore = parsedJson['TotlaScore'] ?? 0;
     userScore = parsedJson['UserScore'] ?? 0;
     experimentScore = parsedJson['ExperimentScore'] ?? 0;
@@ -100,7 +100,7 @@ class ExperimentInfo {
         'SceneIndex': sceneIndex,
         'Category': category,
         'Info': info,
-        'PathOfImage': pathOfImage,
+        'PathOfImage': expImage,
         'TotlaScore': totalScore,
         'UserScore': userScore,
         'ExperimentScore': experimentScore,

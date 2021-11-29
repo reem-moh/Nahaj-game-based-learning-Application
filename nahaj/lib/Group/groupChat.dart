@@ -90,7 +90,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                   },
                 ),
                 //BackButton(color: Colors.blue[600]),
-                Spacer(), 
+                Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -107,7 +107,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                     SizedBox(
                       height: 9.w,
                       width: 9.h,
-                      child: buildIcon(1, AssetImage(''), group.pathOfImage),
+                      child: buildIcon(1, AssetImage(''), group.groupImage),
                     ),
                     //group image
                     SizedBox(
@@ -129,7 +129,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+
                 SizedBox(width: 4),
               ],
             )
@@ -142,11 +142,12 @@ class ProfileHeaderWidget extends StatelessWidget {
             ? BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey[200],
-                image:
-                    DecorationImage(fit: BoxFit.scaleDown, image: NetworkImage(image)))
+                image: DecorationImage(
+                    fit: BoxFit.scaleDown, image: NetworkImage(image)))
             : BoxDecoration(),
         child: type == 1
-            ? Container(): Image(
+            ? Container()
+            : Image(
                 image: AssetImage("assets/Group13.png"),
               ),
       );

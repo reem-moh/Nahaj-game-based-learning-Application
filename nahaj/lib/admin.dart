@@ -286,7 +286,7 @@ class ExpCard extends StatelessWidget {
             child: ClipOval(
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/loading.gif',
-                image: exp.pathOfImage,
+                image: exp.expImage,
                 fit: BoxFit.contain,
                 alignment: Alignment.center,
               ),
