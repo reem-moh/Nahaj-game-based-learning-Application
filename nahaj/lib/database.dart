@@ -1,33 +1,32 @@
 // Import the firebase_core and cloud_firestore plugin
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nahaj/NahajClasses/child.dart' as child;
-import 'package:nahaj/NahajClasses/child.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NahajClasses/Chats.dart';
 
-FirebaseFirestore firestore = FirebaseFirestore.instance;
-FirebaseStorage firestorage = FirebaseStorage.instance;
-
 class DataBase extends ChangeNotifier {
-  late FirebaseAuth _auth;
+  late FirebaseFirestore firestore;
+  late FirebaseStorage firestorage;
+  late FirebaseAuth fireAuth;
   late CollectionReference user;
-  late CollectionReference groups;
+  //late CollectionReference groups;
 
   DataBase() {
-    _auth = FirebaseAuth.instance;
+    firestore = FirebaseFirestore.instance;
+    firestorage = FirebaseStorage.instance;
+    fireAuth = FirebaseAuth.instance;
     user = firestore.collection('user');
   }
 
   //sign up 1 (add the user in Auth)
   Future createNewUser(String name, String email, String password) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
+      UserCredential result = await fireAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       print("createNewUser, database page");
       print(result.user);
@@ -65,7 +64,7 @@ class DataBase extends ChangeNotifier {
   //sign in
   Future loginUser(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await fireAuth.signInWithEmailAndPassword(
           email: email, password: password);
       return result.user;
     } catch (e) {
@@ -76,14 +75,14 @@ class DataBase extends ChangeNotifier {
   //reset password function (in Auth)
   Future<void> resetPassword(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      await fireAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
       print('database page, ' + e.toString());
     }
   }
 
   void changePassword(String password) async {
-    var currentUser = _auth.currentUser;
+    var currentUser = fireAuth.currentUser;
     currentUser!.updatePassword(password).then((_) {
       print("Successfully changed password");
     }).catchError((error) {
@@ -92,7 +91,7 @@ class DataBase extends ChangeNotifier {
   }
 
   void changeEmail(String email, String userId) async {
-    var currentUser = _auth.currentUser;
+    var currentUser = fireAuth.currentUser;
     currentUser!.updateEmail(email).then((_) {
       //change in user collection
 
@@ -165,7 +164,7 @@ class DataBase extends ChangeNotifier {
   Future signOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
-    await _auth.signOut();
+    await fireAuth.signOut();
   }
 
   //Get avatar image from Firestorage
@@ -221,7 +220,7 @@ class DataBase extends ChangeNotifier {
         groupName: groupName,
         leaderId: leaderId,
         leaderName: leaderName,
-        pathOfImage: pathOfImage,
+        groupImage: pathOfImage,
         members: members);
 
     groupDocument
