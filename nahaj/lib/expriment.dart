@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:nahaj/HomePage/category.dart';
@@ -53,6 +54,7 @@ class _Experiment extends State<Experiment> {
                 onUnityMessage: onUnityMessage,
                 onUnitySceneLoaded: onUnitySceneLoaded,
               ),
+              //Back button
               Container(
                 alignment: Alignment.topLeft,
                 padding: EdgeInsets.only(left: 10, top: 20),
@@ -63,7 +65,54 @@ class _Experiment extends State<Experiment> {
                     width: 60,
                   ),
                   onTap: () {
-                    exitExperiment();
+                    showDialog(
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: Text(
+                            "هل تريد الخروج بدون إنهاء التجربة؟",
+                            style: TextStyle(
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
+                          actions: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  exitExperiment();
+                                },
+                                child: Text(
+                                  "نعم",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "لا",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white.withOpacity(0),
+                                  shadowColor: Colors.white.withOpacity(0),
+                                  onPrimary: Colors.white,
+                                )),
+                          ],
+                        );
+                      },
+                      context: context,
+                    );
                   },
                 ),
               ),
@@ -420,7 +469,7 @@ class _QuestionCardState extends State<QuestionCard> {
             });
           } else {
             //answer wrong
-            //banner wrong answer  + ' إجابة خاطئة، الإجابة هي'
+            //banner wrong answer
             showBanner(
                 "إجابة خاطئة، الإجابة هي " + widget.questions![i].correctAnswer,
                 Icons.cancel_rounded,
@@ -443,8 +492,8 @@ class _QuestionCardState extends State<QuestionCard> {
     if (widget.questions![i].answers[chosenAnswer - 1] ==
         widget.questions![i].correctAnswer) {
       //banner correct answer
-      showBanner('أحسنت، الإجابة صحيحة', Icons.check_circle_rounded, Colors.red,
-          17.sp, EdgeInsets.only(left: 1.8.h, right: 2.h));
+      showBanner('أحسنت، الإجابة صحيحة', Icons.check_circle_rounded,
+          Colors.green, 17.sp, EdgeInsets.only(left: 1.8.h, right: 2.h));
       userScore += widget.questions![i].score;
     } else {
       //banner wrong answer
@@ -617,7 +666,7 @@ class _QuestionCardState extends State<QuestionCard> {
   void showBanner(String msg, IconData icon, Color iconColor, double iconSize,
       EdgeInsetsGeometry iconMargin) {
     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-      // width: 43.h,
+      duration: Duration(seconds: 1),
       elevation: 0,
       content: Row(
         mainAxisAlignment: MainAxisAlignment.center,

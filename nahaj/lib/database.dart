@@ -131,6 +131,10 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
+  Future updateUserLevel(String userId, int leve) async {
+    firestore.collection('user').doc(userId).update({'level': leve});
+  }
+
   //Store user info in session
   Future<dynamic> userInfo(String uid) async {
     String name = '1';
@@ -157,6 +161,7 @@ class DataBase extends ChangeNotifier {
     prefs.setString('avatar', avatar);
     prefs.setInt('level', level);
     prefs.setString('email', email);
+    print('inside get user info' + level.toString());
     return true;
   }
 

@@ -16,6 +16,8 @@ import 'package:nahaj/database.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
+User user_ =
+    User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
 
 class HomePage extends StatefulWidget {
   final DataBase db;
@@ -34,9 +36,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
-
-  User user =
-      User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
 
   @override
   void initState() {
@@ -69,7 +68,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         String userId = (prefs.getString('userId') ?? "1");
         String email = (prefs.getString('email') ?? "1");
         int level = (prefs.getInt('level') ?? -1);
-        user = User(
+        user_ = User(
             userId: userId,
             username: username,
             email: email,
@@ -123,7 +122,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     children: [
                       Container(
                         height: screenHeight * 0.08,
-                        child: user.username == "1"
+                        child: user_.username == "1"
                             ? Text(
                                 "...",
                                 style: TextStyle(
@@ -134,7 +133,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                 ),
                               )
                             : Text(
-                                user.username,
+                                user_.username,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontFamily: 'Cairo',
@@ -147,11 +146,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   accountEmail: Text(""),
                   currentAccountPicture: CircleAvatar(
-                    child: user.avatar == "1"
+                    child: user_.avatar == "1"
                         ? CircularProgressIndicator()
                         : FadeInImage.assetNetwork(
                             placeholder: 'assets/loading.gif',
-                            image: user.avatar,
+                            image: user_.avatar,
                             fit: BoxFit.contain,
                             alignment: Alignment.center,
                           ),
@@ -229,7 +228,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       MaterialPageRoute(
                           builder: (context) => ProfilePage(
                                 db: widget.db,
-                                user: user,
+                                user: user_,
                               )),
                     );
                     //tappedIndex = 1;
@@ -427,17 +426,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                user.avatar == "1"
+                                user_.avatar == "1"
                                     ? CircularProgressIndicator()
                                     : FadeInImage.assetNetwork(
                                         placeholder: 'assets/loading.gif',
-                                        image: user.avatar,
+                                        image: user_.avatar,
                                         fit: BoxFit.contain,
                                       ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
-                                user.username == "1"
+                                user_.username == "1"
                                     ? Text(
                                         "...",
                                         style: TextStyle(
@@ -448,7 +447,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         ),
                                       )
                                     : Text(
-                                        'أهلاً، ${user.username}',
+                                        'أهلاً، ${user_.username}',
                                         style: TextStyle(
                                           fontFamily: 'Cairo',
                                           color: Colors.white,
@@ -576,7 +575,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                           builder: (context) =>
                                                               AddGroup(
                                                                 db: widget.db,
-                                                                user: user,
+                                                                user: user_,
                                                               )),
                                                     );
                                                   }),
@@ -597,7 +596,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                           builder: (context) =>
                                                               JoinGroup(
                                                                 db: widget.db,
-                                                                user: user,
+                                                                user: user_,
                                                               )),
                                                     );
                                                   }),
@@ -636,7 +635,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                           height: 18.00.h,
                                           child: CardsOfGroup(
                                             db: widget.db,
-                                            user: user,
+                                            user: user_,
                                           )),
                                     ],
                                   ),
