@@ -14,10 +14,12 @@ int userLevelUpdated = 0;
 class Category extends StatefulWidget {
   final DataBase db;
   final String categoryTitle;
+  final User user;
   const Category({
     Key? key,
     required this.categoryTitle,
     required this.db,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -93,6 +95,7 @@ class _Category extends State<Category> {
                 child: ExperimentsWidget(
                   category: widget.categoryTitle,
                   db: widget.db,
+                  user: widget.user,
                 ),
               ),
             ],
@@ -138,6 +141,7 @@ class _Category extends State<Category> {
 //Experiments stream builder
 // ignore: must_be_immutable
 class ExperimentsWidget extends StatelessWidget {
+  final User user;
   final String category;
   final DataBase db;
   List<ExperimentInfo>? allExperiments;
@@ -145,6 +149,7 @@ class ExperimentsWidget extends StatelessWidget {
   ExperimentsWidget({
     required this.db,
     required this.category,
+    required this.user,
   });
 
   @override
@@ -272,12 +277,12 @@ class ExperimentsWidget extends StatelessWidget {
         newLevel = 25;
         break;
     }
-    if (newLevel > user_.level) {
-      db.updateUserLevel(user_.userId, newLevel);
-      db.userInfo(user_.userId);
+    if (newLevel > user.level) {
+      db.updateUserLevel(user.userId, newLevel);
+      db.userInfo(user.userId);
       userLevelUpdated = newLevel;
       showLevelDialog = true;
-      print('\nuser new level after update' + user_.level.toString());
+      print('\nuser new level after update' + user.level.toString());
     }
   }
 }

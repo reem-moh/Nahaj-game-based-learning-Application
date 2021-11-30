@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:highlighter_coachmark/highlighter_coachmark.dart';
 import 'package:nahaj/Profile/profile.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/groupChat.dart';
@@ -16,8 +18,6 @@ import 'package:nahaj/database.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
-User user_ =
-    User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
 
 class HomePage extends StatefulWidget {
   final DataBase db;
@@ -37,6 +37,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   late int tappedIndex;
 
+  User user =
+      User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
+  GlobalKey _fabKeyProfile = GlobalObjectKey("fab"); // used by FAB
+  GlobalKey _fabKeyHelp = GlobalObjectKey("fab"); // used by FAB
+
+  GlobalKey _LogoutKey = GlobalObjectKey("button"); // used by RaisedButton
+  final _key = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -68,7 +75,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         String userId = (prefs.getString('userId') ?? "1");
         String email = (prefs.getString('email') ?? "1");
         int level = (prefs.getInt('level') ?? -1);
-        user_ = User(
+        user = User(
             userId: userId,
             username: username,
             email: email,
@@ -107,11 +114,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       child: ScaleTransition(
         scale: _menuScaleAnimation,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.07.h, 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(screenWidth * 0.064.h, 0, 0, 0),
           children: [
             //profile image and name
             Container(
-              alignment: Alignment.topRight,
+              alignment: Alignment.centerRight,
               height: 23.h,
               width: 5.h,
               child: SizedBox(
@@ -122,7 +129,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     children: [
                       Container(
                         height: screenHeight * 0.08,
-                        child: user_.username == "1"
+                        child: user.username == "1"
                             ? Text(
                                 "...",
                                 style: TextStyle(
@@ -132,13 +139,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                   fontSize: 2.7.w,
                                 ),
                               )
-                            : Text(
-                                user_.username,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Cairo',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 2.7.w,
+                            : Container(
+                                padding: EdgeInsets.fromLTRB(
+                                    screenWidth * 0.005.h, 0, 0, 0),
+                                child: Text(
+                                  user.username,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 2.7.w,
+                                  ),
                                 ),
                               ),
                       ),
@@ -146,11 +157,11 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   ),
                   accountEmail: Text(""),
                   currentAccountPicture: CircleAvatar(
-                    child: user_.avatar == "1"
+                    child: user.avatar == "1"
                         ? CircularProgressIndicator()
                         : FadeInImage.assetNetwork(
                             placeholder: 'assets/loading.gif',
-                            image: user_.avatar,
+                            image: user.avatar,
                             fit: BoxFit.contain,
                             alignment: Alignment.center,
                           ),
@@ -218,7 +229,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontWeight: FontWeight.w600,
                     fontSize: 2.4.w,
                   ),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.rtl, // key: _fabKeyProfile,
                 ),
                 trailing: Icon(Icons.person, size: screenHeight * 0.032),
                 onTap: () {
@@ -228,7 +239,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       MaterialPageRoute(
                           builder: (context) => ProfilePage(
                                 db: widget.db,
-                                user: user_,
+                                user: user,
                               )),
                     );
                     //tappedIndex = 1;
@@ -259,9 +270,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontWeight: FontWeight.w600,
                     fontSize: 2.4.w,
                   ),
-                  textDirection: TextDirection.rtl,
+                  textDirection: TextDirection.rtl, //  key: _fabKeyHelp,
                 ),
+                // key: _buttonKey,   // setting key
+
                 onTap: () {
+                  showsections();
+
                   /*setState(() {
                     Navigator.push(
                       context,
@@ -295,6 +310,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
+                  key: _LogoutKey,
                 ),
                 onTap: () {
                   setState(() {
@@ -340,6 +356,129 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
+    );
+  }
+
+  void showsections() {
+    CoachMark coachMarkTile = CoachMark();
+    RenderBox target =
+        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromLTWH(0, 180, 350, 250);
+    coachMarkTile.show(
+      targetContext: _LogoutKey.currentContext,
+      markRect: markRect,
+      markShape: BoxShape.rectangle,
+      children: [
+        Positioned(
+          right: 550,
+          bottom: 470,
+          child: Text(
+            " هنا ستجد التجارب لقسم الكيمياء ",
+            style: const TextStyle(
+              fontSize: 30.0,
+              fontStyle: FontStyle.italic,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+      onClose: () => Timer(Duration(seconds: 1), () => showGroup()),
+    );
+  }
+
+  void showGroup() {
+    CoachMark coachMarkTile = CoachMark();
+    RenderBox target =
+        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromLTWH(270, 420, 770, 230);
+    coachMarkTile.show(
+      targetContext: _LogoutKey.currentContext,
+      markRect: markRect,
+      markShape: BoxShape.rectangle,
+      children: [
+        Positioned(
+          right: 200,
+          bottom: 470,
+          child: Text(
+            "هنا تظهر المجموعات التابعة لك او المنضم لها",
+            style: const TextStyle(
+              fontSize: 30.0,
+              fontStyle: FontStyle.italic,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+      onClose: () => Timer(Duration(seconds: 1), () => showjoining()),
+    );
+  }
+
+  void showjoining() {
+    CoachMark coachMarkFAB = CoachMark();
+
+    RenderBox target =
+        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromLTWH(0, 430, 80, 80);
+
+    coachMarkFAB.show(
+      targetContext: _LogoutKey.currentContext,
+      markRect: markRect,
+      children: [
+        Container(
+          child: Positioned(
+            right: 700,
+            bottom: 400,
+            child: Text(
+              "انقر هنا لاضافة مجموعة او انضمام لمجموعة ",
+              style: const TextStyle(
+                fontSize: 30.0,
+                fontStyle: FontStyle.italic,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
+      duration: null,
+      onClose: () => Timer(Duration(seconds: 1), () => showLogout()),
+    );
+  }
+
+  void showLogout() {
+    CoachMark coachMarkFAB = CoachMark();
+
+    RenderBox target =
+        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromLTWH(1080, 720, 100, 100);
+
+    coachMarkFAB.show(
+      targetContext: _LogoutKey.currentContext,
+      markRect: markRect,
+      children: [
+        Container(
+          child: Positioned(
+            right: 135,
+            bottom: 45,
+            child: Text(
+              "انقر هنا لتسجيل خروجك",
+              style: const TextStyle(
+                fontSize: 30.0,
+                fontStyle: FontStyle.italic,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
+      ],
+      duration: Duration(seconds: 5),
     );
   }
 
@@ -426,17 +565,17 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                user_.avatar == "1"
+                                user.avatar == "1"
                                     ? CircularProgressIndicator()
                                     : FadeInImage.assetNetwork(
                                         placeholder: 'assets/loading.gif',
-                                        image: user_.avatar,
+                                        image: user.avatar,
                                         fit: BoxFit.contain,
                                       ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
                                         0.10),
-                                user_.username == "1"
+                                user.username == "1"
                                     ? Text(
                                         "...",
                                         style: TextStyle(
@@ -447,7 +586,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                         ),
                                       )
                                     : Text(
-                                        'أهلاً، ${user_.username}',
+                                        'أهلاً، ${user.username}',
                                         style: TextStyle(
                                           fontFamily: 'Cairo',
                                           color: Colors.white,
@@ -506,6 +645,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       title: 'الكيمياء',
                                       image: 'assets/chemistry.gif',
                                       db: widget.db,
+                                      user: user,
                                     ),
                                     CategoryCard(
                                       cardColor:
@@ -513,6 +653,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       title: 'النباتات',
                                       image: 'assets/plants.gif',
                                       db: widget.db,
+                                      user: user,
                                     ),
                                     CategoryCard(
                                       cardColor:
@@ -520,6 +661,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       title: 'الحيوانات',
                                       image: 'assets/animals.png',
                                       db: widget.db,
+                                      user: user,
                                     ),
                                   ],
                                 ),
@@ -542,7 +684,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                 shape: BoxShape.circle,
                                               ),
                                               margin: EdgeInsets.only(
-                                                right: 9.00.h,
+                                                right: 16.00.h,
+                                                top: 60,
                                               ),
                                               child: Icon(
                                                 Icons.add,
@@ -575,7 +718,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                           builder: (context) =>
                                                               AddGroup(
                                                                 db: widget.db,
-                                                                user: user_,
+                                                                user: user,
                                                               )),
                                                     );
                                                   }),
@@ -596,7 +739,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                           builder: (context) =>
                                                               JoinGroup(
                                                                 db: widget.db,
-                                                                user: user_,
+                                                                user: user,
                                                               )),
                                                     );
                                                   }),
@@ -631,11 +774,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       //list view
                                       Container(
                                           margin: EdgeInsets.only(
-                                              left: 30.0, right: 30.0),
+                                              bottom: 500,
+                                              left: 30.0,
+                                              right: 30.0),
                                           height: 18.00.h,
                                           child: CardsOfGroup(
                                             db: widget.db,
-                                            user: user_,
+                                            user: user,
                                           )),
                                     ],
                                   ),
@@ -666,6 +811,7 @@ class CategoryCard extends StatelessWidget {
     this.size3 = 30.0,
     this.fontSize = 2.4,
     required this.db,
+    required this.user,
   });
 
   Color cardColor;
@@ -673,6 +819,7 @@ class CategoryCard extends StatelessWidget {
   String image;
   double size1, size2, size3, fontSize;
   DataBase db;
+  User user;
 
   @override
   Widget build(BuildContext context) {
@@ -685,6 +832,7 @@ class CategoryCard extends StatelessWidget {
               builder: (context) => Category(
                     categoryTitle: title,
                     db: db,
+                    user: user,
                   )),
         );
       },
