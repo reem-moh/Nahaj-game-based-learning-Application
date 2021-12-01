@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
-import 'package:nahaj/HomePage/category.dart';
 import 'package:nahaj/NahajClasses/child.dart';
 import 'package:sizer/sizer.dart';
+import 'HomePage/category.dart';
 import 'database.dart';
 
 class Experiment extends StatefulWidget {
@@ -609,7 +609,14 @@ class _QuestionCardState extends State<QuestionCard> {
                                 (value) =>
                                     widget.unityWidgetController.unload()!);
                             Navigator.pop(context);
-                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Category(
+                                        categoryTitle: widget.exp.category,
+                                        db: widget.db,
+                                      )),
+                            );
                           },
                         )
                       ],
@@ -675,9 +682,6 @@ class _QuestionCardState extends State<QuestionCard> {
       ),
       backgroundColor: Color.fromARGB(0, 255, 255, 255),
       behavior: SnackBarBehavior.floating,
-      /*shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0),
-      ),*/
       margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 170),
     ));
   }

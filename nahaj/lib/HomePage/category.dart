@@ -14,12 +14,11 @@ int userLevelUpdated = 0;
 class Category extends StatefulWidget {
   final DataBase db;
   final String categoryTitle;
-  final User user;
+
   const Category({
     Key? key,
     required this.categoryTitle,
     required this.db,
-    required this.user,
   }) : super(key: key);
 
   @override
@@ -31,7 +30,7 @@ class _Category extends State<Category> {
   void initState() {
     super.initState();
     if (showLevelDialog) {
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(milliseconds: 10), () {
         showDialog(
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
@@ -95,7 +94,6 @@ class _Category extends State<Category> {
                 child: ExperimentsWidget(
                   category: widget.categoryTitle,
                   db: widget.db,
-                  user: widget.user,
                 ),
               ),
             ],
@@ -112,10 +110,7 @@ class _Category extends State<Category> {
             ),
             onPressed: () {
               setState(() {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomePage(
-                          db: widget.db,
-                        )));
+                Navigator.of(context).pop();
               });
             },
           ),
@@ -132,6 +127,47 @@ class _Category extends State<Category> {
                   color: Color.fromARGB(255, 114, 78, 140)),
             ),
           ),
+          /*showLevelDialog
+              ? CupertinoAlertDialog(
+                  title: Text(
+                    "تهانينا🎉",
+                    style: TextStyle(
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
+                  content: Text(
+                    'لقد وصلت إلى المستوى ' + userLevelUpdated.toString(),
+                    style: TextStyle(
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
+                  actions: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            showLevelDialog = false;
+                          });
+
+                          //Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "حسناً",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white.withOpacity(0),
+                          shadowColor: Colors.white.withOpacity(0),
+                          onPrimary: Colors.white,
+                        )),
+                  ],
+                )
+              : Container(
+                  width: 0,
+                  height: 0,
+                ),*/
         ],
       ),
     );
@@ -141,7 +177,6 @@ class _Category extends State<Category> {
 //Experiments stream builder
 // ignore: must_be_immutable
 class ExperimentsWidget extends StatelessWidget {
-  final User user;
   final String category;
   final DataBase db;
   List<ExperimentInfo>? allExperiments;
@@ -149,7 +184,6 @@ class ExperimentsWidget extends StatelessWidget {
   ExperimentsWidget({
     required this.db,
     required this.category,
-    required this.user,
   });
 
   @override
@@ -165,7 +199,7 @@ class ExperimentsWidget extends StatelessWidget {
                     'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
                 allExperiments = snapshot.data;
-                checkUserLeve(context);
+                checkUserLeve();
                 return allExperiments == null
                     ? buildText('لا توجد تجارب')
                     : ListView.builder(
@@ -194,7 +228,7 @@ class ExperimentsWidget extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       );
-  void checkUserLeve(BuildContext context) {
+  void checkUserLeve() {
     int x = 0;
     int newLevel = 0;
     for (var exp in allExperiments!) {
@@ -277,12 +311,14 @@ class ExperimentsWidget extends StatelessWidget {
         newLevel = 25;
         break;
     }
-    if (newLevel > user.level) {
-      db.updateUserLevel(user.userId, newLevel);
-      db.userInfo(user.userId);
+    print(user_.level.toString() + " " + newLevel.toString());
+    if (newLevel > user_.level) {
+      db.updateUserLevel(user_.userId, newLevel);
+      db.userInfo(user_.userId);
       userLevelUpdated = newLevel;
       showLevelDialog = true;
-      print('\nuser new level after update' + user.level.toString());
+      print(user_.level.toString() + " " + newLevel.toString());
+      return;
     }
   }
 }
