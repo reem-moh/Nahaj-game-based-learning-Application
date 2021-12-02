@@ -23,6 +23,24 @@ class User extends ChangeNotifier {
   }
 }
 
+class Admin extends ChangeNotifier {
+  String adminId = '';
+  String adminName = '';
+  String email = '';
+
+  Admin({
+    required this.adminId,
+    required this.adminName,
+    required this.email,
+  });
+
+  Admin.fromJson(Map parsedJson) {
+    adminId = parsedJson['userId'] ?? '';
+    adminName = parsedJson['name'] ?? '';
+    email = parsedJson['email'] ?? '';
+  }
+}
+
 class Groups {
   int goupCode = -1; //Code
   String groupId = '';

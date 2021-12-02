@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nahaj/admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
-
 
 class Signin extends StatefulWidget {
   final DataBase db;
@@ -24,6 +24,7 @@ class _SigninState extends State<Signin> {
   bool valid = false;
   bool vaildEmail = false;
   bool loginErr = false;
+  bool isUser = false;
 
   @override
   Widget build(BuildContext context) {
@@ -137,16 +138,13 @@ class _SigninState extends State<Signin> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                        initialValue:'12345678',
+                        initialValue: '12345678',
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         textDirection: TextDirection.rtl,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        /*onChanged: (val) {
-                          password = val;
-                        },*/
                         validator: (val) {
                           if (val!.length <= 0) {
                             valid = false;
@@ -176,9 +174,16 @@ class _SigninState extends State<Signin> {
                         // if(_key.currentContext.validate())
                         if (valid) {
                           if (await loginUser()) {
-                            setState(() {
-                              Navigator.of(context).pushNamed('/HomePage');
-                            });
+                            if (isUser) {
+                              setState(() {
+                                Navigator.of(context).pushNamed('/HomePage');
+                              });
+                            } else {
+                              setState(() {
+                                Navigator.of(context)
+                                    .pushNamed('/AdminHomePage');
+                              });
+                            }
                           } else {
                             loginErr = true;
                           }
@@ -234,8 +239,7 @@ class _SigninState extends State<Signin> {
                           showDialog(
                             builder: (BuildContext context) {
                               return CupertinoAlertDialog(
-                                title: Text(
-                                    'الرجاء ادخال البريد الالكتروني'),
+                                title: Text('الرجاء ادخال البريد الالكتروني'),
                               );
                             },
                             context: context,
@@ -304,14 +308,26 @@ class _SigninState extends State<Signin> {
     prefs.setString('avatar', '');
     prefs.setDouble('level', -1.0);
     prefs.setString('email', '');
-    
+
     dynamic authResutl = await widget.db.loginUser(email, password);
     if (authResutl == null) {
       print("login error");
       return false;
     } else {
       print("log in Successuflly, signin page");
-      await widget.db.userInfo(authResutl.uid.toString()).then((value) {});
+      var x;
+      if (x = await widget.db.userInfo(authResutl.uid.toString())) {
+        print(x);
+        isUser = true;
+      } else if (x = await widget.db.adminInfo(authResutl.uid.toString())) {
+        print(x);
+        isUser = false;
+      }
+      /*await widget.db.userInfo(authResutl.uid.toString()).then((value) async {
+        !value
+            ? await widget.db.adminInfo(authResutl.uid.toString())
+            : isUser = value;
+      });*/
       return true;
     }
   }

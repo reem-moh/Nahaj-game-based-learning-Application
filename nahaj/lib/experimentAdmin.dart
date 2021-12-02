@@ -7,10 +7,10 @@ import '../database.dart';
 
 //List<ExperimentInfo> experiments = [];
 
-class ExpInfo extends StatefulWidget {
+class ExperimentAdmin extends StatefulWidget {
   final DataBase db;
   final ExperimentInfo exp;
-  const ExpInfo({
+  const ExperimentAdmin({
     Key? key,
     required this.db,
     required this.exp,
@@ -20,7 +20,7 @@ class ExpInfo extends StatefulWidget {
   _ExpInfo createState() => _ExpInfo();
 }
 
-class _ExpInfo extends State<ExpInfo> {
+class _ExpInfo extends State<ExperimentAdmin> {
   @override
   void initState() {
     super.initState();

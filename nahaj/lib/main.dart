@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nahaj/SignPages/Signin.dart';
+import 'package:nahaj/admin.dart';
 //import 'package:nahaj/Group/addGroup.dart';
 //import 'package:nahaj/Group/group.dart';
 //import 'package:nahaj/HomePage/homePage.dart';
@@ -48,9 +49,18 @@ class MyApp extends StatelessWidget {
             db: this.database,
           ),
           routes: <String, WidgetBuilder>{
-            '/SignUp': (BuildContext context) => new SignUp(db: this.database,),
-            '/HomePage': (BuildContext context) => new HomePage(db: this.database,),
-            '/Signin': (BuildContext context) => new Signin(db: this.database,),
+            '/SignUp': (BuildContext context) => new SignUp(
+                  db: this.database,
+                ),
+            '/HomePage': (BuildContext context) => new HomePage(
+                  db: this.database,
+                ),
+            '/AdminHomePage': (BuildContext context) => new AdminHomePage(
+                  db: this.database,
+                ),
+            '/Signin': (BuildContext context) => new Signin(
+                  db: this.database,
+                ),
           },
         );
       },

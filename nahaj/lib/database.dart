@@ -142,18 +142,27 @@ class DataBase extends ChangeNotifier {
     String avatar = '1';
     int level = 0;
 
-    await user.doc(uid).get().then((value) {
-      print('read from firestore: \n ' +
-          value.get("email") +
-          ' ' +
-          value.get("name") +
-          ' ' +
-          value.get("avatar"));
-      name = value.get('name');
-      email = value.get("email");
-      avatar = value.get("avatar");
-      level = value.get("level");
-    });
+    try {
+      await user.doc(uid).get().then((value) {
+        if (value.exists) {
+          print('read from firestore: \n ' +
+              value.get("email") +
+              ' ' +
+              value.get("name") +
+              ' ' +
+              value.get("avatar"));
+          name = value.get('name');
+          email = value.get("email");
+          avatar = value.get("avatar");
+          level = value.get("level");
+        } else {
+          return false;
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
 
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('userId', uid);
@@ -162,7 +171,37 @@ class DataBase extends ChangeNotifier {
     prefs.setInt('level', level);
     prefs.setString('email', email);
     print('inside get user info' + level.toString());
-    return true;
+    return name == '1' ? false : true;
+  }
+
+  Future<dynamic> adminInfo(String uid) async {
+    String name = '1';
+    String email = '1';
+
+    try {
+      await firestore.collection('Admin').doc(uid).get().then((value) {
+        if (value.exists) {
+          print('read from firestore: \n ' +
+              value.get("email") +
+              ' ' +
+              value.get("name"));
+          name = value.get('name');
+          email = value.get("email");
+        } else {
+          return false;
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('userId', uid);
+    prefs.setString('username', name);
+    prefs.setString('email', email);
+    print('inside get admin info' + email);
+    return name == '1' ? false : true;
   }
 
   //Signout
