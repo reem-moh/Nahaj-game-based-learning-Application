@@ -38,13 +38,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _scaleAnimation;
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
-  late int tappedIndex;
+  int tappedIndex = 0;
 
-  GlobalKey _fabKeyProfile = GlobalObjectKey("fab"); // used by FAB
-  GlobalKey _fabKeyHelp = GlobalObjectKey("fab"); // used by FAB
+  late GlobalKey _logoutKey; // used by RaisedButton
 
-  GlobalKey _LogoutKey = GlobalObjectKey("button"); // used by RaisedButton
-  final _key = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -54,11 +51,8 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         Tween<double>(begin: 0.5, end: 1).animate(_controller);
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
-    tappedIndex = 0;
-
+    _logoutKey = GlobalObjectKey("button");
     _getInfoFromSession();
-
-    //widget.db.getExperiments().then((value) => experiments = value);
   }
 
   @override
@@ -115,13 +109,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       child: ScaleTransition(
         scale: _menuScaleAnimation,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.064.h, 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(screenWidth * 0.074.h, 0, 0, 0),
           children: [
             //profile image and name
             Container(
               alignment: Alignment.centerRight,
               height: 23.h,
-              width: 5.h,
               child: SizedBox(
                 height: screenHeight * 0.9,
                 child: UserAccountsDrawerHeader(
@@ -271,22 +264,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontWeight: FontWeight.w600,
                     fontSize: 2.4.w,
                   ),
-                  textDirection: TextDirection.rtl, //  key: _fabKeyHelp,
+                  textDirection: TextDirection.rtl,
                 ),
-                // key: _buttonKey,   // setting key
-
                 onTap: () {
                   showsections();
-
-                  /*setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AR()),
-                    );
-                    
-                  });*/
                   setState(() {
-                    // tappedIndex = 2;
+                    tappedIndex = 2;
                   });
                 },
               ),
@@ -311,7 +294,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
-                  key: _LogoutKey,
+                  key: _logoutKey,
                 ),
                 onTap: () {
                   setState(() {
@@ -363,58 +346,60 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   void showsections() {
     CoachMark coachMarkTile = CoachMark();
     RenderBox target =
-        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+        _logoutKey.currentContext!.findRenderObject() as RenderBox;
 
     Rect markRect = target.localToGlobal(Offset.zero) & target.size;
     markRect = Rect.fromLTWH(0, 180, 350, 250);
     coachMarkTile.show(
-      targetContext: _LogoutKey.currentContext,
+      targetContext: _logoutKey.currentContext,
       markRect: markRect,
       markShape: BoxShape.rectangle,
       children: [
         Positioned(
-          right: 550,
-          bottom: 470,
+          right: 55.0.h,
+          bottom: 47.0.w,
           child: Text(
             " هنا ستجد التجارب لقسم الكيمياء ",
-            style: const TextStyle(
-              fontSize: 30.0,
-              fontStyle: FontStyle.italic,
+            style: TextStyle(
+              fontFamily: 'Cairo',
               color: Colors.white,
+              fontSize: 2.6.w,
+              fontWeight: FontWeight.w600,
             ),
           ),
         )
       ],
-      onClose: () => Timer(Duration(seconds: 1), () => showGroup()),
+      onClose: () => Timer(Duration(milliseconds: 10), () => showGroup()),
     );
   }
 
   void showGroup() {
     CoachMark coachMarkTile = CoachMark();
     RenderBox target =
-        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+        _logoutKey.currentContext!.findRenderObject() as RenderBox;
 
     Rect markRect = target.localToGlobal(Offset.zero) & target.size;
     markRect = Rect.fromLTWH(270, 420, 770, 230);
     coachMarkTile.show(
-      targetContext: _LogoutKey.currentContext,
+      targetContext: _logoutKey.currentContext,
       markRect: markRect,
       markShape: BoxShape.rectangle,
       children: [
         Positioned(
-          right: 200,
-          bottom: 470,
+          right: 20.0.h,
+          bottom: 47.0.w,
           child: Text(
             "هنا تظهر المجموعات التابعة لك او المنضم لها",
-            style: const TextStyle(
-              fontSize: 30.0,
-              fontStyle: FontStyle.italic,
+            style: TextStyle(
+              fontFamily: 'Cairo',
               color: Colors.white,
+              fontSize: 2.6.w,
+              fontWeight: FontWeight.w600,
             ),
           ),
         )
       ],
-      onClose: () => Timer(Duration(seconds: 1), () => showjoining()),
+      onClose: () => Timer(Duration(milliseconds: 10), () => showjoining()),
     );
   }
 
@@ -422,32 +407,33 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     CoachMark coachMarkFAB = CoachMark();
 
     RenderBox target =
-        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+        _logoutKey.currentContext!.findRenderObject() as RenderBox;
 
     Rect markRect = target.localToGlobal(Offset.zero) & target.size;
     markRect = Rect.fromLTWH(0, 430, 80, 80);
 
     coachMarkFAB.show(
-      targetContext: _LogoutKey.currentContext,
+      targetContext: _logoutKey.currentContext,
       markRect: markRect,
       children: [
         Container(
           child: Positioned(
-            right: 700,
-            bottom: 400,
+            right: 70.0.h,
+            bottom: 40.0.w,
             child: Text(
               "انقر هنا لاضافة مجموعة او انضمام لمجموعة ",
-              style: const TextStyle(
-                fontSize: 30.0,
-                fontStyle: FontStyle.italic,
+              style: TextStyle(
+                fontFamily: 'Cairo',
                 color: Colors.white,
+                fontSize: 2.6.w,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
         )
       ],
-      duration: null,
-      onClose: () => Timer(Duration(seconds: 1), () => showLogout()),
+      // duration: null,
+      onClose: () => Timer(Duration(milliseconds: 10), () => showLogout()),
     );
   }
 
@@ -455,31 +441,34 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
     CoachMark coachMarkFAB = CoachMark();
 
     RenderBox target =
-        _LogoutKey.currentContext!.findRenderObject() as RenderBox;
+        _logoutKey.currentContext!.findRenderObject() as RenderBox;
 
     Rect markRect = target.localToGlobal(Offset.zero) & target.size;
     markRect = Rect.fromLTWH(1080, 720, 100, 100);
 
     coachMarkFAB.show(
-      targetContext: _LogoutKey.currentContext,
+      targetContext: _logoutKey.currentContext,
       markRect: markRect,
       children: [
         Container(
           child: Positioned(
-            right: 135,
-            bottom: 45,
+            right: 13.5.h,
+            bottom: 4.5.w,
             child: Text(
               "انقر هنا لتسجيل خروجك",
-              style: const TextStyle(
-                fontSize: 30.0,
-                fontStyle: FontStyle.italic,
+              style: TextStyle(
+                fontFamily: 'Cairo',
                 color: Colors.white,
+                fontSize: 2.6.w,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
         )
       ],
-      duration: Duration(seconds: 5),
+      onClose: () => Timer(Duration(milliseconds: 10), () {
+        
+      }),
     );
   }
 
@@ -528,9 +517,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                             ),
                             onTap: () {
                               setState(() {
-                                if (isCollapsed)
+                                if (isCollapsed) {
                                   _controller.forward();
-                                else
+                                  tappedIndex = 0;
+                                } else
                                   _controller.reverse();
                                 isCollapsed = !isCollapsed;
                               });
@@ -672,8 +662,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                     children: [
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                            MainAxisAlignment.start,
                                         children: [
+                                          SizedBox(
+                                            width: 1.h,
+                                          ),
+                                          //pluse sign
                                           FocusedMenuHolder(
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -746,9 +740,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                                   }),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 65.h,
-                                          ),
+                                          Spacer(),
                                           Text(
                                             ':المجموعات',
                                             style: TextStyle(
@@ -772,9 +764,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       //list view
                                       Container(
                                           margin: EdgeInsets.only(
-                                              bottom: 500,
-                                              left: 30.0,
-                                              right: 30.0),
+                                              left: 30.0, right: 30.0),
                                           height: 18.00.h,
                                           child: CardsOfGroup(
                                             db: widget.db,
@@ -798,7 +788,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 }
 
-// ignore: must_be_immutable
+
 class CategoryCard extends StatelessWidget {
   CategoryCard({
     this.cardColor = Colors.grey,

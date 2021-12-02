@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nahaj/admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nahaj/database.dart';
 import 'package:sizer/sizer.dart';
