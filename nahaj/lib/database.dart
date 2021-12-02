@@ -574,6 +574,18 @@ class DataBase extends ChangeNotifier {
         .update({'Score': score});
   }
 
+  deleteQuestion(String expID, String quesID) {
+    //remove from collection chat
+    firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc(quesID)
+        .delete() // <-- Delete
+        .then((_) => print('Deleted questiong done'))
+        .catchError((error) => print('Delete failed: $error'));
+  }
+
   //sign up 2 (add the user in Firestore)
   Future<void> addNewQuestion(
       String question,
