@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class GroupInfo extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -75,14 +75,13 @@ class _SignupState extends State<SignUp> {
                     ],
                   ),
                 ),
-               
-               //Name
+
+                //Name
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.08,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
                     child: Text(
                       ": الاسم ",
                       style: TextStyle(
@@ -133,8 +132,7 @@ class _SignupState extends State<SignUp> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
                     child: Text(
                       ":البريد الإلكتروني ",
                       style: TextStyle(
@@ -187,8 +185,7 @@ class _SignupState extends State<SignUp> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 150, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
                     child: Text(
                       ":كلمة السر",
                       style: TextStyle(
@@ -239,8 +236,7 @@ class _SignupState extends State<SignUp> {
                   height: MediaQuery.of(context).size.height * 0.08,
                   child: Container(
                     alignment: Alignment.centerRight,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 130, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal: 130, vertical: 0),
                     child: Text(
                       ":إعادة كلمة السر ",
                       style: TextStyle(

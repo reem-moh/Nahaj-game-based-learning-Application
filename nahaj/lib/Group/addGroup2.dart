@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 
 import 'package:nahaj/NahajClasses/child.dart';
 
@@ -7,7 +7,12 @@ class AddGroup2 extends StatefulWidget {
   final DataBase db;
   final String nameoftheGroup;
   final User user;
-  AddGroup2({Key? key, required this.db,required this.nameoftheGroup,required this.user}) : super(key: key);
+  AddGroup2(
+      {Key? key,
+      required this.db,
+      required this.nameoftheGroup,
+      required this.user})
+      : super(key: key);
 
   @override
   _AddGroup2 createState() => _AddGroup2();
@@ -49,7 +54,7 @@ class _AddGroup2 extends State<AddGroup2> {
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Container(
                   alignment: Alignment.center,
-                 // padding: EdgeInsets.only(top: 0, left: 280),
+                  // padding: EdgeInsets.only(top: 0, left: 280),
                   child: Text(
                     " تم إنشاء المجموعة بنجاح",
                     style: TextStyle(
@@ -94,7 +99,8 @@ class _AddGroup2 extends State<AddGroup2> {
                             color: Color.fromARGB(255, 129, 190, 255))),
                     onPressed: () {
                       setState(() {
-                        Navigator.of(context).pushNamedAndRemoveUntil('/HomePage', (Route<dynamic> route) => false );
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/HomePage', (Route<dynamic> route) => false);
                       });
                       //createGroup(name);
                     },

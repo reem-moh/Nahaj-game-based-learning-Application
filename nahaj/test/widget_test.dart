@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:nahaj/main.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    DataBase db=DataBase();
+    DataBase db = DataBase();
     await tester.pumpWidget(MyApp(db));
 
     // Verify that our counter starts at 0.

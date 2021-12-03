@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 
 class JoinGroup extends StatefulWidget {
   final DataBase db;

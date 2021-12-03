@@ -6,7 +6,8 @@ import 'package:nahaj/NahajClasses/child.dart';
 import 'package:nahaj/AdminPages/experimentAdmin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/HomePage/category.dart';
+import 'package:nahaj/presenter.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
@@ -68,7 +69,8 @@ class _AdminHomePage extends State<AdminHomePage>
           adminName: username,
           email: email,
         );
-        print("inside admin home paage username:$username userId:$userId email:$email");
+        print(
+            "inside admin home paage username:$username userId:$userId email:$email");
       });
     }
   }
@@ -469,7 +471,7 @@ class AdminExperimentsWidget extends StatelessWidget {
                         reverse: true,
                         itemCount: allExperiments.length,
                         itemBuilder: (context, index) {
-                          final exp = allExperiments[index]; 
+                          final exp = allExperiments[index];
                           return AdminExperimentCard(
                             db: db,
                             exp: exp,

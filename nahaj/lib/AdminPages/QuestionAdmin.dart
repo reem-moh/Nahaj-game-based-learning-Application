@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class QuestionCard extends StatefulWidget {
@@ -157,43 +157,42 @@ class _QuestionCardState extends State<QuestionCard> {
   Container CorrectAnswer() {
     return Container(
       child: Column(
-      children: <Widget>[
-        SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
-                    child: Text(
-                      ": الاجابه الصحيحه",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 2.7.w,
-                      ),
-                    ),
-                  ),
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.08,
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
+              child: Text(
+                ": الاجابه الصحيحه",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 2.7.w,
                 ),
-             
-        _myRadioButton(
-          title: "الاجابة ١",
-          value: 0,
-        ),
-        _myRadioButton(
-          title: "الاجابة ٢",
-          value: 1,
-        ),
-        _myRadioButton(
-          title: "الاجابة ٣",
-          value: 2,
-        ),
-        _myRadioButton(
-          title: "الاجابة ٤",
-          value: 3,
-        ),
-      ],
-    ),);
+              ),
+            ),
+          ),
+          _myRadioButton(
+            title: "الاجابة ١",
+            value: 0,
+          ),
+          _myRadioButton(
+            title: "الاجابة ٢",
+            value: 1,
+          ),
+          _myRadioButton(
+            title: "الاجابة ٣",
+            value: 2,
+          ),
+          _myRadioButton(
+            title: "الاجابة ٤",
+            value: 3,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildExpName(String expName) => Column(

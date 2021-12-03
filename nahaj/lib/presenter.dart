@@ -42,7 +42,7 @@ class DataBase extends ChangeNotifier {
     }
   }
 
-  //sign up 2 (add the user in Firestore)
+  //sign up 2 (add the user in Firestore) ✅
   Future<void> addNewUser(String name, String email, String uid) async {
     // Call the user's CollectionReference to add a new user
     return await user
@@ -61,7 +61,7 @@ class DataBase extends ChangeNotifier {
             (error) => print("database page, Failed to add user: $error"));
   }
 
-  //sign in
+  //sign in ✅
   Future loginUser(String email, String password) async {
     try {
       UserCredential result = await fireAuth.signInWithEmailAndPassword(
@@ -131,6 +131,7 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
+//✅
   Future updateUserLevel(String userId, int leve) async {
     firestore.collection('user').doc(userId).update({'level': leve});
   }
@@ -233,8 +234,7 @@ class DataBase extends ChangeNotifier {
     return "-1";
   }
 
-  //get groups of the user
-
+  //get groups of the user ✅
   Stream<List<child.Groups>> getGroupsList(String uid, String uName) {
     Map member = {'userId': uid};
 
@@ -247,6 +247,7 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
+//✅
   Future<void> createGroup(int code, String groupName, String leaderName,
       String leaderId, String pathOfImage) async {
     //add to group collection
@@ -434,6 +435,7 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
+//✅
   Stream<List<child.ExperimentInfo>> getExperiments(String category) {
     return firestore
         .collection('Experiments')
@@ -451,6 +453,7 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
+//✅
   Stream<List<child.Question>> getQuestions(String expID) {
     return firestore
         .collection('Experiments')
@@ -586,7 +589,7 @@ class DataBase extends ChangeNotifier {
         .catchError((error) => print('Delete failed: $error'));
   }
 
-  //sign up 2 (add the user in Firestore)
+  //add Q ✅
   Future<void> addNewQuestion(
       String question,
       String correctAnswer,

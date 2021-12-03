@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/database.dart';
+import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
