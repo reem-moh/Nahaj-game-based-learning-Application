@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/child.dart';
-import 'package:nahaj/experimentAdmin.dart';
+import 'package:nahaj/AdminPages/experimentAdmin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:nahaj/HomePage/category.dart';
 import 'package:nahaj/database.dart';
 
 //#FDE9A9
@@ -36,11 +35,7 @@ class _AdminHomePage extends State<AdminHomePage>
     adminName: '1',
     email: '1',
   );
-  GlobalKey _fabKeyProfile = GlobalObjectKey("fab"); // used by FAB
-  GlobalKey _fabKeyHelp = GlobalObjectKey("fab"); // used by FAB
 
-  GlobalKey _LogoutKey = GlobalObjectKey("button"); // used by RaisedButton
-  final _key = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -51,7 +46,7 @@ class _AdminHomePage extends State<AdminHomePage>
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
     tappedIndex = 0;
-
+    print("inside initState admin home pAGE");
     _getInfoFromSession();
   }
 
@@ -73,6 +68,7 @@ class _AdminHomePage extends State<AdminHomePage>
           adminName: username,
           email: email,
         );
+        print("inside admin home paage username:$username userId:$userId email:$email");
       });
     }
   }
@@ -218,7 +214,6 @@ class _AdminHomePage extends State<AdminHomePage>
                     fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
-                  key: _LogoutKey,
                 ),
                 onTap: () {
                   setState(() {
@@ -381,7 +376,7 @@ class _AdminHomePage extends State<AdminHomePage>
                         Container(
                           child: Stack(children: [
                             //background bottom
-                            /*Container(
+                            Container(
                                 width: MediaQuery.of(context).size.width.h,
                                 margin: EdgeInsets.only(
                                     top: MediaQuery.of(context).size.width *
@@ -389,7 +384,7 @@ class _AdminHomePage extends State<AdminHomePage>
                                 child: Image(
                                     fit: BoxFit.fill,
                                     image: AssetImage(
-                                        "assets/homeBottomBackground.png"))),*/
+                                        "assets/homeBottomBackground.png"))),
                             Column(
                               children: [
                                 SizedBox(
@@ -397,8 +392,9 @@ class _AdminHomePage extends State<AdminHomePage>
                                 ),
                                 //experiments
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
+                                    Spacer(),
                                     Text(
                                       ':التجارب',
                                       style: TextStyle(
@@ -448,7 +444,6 @@ class _AdminHomePage extends State<AdminHomePage>
 // ignore: must_be_immutable
 class AdminExperimentsWidget extends StatelessWidget {
   final DataBase db;
-  List<ExperimentInfo>? allExperiments;
 
   AdminExperimentsWidget({
     required this.db,
@@ -466,16 +461,15 @@ class AdminExperimentsWidget extends StatelessWidget {
                 return buildText(
                     'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
-                allExperiments = snapshot.data;
+                final allExperiments = snapshot.data;
                 return allExperiments == null
                     ? buildText('لا توجد تجارب')
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
-                        itemCount: allExperiments!.length,
+                        itemCount: allExperiments.length,
                         itemBuilder: (context, index) {
-                          final exp = allExperiments![index]; //[index];
-
+                          final exp = allExperiments[index]; 
                           return AdminExperimentCard(
                             db: db,
                             exp: exp,

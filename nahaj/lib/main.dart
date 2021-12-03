@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nahaj/SignPages/Signin.dart';
-import 'package:nahaj/admin.dart';
+import 'package:nahaj/AdminPages/admin.dart';
 //import 'package:nahaj/Group/addGroup.dart';
 //import 'package:nahaj/Group/group.dart';
 //import 'package:nahaj/HomePage/homePage.dart';
