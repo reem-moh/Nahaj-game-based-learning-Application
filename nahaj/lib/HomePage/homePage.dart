@@ -466,9 +466,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           ),
         )
       ],
-      onClose: () => Timer(Duration(milliseconds: 10), () {
-        
-      }),
+      onClose: () => Timer(Duration(milliseconds: 10), () {}),
     );
   }
 
@@ -637,6 +635,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       image: 'assets/chemistry.gif',
                                       db: widget.db,
                                       user: user_,
+                                      closed: false,
                                     ),
                                     CategoryCard(
                                       cardColor:
@@ -645,6 +644,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       image: 'assets/plants.gif',
                                       db: widget.db,
                                       user: user_,
+                                      closed: true,
                                     ),
                                     CategoryCard(
                                       cardColor:
@@ -653,6 +653,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       image: 'assets/animals.png',
                                       db: widget.db,
                                       user: user_,
+                                      closed: true,
                                     ),
                                   ],
                                 ),
@@ -788,7 +789,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   }
 }
 
-
+// ignore: must_be_immutable
 class CategoryCard extends StatelessWidget {
   CategoryCard({
     this.cardColor = Colors.grey,
@@ -800,6 +801,7 @@ class CategoryCard extends StatelessWidget {
     this.fontSize = 2.4,
     required this.db,
     required this.user,
+    required this.closed,
   });
 
   Color cardColor;
@@ -808,61 +810,125 @@ class CategoryCard extends StatelessWidget {
   double size1, size2, size3, fontSize;
   DataBase db;
   User user;
+  bool closed;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         print(title);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Category(
-                    categoryTitle: title,
-                    db: db,
-                  )),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: cardColor, width: .20.h),
-          color: cardColor,
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade400,
-              blurRadius: 7,
-              spreadRadius: 0,
-              offset: Offset(4, 4),
-            ),
-          ],
-        ),
-        margin: EdgeInsets.all(0.08.w),
-        height: size1.w,
-        width: size3.h,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
+        if (closed) {
+          showDialog(
+            builder: (BuildContext context) {
+              return CupertinoAlertDialog(
+                title: Text(
+                  "🧑🏻‍🔬",
                   style: TextStyle(
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSize.w,
-                      color: Color.fromARGB(255, 114, 78, 140)),
+                    fontSize: 10.sp,
+                    fontFamily: 'Cairo',
+                  ),
+                ),
+                content: Text(
+                  'المزيد من التجارب قادمة في الطريق',
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "حسناً",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                ],
+              );
+            },
+            context: context,
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Category(
+                      categoryTitle: title,
+                      db: db,
+                    )),
+          );
+        }
+      },
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: cardColor, width: .20.h),
+              color: cardColor,
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade400,
+                  blurRadius: 7,
+                  spreadRadius: 0,
+                  offset: Offset(4, 4),
                 ),
               ],
             ),
-            Image.asset(
-              image,
-              height: size2.w,
-              width: size2.h,
+            margin: EdgeInsets.all(0.08.w),
+            height: size1.w,
+            width: size3.h,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.bold,
+                          fontSize: fontSize.w,
+                          color: Color.fromARGB(255, 114, 78, 140)),
+                    ),
+                  ],
+                ),
+                Image.asset(
+                  image,
+                  height: size2.w,
+                  width: size2.h,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          closed
+              ? Container(
+                  height: 30.2.w,
+                  width: 30.2.h,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  child: Icon(
+                    Icons.lock_rounded,
+                    color: Colors.black.withOpacity(0.9),
+                    size: 60.sp,
+                  ),
+                )
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
+        ],
       ),
     );
   }
