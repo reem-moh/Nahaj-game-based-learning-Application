@@ -15,7 +15,7 @@ class Signin extends StatefulWidget {
 class _SigninState extends State<Signin> {
   final _key = GlobalKey<FormState>();
 
-  String email = "reem@gmail.com";
+  String email = "";
   String password = "12345678";
   String username = "1";
   String avatar = "1";
@@ -84,7 +84,7 @@ class _SigninState extends State<Signin> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
-                      initialValue: "reem@gmail.com",
+                      initialValue: "child@nahaj.com",
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       textDirection: TextDirection.rtl,
                       decoration: InputDecoration(

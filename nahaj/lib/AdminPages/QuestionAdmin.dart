@@ -9,12 +9,14 @@ class QuestionCard extends StatefulWidget {
   final Question question;
   final ExperimentInfo exp;
   final DataBase db;
+  final int index;
 
   QuestionCard({
     required this.question,
     required this.db,
     required this.exp,
     Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,9 @@ class _QuestionCardState extends State<QuestionCard> {
   bool validQuestion = false;
   bool validAnswer = false;
   List<String> answers = ['', '', '', ''];
-  int _groupValue = -1;
+  int _raidoButtonValue = -1;
+  int dropdownvalue = 1;
+  List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   String email = "";
 
@@ -59,22 +63,39 @@ class _QuestionCardState extends State<QuestionCard> {
           //Question information
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(height: 2.0.w),
+              SizedBox(height: 6.0.w),
               //info
+
+              //Q detailes
               Expanded(
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   children: [
-                    //exp name
-                    buildExpName(widget.exp.name),
-                    SizedBox(height: 30.1.w),
+                    //Q number
+                    Center(
+                      child: textFieldInput('السؤال رقم ${widget.index}', 2.7),
+                    ),
+
+                    SizedBox(height: 18.1.w),
                     //Question and answers
                     buildInfo(widget.question),
-                    SizedBox(height: 2.4.w),
-                    CorrectAnswer(),
-                    changes ? Center(child: buildUpgradeButton()) : Center(),
-                    SizedBox(height: 9.0.w),
+                    SizedBox(height: 3.4.w),
+                    //Buttons
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            buildUpgradeButton('حذف السؤال', 2),
+                            SizedBox(width: 3.4.w),
+                            buildUpgradeButton('حفظ التغييرات', 1),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.0.w),
                   ],
                 ),
               ),
@@ -98,7 +119,7 @@ class _QuestionCardState extends State<QuestionCard> {
                   image: AssetImage("assets/PreviosButton.png"),
                 ),
                 onPressed: () {
-                  /*
+                  
                   setState(() {
                     if (changes && !savedChanges) {
                       showDialog(
@@ -108,9 +129,8 @@ class _QuestionCardState extends State<QuestionCard> {
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil('/HomePage',
-                                            (Route<dynamic> route) => false);
+                                    Navigator.of(context).pop();
+                                     Navigator.of(context).pop();
                                   },
                                   child: Text(
                                     "نعم",
@@ -143,7 +163,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       Navigator.of(context).pop();
                     }
                   });
-               */
+               
                 },
               ),
             ],
@@ -153,232 +173,306 @@ class _QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  Container CorrectAnswer() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.width * 0.4,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
-              child: Text(
-                ": الاجابه الصحيحه",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 2.7.w,
-                ),
-              ),
-            ),
-          ),
-          _myRadioButton(
-            title: "الاجابة ١",
-            value: 0,
-          ),
-          _myRadioButton(
-            title: "الاجابة ٢",
-            value: 1,
-          ),
-          _myRadioButton(
-            title: "الاجابة ٣",
-            value: 2,
-          ),
-          _myRadioButton(
-            title: "الاجابة ٤",
-            value: 3,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildExpName(String expName) => Column(
-        children: [
-          SizedBox(height: 2.0.w),
-          Text(
-            expName,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 2.7.w,
-            ),
-          )
-        ],
-      );
-
   Widget buildInfo(Question question) => Container(
         margin: EdgeInsets.only(left: 10.h),
         child: Column(
           children: [
+            //question score
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                //Score drop down Question
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.09,
+                    width: MediaQuery.of(context).size.width * 0.49,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
+                    child: dropDownScore()),
+                //Score name
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: textFieldInput(': نقاط السؤال', 2.7)),
+              ],
+            ),
+            SizedBox(height: 3.0.w),
+
             //Question
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 //Question field
                 Expanded(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.08,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.09,
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 5.0.h, vertical: 0),
-                        child: TextFormField(
-                          textDirection: TextDirection.rtl,
-                          initialValue: question.question,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          cursorRadius: Radius.circular(50),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (val) {
-                            changes = true;
-                            savedChanges = false;
-                            if (val!.length <= 0) {
-                              validQuestion = false;
-                              return 'هذا الحقل مطلوب';
-                            } else {
-                              validQuestion = true;
-                              questionString = val;
-                            }
-                            return null;
-                          },
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
-                    child: Text(
-                      ": السؤال",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 2.7.w,
+                        EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
+                    child: TextFormField(
+                      textDirection: TextDirection.rtl,
+                      initialValue: question.question,
+                      textAlign: TextAlign.start,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      cursorRadius: Radius.circular(50),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
                       ),
+                      validator: (val) {
+                        changes = true;
+                        savedChanges = false;
+                        if (val!.length <= 0) {
+                          validQuestion = false;
+                          return 'هذا الحقل مطلوب';
+                        } else {
+                          validQuestion = true;
+                          questionString = val;
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ),
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    //padding:
+                    //  EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
+                    child: textFieldInput(": السؤال", 2.7)),
               ],
             ),
-            SizedBox(height: 9.0.w),
+            SizedBox(height: 6.0.w),
+
             //Answers 1 and 2
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                answerCard(question.answers[0], 0),
-                SizedBox(width: 1.w),
-                answerNumber(1),
-                //SizedBox(height: 1.w),
-
                 answerCard(question.answers[1], 1),
                 SizedBox(width: 1.w),
-                answerNumber(2),
-
-                // answerCard(question.answers[2], 2),
-                // answerNumber(1),
-                //SizedBox(height: 1.w),
-                // answerCard(question.answers[3], 3),
-                // answerNumber(1),
+                textFieldInput(': الاجابة رقم 2', 1.7),
+                answerCard(question.answers[0], 0),
+                SizedBox(width: 1.w),
+                textFieldInput(': الاجابة رقم 1', 1.7),
               ],
             ),
-            SizedBox(height: 4.0.w),
+            SizedBox(height: 3.0.w),
+
             //Answers 3 and 4
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                answerCard(question.answers[2], 2),
-                SizedBox(width: 1.w),
-                answerNumber(3),
-                //SizedBox(height: 1.w),
-
                 answerCard(question.answers[3], 3),
                 SizedBox(width: 1.w),
-                answerNumber(4),
+                textFieldInput(': الاجابة رقم 4', 1.7),
+                answerCard(question.answers[2], 2),
+                SizedBox(width: 1.w),
+                textFieldInput(': الاجابة رقم 3', 1.7),
               ],
             ),
-            SizedBox(height: 4.0.w),
+            SizedBox(height: 6.0.w),
+
+            //CorrectAnswer
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Expanded(flex: 1, child: correctAnswer()),
+              SizedBox(width: 1.w),
+              Container(
+                  height: MediaQuery.of(context).size.height * 0.08,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: textFieldInput(': الاجابة الصحيحة', 2.7)),
+            ])
           ],
         ),
       );
 
+  Row correctAnswer() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Row(
+            children: [
+              Text('الاجابة 4'),
+              Radio(
+                  value: 4,
+                  groupValue: _raidoButtonValue,
+                  onChanged: (newValue) {
+                    setState(() => _raidoButtonValue = newValue as int);
+                  }),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Row(
+            children: [
+              Text('الاجابة 3'),
+              Radio(
+                  value: 3,
+                  groupValue: _raidoButtonValue,
+                  onChanged: (newValue) {
+                    setState(() => _raidoButtonValue = newValue as int);
+                  }),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Row(
+            children: [
+              Text('الاجابة 2'),
+              Radio(
+                  value: 2,
+                  groupValue: _raidoButtonValue,
+                  onChanged: (newValue) {
+                    setState(() => _raidoButtonValue = newValue as int);
+                  }),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Row(
+            children: [
+              Text('الاجابة 1'),
+              Radio(
+                  value: 1,
+                  groupValue: _raidoButtonValue,
+                  onChanged: (newValue) {
+                    setState(() => _raidoButtonValue = newValue as int);
+                  }),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  InputDecorator dropDownScore() {
+    return InputDecorator(
+      decoration: const InputDecoration(border: OutlineInputBorder()),
+      child: DropdownButton(
+        alignment: Alignment.centerRight,
+        value: dropdownvalue,
+        menuMaxHeight: 180,
+        icon: Icon(Icons.keyboard_arrow_down),
+        items: items.map((int items) {
+          return DropdownMenuItem(value: items, child: Text("$items"));
+        }).toList(),
+        onChanged: (newValue) {
+          setState(() {
+            dropdownvalue = newValue as int;
+          });
+        },
+      ),
+    );
+  }
+
+  Container textFieldInput(String text, double size) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.2,
+      child: Text(
+        "$text ",
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Cairo',
+          fontWeight: FontWeight.w600,
+          fontSize: size.w,
+        ),
+      ),
+    );
+  }
+
   Expanded answerCard(String answer, int index) {
     return Expanded(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              //height: MediaQuery.of(context).size.height * 0.08,
-              //width: MediaQuery.of(context).size.width * 0.4,
-              child: Container(
-                  // padding: EdgeInsets.symmetric(horizontal: 5.0.h, vertical: 0),
-                  child: TextFormField(
-                textDirection: TextDirection.rtl,
-                initialValue: answer,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-                validator: (val) {
-                  changes = true;
-                  savedChanges = false;
-                  if (val!.length <= 0) {
-                    validAnswer = false;
-                    return 'هذا الحقل مطلوب';
-                  } else {
-                    validAnswer = true;
-                    answers[index] = val;
-                  }
-                },
-              )),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  SizedBox answerNumber(int index) {
-    return SizedBox(
-      //height: MediaQuery.of(context).size.height * 0.08,
-      width: MediaQuery.of(context).size.width * 0.2,
-      child: Container(
-        //padding: EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
-        child: Text(
-          ":الاجابة رقم $index ",
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Cairo',
-            fontWeight: FontWeight.w600,
-            fontSize: 1.7.w,
+        child: Container(
+            child: TextFormField(
+          textDirection: TextDirection.rtl,
+          initialValue: answer,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
           ),
-        ),
+          validator: (val) {
+            changes = true;
+            savedChanges = false;
+            if (val!.length <= 0) {
+              validAnswer = false;
+              return 'هذا الحقل مطلوب';
+            } else {
+              validAnswer = true;
+              answers[index] = val;
+            }
+          },
+        )),
       ),
     );
   }
 
-  Widget buildUpgradeButton() => ButtonWidget(
-        text: 'حفظ التغييرات',
-        onClicked: () {
-          if (updateUser(questionString, email, password)) {
-            print("inside dialog!");
-            savedChanges = true;
-            /*  showDialog(
-              builder: (BuildContext context) {
-                return CupertinoAlertDialog(
-                  title: Text('تم تحديث البيانات بنجاح'),
-                  content: Image.asset("assets/party.png", fit: BoxFit.cover),
-                );
-              },
-              context: context,
-            );
-          */
-          }
+  Widget buildUpgradeButton(String text, int type) => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: type == 1 ? Colors.blue : Colors.red,
+          shape: StadiumBorder(),
+          onPrimary: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 3.2.h, vertical: 1.2.w),
+        ),
+        child: Text(text),
+        onPressed: () {
+          showDialog(
+            builder: (BuildContext context) {
+              return CupertinoAlertDialog(
+                title: Text("هل انت متاكد ؟"),
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        // save changes
+                        if (type == 1) {
+                          if (updateUser(questionString, email, password)) {
+                            print("inside dialog!");
+                            savedChanges = true;
+                            showDialog(
+                              builder: (BuildContext context) {
+                                return CupertinoAlertDialog(
+                                  title: Text('تم تحديث البيانات بنجاح'),
+                                  content: Image.asset("assets/party.png",
+                                      fit: BoxFit.cover),
+                                );
+                              },
+                              context: context,
+                            );
+                          }
+                        } else {
+                          //Delete question
+
+                        }
+
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/AdminHomePage', (Route<dynamic> route) => false);
+                      },
+                      child: Text(
+                        "نعم",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("لا", style: TextStyle(color: Colors.black)),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                ],
+              );
+            },
+            context: context,
+          );
         },
       );
 
@@ -422,37 +516,4 @@ class _QuestionCardState extends State<QuestionCard> {
 
     return false;
   }
-
-  Widget _myRadioButton({required String title, required int value}) {
-    return RadioListTile(
-      value: value,
-      groupValue: _groupValue,
-      onChanged: (int? newValue) {
-        setState(() => _groupValue = newValue!);
-      },
-      title: Text(title), //onChanged: (int? value) {  },
-    );
-  }
-}
-
-class ButtonWidget extends StatelessWidget {
-  final String text;
-  final VoidCallback onClicked;
-
-  const ButtonWidget({
-    Key? key,
-    required this.text,
-    required this.onClicked,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
-          onPrimary: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 3.2.h, vertical: 1.2.w),
-        ),
-        child: Text(text),
-        onPressed: onClicked,
-      );
 }

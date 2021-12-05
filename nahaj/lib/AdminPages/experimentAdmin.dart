@@ -627,6 +627,7 @@ class CardsOfQuestions extends StatelessWidget {
               db: db,
               question: question,
               exp: exp,
+              index: counter,
             ),
           ),
         );
