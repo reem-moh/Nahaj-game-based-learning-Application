@@ -381,6 +381,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      /*
                       //pluse sign
                       FocusedMenuHolder(
                         child: Container(
@@ -418,12 +419,21 @@ class _ExpInfo extends State<ExperimentAdmin> {
                                   MaterialPageRoute(
                                       builder: (context) => QuestionCard(
                                             db: widget.db,
-                                            exp: widget.exp, question: new Question(id: '', expID: widget.exp.id, question: '', answers: ['','','',''], correctAnswer: '', score: 1), index: -1,
+                                            exp: widget.exp,
+                                            question: new Question(
+                                                id: '',
+                                                expID: widget.exp.id,
+                                                question: '',
+                                                answers: ['', '', '', ''],
+                                                correctAnswer: '',
+                                                score: 1),
+                                            index: -1,
                                           )),
                                 );
                               }),
                         ],
                       ),
+                      */
                       Spacer(),
                       Text(
                         ':الاسئلة',
@@ -564,23 +574,60 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
               } else {
                 final allQuestions = snapshot.data;
                 return allQuestions == null
-                    ? buildText('لا توجد أسئلة')
+                    ? ListView(children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 30.0, right: 30.0),
+                            height: 18.00.h,
+                            child: CardsOfQuestions(
+                              db: widget.db,
+                              exp: widget.exp,
+                              question: new Question(
+                                  id: '',
+                                  expID: widget.exp.id,
+                                  question: '',
+                                  answers: ['', '', '', ''],
+                                  correctAnswer: '',
+                                  score: 1),
+                              index: -1,
+                            )),
+                        buildText('لا توجد أسئلة')
+                      ])
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
-                        itemCount: allQuestions.length,
+                        itemCount: allQuestions.length + 1,
                         itemBuilder: (context, index) {
-                          final question = allQuestions[index]; //[index];
+                          final question = index >= allQuestions.length
+                              ? null
+                              : allQuestions[index]; //[index];
 
-                          return Container(
-                              margin: EdgeInsets.only(left: 30.0, right: 30.0),
-                              height: 18.00.h,
-                              child: CardsOfQuestions(
-                                db: widget.db,
-                                exp: widget.exp,
-                                question: question,
-                                index: index,
-                              ));
+                          return index >= allQuestions.length
+                              ? Container(
+                                  margin:
+                                      EdgeInsets.only(left: 30.0, right: 30.0),
+                                  height: 18.00.h,
+                                  child: CardsOfQuestions(
+                                    db: widget.db,
+                                    exp: widget.exp,
+                                    question: new Question(
+                                        id: '',
+                                        expID: widget.exp.id,
+                                        question: '',
+                                        answers: ['', '', '', ''],
+                                        correctAnswer: '',
+                                        score: 1),
+                                    index: -1,
+                                  ))
+                              : Container(
+                                  margin:
+                                      EdgeInsets.only(left: 30.0, right: 30.0),
+                                  height: 18.00.h,
+                                  child: CardsOfQuestions(
+                                    db: widget.db,
+                                    exp: widget.exp,
+                                    question: question!,
+                                    index: index,
+                                  ));
                         },
                         scrollDirection: Axis.horizontal,
                       );
@@ -618,7 +665,7 @@ class CardsOfQuestions extends StatelessWidget {
     return InkWell(
       onTap: () {
         print('Question');
-
+        index!=-1?
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -627,6 +674,16 @@ class CardsOfQuestions extends StatelessWidget {
               question: question,
               exp: exp,
               index: counter,
+            ),
+          ),
+        ):Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuestionCard(
+              db: db,
+              question: question,
+              exp: exp,
+              index: index,
             ),
           ),
         );
@@ -644,25 +701,40 @@ class CardsOfQuestions extends StatelessWidget {
             ),
             child: ClipOval(
                 child: Container(
-              child: Text("$counter",
-                  style: TextStyle(
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 7.2.w,
-                      color: Colors.black)),
+              child: index == -1
+                  ? Icon(
+                      Icons.add,
+                      size: 85,
+                      color: Colors.black,
+                    )
+                  : Text("$counter",
+                      style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 7.2.w,
+                          color: Colors.black)),
               decoration: BoxDecoration(
                   shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
             )),
           ),
           Container(
-            child: Text(
-              "سؤال $counter",
-              style: TextStyle(
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 2.2.w,
-                  color: Color.fromARGB(170, 0, 0, 0)),
-            ),
+            child: index == -1
+                ? Text(
+                    "إضافة سؤال",
+                    style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.2.w,
+                        color: Color.fromARGB(170, 0, 0, 0)),
+                  )
+                : Text(
+                    "سؤال $counter",
+                    style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 2.2.w,
+                        color: Color.fromARGB(170, 0, 0, 0)),
+                  ),
           ),
         ],
       ),
