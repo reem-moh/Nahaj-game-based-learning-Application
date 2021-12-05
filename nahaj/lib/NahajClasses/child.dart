@@ -127,14 +127,14 @@ class ExperimentInfo {
 
 class Question {
   String question = '';
-  //String id = '';
+  String id = '';
   String expID = '';
-  List answers = [{}];
+  List<String> answers = [''];
   String correctAnswer = '';
   int score = 0;
 
   Question({
-    //required this.id,
+    required this.id,
     required this.expID,
     required this.question,
     required this.answers,
@@ -144,7 +144,7 @@ class Question {
 
   Question.fromJson(Map parsedJson) {
     question = parsedJson['Question'] ?? '';
-    //id = parsedJson['QID'] ?? '';
+    id = parsedJson['QID'] ?? '';
     expID = parsedJson['ExpID'] ?? '';
     correctAnswer = parsedJson['CorrectAnswer'] ?? '';
     score = parsedJson['Score'] ?? 0;
@@ -158,7 +158,7 @@ class Question {
 
   Map<String, dynamic> toJson() => {
         'Question': question,
-        //'QID': id,
+        'QID': id,
         'ExpID': expID,
         'CorrectAnswer': correctAnswer,
         'Score': score,

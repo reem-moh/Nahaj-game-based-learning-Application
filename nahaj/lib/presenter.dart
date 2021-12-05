@@ -487,15 +487,6 @@ class DataBase extends ChangeNotifier {
         .update({'ExperimentScore': score});
   }
 
-  Future updateQuestion(String expID, String quesID, String ques) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Question': ques});
-  }
-
   Future updateQuesAns(
       String expID,
       String quesID,
@@ -522,64 +513,9 @@ class DataBase extends ChangeNotifier {
     });
   }
 
-  Future updateQuesAns1(String expID, String quesID, String ans1) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Answer1': ans1});
-  }
-
-  Future updateQuesAns2(String expID, String quesID, String ans2) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Answer1': ans2});
-  }
-
-  Future updateQuesAns3(String expID, String quesID, String ans3) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Answer1': ans3});
-  }
-
-  Future updateQuesAns4(String expID, String quesID, String ans4) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Answer1': ans4});
-  }
-
-  Future updateQuesCorrectAns(
-      String expID, String quesID, String correctAns) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'CorrectAnswer': correctAns});
-  }
-
-  Future updateQuesScore(String expID, String quesID, int score) async {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .doc(quesID)
-        .update({'Score': score});
-  }
-
-  deleteQuestion(String expID, String quesID) {
+  deleteQuestion(String expID, String quesID) async{
     //remove from collection chat
-    firestore
+    await firestore
         .collection('Experiments')
         .doc(expID)
         .collection('Questions')
@@ -600,13 +536,11 @@ class DataBase extends ChangeNotifier {
       int score,
       String expID) async {
     // Call the user's CollectionReference to add a new user
-    return await firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .add({
+    final questionDocument = firestore.collection('Experiments').doc(expID).collection('Questions').doc();
+    return await questionDocument.set({
           'Question': question,
           'ExpID': expID,
+          'QID':questionDocument.id,
           'CorrectAnswer': correctAnswer,
           'Score': score,
           'Answer1': answer1,

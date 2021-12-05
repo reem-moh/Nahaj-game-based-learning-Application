@@ -8,7 +8,6 @@ import 'package:sizer/sizer.dart';
 import '../../NahajClasses/child.dart';
 import 'package:nahaj/presenter.dart';
 import 'QuestionAdmin.dart';
-import 'AddQuestionCard.dart';
 
 class ExperimentAdmin extends StatefulWidget {
   final DataBase db;
@@ -417,9 +416,9 @@ class _ExpInfo extends State<ExperimentAdmin> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AddQuestionCard(
+                                      builder: (context) => QuestionCard(
                                             db: widget.db,
-                                            exp: widget.exp,
+                                            exp: widget.exp, question: new Question(id: '', expID: widget.exp.id, question: '', answers: ['','','',''], correctAnswer: '', score: 1), index: -1,
                                           )),
                                 );
                               }),
