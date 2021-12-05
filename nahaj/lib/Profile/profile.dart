@@ -615,8 +615,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return false;
   }
 
-  getAvatarImages() {
-    widget.db.listOfAvatars().then((value) => avatars = value);
+   getAvatarImages() async {
+    await widget.db.listOfAvatars().then((value) => avatars = value);
   }
 }
 
