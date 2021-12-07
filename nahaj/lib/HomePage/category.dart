@@ -127,47 +127,6 @@ class _Category extends State<Category> {
                   color: Color.fromARGB(255, 114, 78, 140)),
             ),
           ),
-          /*showLevelDialog
-              ? CupertinoAlertDialog(
-                  title: Text(
-                    "تهانينا🎉",
-                    style: TextStyle(
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                  content: Text(
-                    'لقد وصلت إلى المستوى ' + userLevelUpdated.toString(),
-                    style: TextStyle(
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            showLevelDialog = false;
-                          });
-
-                          //Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "حسناً",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white.withOpacity(0),
-                          shadowColor: Colors.white.withOpacity(0),
-                          onPrimary: Colors.white,
-                        )),
-                  ],
-                )
-              : Container(
-                  width: 0,
-                  height: 0,
-                ),*/
         ],
       ),
     );
@@ -196,7 +155,7 @@ class ExperimentsWidget extends StatelessWidget {
             default:
               if (snapshot.hasError) {
                 return buildText(
-                    'Something Went Wrong Try later ${snapshot.hasError}');
+                    'Something Went Wrong Try later ${snapshot.error}');
               } else {
                 allExperiments = snapshot.data;
                 checkUserLeve();
@@ -228,89 +187,64 @@ class ExperimentsWidget extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       );
-  void checkUserLeve() {
+  Future<void> checkUserLeve() async {
     int x = 0;
     int newLevel = 0;
-    for (var exp in allExperiments!) {
+    /*for (var exp in allExperiments!) {
       x += exp.userScore;
-    }
-    switch (x) {
-      case 5:
-        newLevel = 1;
-        break;
-      case 10:
-        newLevel = 2;
-        break;
-      case 15:
-        newLevel = 3;
-        break;
-      case 20:
-        newLevel = 4;
-        break;
-      case 25:
-        newLevel = 5;
-        break;
-      case 30:
-        newLevel = 6;
-        break;
-      case 35:
-        newLevel = 7;
-        break;
-      case 40:
-        newLevel = 8;
-        break;
-      case 45:
-        newLevel = 9;
-        break;
-      case 50:
-        newLevel = 10;
-        break;
-      case 55:
-        newLevel = 11;
-        break;
-      case 60:
-        newLevel = 12;
-        break;
-      case 65:
-        newLevel = 13;
-        break;
-      case 70:
-        newLevel = 14;
-        break;
-      case 75:
-        newLevel = 15;
-        break;
-      case 80:
-        newLevel = 16;
-        break;
-      case 85:
-        newLevel = 17;
-        break;
-      case 90:
-        newLevel = 18;
-        break;
-      case 95:
-        newLevel = 19;
-        break;
-      case 100:
-        newLevel = 20;
-        break;
-      case 105:
-        newLevel = 21;
-        break;
-      case 110:
-        newLevel = 22;
-        break;
-      case 115:
-        newLevel = 23;
-        break;
-      case 120:
-        newLevel = 24;
-        break;
-      case 125:
-        newLevel = 25;
-        break;
-    }
+    }*/
+    await db.getAllUserScores(user_.userId).then((value) => x = value);
+    print('score is ' + x.toString());
+    if (x >= 5 && x < 10)
+      newLevel = 1;
+    else if (x >= 10 && x < 15)
+      newLevel = 2;
+    else if (x >= 15 && x < 20)
+      newLevel = 3;
+    else if (x >= 20 && x < 25)
+      newLevel = 4;
+    else if (x >= 25 && x < 30)
+      newLevel = 5;
+    else if (x >= 30 && x < 35)
+      newLevel = 6;
+    else if (x >= 35 && x < 40)
+      newLevel = 7;
+    else if (x >= 40 && x < 45)
+      newLevel = 8;
+    else if (x >= 45 && x < 50)
+      newLevel = 9;
+    else if (x >= 50 && x < 55)
+      newLevel = 10;
+    else if (x >= 55 && x < 60)
+      newLevel = 11;
+    else if (x >= 60 && x < 65)
+      newLevel = 12;
+    else if (x >= 65 && x < 70)
+      newLevel = 13;
+    else if (x >= 70 && x < 75)
+      newLevel = 14;
+    else if (x >= 75 && x < 80)
+      newLevel = 15;
+    else if (x >= 80 && x < 85)
+      newLevel = 16;
+    else if (x >= 85 && x < 90)
+      newLevel = 17;
+    else if (x >= 90 && x < 95)
+      newLevel = 18;
+    else if (x >= 95 && x < 100)
+      newLevel = 19;
+    else if (x >= 100 && x < 105)
+      newLevel = 20;
+    else if (x >= 105 && x < 110)
+      newLevel = 21;
+    else if (x >= 110 && x < 115)
+      newLevel = 22;
+    else if (x >= 115 && x < 120)
+      newLevel = 23;
+    else if (x >= 120 && x < 125)
+      newLevel = 24;
+    else if (x >= 125 && x < 130) newLevel = 25;
+
     print(user_.level.toString() + " " + newLevel.toString());
     if (newLevel > user_.level) {
       db.updateUserLevel(user_.userId, newLevel);
@@ -401,7 +335,7 @@ class _ExperimentCardState extends State<ExperimentCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //stars
-                    ScoreStars(widget.exp.userScore, widget.exp.totalScore),
+                    ScoreStars(widget.exp.id, widget.exp.totalScore, widget.db),
                     //name
                     Text(
                       widget.exp.name,
@@ -445,15 +379,32 @@ class _ExperimentCardState extends State<ExperimentCard> {
 }
 
 // ignore: must_be_immutable
-class ScoreStars extends StatelessWidget {
-  var userScore, totalScore;
+class ScoreStars extends StatefulWidget {
+  var totalScore, expId;
+  late DataBase db;
+
+  ScoreStars(expid, ts, d) {
+    expId = expid;
+    totalScore = ts;
+    db = d;
+  }
+
+  @override
+  State<ScoreStars> createState() => _ScoreStarsState();
+}
+
+class _ScoreStarsState extends State<ScoreStars> {
+  var userScore = 0;
+
   String star1 = 'assets/EmptyRatingStar.png';
+
   String star2 = 'assets/EmptyRatingStar.png';
+
   String star3 = 'assets/EmptyRatingStar.png';
 
-  ScoreStars(us, ts) {
-    userScore = us;
-    totalScore = ts;
+  @override
+  void initState() {
+    super.initState();
     setStars();
   }
 
@@ -483,37 +434,44 @@ class ScoreStars extends StatelessWidget {
     );
   }
 
-  setStars() {
-    var result = userScore * 3 / totalScore;
-//FullRatingStar
-    if (result == 0) {
-      star1 = 'assets/EmptyRatingStar.png';
-      star2 = 'assets/EmptyRatingStar.png';
-      star3 = 'assets/EmptyRatingStar.png';
-    } else if (result > 0 && result < 1) {
-      star1 = 'assets/HalfRatingStar.png';
-      star2 = 'assets/EmptyRatingStar.png';
-      star3 = 'assets/EmptyRatingStar.png';
-    } else if (result == 1) {
-      star1 = 'assets/FullRatingStar.png';
-      star2 = 'assets/EmptyRatingStar.png';
-      star3 = 'assets/EmptyRatingStar.png';
-    } else if (result > 1 && result < 2) {
-      star1 = 'assets/FullRatingStar.png';
-      star2 = 'assets/HalfRatingStar.png';
-      star3 = 'assets/EmptyRatingStar.png';
-    } else if (result == 2) {
-      star1 = 'assets/FullRatingStar.png';
-      star2 = 'assets/FullRatingStar.png';
-      star3 = 'assets/EmptyRatingStar.png';
-    } else if (result > 2 && result < 3) {
-      star1 = 'assets/FullRatingStar.png';
-      star2 = 'assets/FullRatingStar.png';
-      star3 = 'assets/HalfRatingStar.png';
-    } else if (result == 3) {
-      star1 = 'assets/FullRatingStar.png';
-      star2 = 'assets/FullRatingStar.png';
-      star3 = 'assets/FullRatingStar.png';
+  setStars() async {
+    userScore = await widget.db.getUserScore(user_.userId, widget.expId);
+    print(userScore);
+    var result = userScore * 3 / widget.totalScore;
+    print(result);
+    if (this.mounted) {
+      setState(() {
+        //FullRatingStar
+        if (result == 0) {
+          star1 = 'assets/EmptyRatingStar.png';
+          star2 = 'assets/EmptyRatingStar.png';
+          star3 = 'assets/EmptyRatingStar.png';
+        } else if (result > 0 && result < 1) {
+          star1 = 'assets/HalfRatingStar.png';
+          star2 = 'assets/EmptyRatingStar.png';
+          star3 = 'assets/EmptyRatingStar.png';
+        } else if (result == 1) {
+          star1 = 'assets/FullRatingStar.png';
+          star2 = 'assets/EmptyRatingStar.png';
+          star3 = 'assets/EmptyRatingStar.png';
+        } else if (result > 1 && result < 2) {
+          star1 = 'assets/FullRatingStar.png';
+          star2 = 'assets/HalfRatingStar.png';
+          star3 = 'assets/EmptyRatingStar.png';
+        } else if (result == 2) {
+          star1 = 'assets/FullRatingStar.png';
+          star2 = 'assets/FullRatingStar.png';
+          star3 = 'assets/EmptyRatingStar.png';
+        } else if (result > 2 && result < 3) {
+          star1 = 'assets/FullRatingStar.png';
+          star2 = 'assets/FullRatingStar.png';
+          star3 = 'assets/HalfRatingStar.png';
+        } else if (result == 3) {
+          star1 = 'assets/FullRatingStar.png';
+          star2 = 'assets/FullRatingStar.png';
+          star3 = 'assets/FullRatingStar.png';
+        }
+      });
     }
   }
 }

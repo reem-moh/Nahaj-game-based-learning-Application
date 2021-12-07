@@ -507,7 +507,7 @@ class _QuestionCardState extends State<QuestionCard> {
     //update score with experiment score
     userScore += widget.exp.experimentScore;
 
-    widget.db.updateExpScore(widget.expID, userScore);
+    widget.db.updateUserScore(widget.expID, userScore);
     setStars();
     //questions widget disapear
     Navigator.pop(context);

@@ -88,16 +88,17 @@ class ExperimentInfo {
   String info = '';
   String expImage = '';
   int totalScore = 0;
-  int userScore = 0;
+  //int userScore = 0;
   int experimentScore = 0;
 
   ExperimentInfo({
+    required this.id,
     required this.name,
     required this.category,
     required this.info,
     required this.expImage,
     required this.totalScore,
-    required this.userScore,
+    //required this.userScore,
     required this.experimentScore,
   });
 
@@ -109,7 +110,7 @@ class ExperimentInfo {
     info = parsedJson['Info'] ?? '';
     expImage = parsedJson['PathOfImage'] ?? '';
     totalScore = parsedJson['TotlaScore'] ?? 0;
-    userScore = parsedJson['UserScore'] ?? 0;
+    //userScore = parsedJson['UserScore'] ?? 0;
     experimentScore = parsedJson['ExperimentScore'] ?? 0;
   }
 
@@ -120,7 +121,7 @@ class ExperimentInfo {
         'Info': info,
         'PathOfImage': expImage,
         'TotlaScore': totalScore,
-        'UserScore': userScore,
+        //'UserScore': userScore,
         'ExperimentScore': experimentScore,
       };
 }

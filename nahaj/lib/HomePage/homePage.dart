@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:highlighter_coachmark/highlighter_coachmark.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nahaj/Profile/profile.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/groupChat.dart';
@@ -39,8 +38,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
   late Animation<double> _menuScaleAnimation;
   late Animation<Offset> _slideAnimation;
   int tappedIndex = 0;
+  bool showHelp = false;
 
-  late GlobalKey _logoutKey; // used by RaisedButton
+  /*late GlobalKey CategoryKey = GlobalObjectKey("category");
+  late GlobalKey GroupKey = GlobalObjectKey("group");
+  late GlobalKey JoinGKey = GlobalObjectKey("joinG");
+  late GlobalKey LogOutKey = GlobalObjectKey("logout"); */ // used by RaisedButton
 
   @override
   void initState() {
@@ -51,7 +54,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
         Tween<double>(begin: 0.5, end: 1).animate(_controller);
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
-    _logoutKey = GlobalObjectKey("button");
+    /*CategoryKey = GlobalObjectKey("category");
+    GroupKey = GlobalObjectKey("group");
+    JoinGKey = GlobalObjectKey("joinG");
+    LogOutKey = GlobalObjectKey("logout");*/
     _getInfoFromSession();
   }
 
@@ -109,7 +115,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
       child: ScaleTransition(
         scale: _menuScaleAnimation,
         child: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.074.h, 0, 0, 0),
+          padding: EdgeInsets.fromLTRB(75.38.h, 0, 0, 0),
           children: [
             //profile image and name
             Container(
@@ -134,8 +140,7 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                 ),
                               )
                             : Container(
-                                padding: EdgeInsets.fromLTRB(
-                                    screenWidth * 0.005.h, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(4.19.h, 0, 0, 0),
                                 child: Text(
                                   user_.username,
                                   style: TextStyle(
@@ -267,8 +272,16 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                   textDirection: TextDirection.rtl,
                 ),
                 onTap: () {
-                  showsections();
+                  //showsections();
                   setState(() {
+                    showHelp = true;
+                    //tappedIndex = 2;
+                    if (isCollapsed)
+                      _controller.forward();
+                    else
+                      _controller.reverse();
+
+                    isCollapsed = !isCollapsed;
                     tappedIndex = 2;
                   });
                 },
@@ -294,7 +307,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     fontSize: 2.4.w,
                   ),
                   textDirection: TextDirection.rtl,
-                  key: _logoutKey,
                 ),
                 onTap: () {
                   setState(() {
@@ -340,133 +352,6 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
           ],
         ),
       ),
-    );
-  }
-
-  void showsections() {
-    CoachMark coachMarkTile = CoachMark();
-    RenderBox target =
-        _logoutKey.currentContext!.findRenderObject() as RenderBox;
-
-    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
-    markRect = Rect.fromLTWH(0, 180, 350, 250);
-    coachMarkTile.show(
-      targetContext: _logoutKey.currentContext,
-      markRect: markRect,
-      markShape: BoxShape.rectangle,
-      children: [
-        Positioned(
-          right: 55.0.h,
-          bottom: 47.0.w,
-          child: Text(
-            " هنا ستجد التجارب لقسم الكيمياء ",
-            style: TextStyle(
-              fontFamily: 'Cairo',
-              color: Colors.white,
-              fontSize: 2.6.w,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        )
-      ],
-      onClose: () => Timer(Duration(milliseconds: 10), () => showGroup()),
-    );
-  }
-
-  void showGroup() {
-    CoachMark coachMarkTile = CoachMark();
-    RenderBox target =
-        _logoutKey.currentContext!.findRenderObject() as RenderBox;
-
-    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
-    markRect = Rect.fromLTWH(270, 420, 770, 230);
-    coachMarkTile.show(
-      targetContext: _logoutKey.currentContext,
-      markRect: markRect,
-      markShape: BoxShape.rectangle,
-      children: [
-        Positioned(
-          right: 20.0.h,
-          bottom: 47.0.w,
-          child: Text(
-            "هنا تظهر المجموعات التابعة لك او المنضم لها",
-            style: TextStyle(
-              fontFamily: 'Cairo',
-              color: Colors.white,
-              fontSize: 2.6.w,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        )
-      ],
-      onClose: () => Timer(Duration(milliseconds: 10), () => showjoining()),
-    );
-  }
-
-  void showjoining() {
-    CoachMark coachMarkFAB = CoachMark();
-
-    RenderBox target =
-        _logoutKey.currentContext!.findRenderObject() as RenderBox;
-
-    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
-    markRect = Rect.fromLTWH(0, 430, 80, 80);
-
-    coachMarkFAB.show(
-      targetContext: _logoutKey.currentContext,
-      markRect: markRect,
-      children: [
-        Container(
-          child: Positioned(
-            right: 70.0.h,
-            bottom: 40.0.w,
-            child: Text(
-              "انقر هنا لاضافة مجموعة او انضمام لمجموعة ",
-              style: TextStyle(
-                fontFamily: 'Cairo',
-                color: Colors.white,
-                fontSize: 2.6.w,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        )
-      ],
-      // duration: null,
-      onClose: () => Timer(Duration(milliseconds: 10), () => showLogout()),
-    );
-  }
-
-  void showLogout() {
-    CoachMark coachMarkFAB = CoachMark();
-
-    RenderBox target =
-        _logoutKey.currentContext!.findRenderObject() as RenderBox;
-
-    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
-    markRect = Rect.fromLTWH(1080, 720, 100, 100);
-
-    coachMarkFAB.show(
-      targetContext: _logoutKey.currentContext,
-      markRect: markRect,
-      children: [
-        Container(
-          child: Positioned(
-            right: 13.5.h,
-            bottom: 4.5.w,
-            child: Text(
-              "انقر هنا لتسجيل خروجك",
-              style: TextStyle(
-                fontFamily: 'Cairo',
-                color: Colors.white,
-                fontSize: 2.6.w,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        )
-      ],
-      onClose: () => Timer(Duration(milliseconds: 10), () {}),
     );
   }
 
@@ -781,6 +666,138 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                       ],
                     ),
                   ),
+
+                  showHelp
+                      ? Container(
+                          height: 100.w,
+                          width: 100.h,
+                          child: IntroductionScreen(
+                            pages: [
+                              PageViewModel(
+                                title: '',
+                                body: "هنا ستجد تجارب مختلفة تحت كل قسم 🧪",
+                                image: Center(
+                                    child: Container(
+                                        margin: EdgeInsets.only(top: 5.w),
+                                        child: Image.asset(
+                                            'assets/HelpCategory.png'))),
+                                decoration: const PageDecoration(
+                                  titleTextStyle:
+                                      TextStyle(color: Colors.orange),
+                                  bodyTextStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                              PageViewModel(
+                                title: '',
+                                body: "هنا ستجد المجموعات التي انت منضم لها 👥",
+                                image: Center(
+                                    child: Container(
+                                        margin: EdgeInsets.only(top: 5.w),
+                                        child: Image.asset(
+                                            'assets/HelpGroups.png'))),
+                                decoration: const PageDecoration(
+                                  titleTextStyle:
+                                      TextStyle(color: Colors.orange),
+                                  bodyTextStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                              PageViewModel(
+                                title: '',
+                                body:
+                                    "وهنا يمكنك إنشاء أو الانضمام إلى مجموعة جديدة 👥",
+                                image: Center(
+                                    child: Container(
+                                  margin: EdgeInsets.only(top: 5.w),
+                                  child:
+                                      Image.asset('assets/HelpGroupButton.png'),
+                                )),
+                                decoration: const PageDecoration(
+                                  titleTextStyle:
+                                      TextStyle(color: Colors.orange),
+                                  bodyTextStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                              PageViewModel(
+                                title: '',
+                                body:
+                                    "بعد إنشاء مجموعة جديدة يمكنك مشاركة رمز المجموعة مع أصدقائك",
+                                image: Center(
+                                    child: Container(
+                                  margin: EdgeInsets.only(top: 5.w),
+                                  child:
+                                      Image.asset('assets/HelpShareGroup.png'),
+                                )),
+                                decoration: const PageDecoration(
+                                  titleTextStyle:
+                                      TextStyle(color: Colors.orange),
+                                  bodyTextStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                              PageViewModel(
+                                title: '',
+                                body:
+                                    "هنا يمكنك الذهاب لملفك الشخصي 👤 أو تسجيل الخروج",
+                                image: Center(
+                                    child: Container(
+                                        margin: EdgeInsets.only(top: 5.w),
+                                        child: Image.asset(
+                                            'assets/HelpSideMenu.png'))),
+                                decoration: PageDecoration(
+                                  titleTextStyle:
+                                      TextStyle(color: Colors.orange),
+                                  bodyTextStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                            ],
+                            onDone: () {
+                              setState(() {
+                                showHelp = false;
+                              });
+                            },
+                            onSkip: () {
+                              setState(() {
+                                showHelp = false;
+                              });
+                            },
+                            showSkipButton: true,
+                            skip: Text("Skip",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 7.sp)),
+                            next: Icon(
+                              Icons.arrow_forward,
+                              size: 2.5.h,
+                            ),
+                            done: Text("Done",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 7.sp)),
+                            dotsDecorator: DotsDecorator(
+                                size: Size.square(10.0),
+                                activeSize: Size(20.0, 10.0),
+                                activeColor: Colors.amberAccent,
+                                color: Colors.black26,
+                                spacing: EdgeInsets.symmetric(horizontal: 3.0),
+                                activeShape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25.0))),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),

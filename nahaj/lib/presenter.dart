@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/child.dart' as child;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NahajClasses/Chats.dart';
@@ -56,9 +57,25 @@ class DataBase extends ChangeNotifier {
           'level': 0,
           'userId': uid,
         })
-        .then((value) => print("User Added, database page"))
+        .then((value) => createUserScore(uid))
         .catchError(
             (error) => print("database page, Failed to add user: $error"));
+  }
+
+  Future<void> createUserScore(String uid) async {
+    List<String> expIDs = [];
+    await firestore.collection('Experiments').get().then((value) {
+      for (var doc in value.docs) {
+        expIDs.add(doc.id);
+      }
+    });
+    for (var expID in expIDs) {
+      user
+          .doc(uid)
+          .collection('UserScore')
+          .doc(expID)
+          .set({'UserScore': 0}).then((value) => print('in create user score'));
+    }
   }
 
   //sign in ✅
@@ -131,9 +148,9 @@ class DataBase extends ChangeNotifier {
     return true;
   }
 
-//✅
-  Future updateUserLevel(String userId, int leve) async {
-    firestore.collection('user').doc(userId).update({'level': leve});
+//update user level after experiment✅
+  Future updateUserLevel(String userId, int level) async {
+    firestore.collection('user').doc(userId).update({'level': level});
   }
 
   //Store user info in session
@@ -247,7 +264,7 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
-//✅
+//creat groups for the user ✅
   Future<void> createGroup(int code, String groupName, String leaderName,
       String leaderId, String pathOfImage) async {
     //add to group collection
@@ -437,6 +454,7 @@ class DataBase extends ChangeNotifier {
 
 //✅
   Stream<List<child.ExperimentInfo>> getExperiments(String category) {
+    List<child.ExperimentInfo> expList = [];
     return firestore
         .collection('Experiments')
         .where('Category', isEqualTo: category)
@@ -513,7 +531,7 @@ class DataBase extends ChangeNotifier {
     });
   }
 
-  deleteQuestion(String expID, String quesID) async{
+  deleteQuestion(String expID, String quesID) async {
     //remove from collection chat
     await firestore
         .collection('Experiments')
@@ -536,11 +554,16 @@ class DataBase extends ChangeNotifier {
       int score,
       String expID) async {
     // Call the user's CollectionReference to add a new user
-    final questionDocument = firestore.collection('Experiments').doc(expID).collection('Questions').doc();
-    return await questionDocument.set({
+    final questionDocument = firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .doc();
+    return await questionDocument
+        .set({
           'Question': question,
           'ExpID': expID,
-          'QID':questionDocument.id,
+          'QID': questionDocument.id,
           'CorrectAnswer': correctAnswer,
           'Score': score,
           'Answer1': answer1,
@@ -583,7 +606,28 @@ class DataBase extends ChangeNotifier {
     return avatar;
   }
 
-  Future updateExpScore(String expID, int score) async {
-    firestore.collection('Experiments').doc(expID).update({'UserScore': score});
+  Future updateUserScore(String expID, int score) async {
+    user
+        .doc(user_.userId)
+        .collection('UserScore')
+        .doc(expID)
+        .update({'UserScore': score});
+  }
+
+  Future<int> getUserScore(String userId, String expId) async {
+    var doc = await user.doc(userId).collection('UserScore').doc(expId).get();
+    int score = doc.get('UserScore') ?? 0;
+    print('getUserScore ' + score.toString());
+    return score;
+  }
+
+  Future<int> getAllUserScores(String userId) async {
+    int totalUserScore = 0;
+    var docs = await user.doc(userId).collection('UserScore').get();
+    for (var doc in docs.docs) {
+      int score = doc.get('UserScore') ?? 0;
+      totalUserScore += score;
+    }
+    return totalUserScore;
   }
 }

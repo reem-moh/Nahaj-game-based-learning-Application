@@ -60,19 +60,12 @@ public class fillLiquidOnBottle : MonoBehaviour
 
                 //move object 
                 doneCollsion = true; 
-                //GetComponent<Transform>().position = Vector3.Lerp(GetComponent<Transform>().position,target.position, speed * Time.deltaTime);
-
+                
                 gameObject.GetComponent<Transform>().position = target.position;
 
                 //after move the object
                 Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
-                
-                // Vector3(-0.074000001,0.379999995,-1.78779999e-06)
-                //Vector3(-0.125400007,0.344900012,-0.0105999997)
-               // p = gameObject.GetComponent<Transform>().position;
-               // p = new Vector3(p.x + 0.0366f,p.y + 0.07f,p.z + -0.0255599f);
-               // gameObject.GetComponent<Transform>().position = p;
-                
+    
                 //pour liquid 
                 enableAnimation();
             }
