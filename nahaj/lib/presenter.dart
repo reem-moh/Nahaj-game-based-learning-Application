@@ -484,22 +484,22 @@ class DataBase extends ChangeNotifier {
   }
 
   Future updateExpName(String expID, String name) async {
-    firestore.collection('Experiments').doc(expID).update({'Name': name});
+    await firestore.collection('Experiments').doc(expID).update({'Name': name});
   }
 
   Future updateExpCategory(String expID, String category) async {
-    firestore
+    await firestore
         .collection('Experiments')
         .doc(expID)
         .update({'Category': category});
   }
 
   Future updateExpInfo(String expID, String info) async {
-    firestore.collection('Experiments').doc(expID).update({'Info': info});
+    await firestore.collection('Experiments').doc(expID).update({'Info': info});
   }
 
   Future updateExpScor(String expID, int score) async {
-    firestore
+    await firestore
         .collection('Experiments')
         .doc(expID)
         .update({'ExperimentScore': score});
