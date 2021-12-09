@@ -33,6 +33,8 @@ class _QuestionCardState extends State<QuestionCard> {
   List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   bool changes = false;
+  bool error = false;
+  bool answer3And4 = false;
   bool savedChanges = true;
 
   @override
@@ -69,7 +71,7 @@ class _QuestionCardState extends State<QuestionCard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(height: 6.0.w),
+              SizedBox(height: 5.0.w),
               //info Q detailes
               Expanded(
                 child: ListView(
@@ -78,10 +80,10 @@ class _QuestionCardState extends State<QuestionCard> {
                     //Q number
                     Center(
                       child: widget.index == -1
-                          ? textFieldInput('سؤال جديد', 2.7)
+                          ? textFieldInput('سؤال جديد', 4.5)
                           : textFieldInput('السؤال رقم ${widget.index}', 2.7),
                     ),
-                    SizedBox(height: 18.1.w),
+                    SizedBox(height: 15.1.w),
 
                     //Question and answers
                     buildInfo(widget.question),
@@ -129,7 +131,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 ),
                 onPressed: () {
                   setState(() {
-                    if (changes && !savedChanges) {
+                    if (!savedChanges) {
                       showDialog(
                         builder: (BuildContext context) {
                           return CupertinoAlertDialog(
@@ -184,6 +186,25 @@ class _QuestionCardState extends State<QuestionCard> {
         margin: EdgeInsets.only(left: 10.h),
         child: Column(
           children: [
+            //error
+            error
+                ? Container(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      child: Text(
+                        'يجب تعبئة البيانات المطلوبه (*)',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 1.7.w,
+                        ),
+                      ),
+                    ))
+                : Container(),
+
             //question score
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -199,7 +220,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
-                    child: textFieldInput(': نقاط السؤال', 2.7)),
+                    child: textFieldInput(': نقاط السؤال *', 2.7)),
               ],
             ),
             SizedBox(height: 3.0.w),
@@ -222,10 +243,10 @@ class _QuestionCardState extends State<QuestionCard> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       cursorRadius: Radius.circular(50),
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
+                          border: OutlineInputBorder(),
+                          fillColor: Colors.white,
+                          filled: true),
                       validator: (val) {
-                        changes = true;
                         savedChanges = false;
                         questionString = val!;
                         if (val.length <= 0) {
@@ -247,7 +268,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     width: MediaQuery.of(context).size.width * 0.4,
                     //padding:
                     //  EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
-                    child: textFieldInput(": السؤال", 2.7)),
+                    child: textFieldInput(": السؤال *", 2.7)),
               ],
             ),
             SizedBox(height: 6.0.w),
@@ -258,14 +279,29 @@ class _QuestionCardState extends State<QuestionCard> {
               children: [
                 answerCard(question.answers[1], 1),
                 SizedBox(width: 1.w),
-                textFieldInput(': الاجابة رقم 2', 1.7),
+                textFieldInput(': الاجابة رقم 2 *', 1.7),
                 answerCard(question.answers[0], 0),
                 SizedBox(width: 1.w),
-                textFieldInput(': الاجابة رقم 1', 1.7),
+                textFieldInput(': الاجابة رقم 1 *', 1.7),
               ],
             ),
             SizedBox(height: 3.0.w),
 
+            //error
+            answer3And4
+                ? Container(
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Text(
+                      'يجب تعبئة الاجابتين الثالثه والرابعه',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 1.7.w,
+                      ),
+                    ))
+                : Container(),
             //Answers 3 and 4
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -287,7 +323,7 @@ class _QuestionCardState extends State<QuestionCard> {
               Container(
                   height: MediaQuery.of(context).size.height * 0.08,
                   width: MediaQuery.of(context).size.width * 0.4,
-                  child: textFieldInput(': الاجابة الصحيحة', 2.7)),
+                  child: textFieldInput(': الاجابة الصحيحة *', 2.7)),
             ])
           ],
         ),
@@ -301,11 +337,20 @@ class _QuestionCardState extends State<QuestionCard> {
           flex: 1,
           child: Row(
             children: [
-              Text('الاجابة 4'),
+              Text(
+                'الاجابة 4',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 2.w,
+                ),
+              ),
               Radio(
                   value: 4,
                   groupValue: _raidoButtonValue,
                   onChanged: (newValue) {
+                    changes = true;
                     setState(() => _raidoButtonValue = newValue as int);
                   }),
             ],
@@ -315,11 +360,21 @@ class _QuestionCardState extends State<QuestionCard> {
           flex: 1,
           child: Row(
             children: [
-              Text('الاجابة 3'),
+              Text(
+                'الاجابة 3',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 2.w,
+                ),
+              ),
+              // Text(),
               Radio(
                   value: 3,
                   groupValue: _raidoButtonValue,
                   onChanged: (newValue) {
+                    changes = true;
                     setState(() => _raidoButtonValue = newValue as int);
                   }),
             ],
@@ -329,11 +384,20 @@ class _QuestionCardState extends State<QuestionCard> {
           flex: 1,
           child: Row(
             children: [
-              Text('الاجابة 2'),
+              Text(
+                'الاجابة 2',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 2.w,
+                ),
+              ),
               Radio(
                   value: 2,
                   groupValue: _raidoButtonValue,
                   onChanged: (newValue) {
+                    changes = true;
                     setState(() => _raidoButtonValue = newValue as int);
                   }),
             ],
@@ -343,11 +407,20 @@ class _QuestionCardState extends State<QuestionCard> {
           flex: 1,
           child: Row(
             children: [
-              Text('الاجابة 1'),
+              Text(
+                'الاجابة 1',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 2.w,
+                ),
+              ),
               Radio(
                   value: 1,
                   groupValue: _raidoButtonValue,
                   onChanged: (newValue) {
+                    changes = true;
                     setState(() => _raidoButtonValue = newValue as int);
                   }),
             ],
@@ -357,22 +430,27 @@ class _QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  InputDecorator dropDownScore() {
-    return InputDecorator(
-      decoration: const InputDecoration(border: OutlineInputBorder()),
-      child: DropdownButton(
-        alignment: Alignment.centerRight,
-        value: dropdownvalue,
-        menuMaxHeight: 180,
-        icon: Icon(Icons.keyboard_arrow_down),
-        items: items.map((int items) {
-          return DropdownMenuItem(value: items, child: Text("$items"));
-        }).toList(),
-        onChanged: (newValue) {
-          setState(() {
-            dropdownvalue = newValue as int;
-          });
-        },
+  Container dropDownScore() {
+    return Container(
+      child: InputDecorator(
+        decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            fillColor: Colors.white,
+            filled: true),
+        child: DropdownButton(
+          alignment: Alignment.centerRight,
+          value: dropdownvalue,
+          menuMaxHeight: 180,
+          icon: Icon(Icons.keyboard_arrow_down),
+          items: items.map((int items) {
+            return DropdownMenuItem(value: items, child: Text("$items"));
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              dropdownvalue = newValue as int;
+            });
+          },
+        ),
       ),
     );
   }
@@ -402,9 +480,10 @@ class _QuestionCardState extends State<QuestionCard> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
+            filled: true,
+            fillColor: Colors.white,
           ),
           validator: (val) {
-            changes = true;
             savedChanges = false;
             if (index < 2) {
               if (val!.length <= 0) {
@@ -436,96 +515,128 @@ class _QuestionCardState extends State<QuestionCard> {
           onPrimary: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 3.2.h, vertical: 1.2.w),
         ),
-        child: Text(text),
+        child: Text(
+          "$text ",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Cairo',
+            fontWeight: FontWeight.w600,
+            fontSize: 2.w,
+          ),
+        ),
         onPressed: () {
-          showDialog(
-            builder: (BuildContext context) {
-              return CupertinoAlertDialog(
-                title: Text("هل انت متاكد ؟"),
+          //update add Q
+          if (type == 1) {
+            if (updateQuestion()) {
+              showDialog(
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                      title: Text("هل انت متاكد ؟"),
+                      actions: [
+                        //yes
+                        ElevatedButton(
+                            onPressed: () {
+                              //new question
+                              saveChanges(context);
+                            },
+                            child: Text(
+                              "نعم",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white.withOpacity(0),
+                              shadowColor: Colors.white.withOpacity(0),
+                              onPrimary: Colors.white,
+                            )),
+                        //no
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("لا",
+                                style: TextStyle(color: Colors.black)),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white.withOpacity(0),
+                              shadowColor: Colors.white.withOpacity(0),
+                              onPrimary: Colors.white,
+                            )),
+                      ]);
+                },
+                context: context,
+              );
+            }
+          }
+          //delete Q
+          else {
+            showDialog(
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                    title: Text("هل انت متاكد من حذف السؤال ؟"),
+                    actions: [
+                      //yes
+                      ElevatedButton(
+                          onPressed: () {
+                            deleteQuestion(
+                              widget.question.expID,
+                              widget.question.id,
+                            );
+                          },
+                          child: Text(
+                            "نعم",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white.withOpacity(0),
+                            shadowColor: Colors.white.withOpacity(0),
+                            onPrimary: Colors.white,
+                          )),
+                      //no
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child:
+                              Text("لا", style: TextStyle(color: Colors.black)),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white.withOpacity(0),
+                            shadowColor: Colors.white.withOpacity(0),
+                            onPrimary: Colors.white,
+                          )),
+                    ]);
+              },
+              context: context,
+            );
+          }
+        },
+      );
+
+  void saveChanges(BuildContext context) {
+    if (widget.index == -1) {
+      print('inside new question');
+      widget.db
+          .addNewQuestion(
+              questionString,
+              answers[_raidoButtonValue - 1],
+              answers[0],
+              answers[1],
+              answers[2],
+              answers[3],
+              dropdownvalue,
+              widget.exp.id)
+          .then((value) {
+        savedChanges = true;
+        print("added new question");
+        showDialog(
+          builder: (BuildContext context) {
+            return CupertinoAlertDialog(
+                title: Text('تم تحديث البيانات بنجاح'),
+                content: Image.asset("assets/party.png", fit: BoxFit.cover),
                 actions: [
                   ElevatedButton(
                       onPressed: () {
-                        // save changes
-                        if (type == 1) {
-                          if (updateQuestion()) {
-                            print("inside dialog!");
-                            savedChanges = true;
-                            showDialog(
-                              builder: (BuildContext context) {
-                                return CupertinoAlertDialog(
-                                    title: Text('تم تحديث البيانات بنجاح'),
-                                    content: Image.asset("assets/party.png",
-                                        fit: BoxFit.cover),
-                                    actions: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text(
-                                            "نعم",
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Colors.white.withOpacity(0),
-                                            shadowColor:
-                                                Colors.white.withOpacity(0),
-                                            onPrimary: Colors.white,
-                                          )),
-                                    ]);
-                              },
-                              context: context,
-                            );
-                            //update false
-                          } else {
-                            Navigator.of(context).pop();
-                          }
-                        } else {
-                          //Delete question
-                          if (deleteQuestion(
-                            widget.question.expID,
-                            widget.question.id,
-                          )) {
-                            print("inside dialog!");
-                            savedChanges = true;
-                            showDialog(
-                              builder: (BuildContext context) {
-                                return CupertinoAlertDialog(
-                                    title: Text('تم حذف السؤال بنجاح'),
-                                    content: Image.asset("assets/party.png",
-                                        fit: BoxFit.cover),
-                                    actions: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pushNamedAndRemoveUntil(
-                                                    '/AdminHomePage',
-                                                    (Route<dynamic> route) =>
-                                                        false);
-                                          },
-                                          child: Text(
-                                            "نعم",
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            primary:
-                                                Colors.white.withOpacity(0),
-                                            shadowColor:
-                                                Colors.white.withOpacity(0),
-                                            onPrimary: Colors.white,
-                                          )),
-                                    ]);
-                              },
-                              context: context,
-                            );
-                          } else {
-                            Navigator.of(context).pop();
-                          }
-                        }
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text(
                         "نعم",
@@ -536,23 +647,60 @@ class _QuestionCardState extends State<QuestionCard> {
                         shadowColor: Colors.white.withOpacity(0),
                         onPrimary: Colors.white,
                       )),
+                ]);
+          },
+          context: context,
+        );
+
+        return true;
+      });
+    } else {
+      print('inside update question');
+      widget.db
+          .updateQuesAns(
+              widget.question.expID,
+              widget.question.id,
+              questionString,
+              answers[0],
+              answers[1],
+              answers[2],
+              answers[3],
+              answers[_raidoButtonValue - 1],
+              dropdownvalue)
+          .then((value) {
+        print("update question");
+        print(
+            "${widget.question.expID},${widget.question.id},$questionString,${answers[0]},${answers[1]},${answers[2]},${answers[3]},${answers[_raidoButtonValue - 1]},${dropdownvalue}, ${savedChanges = true}");
+        showDialog(
+          builder: (BuildContext context) {
+            return CupertinoAlertDialog(
+                title: Text('تم تحديث البيانات بنجاح'),
+                content: Image.asset("assets/party.png", fit: BoxFit.cover),
+                actions: [
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
-                      child: Text("لا", style: TextStyle(color: Colors.black)),
+                      child: Text(
+                        "نعم",
+                        style: TextStyle(color: Colors.black),
+                      ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white.withOpacity(0),
                         shadowColor: Colors.white.withOpacity(0),
                         onPrimary: Colors.white,
                       )),
-                ],
-              );
-            },
-            context: context,
-          );
-        },
-      );
+                ]);
+          },
+          context: context,
+        );
+
+        return true;
+      });
+    }
+  }
 
   bool updateQuestion() {
     if (!validQuestion) {
@@ -564,75 +712,78 @@ class _QuestionCardState extends State<QuestionCard> {
     if (validAnswer) {
       if (answers[0] == '' || answers[1] == '') {
         validAnswer = false;
+        error = true;
       } else if (answers[2] != "" && answers[3] == "") {
+        answer3And4 = true;
         validAnswer = false;
+        error = true;
       } else if (answers[2] == "" && answers[3] != "") {
         validAnswer = false;
+        answer3And4 = true;
+        error = true;
       }
     }
-
+    setState(() {
+      error = true;
+    });
     if (validQuestion && validAnswer && _raidoButtonValue != -1) {
+      error = false;
       print(
-          "validQuestion: $questionString,length: ${widget.question.answers.length}\n validAnswer: ${answers[0] + answers[1] + answers[2] + answers[3]}\n_raidoButtonValue $_raidoButtonValue");
+          "validQuestion: $questionString,length: ${widget.question.answers.length}\n validAnswer: ${answers[0] + " " + answers[1] + " " + answers[2] + " " + answers[3]}\n_raidoButtonValue $_raidoButtonValue");
 
       //check if radio answer has value
-      if (_raidoButtonValue == 3 || _raidoButtonValue == 4) {
+      if ((_raidoButtonValue == 3 || _raidoButtonValue == 4) &&
+          (answers[2] == "" || answers[3] == "")) {
         print("_raidoButtonValue in 3 or 4 ${answers[2]} ${answers[3]}");
-        if (answers[2] == "" || answers[3] == "") {
-          print("_raidoButtonValue in 3 or 4 is empty");
-          return false;
-        }
-      }
-      //new question
-      if (widget.index == -1) {
-        print('inside new question');
-        widget.db
-            .addNewQuestion(
-                questionString,
-                answers[_raidoButtonValue - 1],
-                answers[0],
-                answers[1],
-                answers[2],
-                answers[3],
-                dropdownvalue,
-                widget.exp.id)
-            .then((value) {
-          savedChanges = true;
-          print("added new question");
-          return true;
+        print("_raidoButtonValue in 3 or 4 is empty");
+        setState(() {
+          error = true;
         });
-      } else {
-        print('inside update question');
-        widget.db
-            .updateQuesAns(
-                widget.question.expID,
-                widget.question.id,
-                questionString,
-                answers[0],
-                answers[1],
-                answers[2],
-                answers[3],
-                answers[_raidoButtonValue - 1],
-                dropdownvalue)
-            .then((value) {
-          print("update question");
-          savedChanges = true;
-          return true;
-        });
+        return false;
       }
+      setState(() {
+        error = false;
+      });
       return true;
     }
     print("not true");
     print(
         "validQuestion: $validQuestion,\n validAnswer: $validAnswer \nanswers:${answers[0] + "  " + answers[1] + "  " + answers[2] + "  " + answers[3]}\nwidgetQuestionanswers: ${widget.question.answers[0] + "  " + widget.question.answers[1] + "  " + widget.question.answers[2] + "  " + widget.question.answers[3]}\n_raidoButtonValue $_raidoButtonValue");
-
+    setState(() {
+      error = true;
+    });
     return false;
   }
 
-  bool deleteQuestion(String expID, String questionId) {
+  bool deleteQuestion(String expID, String questionId)  {
     widget.db.deleteQuestion(expID, questionId).then((value) {
       print("update question");
       savedChanges = true;
+      showDialog(
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+              title: Text('تم حذف السؤال بنجاح'),
+              content: Image.asset("assets/party.png", fit: BoxFit.cover),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/AdminHomePage', (Route<dynamic> route) => false);
+                    },
+                    child: Text(
+                      "نعم",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white.withOpacity(0),
+                      shadowColor: Colors.white.withOpacity(0),
+                      onPrimary: Colors.white,
+                    )),
+              ]);
+        },
+        context: context,
+      );
+
       return true;
     });
     return false;
