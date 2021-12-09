@@ -36,6 +36,7 @@ class _QuestionCardState extends State<QuestionCard> {
   bool error = false;
   bool answer3And4 = false;
   bool savedChanges = true;
+  int oldScore=0;
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _QuestionCardState extends State<QuestionCard> {
     answers = widget.question.answers;
     questionString = widget.question.question;
     dropdownvalue = widget.question.score;
+    oldScore = widget.question.score;
     for (int i = 0; i < answers.length; i++) {
       if (answers[i] == widget.question.correctAnswer) {
         _raidoButtonValue = i + 1;
@@ -579,6 +581,7 @@ class _QuestionCardState extends State<QuestionCard> {
                             deleteQuestion(
                               widget.question.expID,
                               widget.question.id,
+                              widget.question.score
                             );
                           },
                           child: Text(
@@ -666,7 +669,9 @@ class _QuestionCardState extends State<QuestionCard> {
               answers[2],
               answers[3],
               answers[_raidoButtonValue - 1],
-              dropdownvalue)
+              dropdownvalue,
+              oldScore
+              )
           .then((value) {
         print("update question");
         print(
@@ -755,8 +760,8 @@ class _QuestionCardState extends State<QuestionCard> {
     return false;
   }
 
-  bool deleteQuestion(String expID, String questionId)  {
-    widget.db.deleteQuestion(expID, questionId).then((value) {
+  bool deleteQuestion(String expID, String questionId, int questionScore)  {
+    widget.db.deleteQuestion(expID, questionId,questionScore).then((value) {
       print("update question");
       savedChanges = true;
       showDialog(

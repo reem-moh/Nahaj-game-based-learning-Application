@@ -23,6 +23,7 @@ class DataBase extends ChangeNotifier {
     fireAuth = FirebaseAuth.instance;
     user = firestore.collection('user');
   }
+  //------------User---------------
 
   //sign up 1 (add the user in Auth)
   Future createNewUser(String name, String email, String password) async {
@@ -222,6 +223,48 @@ class DataBase extends ChangeNotifier {
     return name == '1' ? false : true;
   }
 
+  Future<List> listOfAvatars() async {
+    List avatar = [];
+    var collection = firestore.collection('AvatarImages');
+
+    var querySnapshot = await collection.get();
+
+    for (int i = 0; i < querySnapshot.size; i++) {
+      avatar.add({
+        'url': querySnapshot.docs[i]['url'],
+        'level': querySnapshot.docs[i]['level']
+      });
+    }
+    print("avatar inside db: $avatar");
+    avatar.sort((a, b) => a['level'].compareTo(b['level']));
+    return avatar;
+  }
+
+  Future updateUserScore(String expID, int score) async {
+    user
+        .doc(user_.userId)
+        .collection('UserScore')
+        .doc(expID)
+        .update({'UserScore': score});
+  }
+
+  Future<int> getUserScore(String userId, String expId) async {
+    var doc = await user.doc(userId).collection('UserScore').doc(expId).get();
+    int score = doc.get('UserScore') ?? 0;
+    print('getUserScore ' + score.toString());
+    return score;
+  }
+
+  Future<int> getAllUserScores(String userId) async {
+    int totalUserScore = 0;
+    var docs = await user.doc(userId).collection('UserScore').get();
+    for (var doc in docs.docs) {
+      int score = doc.get('UserScore') ?? 0;
+      totalUserScore += score;
+    }
+    return totalUserScore;
+  }
+
   //Signout
   Future signOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -250,6 +293,8 @@ class DataBase extends ChangeNotifier {
     }
     return "-1";
   }
+
+  //------------Group---------------
 
   //get groups of the user ✅
   Stream<List<child.Groups>> getGroupsList(String uid, String uName) {
@@ -400,7 +445,21 @@ class DataBase extends ChangeNotifier {
         .catchError((error) => print('Delete failed: $error'));
   }
 
-  /* for Chat */
+  Stream<List<child.User>> getMembers(List members) {
+    print("inside getMembers: \n members list before fetch: $members");
+    var x = firestore
+        .collection('user')
+        .where('userId', whereIn: members)
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+            .map((document) => child.User.fromJson(document.data()))
+            .toList());
+    print("inside getMembers: \n members list after fetch: ${x}");
+    return x;
+  }
+
+  //------------Chat---------------
+
   void createChat(String groupId, String groupName) {
     //add to group collection
     if (groupId == '-1') {
@@ -452,7 +511,8 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
-//✅
+  //------------Experiment---------------
+
   Stream<List<child.ExperimentInfo>> getExperiments(String category) {
     List<child.ExperimentInfo> expList = [];
     return firestore
@@ -471,18 +531,6 @@ class DataBase extends ChangeNotifier {
             .toList());
   }
 
-//✅
-  Stream<List<child.Question>> getQuestions(String expID) {
-    return firestore
-        .collection('Experiments')
-        .doc(expID)
-        .collection('Questions')
-        .snapshots()
-        .map((snapShot) => snapShot.docs
-            .map((document) => child.Question.fromJson(document.data()))
-            .toList());
-  }
-
   Future updateExpName(String expID, String name) async {
     await firestore.collection('Experiments').doc(expID).update({'Name': name});
   }
@@ -498,11 +546,26 @@ class DataBase extends ChangeNotifier {
     await firestore.collection('Experiments').doc(expID).update({'Info': info});
   }
 
-  Future updateExpScor(String expID, int score) async {
+  Future updateExpScor(String expID, int score, int oldExperimentScore) async {
     await firestore
         .collection('Experiments')
         .doc(expID)
         .update({'ExperimentScore': score});
+    //update total score of exp
+    updateTotalScore(expID,(score-oldExperimentScore));
+  }
+
+  //------------Question---------------
+
+  Stream<List<child.Question>> getQuestions(String expID) {
+    return firestore
+        .collection('Experiments')
+        .doc(expID)
+        .collection('Questions')
+        .snapshots()
+        .map((snapShot) => snapShot.docs
+            .map((document) => child.Question.fromJson(document.data()))
+            .toList());
   }
 
   Future updateQuesAns(
@@ -514,7 +577,7 @@ class DataBase extends ChangeNotifier {
       String ans3,
       String ans4,
       String correctAns,
-      int score) async {
+      int score,int oldScore) async {
     return firestore
         .collection('Experiments')
         .doc(expID)
@@ -528,11 +591,16 @@ class DataBase extends ChangeNotifier {
       'Answer4': ans4,
       'CorrectAnswer': correctAns,
       'Score': score
-    });
+    }).then((value)
+    async {//update exp total score
+    await updateTotalScore(expID, score-oldScore);
+    print("inside updateQuesAns after call updateTotalScore");}
+    );
+    
   }
 
-  deleteQuestion(String expID, String quesID) async {
-    //remove from collection chat
+  deleteQuestion(String expID, String quesID,int quesScore) async {
+    //remove from collection Question
     await firestore
         .collection('Experiments')
         .doc(expID)
@@ -541,9 +609,10 @@ class DataBase extends ChangeNotifier {
         .delete() // <-- Delete
         .then((_) => print('Deleted questiong done'))
         .catchError((error) => print('Delete failed: $error'));
+    //delete score from total score exp
+    updateTotalScore(expID,-quesScore);
   }
 
-  //add Q ✅
   Future<void> addNewQuestion(
       String question,
       String correctAnswer,
@@ -559,75 +628,32 @@ class DataBase extends ChangeNotifier {
         .doc(expID)
         .collection('Questions')
         .doc();
-    return await questionDocument
-        .set({
-          'Question': question,
-          'ExpID': expID,
-          'QID': questionDocument.id,
-          'CorrectAnswer': correctAnswer,
-          'Score': score,
-          'Answer1': answer1,
-          'Answer2': answer2,
-          'Answer3': answer3,
-          'Answer4': answer4,
-        })
-        .then((value) => print("User Added, database page"))
-        .catchError(
-            (error) => print("database page, Failed to add user: $error"));
+    return await questionDocument.set({
+      'Question': question,
+      'ExpID': expID,
+      'QID': questionDocument.id,
+      'CorrectAnswer': correctAnswer,
+      'Score': score,
+      'Answer1': answer1,
+      'Answer2': answer2,
+      'Answer3': answer3,
+      'Answer4': answer4,
+    }).then((value) {
+      print("User Added, database page");
+      updateTotalScore(expID,score);
+    }).catchError(
+        (error) => print("database page, Failed to add user: $error"));
+    //update total score of exp
   }
 
-  Stream<List<child.User>> getMembers(List members) {
-    print("inside getMembers: \n members list before fetch: $members");
-    var x = firestore
-        .collection('user')
-        .where('userId', whereIn: members)
-        .snapshots()
-        .map((snapShot) => snapShot.docs
-            .map((document) => child.User.fromJson(document.data()))
-            .toList());
-    print("inside getMembers: \n members list after fetch: ${x}");
-    return x;
-  }
-
-  Future<List> listOfAvatars() async {
-    List avatar = [];
-    var collection = firestore.collection('AvatarImages');
-
-    var querySnapshot = await collection.get();
-
-    for (int i = 0; i < querySnapshot.size; i++) {
-      avatar.add({
-        'url': querySnapshot.docs[i]['url'],
-        'level': querySnapshot.docs[i]['level']
-      });
-    }
-    print("avatar inside db: $avatar");
-    avatar.sort((a, b) => a['level'].compareTo(b['level']));
-    return avatar;
-  }
-
-  Future updateUserScore(String expID, int score) async {
-    user
-        .doc(user_.userId)
-        .collection('UserScore')
-        .doc(expID)
-        .update({'UserScore': score});
-  }
-
-  Future<int> getUserScore(String userId, String expId) async {
-    var doc = await user.doc(userId).collection('UserScore').doc(expId).get();
-    int score = doc.get('UserScore') ?? 0;
-    print('getUserScore ' + score.toString());
-    return score;
-  }
-
-  Future<int> getAllUserScores(String userId) async {
-    int totalUserScore = 0;
-    var docs = await user.doc(userId).collection('UserScore').get();
-    for (var doc in docs.docs) {
-      int score = doc.get('UserScore') ?? 0;
-      totalUserScore += score;
-    }
-    return totalUserScore;
+  Future updateTotalScore(String expID, int score) async {
+    await firestore.collection('Experiments').doc(expID).get().then((value) {
+      int TotlaScore = value.get('TotlaScore');
+      print("TotlaScore inside updateTotalScore $TotlaScore score: $score");
+      firestore
+          .collection('Experiments')
+          .doc(expID)
+          .update({'TotlaScore': (TotlaScore + score)});
+    });
   }
 }
