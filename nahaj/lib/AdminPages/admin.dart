@@ -110,7 +110,6 @@ class _AdminHomePage extends State<AdminHomePage>
             Container(
               alignment: Alignment.centerRight,
               height: 23.h,
-              width: 5.h,
               child: SizedBox(
                 height: screenHeight * 0.9,
                 child: UserAccountsDrawerHeader(
@@ -130,8 +129,7 @@ class _AdminHomePage extends State<AdminHomePage>
                                 ),
                               )
                             : Container(
-                                padding: EdgeInsets.fromLTRB(
-                                    screenWidth * 0.005.h, 0, 0, 0),
+                                padding: EdgeInsets.fromLTRB(4.19.h, 0, 0, 0),
                                 child: Text(
                                   admin.adminName,
                                   style: TextStyle(
@@ -148,21 +146,20 @@ class _AdminHomePage extends State<AdminHomePage>
                   accountEmail: Text(""),
                   currentAccountPicture: CircleAvatar(
                     child: Image.asset(
-                      'assets/Groupimage.png',
+                      'assets/user 2.png',
                       fit: BoxFit.contain,
                       alignment: Alignment.center,
                     ),
                     backgroundColor: Colors.white54,
                   ),
                   currentAccountPictureSize:
-                      Size(screenHeight * 0.38, screenWidth * 0.1),
+                      Size(screenHeight * 0.41, screenWidth * 0.1),
                   decoration: BoxDecoration(
                     color: backgroundColorOfSideBar,
                   ),
                 ),
               ),
             ),
-
             //home page الرئيسية
             Theme(
               data: ThemeData(
