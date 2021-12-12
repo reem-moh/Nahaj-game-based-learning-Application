@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class SignUp extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   SignUp({Key? key, required this.db}) : super(key: key);
 
   @override

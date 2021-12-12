@@ -2,18 +2,17 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/AdminPages/experimentAdmin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-import 'package:nahaj/HomePage/category.dart';
 import 'package:nahaj/presenter.dart';
 
 //#FDE9A9
 final Color backgroundColorOfSideBar = Color(0xffFDE9A9);
 
 class AdminHomePage extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   AdminHomePage({Key? key, required this.db}) : super(key: key);
 
   @override
@@ -345,7 +344,7 @@ class _AdminHomePage extends State<AdminHomePage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/Groupimage.png',
+                                  'assets/user 2.png',
                                   fit: BoxFit.contain,
                                 ),
                                 SizedBox(
@@ -442,7 +441,7 @@ class _AdminHomePage extends State<AdminHomePage>
 //Experiments stream builder
 // ignore: must_be_immutable
 class AdminExperimentsWidget extends StatelessWidget {
-  final DataBase db;
+  final Presenter db;
 
   AdminExperimentsWidget({
     required this.db,
@@ -490,7 +489,7 @@ class AdminExperimentsWidget extends StatelessWidget {
 }
 
 class AdminExperimentCard extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final ExperimentInfo exp;
   const AdminExperimentCard({
     required this.db,

@@ -5,7 +5,7 @@ import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class Signin extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   Signin({Key? key, required this.db}) : super(key: key);
 
   @override

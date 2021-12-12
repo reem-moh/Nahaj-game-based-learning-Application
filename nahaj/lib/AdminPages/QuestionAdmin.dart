@@ -1,14 +1,14 @@
 // ignore: must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class QuestionCard extends StatefulWidget {
   final Question question;
   final ExperimentInfo exp;
-  final DataBase db;
+  final Presenter db;
   final int index;
 
   QuestionCard({
@@ -36,7 +36,7 @@ class _QuestionCardState extends State<QuestionCard> {
   bool error = false;
   bool answer3And4 = false;
   bool savedChanges = true;
-  int oldScore=0;
+  int oldScore = 0;
 
   @override
   void initState() {
@@ -578,11 +578,8 @@ class _QuestionCardState extends State<QuestionCard> {
                       //yes
                       ElevatedButton(
                           onPressed: () {
-                            deleteQuestion(
-                              widget.question.expID,
-                              widget.question.id,
-                              widget.question.score
-                            );
+                            deleteQuestion(widget.question.expID,
+                                widget.question.id, widget.question.score);
                           },
                           child: Text(
                             "نعم",
@@ -670,8 +667,7 @@ class _QuestionCardState extends State<QuestionCard> {
               answers[3],
               answers[_raidoButtonValue - 1],
               dropdownvalue,
-              oldScore
-              )
+              oldScore)
           .then((value) {
         print("update question");
         print(
@@ -760,8 +756,8 @@ class _QuestionCardState extends State<QuestionCard> {
     return false;
   }
 
-  bool deleteQuestion(String expID, String questionId, int questionScore)  {
-    widget.db.deleteQuestion(expID, questionId,questionScore).then((value) {
+  bool deleteQuestion(String expID, String questionId, int questionScore) {
+    widget.db.deleteQuestion(expID, questionId, questionScore).then((value) {
       print("update question");
       savedChanges = true;
       showDialog(

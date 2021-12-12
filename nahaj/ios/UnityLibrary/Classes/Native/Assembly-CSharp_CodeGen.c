@@ -109,335 +109,343 @@ extern void ForceTest_Start_mA2FF9E12833F40C33E32C31BAC0CF716FDA57A60 (void);
 extern void ForceTest_Update_m80F090029E849DEAFE4F3E7583BE8B6F319C3436 (void);
 // 0x00000037 System.Void ForceTest::.ctor()
 extern void ForceTest__ctor_mFDF49B32010A32CA98FEBE954DE7FC6756B47759 (void);
-// 0x00000038 System.Void NextInstruction::Start()
+// 0x00000038 System.Void LoadSceneManager::Start()
+extern void LoadSceneManager_Start_mF494B479CD5C3461FE6BCDF0F4D7452C244DE39D (void);
+// 0x00000039 System.Void LoadSceneManager::Update()
+extern void LoadSceneManager_Update_mB0E77D7DBAF08199523F4C7E47CDE60292BCC77B (void);
+// 0x0000003A System.Void LoadSceneManager::LoadScene(System.String)
+extern void LoadSceneManager_LoadScene_mE847E6E411927E87DCAC2D3ED5C29BEDB2BE0CEA (void);
+// 0x0000003B System.Void LoadSceneManager::.ctor()
+extern void LoadSceneManager__ctor_m875092AABE90D3147B6550E865F8490211B1E329 (void);
+// 0x0000003C System.Void NextInstruction::Start()
 extern void NextInstruction_Start_m255404B015D87710972DE90E8D8F00486EBA1428 (void);
-// 0x00000039 System.Void NextInstruction::ShowInstruction()
+// 0x0000003D System.Void NextInstruction::ShowInstruction()
 extern void NextInstruction_ShowInstruction_m5E22886B7A4453DD56AD5333CC00ACFFA76E16DC (void);
-// 0x0000003A System.Void NextInstruction::enableClickable()
+// 0x0000003E System.Void NextInstruction::enableClickable()
 extern void NextInstruction_enableClickable_mE261D7EAFE7D4E34BF6DC7BC27FBACD8988E8321 (void);
-// 0x0000003B System.Void NextInstruction::incrementPB()
+// 0x0000003F System.Void NextInstruction::incrementPB()
 extern void NextInstruction_incrementPB_mBCA992AC22D7047C14AA020AFB74DC7C4098E820 (void);
-// 0x0000003C System.Void NextInstruction::.ctor()
+// 0x00000040 System.Void NextInstruction::.ctor()
 extern void NextInstruction__ctor_m888C34768DBBAA02829D20EE6612FAD5334EE54D (void);
-// 0x0000003D System.Void OnHit::OnInteractiveHitTest(Vuforia.HitTestResult)
+// 0x00000041 System.Void OnHit::OnInteractiveHitTest(Vuforia.HitTestResult)
 extern void OnHit_OnInteractiveHitTest_m2D3FA7D7B9CE7DA41C22DD396E8E71853E561A5C (void);
-// 0x0000003E System.Void OnHit::showInstruction()
+// 0x00000042 System.Void OnHit::showInstruction()
 extern void OnHit_showInstruction_m3884E00D5856E6E669A29521F9706848C095797C (void);
-// 0x0000003F System.Void OnHit::.ctor()
+// 0x00000043 System.Void OnHit::.ctor()
 extern void OnHit__ctor_mDB514CD24F5EAA33382463EA8CE4825596394830 (void);
-// 0x00000040 System.Void ConveyImpacts::OnCollisionEnter(UnityEngine.Collision)
+// 0x00000044 System.Void ConveyImpacts::OnCollisionEnter(UnityEngine.Collision)
 extern void ConveyImpacts_OnCollisionEnter_m287F928E0FAD0A4A1EF75ACAD13EFCA72EF4CBB8 (void);
-// 0x00000041 System.Void ConveyImpacts::.ctor()
+// 0x00000045 System.Void ConveyImpacts::.ctor()
 extern void ConveyImpacts__ctor_mA1530C87547299FC34E69742E78A0B1254B50F2D (void);
-// 0x00000042 System.Void GhostPhysics::Start()
+// 0x00000046 System.Void GhostPhysics::Start()
 extern void GhostPhysics_Start_mEFD163188ACA48013F1CF348F135DB0D4961A414 (void);
-// 0x00000043 System.Void GhostPhysics::OnDestroy()
+// 0x00000047 System.Void GhostPhysics::OnDestroy()
 extern void GhostPhysics_OnDestroy_m2DC8B3952BD6529D23C8B41176F97EAD687CA47C (void);
-// 0x00000044 System.Void GhostPhysics::SendCollision(UnityEngine.Collision)
+// 0x00000048 System.Void GhostPhysics::SendCollision(UnityEngine.Collision)
 extern void GhostPhysics_SendCollision_mEC3F4B5F3685745AA76D8F327CD16D79C07F9D66 (void);
-// 0x00000045 UnityEngine.Transform GhostPhysics::GetController()
+// 0x00000049 UnityEngine.Transform GhostPhysics::GetController()
 extern void GhostPhysics_GetController_m516AF8B2A5E616A231FE65E444892A72F64B2E15 (void);
-// 0x00000046 System.Void GhostPhysics::Update()
+// 0x0000004A System.Void GhostPhysics::Update()
 extern void GhostPhysics_Update_mBAC26F7A3E0DA20A3B4C48A9729412D2FEA1F728 (void);
-// 0x00000047 System.Void GhostPhysics::.ctor()
+// 0x0000004B System.Void GhostPhysics::.ctor()
 extern void GhostPhysics__ctor_m77D310A437CA8F4E0035DC6FBF7D129458829491 (void);
-// 0x00000048 System.Boolean Waiter::Waited(System.Single)
+// 0x0000004C System.Boolean Waiter::Waited(System.Single)
 extern void Waiter_Waited_m91986184DF8F2FE4505F486D7A0E026D5740173E (void);
-// 0x00000049 System.Void Waiter::.ctor()
+// 0x0000004D System.Void Waiter::.ctor()
 extern void Waiter__ctor_m1201777F6232FC7D3C15A9293767E52D6FB2A0B5 (void);
-// 0x0000004A System.Void ShowBottleBakingSoda::Start()
+// 0x0000004E System.Void ShowBottleBakingSoda::Start()
 extern void ShowBottleBakingSoda_Start_mD5F636DF72B34BE23C39E6A15BD048ACCC8E0A2E (void);
-// 0x0000004B System.Void ShowBottleBakingSoda::ShowBakingSoda()
+// 0x0000004F System.Void ShowBottleBakingSoda::ShowBakingSoda()
 extern void ShowBottleBakingSoda_ShowBakingSoda_mAE196543180802A1FE6B626FE06BC560F380E6CC (void);
-// 0x0000004C System.Void ShowBottleBakingSoda::clicked()
+// 0x00000050 System.Void ShowBottleBakingSoda::clicked()
 extern void ShowBottleBakingSoda_clicked_mF057E72DAF0C4991047520C5061C854B7A67E2EB (void);
-// 0x0000004D System.Void ShowBottleBakingSoda::.ctor()
+// 0x00000051 System.Void ShowBottleBakingSoda::.ctor()
 extern void ShowBottleBakingSoda__ctor_mCCB2C13470F7C55B693CB12B5916811B997DD217 (void);
-// 0x0000004E System.Void ShowBottleColor::Start()
+// 0x00000052 System.Void ShowBottleColor::Start()
 extern void ShowBottleColor_Start_mC02D4D8382F1050706895444B3462B50DCA27969 (void);
-// 0x0000004F System.Void ShowBottleColor::ShowColor()
+// 0x00000053 System.Void ShowBottleColor::ShowColor()
 extern void ShowBottleColor_ShowColor_m2C865761D5538D57375FB709353959500FCB9E15 (void);
-// 0x00000050 System.Void ShowBottleColor::clicked()
+// 0x00000054 System.Void ShowBottleColor::clicked()
 extern void ShowBottleColor_clicked_mD37140F0808E97752E9B0E5676140AD9B27BE7CF (void);
-// 0x00000051 System.Void ShowBottleColor::.ctor()
+// 0x00000055 System.Void ShowBottleColor::.ctor()
 extern void ShowBottleColor__ctor_m91DE7EE35335A2FB1E9835AB95BCC65CF8365B09 (void);
-// 0x00000052 System.Void ShowBottleSoap::Start()
+// 0x00000056 System.Void ShowBottleSoap::Start()
 extern void ShowBottleSoap_Start_m6330F167AE5347644BB134CDDFD168E897F4314C (void);
-// 0x00000053 System.Void ShowBottleSoap::ShowSoap()
+// 0x00000057 System.Void ShowBottleSoap::ShowSoap()
 extern void ShowBottleSoap_ShowSoap_m1D8A4B53150BEF5A286ADE9D4EF8CA988AF3143C (void);
-// 0x00000054 System.Void ShowBottleSoap::clicked()
+// 0x00000058 System.Void ShowBottleSoap::clicked()
 extern void ShowBottleSoap_clicked_m5BCF8B69E23023816384DD644BAAF38717A8A8E8 (void);
-// 0x00000055 System.Void ShowBottleSoap::.ctor()
+// 0x00000059 System.Void ShowBottleSoap::.ctor()
 extern void ShowBottleSoap__ctor_m783E541FECD88F7C0DE79F2E9473BDDCBF617CAB (void);
-// 0x00000056 System.Void ShowBottleVinegar::Start()
+// 0x0000005A System.Void ShowBottleVinegar::Start()
 extern void ShowBottleVinegar_Start_m7668BC4B560B5963B265532087A9B94055E86EA5 (void);
-// 0x00000057 System.Void ShowBottleVinegar::ShowVinegar()
+// 0x0000005B System.Void ShowBottleVinegar::ShowVinegar()
 extern void ShowBottleVinegar_ShowVinegar_m110ED3CF98CDAD713AB973AD98D7E04FD3614A70 (void);
-// 0x00000058 System.Void ShowBottleVinegar::clicked()
+// 0x0000005C System.Void ShowBottleVinegar::clicked()
 extern void ShowBottleVinegar_clicked_mC9E83B2068819F24D628B6775855BFC5655CEB05 (void);
-// 0x00000059 System.Void ShowBottleVinegar::.ctor()
+// 0x0000005D System.Void ShowBottleVinegar::.ctor()
 extern void ShowBottleVinegar__ctor_m9BDB98314A74C241BC5563AF2BB4A438C5B7F37C (void);
-// 0x0000005A System.Void ShowBottlewater::Start()
+// 0x0000005E System.Void ShowBottlewater::Start()
 extern void ShowBottlewater_Start_m6E495FFA778B3D960494FE6A0F07FCF73A804639 (void);
-// 0x0000005B System.Void ShowBottlewater::ShowWater()
+// 0x0000005F System.Void ShowBottlewater::ShowWater()
 extern void ShowBottlewater_ShowWater_m7EB1AC63A657F32A033028B02E32E610DE576484 (void);
-// 0x0000005C System.Void ShowBottlewater::clicked()
+// 0x00000060 System.Void ShowBottlewater::clicked()
 extern void ShowBottlewater_clicked_m7AE83EA5279FB87583425D98A303721C7DEBE60C (void);
-// 0x0000005D System.Void ShowBottlewater::.ctor()
+// 0x00000061 System.Void ShowBottlewater::.ctor()
 extern void ShowBottlewater__ctor_mA99E118B6FCBE6E9526A5870965F80DF7BA2135E (void);
-// 0x0000005E System.Void countdownController::Start()
+// 0x00000062 System.Void countdownController::Start()
 extern void countdownController_Start_m179B97DFADB53214F716E0B40ED46F48102C84FD (void);
-// 0x0000005F System.Collections.IEnumerator countdownController::countdownToStart()
+// 0x00000063 System.Collections.IEnumerator countdownController::countdownToStart()
 extern void countdownController_countdownToStart_m900F7EB78EE75B9303513ADA9BE3D18485D3E3B0 (void);
-// 0x00000060 System.Void countdownController::.ctor()
+// 0x00000064 System.Void countdownController::.ctor()
 extern void countdownController__ctor_mA0A9A1D37BBA5442F6A714520B8658E8650AA7D6 (void);
-// 0x00000061 System.Void countdownController/<countdownToStart>d__8::.ctor(System.Int32)
+// 0x00000065 System.Void countdownController/<countdownToStart>d__8::.ctor(System.Int32)
 extern void U3CcountdownToStartU3Ed__8__ctor_m9E8584EE755EE8336412FBDFF10B40D961C616E8 (void);
-// 0x00000062 System.Void countdownController/<countdownToStart>d__8::System.IDisposable.Dispose()
+// 0x00000066 System.Void countdownController/<countdownToStart>d__8::System.IDisposable.Dispose()
 extern void U3CcountdownToStartU3Ed__8_System_IDisposable_Dispose_m10C4FB29E71D5F620E55376730713C02B773E34D (void);
-// 0x00000063 System.Boolean countdownController/<countdownToStart>d__8::MoveNext()
+// 0x00000067 System.Boolean countdownController/<countdownToStart>d__8::MoveNext()
 extern void U3CcountdownToStartU3Ed__8_MoveNext_m831C0A40BDDAA2EF2E8F4B9DCD4B4BD3689E46DF (void);
-// 0x00000064 System.Object countdownController/<countdownToStart>d__8::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
+// 0x00000068 System.Object countdownController/<countdownToStart>d__8::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
 extern void U3CcountdownToStartU3Ed__8_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m2250A9C1FCC9CC4469EB93379ECE6E9E7CBC3116 (void);
-// 0x00000065 System.Void countdownController/<countdownToStart>d__8::System.Collections.IEnumerator.Reset()
+// 0x00000069 System.Void countdownController/<countdownToStart>d__8::System.Collections.IEnumerator.Reset()
 extern void U3CcountdownToStartU3Ed__8_System_Collections_IEnumerator_Reset_m5B5EE23E627A45E7391D1A24DB2809B1FF09EE07 (void);
-// 0x00000066 System.Object countdownController/<countdownToStart>d__8::System.Collections.IEnumerator.get_Current()
+// 0x0000006A System.Object countdownController/<countdownToStart>d__8::System.Collections.IEnumerator.get_Current()
 extern void U3CcountdownToStartU3Ed__8_System_Collections_IEnumerator_get_Current_mD6487D0C25B72BE9A5C4D678769A428F3947FA1F (void);
-// 0x00000067 System.Void exitGame::Start()
+// 0x0000006B System.Void exitGame::Start()
 extern void exitGame_Start_mF3361EFFF30112C42323610A35589661A433EB0E (void);
-// 0x00000068 System.Void exitGame::EndGame()
+// 0x0000006C System.Void exitGame::EndGame()
 extern void exitGame_EndGame_mBE235A6E15642CA5588C61E514423FF34D55D44B (void);
-// 0x00000069 System.Void exitGame::.ctor()
+// 0x0000006D System.Void exitGame::.ctor()
 extern void exitGame__ctor_mCE903D2B9C5DAE2D514FD2F2E444769849D83C8A (void);
-// 0x0000006A System.Void explosion::Start()
+// 0x0000006E System.Void explosion::Start()
 extern void explosion_Start_m4279CD28A25432C9B1874E3F66202B23CC10C062 (void);
-// 0x0000006B System.Void explosion::Update()
+// 0x0000006F System.Void explosion::Update()
 extern void explosion_Update_m7356A2F35704888093A829CD13E48EC348C517F8 (void);
-// 0x0000006C System.Void explosion::OnCollisionEnter(UnityEngine.Collision)
+// 0x00000070 System.Void explosion::OnCollisionEnter(UnityEngine.Collision)
 extern void explosion_OnCollisionEnter_m1C0E83690B0F46C6C23CE3A6A13C18D655A86CB7 (void);
-// 0x0000006D System.Void explosion::activate()
+// 0x00000071 System.Void explosion::activate()
 extern void explosion_activate_m5CB4673A9FCECB3D6E9F68F13391AF9B4B5F9F7B (void);
-// 0x0000006E System.Void explosion::explode()
+// 0x00000072 System.Void explosion::explode()
 extern void explosion_explode_mEE66E34C9C0BBC5EA0895B92BED3F829E439CCEC (void);
-// 0x0000006F System.Void explosion::finished()
+// 0x00000073 System.Void explosion::finished()
 extern void explosion_finished_m6BBB1664DF8A75AE8C2AA6557C192DC03EFC8B58 (void);
-// 0x00000070 System.Void explosion::enableSound()
+// 0x00000074 System.Void explosion::enableSound()
 extern void explosion_enableSound_m55927DBA9E3FD9A61658A804FDE568A2C6B57AE5 (void);
-// 0x00000071 System.Void explosion::.ctor()
+// 0x00000075 System.Void explosion::.ctor()
 extern void explosion__ctor_mAFD09E6883030A1EC791381ECC756542DDED2695 (void);
-// 0x00000072 System.Void fillLiquidOnBottle::Start()
+// 0x00000076 System.Void fillLiquidOnBottle::Start()
 extern void fillLiquidOnBottle_Start_m51C66874B60C26403152FC4306631686A106C96A (void);
-// 0x00000073 System.Void fillLiquidOnBottle::update()
+// 0x00000077 System.Void fillLiquidOnBottle::update()
 extern void fillLiquidOnBottle_update_m46CA02E513C851E42F9B89992B8567BF892673C0 (void);
-// 0x00000074 System.Void fillLiquidOnBottle::OnCollisionEnter(UnityEngine.Collision)
+// 0x00000078 System.Void fillLiquidOnBottle::OnCollisionEnter(UnityEngine.Collision)
 extern void fillLiquidOnBottle_OnCollisionEnter_m95FE951E7EB7D6F6981D77DAA46A7E140B2FE56C (void);
-// 0x00000075 System.Void fillLiquidOnBottle::disableVolacno()
+// 0x00000079 System.Void fillLiquidOnBottle::disableVolacno()
 extern void fillLiquidOnBottle_disableVolacno_m45D1F2B59B55F3ECE7F302EFE1D57BFB67009B88 (void);
-// 0x00000076 System.Void fillLiquidOnBottle::disable()
+// 0x0000007A System.Void fillLiquidOnBottle::disable()
 extern void fillLiquidOnBottle_disable_m412A9C082BD62EFB7B084FEE2367E257DDD04285 (void);
-// 0x00000077 System.Void fillLiquidOnBottle::enableAnimation()
+// 0x0000007B System.Void fillLiquidOnBottle::enableAnimation()
 extern void fillLiquidOnBottle_enableAnimation_mDBB83A494D3D773FD5998B4343F0969D7C44EB8D (void);
-// 0x00000078 System.Void fillLiquidOnBottle::distroy()
+// 0x0000007C System.Void fillLiquidOnBottle::distroy()
 extern void fillLiquidOnBottle_distroy_mA36910157E4A8A8138064FA998C3CE6A3D0F34A7 (void);
-// 0x00000079 System.Void fillLiquidOnBottle::enableVolcano()
+// 0x0000007D System.Void fillLiquidOnBottle::enableVolcano()
 extern void fillLiquidOnBottle_enableVolcano_mD13C3C233AE80D6CA1DE3BBE1078DCCBD55EF03D (void);
-// 0x0000007A System.Void fillLiquidOnBottle::enableSound()
+// 0x0000007E System.Void fillLiquidOnBottle::enableSound()
 extern void fillLiquidOnBottle_enableSound_m94B182FDFFBD7DA2A2FED311DD3888AA3934B0E3 (void);
-// 0x0000007B System.Void fillLiquidOnBottle::.ctor()
+// 0x0000007F System.Void fillLiquidOnBottle::.ctor()
 extern void fillLiquidOnBottle__ctor_mD4052F14916652CC0036E25500033BD75F42B04D (void);
-// 0x0000007C System.Void hideCheck::Start()
+// 0x00000080 System.Void hideCheck::Start()
 extern void hideCheck_Start_mAA1F2A16F22C416561555A27870C1CA162D42A1E (void);
-// 0x0000007D System.Void hideCheck::Update()
+// 0x00000081 System.Void hideCheck::Update()
 extern void hideCheck_Update_m2BD9BA0C67A21F6D720CFCD707001EECE0419793 (void);
-// 0x0000007E System.Void hideCheck::disableCheck()
+// 0x00000082 System.Void hideCheck::disableCheck()
 extern void hideCheck_disableCheck_m8459FE8E1EA8F696E9CF2C0978F0D22D87A30FCC (void);
-// 0x0000007F System.Void hideCheck::.ctor()
+// 0x00000083 System.Void hideCheck::.ctor()
 extern void hideCheck__ctor_m58B8595A8D10CD7096DB76B6A10E0EBFFAD1A873 (void);
-// 0x00000080 System.Void BottleSmash::Start()
+// 0x00000084 System.Void BottleSmash::Start()
 extern void BottleSmash_Start_mB1D934482F816AC425F361FBA72D900B53FF3D5A (void);
-// 0x00000081 System.Void BottleSmash::RandomizeColor()
+// 0x00000085 System.Void BottleSmash::RandomizeColor()
 extern void BottleSmash_RandomizeColor_m66012987D1CCD4085C031DB40C0299351DEE719E (void);
-// 0x00000082 System.Void BottleSmash::OnCollisionEnter(UnityEngine.Collision)
+// 0x00000086 System.Void BottleSmash::OnCollisionEnter(UnityEngine.Collision)
 extern void BottleSmash_OnCollisionEnter_mBC4324A156DF18C0758F888E896BA99EA79C4B4B (void);
-// 0x00000083 System.Void BottleSmash::AttemptCollision(UnityEngine.Collision)
+// 0x00000087 System.Void BottleSmash::AttemptCollision(UnityEngine.Collision)
 extern void BottleSmash_AttemptCollision_mEB05FFA74F12A12A2E6B7DD6F2C3B6BADD92F6B9 (void);
-// 0x00000084 System.Void BottleSmash::RegisterColorBase(ColorBase)
+// 0x00000088 System.Void BottleSmash::RegisterColorBase(ColorBase)
 extern void BottleSmash_RegisterColorBase_mEE3795C63565724677D36E4E5D157A7245EF91D7 (void);
-// 0x00000085 System.Void BottleSmash::ChangedColor()
+// 0x00000089 System.Void BottleSmash::ChangedColor()
 extern void BottleSmash_ChangedColor_m1DA6C80BCFB8A5D528EBC9A2FE3CC10D9F400046 (void);
-// 0x00000086 UnityEngine.Vector3 BottleSmash::GetRandomRotation()
+// 0x0000008A UnityEngine.Vector3 BottleSmash::GetRandomRotation()
 extern void BottleSmash_GetRandomRotation_m92CF9B5505BA2DB088958900E9C200121F1504D0 (void);
-// 0x00000087 System.Void BottleSmash::RandomRotation()
+// 0x0000008B System.Void BottleSmash::RandomRotation()
 extern void BottleSmash_RandomRotation_m7A5C0B73D8F83073DF6E114F72BF72BDEF6F4117 (void);
-// 0x00000088 System.Void BottleSmash::Smash()
+// 0x0000008C System.Void BottleSmash::Smash()
 extern void BottleSmash_Smash_mDAA9CC24A5794D769711F81644AD7826CD01D02D (void);
-// 0x00000089 System.Void BottleSmash::FixedUpdate()
+// 0x0000008D System.Void BottleSmash::FixedUpdate()
 extern void BottleSmash_FixedUpdate_mB8B5937B19DA6FE4C7EB2F06269D7BD3B53EE1A9 (void);
-// 0x0000008A System.Void BottleSmash::.ctor()
+// 0x0000008E System.Void BottleSmash::.ctor()
 extern void BottleSmash__ctor_m5043C4CFFF1F12942903F8E836B2423A97014B77 (void);
-// 0x0000008B System.Void ColorBase::RegisterWithController()
+// 0x0000008F System.Void ColorBase::RegisterWithController()
 extern void ColorBase_RegisterWithController_m3BA6E5D31F7745DF683B96E86B2EA1D515D13EEF (void);
-// 0x0000008C System.Void ColorBase::Unify()
+// 0x00000090 System.Void ColorBase::Unify()
 extern void ColorBase_Unify_m1885FBA0345B1942F20D1A4D9B126480CA9280F0 (void);
-// 0x0000008D System.Void ColorBase::.ctor()
+// 0x00000091 System.Void ColorBase::.ctor()
 extern void ColorBase__ctor_m5368D8E0D6255C36182EC93D9C30F0B3CAEB2299 (void);
-// 0x0000008E System.Void DemoRotation::Start()
+// 0x00000092 System.Void DemoRotation::Start()
 extern void DemoRotation_Start_m2CDD15D9A5B2B77E1029D914471C5A5F5B008D19 (void);
-// 0x0000008F System.Void DemoRotation::Update()
+// 0x00000093 System.Void DemoRotation::Update()
 extern void DemoRotation_Update_m0994184AFC4E66BBAFEEDB5FEE57461D7A24693D (void);
-// 0x00000090 System.Void DemoRotation::.ctor()
+// 0x00000094 System.Void DemoRotation::.ctor()
 extern void DemoRotation__ctor_mCCD4F064E7579E22A3A425469453915836D4D75B (void);
-// 0x00000091 System.Void LiquidAbsorption::Start()
+// 0x00000095 System.Void LiquidAbsorption::Start()
 extern void LiquidAbsorption_Start_m4F7F1476D8D12677655BF926B9A246B7130E00B9 (void);
-// 0x00000092 System.Void LiquidAbsorption::OnParticleCollision(UnityEngine.GameObject)
+// 0x00000096 System.Void LiquidAbsorption::OnParticleCollision(UnityEngine.GameObject)
 extern void LiquidAbsorption_OnParticleCollision_mB1D2FB1D74A6917F63F2127DCC90B44C93B51CFF (void);
-// 0x00000093 System.Void LiquidAbsorption::Update()
+// 0x00000097 System.Void LiquidAbsorption::Update()
 extern void LiquidAbsorption_Update_mC877C04082653B1AF84CFEF2E34B06A63667D2C7 (void);
-// 0x00000094 System.Void LiquidAbsorption::.ctor()
+// 0x00000098 System.Void LiquidAbsorption::.ctor()
 extern void LiquidAbsorption__ctor_m2F74D2A7A2CE4A9F9545DBD3B3583E5B5E5BCD01 (void);
-// 0x00000095 System.Void LiquidAbsorptionV2::Start()
+// 0x00000099 System.Void LiquidAbsorptionV2::Start()
 extern void LiquidAbsorptionV2_Start_m05BFBD4D70B3ED3347FD9DFBCD1B86E706EDA525 (void);
-// 0x00000096 System.Void LiquidAbsorptionV2::OnParticleCollision(UnityEngine.GameObject)
+// 0x0000009A System.Void LiquidAbsorptionV2::OnParticleCollision(UnityEngine.GameObject)
 extern void LiquidAbsorptionV2_OnParticleCollision_mA370B2D8FEF447841A7FD0439304894860958868 (void);
-// 0x00000097 System.Void LiquidAbsorptionV2::Update()
+// 0x0000009B System.Void LiquidAbsorptionV2::Update()
 extern void LiquidAbsorptionV2_Update_m7A84D40760EF865EF3A3EAA8E41A66FA78061B80 (void);
-// 0x00000098 System.Void LiquidAbsorptionV2::.ctor()
+// 0x0000009C System.Void LiquidAbsorptionV2::.ctor()
 extern void LiquidAbsorptionV2__ctor_mF07270D63ED6A664D41B44838BD96E19E4F86502 (void);
-// 0x00000099 System.Void LiquidColor::Start()
+// 0x0000009D System.Void LiquidColor::Start()
 extern void LiquidColor_Start_m354C11BBD58C02810AF34D2921BCF1B8EF99AE3A (void);
-// 0x0000009A System.Void LiquidColor::RegisterWithController()
+// 0x0000009E System.Void LiquidColor::RegisterWithController()
 extern void LiquidColor_RegisterWithController_m20D1F4A29D798CBF7D56ED2DC91E0381A4B7AA91 (void);
-// 0x0000009B System.Void LiquidColor::Unify()
+// 0x0000009F System.Void LiquidColor::Unify()
 extern void LiquidColor_Unify_m5DFE0AFA6D0E5AE3C81EB0576098A33E61BE08B8 (void);
-// 0x0000009C System.Void LiquidColor::.ctor()
+// 0x000000A0 System.Void LiquidColor::.ctor()
 extern void LiquidColor__ctor_mE5FF88B6AF8A6A1C88CC04331459114EC26D9430 (void);
-// 0x0000009D System.Void LiquidPool::Start()
+// 0x000000A1 System.Void LiquidPool::Start()
 extern void LiquidPool_Start_mBC2C72667D032C1B3EB611BDCCD3F7F2060FB0B1 (void);
-// 0x0000009E System.Void LiquidPool::Update()
+// 0x000000A2 System.Void LiquidPool::Update()
 extern void LiquidPool_Update_m4E35C1ED67A9E51B15ACEBAB078E2FAAA62BC3F3 (void);
-// 0x0000009F System.Void LiquidPool::.ctor()
+// 0x000000A3 System.Void LiquidPool::.ctor()
 extern void LiquidPool__ctor_m17E5459AB006619EB1CDDC83BD71A378632C40A5 (void);
-// 0x000000A0 System.Void LiquidVolumeAnimator::OnDrawGizmosSelected()
+// 0x000000A4 System.Void LiquidVolumeAnimator::OnDrawGizmosSelected()
 extern void LiquidVolumeAnimator_OnDrawGizmosSelected_m98FD0EF8BE880B71F5015F5D769705EA11153036 (void);
-// 0x000000A1 System.Void LiquidVolumeAnimator::CalculateSquare(UnityEngine.Vector3)
+// 0x000000A5 System.Void LiquidVolumeAnimator::CalculateSquare(UnityEngine.Vector3)
 extern void LiquidVolumeAnimator_CalculateSquare_m5AED538848C6128FFED24907D95260C759487410 (void);
-// 0x000000A2 System.Void LiquidVolumeAnimator::Start()
+// 0x000000A6 System.Void LiquidVolumeAnimator::Start()
 extern void LiquidVolumeAnimator_Start_m1FDBB455229FDB13E443DF3AF612287016AF572E (void);
-// 0x000000A3 System.Void LiquidVolumeAnimator::AddForce(UnityEngine.Vector3)
+// 0x000000A7 System.Void LiquidVolumeAnimator::AddForce(UnityEngine.Vector3)
 extern void LiquidVolumeAnimator_AddForce_m5E3B8BDBDDDAD6BF0BBF03A8A43DCA85288B448F (void);
-// 0x000000A4 System.Void LiquidVolumeAnimator::FixedUpdate()
+// 0x000000A8 System.Void LiquidVolumeAnimator::FixedUpdate()
 extern void LiquidVolumeAnimator_FixedUpdate_m891DF92B12485725820B601B545E6971E7EB1360 (void);
-// 0x000000A5 System.Void LiquidVolumeAnimator::.ctor()
+// 0x000000A9 System.Void LiquidVolumeAnimator::.ctor()
 extern void LiquidVolumeAnimator__ctor_m37A54774C3DAED4E7941AAA9037BC11282972F4F (void);
-// 0x000000A6 System.Void MeshLiquidEmission::Start()
+// 0x000000AA System.Void MeshLiquidEmission::Start()
 extern void MeshLiquidEmission_Start_mE9B7CD6F67A56875C69F2E000ADD25634625DD72 (void);
-// 0x000000A7 System.Boolean MeshLiquidEmission::LinePlaneIntersection(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&)
+// 0x000000AB System.Boolean MeshLiquidEmission::LinePlaneIntersection(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3&)
 extern void MeshLiquidEmission_LinePlaneIntersection_mEDA54E79872D96346785541CFB8829D8E3C9C342 (void);
-// 0x000000A8 System.Void MeshLiquidEmission::OnDrawGizmos()
+// 0x000000AC System.Void MeshLiquidEmission::OnDrawGizmos()
 extern void MeshLiquidEmission_OnDrawGizmos_m38B0C63CE62FC0853C6D04CA5EA5F59D7F19365E (void);
-// 0x000000A9 System.Void MeshLiquidEmission::SetDual(System.Int32,System.Int32,System.Int32,UnityEngine.Vector3&,UnityEngine.Vector3&,System.Int32&,UnityEngine.Vector3&)
+// 0x000000AD System.Void MeshLiquidEmission::SetDual(System.Int32,System.Int32,System.Int32,UnityEngine.Vector3&,UnityEngine.Vector3&,System.Int32&,UnityEngine.Vector3&)
 extern void MeshLiquidEmission_SetDual_mDAA6EBD9DA3CF1B49B69E104B497FF42C3113B12 (void);
-// 0x000000AA System.Void MeshLiquidEmission::SetDualInverted(System.Int32,System.Int32,System.Int32,UnityEngine.Vector3&,UnityEngine.Vector3&,System.Int32&,UnityEngine.Vector3&)
+// 0x000000AE System.Void MeshLiquidEmission::SetDualInverted(System.Int32,System.Int32,System.Int32,UnityEngine.Vector3&,UnityEngine.Vector3&,System.Int32&,UnityEngine.Vector3&)
 extern void MeshLiquidEmission_SetDualInverted_m544EB4B0DBE2FA53D9E60725B3242A958F9DCFF9 (void);
-// 0x000000AB System.Void MeshLiquidEmission::CalculateTrianglesToEmitFrom(System.Int32[],UnityEngine.Vector3[])
+// 0x000000AF System.Void MeshLiquidEmission::CalculateTrianglesToEmitFrom(System.Int32[],UnityEngine.Vector3[])
 extern void MeshLiquidEmission_CalculateTrianglesToEmitFrom_m430604951784E83738437C18C2698B56E58378FC (void);
-// 0x000000AC System.Single MeshLiquidEmission::GetPS_StartSpeed()
+// 0x000000B0 System.Single MeshLiquidEmission::GetPS_StartSpeed()
 extern void MeshLiquidEmission_GetPS_StartSpeed_mEC8EB5617F4DCB91EA1B99FF8BDE7928F25AC7FD (void);
-// 0x000000AD System.Boolean MeshLiquidEmission::EmitFromSubmesh()
+// 0x000000B1 System.Boolean MeshLiquidEmission::EmitFromSubmesh()
 extern void MeshLiquidEmission_EmitFromSubmesh_mE7146E00861D016B09450E2676DD3A3D58B6D3E8 (void);
-// 0x000000AE System.Void MeshLiquidEmission::Update()
+// 0x000000B2 System.Void MeshLiquidEmission::Update()
 extern void MeshLiquidEmission_Update_m7E82EDA67DA2F098BB3F01912B4AD59BC5105EA4 (void);
-// 0x000000AF System.Void MeshLiquidEmission::.ctor()
+// 0x000000B3 System.Void MeshLiquidEmission::.ctor()
 extern void MeshLiquidEmission__ctor_mD712397CFA6A6828432FC9E33F2BC4ECFD3E48A3 (void);
-// 0x000000B0 System.Void MeshLiquidEmission/BVertex::.ctor()
+// 0x000000B4 System.Void MeshLiquidEmission/BVertex::.ctor()
 extern void BVertex__ctor_m1ACACC7EE748A0486EDF704B19D07FF3005CBFB3 (void);
-// 0x000000B1 System.Void PS_Color::Start()
+// 0x000000B5 System.Void PS_Color::Start()
 extern void PS_Color_Start_mF8BA9E880636E8D52837610D19325FA7A1D51149 (void);
-// 0x000000B2 System.Void PS_Color::RegisterWithController()
+// 0x000000B6 System.Void PS_Color::RegisterWithController()
 extern void PS_Color_RegisterWithController_m2192C2A206CFE5301F365E5DD64759D341216C00 (void);
-// 0x000000B3 System.Void PS_Color::Unify()
+// 0x000000B7 System.Void PS_Color::Unify()
 extern void PS_Color_Unify_m181B5A98CD4CE37CD91F3AAC456324A2149C8747 (void);
-// 0x000000B4 System.Void PS_Color::UpdateValues()
+// 0x000000B8 System.Void PS_Color::UpdateValues()
 extern void PS_Color_UpdateValues_mAAEBA2F75EE73B22CE2E55DC394FA2964854E683 (void);
-// 0x000000B5 System.Void PS_Color::.ctor()
+// 0x000000B9 System.Void PS_Color::.ctor()
 extern void PS_Color__ctor_m1AB5D1B7D1E93D7D6F846FC95BEAD63D1418641F (void);
-// 0x000000B6 System.Void ParticleColor::Start()
+// 0x000000BA System.Void ParticleColor::Start()
 extern void ParticleColor_Start_mC1EF0B7BB8194833BECF97FF8580AF9D3693A922 (void);
-// 0x000000B7 System.Void ParticleColor::RegisterWithController()
+// 0x000000BB System.Void ParticleColor::RegisterWithController()
 extern void ParticleColor_RegisterWithController_m199B0BC71B43FEBB32BCD1FAC5F86E919047133B (void);
-// 0x000000B8 System.Void ParticleColor::Unify()
+// 0x000000BC System.Void ParticleColor::Unify()
 extern void ParticleColor_Unify_mFD67809F2B57F8F5D899335CD401BC51739FF342 (void);
-// 0x000000B9 System.Void ParticleColor::.ctor()
+// 0x000000BD System.Void ParticleColor::.ctor()
 extern void ParticleColor__ctor_m717436E184EDA0BC7BA7715185E0BD92F4C2B306 (void);
-// 0x000000BA System.Void PickUpPotion::Start()
+// 0x000000BE System.Void PickUpPotion::Start()
 extern void PickUpPotion_Start_mDDFD60D4033DB3421D59D3B8CBC7DDFD2E8521A7 (void);
-// 0x000000BB System.Void PickUpPotion::Update()
+// 0x000000BF System.Void PickUpPotion::Update()
 extern void PickUpPotion_Update_mC89395F67F396DC2FA9E5B2F861CC9277847714C (void);
-// 0x000000BC System.Void PickUpPotion::.ctor()
+// 0x000000C0 System.Void PickUpPotion::.ctor()
 extern void PickUpPotion__ctor_m91F0A1B34F63F24CAE14D5D14F7632C184651401 (void);
-// 0x000000BD System.Void PourLiquid::Start()
+// 0x000000C1 System.Void PourLiquid::Start()
 extern void PourLiquid_Start_mB5694E3FF651F41AB639165137EC6F30BDBE7BAE (void);
-// 0x000000BE System.Void PourLiquid::Update()
+// 0x000000C2 System.Void PourLiquid::Update()
 extern void PourLiquid_Update_m637D71B39FBAAAC1B61A8A479ABA8B09A0C0C316 (void);
-// 0x000000BF System.Void PourLiquid::.ctor()
+// 0x000000C3 System.Void PourLiquid::.ctor()
 extern void PourLiquid__ctor_mCF803F0EA24EB29B333A255A236F0FB62AA22770 (void);
-// 0x000000C0 System.Void ResetColors::Start()
+// 0x000000C4 System.Void ResetColors::Start()
 extern void ResetColors_Start_m0AC3A8CA06EB60D63A8BCADD9E1DFFD8624D754F (void);
-// 0x000000C1 System.Void ResetColors::Update()
+// 0x000000C5 System.Void ResetColors::Update()
 extern void ResetColors_Update_m1D95D9A949F386EE53654EDB3E5134716E3DC7F2 (void);
-// 0x000000C2 System.Void ResetColors::.ctor()
+// 0x000000C6 System.Void ResetColors::.ctor()
 extern void ResetColors__ctor_m7E4B9BA0C0BDDAC3B48A6797FDBFE248630F4178 (void);
-// 0x000000C3 System.Void RampAsset::.ctor()
+// 0x000000C7 System.Void RampAsset::.ctor()
 extern void RampAsset__ctor_m378D66B2BA42684D9071D8832D6DAC33ABA5E85A (void);
-// 0x000000C4 System.Void AdjustTimeScale::Start()
+// 0x000000C8 System.Void AdjustTimeScale::Start()
 extern void AdjustTimeScale_Start_mD1396DCA527CACE33308FF8FC9C0277F2AA2B411 (void);
-// 0x000000C5 System.Void AdjustTimeScale::Update()
+// 0x000000C9 System.Void AdjustTimeScale::Update()
 extern void AdjustTimeScale_Update_mC708147D1D143ADCA9CF17252F3CF63ADFE489EA (void);
-// 0x000000C6 System.Void AdjustTimeScale::OnApplicationQuit()
+// 0x000000CA System.Void AdjustTimeScale::OnApplicationQuit()
 extern void AdjustTimeScale_OnApplicationQuit_m951AC9B09C81B79661AABC25DDCC2D7C7B5DB634 (void);
-// 0x000000C7 System.Void AdjustTimeScale::.ctor()
+// 0x000000CB System.Void AdjustTimeScale::.ctor()
 extern void AdjustTimeScale__ctor_m37475124000B20EAD78D8880212E148C74FF0552 (void);
-// 0x000000C8 System.Void ProximityActivate::Start()
+// 0x000000CC System.Void ProximityActivate::Start()
 extern void ProximityActivate_Start_m6A50614FF255868F3BA744E24F571DEE27BA4EDE (void);
-// 0x000000C9 System.Boolean ProximityActivate::IsTargetNear()
+// 0x000000CD System.Boolean ProximityActivate::IsTargetNear()
 extern void ProximityActivate_IsTargetNear_m4703CF6E0EAD767910D51F76C2D2C55C7A90B44F (void);
-// 0x000000CA System.Void ProximityActivate::Update()
+// 0x000000CE System.Void ProximityActivate::Update()
 extern void ProximityActivate_Update_mE464C3E72F19E9855ACB76FE88B143E50F9C2BC5 (void);
-// 0x000000CB System.Void ProximityActivate::.ctor()
+// 0x000000CF System.Void ProximityActivate::.ctor()
 extern void ProximityActivate__ctor_m71A7C0718ECD404F98FB3B476C74DD835757E6B5 (void);
-// 0x000000CC System.Void SimpleCharacterMotor::Awake()
+// 0x000000D0 System.Void SimpleCharacterMotor::Awake()
 extern void SimpleCharacterMotor_Awake_m16349F4AB176D983169E7D079DC8844E942C49CC (void);
-// 0x000000CD System.Void SimpleCharacterMotor::Update()
+// 0x000000D1 System.Void SimpleCharacterMotor::Update()
 extern void SimpleCharacterMotor_Update_m61B6F55DACBBFF2ECBCD5290E0EBAA926F213684 (void);
-// 0x000000CE System.Void SimpleCharacterMotor::UpdateLookRotation()
+// 0x000000D2 System.Void SimpleCharacterMotor::UpdateLookRotation()
 extern void SimpleCharacterMotor_UpdateLookRotation_m0239C81730CE51AA90C40883BEC2591C7325CA76 (void);
-// 0x000000CF System.Void SimpleCharacterMotor::UpdateTranslation()
+// 0x000000D3 System.Void SimpleCharacterMotor::UpdateTranslation()
 extern void SimpleCharacterMotor_UpdateTranslation_mC1E99B9C99D7CFE931538E9150A0634F0D596CF6 (void);
-// 0x000000D0 System.Void SimpleCharacterMotor::.ctor()
+// 0x000000D4 System.Void SimpleCharacterMotor::.ctor()
 extern void SimpleCharacterMotor__ctor_mB2A4A69A8CA6E0C101E36ADEEFB4617CBAE5801B (void);
-// 0x000000D1 System.Void Readme::.ctor()
+// 0x000000D5 System.Void Readme::.ctor()
 extern void Readme__ctor_mF465410C5B2E598F2685E82CFCE1F42186AFF448 (void);
-// 0x000000D2 System.Void Readme/Section::.ctor()
+// 0x000000D6 System.Void Readme/Section::.ctor()
 extern void Section__ctor_mBAD5262A353BC071C61B8DB462A3D4D5AB5C7C4E (void);
-// 0x000000D3 System.Void UnityTemplateProjects.SimpleCameraController::OnEnable()
+// 0x000000D7 System.Void UnityTemplateProjects.SimpleCameraController::OnEnable()
 extern void SimpleCameraController_OnEnable_m2BA1F31BEDE84695933E86CF731059D6FAC2111C (void);
-// 0x000000D4 UnityEngine.Vector3 UnityTemplateProjects.SimpleCameraController::GetInputTranslationDirection()
+// 0x000000D8 UnityEngine.Vector3 UnityTemplateProjects.SimpleCameraController::GetInputTranslationDirection()
 extern void SimpleCameraController_GetInputTranslationDirection_m924AB4CEA66ADC4F1C63EAC21B660E0495765F4A (void);
-// 0x000000D5 System.Void UnityTemplateProjects.SimpleCameraController::Update()
+// 0x000000D9 System.Void UnityTemplateProjects.SimpleCameraController::Update()
 extern void SimpleCameraController_Update_m0E587F33074BE72C54BA835B2217B0E8EC94F24A (void);
-// 0x000000D6 System.Void UnityTemplateProjects.SimpleCameraController::.ctor()
+// 0x000000DA System.Void UnityTemplateProjects.SimpleCameraController::.ctor()
 extern void SimpleCameraController__ctor_mC6AE2509DDF461856450EC7DE0058A1687AB5C87 (void);
-// 0x000000D7 System.Void UnityTemplateProjects.SimpleCameraController/CameraState::SetFromTransform(UnityEngine.Transform)
+// 0x000000DB System.Void UnityTemplateProjects.SimpleCameraController/CameraState::SetFromTransform(UnityEngine.Transform)
 extern void CameraState_SetFromTransform_mAF13C515CFB1085295C01A870D93375E98F16647 (void);
-// 0x000000D8 System.Void UnityTemplateProjects.SimpleCameraController/CameraState::Translate(UnityEngine.Vector3)
+// 0x000000DC System.Void UnityTemplateProjects.SimpleCameraController/CameraState::Translate(UnityEngine.Vector3)
 extern void CameraState_Translate_mB8F7239BD9DB70190E59D47D75DD125AD9AF3A96 (void);
-// 0x000000D9 System.Void UnityTemplateProjects.SimpleCameraController/CameraState::LerpTowards(UnityTemplateProjects.SimpleCameraController/CameraState,System.Single,System.Single)
+// 0x000000DD System.Void UnityTemplateProjects.SimpleCameraController/CameraState::LerpTowards(UnityTemplateProjects.SimpleCameraController/CameraState,System.Single,System.Single)
 extern void CameraState_LerpTowards_mF2D4B962A677B281ED2F539A2FFF8A693FB9A326 (void);
-// 0x000000DA System.Void UnityTemplateProjects.SimpleCameraController/CameraState::UpdateTransform(UnityEngine.Transform)
+// 0x000000DE System.Void UnityTemplateProjects.SimpleCameraController/CameraState::UpdateTransform(UnityEngine.Transform)
 extern void CameraState_UpdateTransform_mE653356FD34828D19ECB6793439A14C38F372410 (void);
-// 0x000000DB System.Void UnityTemplateProjects.SimpleCameraController/CameraState::.ctor()
+// 0x000000DF System.Void UnityTemplateProjects.SimpleCameraController/CameraState::.ctor()
 extern void CameraState__ctor_m9C5338CABE70B8C73F8A4A08C1AFA1B33417DE9D (void);
-static Il2CppMethodPointer s_methodPointers[219] = 
+static Il2CppMethodPointer s_methodPointers[223] = 
 {
 	NULL,
 	NULL,
@@ -494,6 +502,10 @@ static Il2CppMethodPointer s_methodPointers[219] =
 	ForceTest_Start_mA2FF9E12833F40C33E32C31BAC0CF716FDA57A60,
 	ForceTest_Update_m80F090029E849DEAFE4F3E7583BE8B6F319C3436,
 	ForceTest__ctor_mFDF49B32010A32CA98FEBE954DE7FC6756B47759,
+	LoadSceneManager_Start_mF494B479CD5C3461FE6BCDF0F4D7452C244DE39D,
+	LoadSceneManager_Update_mB0E77D7DBAF08199523F4C7E47CDE60292BCC77B,
+	LoadSceneManager_LoadScene_mE847E6E411927E87DCAC2D3ED5C29BEDB2BE0CEA,
+	LoadSceneManager__ctor_m875092AABE90D3147B6550E865F8490211B1E329,
 	NextInstruction_Start_m255404B015D87710972DE90E8D8F00486EBA1428,
 	NextInstruction_ShowInstruction_m5E22886B7A4453DD56AD5333CC00ACFFA76E16DC,
 	NextInstruction_enableClickable_mE261D7EAFE7D4E34BF6DC7BC27FBACD8988E8321,
@@ -659,7 +671,7 @@ static Il2CppMethodPointer s_methodPointers[219] =
 	CameraState_UpdateTransform_mE653356FD34828D19ECB6793439A14C38F372410,
 	CameraState__ctor_m9C5338CABE70B8C73F8A4A08C1AFA1B33417DE9D,
 };
-static const int32_t s_InvokerIndices[219] = 
+static const int32_t s_InvokerIndices[223] = 
 {
 	-1,
 	-1,
@@ -672,24 +684,24 @@ static const int32_t s_InvokerIndices[219] =
 	3357,
 	3357,
 	3357,
-	5035,
+	5036,
 	3992,
-	4626,
-	5035,
-	5123,
-	5123,
-	5123,
+	4627,
+	5036,
+	5124,
+	5124,
+	5124,
 	3357,
 	-1,
 	-1,
 	-1,
 	-1,
-	4873,
+	4874,
 	-1,
 	626,
 	2706,
 	3357,
-	5097,
+	5098,
 	2706,
 	2706,
 	2706,
@@ -704,7 +716,7 @@ static const int32_t s_InvokerIndices[219] =
 	2706,
 	2706,
 	3357,
-	5123,
+	5124,
 	1560,
 	2706,
 	808,
@@ -715,6 +727,10 @@ static const int32_t s_InvokerIndices[219] =
 	2706,
 	3357,
 	3357,
+	3357,
+	3357,
+	3357,
+	2706,
 	3357,
 	3357,
 	3357,
@@ -926,7 +942,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	219,
+	223,
 	s_methodPointers,
 	0,
 	NULL,

@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:sizer/sizer.dart';
 import 'HomePage/category.dart';
 import 'presenter.dart';
 
 class Experiment extends StatefulWidget {
   final String category;
-  final DataBase db;
+  final Presenter db;
   final ExperimentInfo exp;
   const Experiment(
       {Key? key, required this.category, required this.db, required this.exp})
@@ -152,6 +152,8 @@ class _Experiment extends State<Experiment> {
   // Callback that connects the created controller to the unity controller
   void _onUnityCreated(controller) {
     this._unityWidgetController = controller;
+    _unityWidgetController.postMessage(
+        'SceneManager', 'LoadScene', widget.exp.sceneIndex);
     _unityWidgetController.pause();
     _unityWidgetController.resume();
   }
@@ -175,7 +177,7 @@ class QuestionsWidget extends StatelessWidget {
   late UnityWidgetController unityWidgetController;
   final String expID;
   final ExperimentInfo exp;
-  final DataBase db;
+  final Presenter db;
 
   int i = 0;
 
@@ -227,7 +229,7 @@ class QuestionCard extends StatefulWidget {
   final List<Question>? questions;
   final String expID;
   final ExperimentInfo exp;
-  final DataBase db;
+  final Presenter db;
 
   QuestionCard({
     required this.questions,

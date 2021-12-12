@@ -5,10 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nahaj/Group/addGroup2.dart';
 import 'package:nahaj/presenter.dart';
 import 'dart:math';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 
 class AddGroup extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final User user;
   AddGroup({Key? key, required this.db, required this.user}) : super(key: key);
 
@@ -211,7 +211,7 @@ class _AddGroup extends State<AddGroup> {
     );
   }
 
-  Future<bool> createGroup(String groupName, DataBase db) async {
+  Future<bool> createGroup(String groupName, Presenter db) async {
     //check if the name of group greater than 3 character
     if (validName) {
       bool isFound = true;

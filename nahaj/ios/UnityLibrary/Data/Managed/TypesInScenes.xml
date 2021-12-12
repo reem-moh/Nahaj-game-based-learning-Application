@@ -50,14 +50,15 @@
 		<type fullname="UnityEngine.Motion" preserve="nothing"/>
 		<type fullname="UnityEngine.CanvasRenderer" preserve="nothing"/>
 		<type fullname="UnityEngine.Light" preserve="nothing"/>
-		<type fullname="UnityEngine.Cubemap" preserve="nothing"/>
 		<type fullname="UnityEngine.LightmapSettings" preserve="nothing"/>
 		<type fullname="UnityEngine.LightingSettings" preserve="nothing"/>
+		<type fullname="UnityEngine.Cubemap" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Assembly-CSharp">
 		<type fullname="BottleSmash" preserve="nothing"/>
 		<type fullname="LiquidColor" preserve="nothing"/>
 		<type fullname="LiquidVolumeAnimator" preserve="nothing"/>
+		<type fullname="LoadSceneManager" preserve="nothing"/>
 		<type fullname="MeshLiquidEmission" preserve="nothing"/>
 		<type fullname="NextInstruction" preserve="nothing"/>
 		<type fullname="OnHit" preserve="nothing"/>

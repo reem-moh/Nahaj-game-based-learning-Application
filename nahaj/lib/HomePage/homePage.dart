@@ -9,7 +9,7 @@ import 'package:nahaj/Profile/profile.dart';
 import 'package:nahaj/Group/addGroup.dart';
 import 'package:nahaj/Group/groupChat.dart';
 import 'package:nahaj/Group/joinGroup.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'category.dart';
@@ -22,7 +22,7 @@ User user_ =
     User(userId: '1', username: '1', email: '1', avatar: '1', level: -1);
 
 class HomePage extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   HomePage({Key? key, required this.db}) : super(key: key);
 
   @override
@@ -524,18 +524,18 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                     ),
                                     CategoryCard(
                                       cardColor:
-                                          Color.fromARGB(255, 202, 203, 203),
-                                      title: 'النباتات',
-                                      image: 'assets/plants.gif',
-                                      db: widget.db,
-                                      user: user_,
-                                      closed: true,
-                                    ),
-                                    CategoryCard(
-                                      cardColor:
                                           Color.fromARGB(255, 230, 230, 230),
                                       title: 'الحيوانات',
                                       image: 'assets/animals.png',
+                                      db: widget.db,
+                                      user: user_,
+                                      closed: false,
+                                    ),
+                                    CategoryCard(
+                                      cardColor:
+                                          Color.fromARGB(255, 202, 203, 203),
+                                      title: 'النباتات',
+                                      image: 'assets/plants.gif',
                                       db: widget.db,
                                       user: user_,
                                       closed: true,
@@ -825,7 +825,7 @@ class CategoryCard extends StatelessWidget {
   String title;
   String image;
   double size1, size2, size3, fontSize;
-  DataBase db;
+  Presenter db;
   User user;
   bool closed;
 
@@ -952,7 +952,7 @@ class CategoryCard extends StatelessWidget {
 }
 
 class GroupsCard extends StatelessWidget {
-  final DataBase db;
+  final Presenter db;
   final Groups group;
   final User user;
   GroupsCard(
@@ -1008,7 +1008,7 @@ class GroupsCard extends StatelessWidget {
 
 class CardsOfGroup extends StatelessWidget {
   final User user;
-  final DataBase db;
+  final Presenter db;
   //final Groups group;
 
   const CardsOfGroup({

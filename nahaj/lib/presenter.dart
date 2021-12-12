@@ -6,18 +6,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nahaj/HomePage/homePage.dart';
-import 'package:nahaj/NahajClasses/child.dart' as child;
+import 'package:nahaj/NahajClasses/classes.dart' as child;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NahajClasses/Chats.dart';
 
-class DataBase extends ChangeNotifier {
+class Presenter extends ChangeNotifier {
   late FirebaseFirestore firestore;
   late FirebaseStorage firestorage;
   late FirebaseAuth fireAuth;
   late CollectionReference user;
   //late CollectionReference groups;
 
-  DataBase() {
+  Presenter() {
     firestore = FirebaseFirestore.instance;
     firestorage = FirebaseStorage.instance;
     fireAuth = FirebaseAuth.instance;
@@ -514,7 +514,6 @@ class DataBase extends ChangeNotifier {
   //------------Experiment---------------
 
   Stream<List<child.ExperimentInfo>> getExperiments(String category) {
-    List<child.ExperimentInfo> expList = [];
     return firestore
         .collection('Experiments')
         .where('Category', isEqualTo: category)
@@ -552,7 +551,7 @@ class DataBase extends ChangeNotifier {
         .doc(expID)
         .update({'ExperimentScore': score});
     //update total score of exp
-    updateTotalScore(expID,(score-oldExperimentScore));
+    updateTotalScore(expID, (score - oldExperimentScore));
   }
 
   //------------Question---------------
@@ -577,7 +576,8 @@ class DataBase extends ChangeNotifier {
       String ans3,
       String ans4,
       String correctAns,
-      int score,int oldScore) async {
+      int score,
+      int oldScore) async {
     return firestore
         .collection('Experiments')
         .doc(expID)
@@ -591,15 +591,14 @@ class DataBase extends ChangeNotifier {
       'Answer4': ans4,
       'CorrectAnswer': correctAns,
       'Score': score
-    }).then((value)
-    async {//update exp total score
-    await updateTotalScore(expID, score-oldScore);
-    print("inside updateQuesAns after call updateTotalScore");}
-    );
-    
+    }).then((value) async {
+      //update exp total score
+      await updateTotalScore(expID, score - oldScore);
+      print("inside updateQuesAns after call updateTotalScore");
+    });
   }
 
-  deleteQuestion(String expID, String quesID,int quesScore) async {
+  deleteQuestion(String expID, String quesID, int quesScore) async {
     //remove from collection Question
     await firestore
         .collection('Experiments')
@@ -610,7 +609,7 @@ class DataBase extends ChangeNotifier {
         .then((_) => print('Deleted questiong done'))
         .catchError((error) => print('Delete failed: $error'));
     //delete score from total score exp
-    updateTotalScore(expID,-quesScore);
+    updateTotalScore(expID, -quesScore);
   }
 
   Future<void> addNewQuestion(
@@ -640,7 +639,7 @@ class DataBase extends ChangeNotifier {
       'Answer4': answer4,
     }).then((value) {
       print("User Added, database page");
-      updateTotalScore(expID,score);
+      updateTotalScore(expID, score);
     }).catchError(
         (error) => print("database page, Failed to add user: $error"));
     //update total score of exp

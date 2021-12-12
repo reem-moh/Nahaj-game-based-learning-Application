@@ -25,12 +25,12 @@ Future<void> main() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  DataBase db = DataBase();
+  Presenter db = Presenter();
   runApp(MyApp(db));
 }
 
 class MyApp extends StatelessWidget {
-  final DataBase database;
+  final Presenter database;
 
   @override
   MyApp(this.database);

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:sizer/sizer.dart';
-import '../../NahajClasses/child.dart';
+import '../NahajClasses/classes.dart';
 import 'package:nahaj/presenter.dart';
 import 'QuestionAdmin.dart';
 
 class ExperimentAdmin extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final ExperimentInfo exp;
   const ExperimentAdmin({
     Key? key,
@@ -557,7 +557,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
     }
 
     widget.db
-        .updateExpScor(widget.exp.id, experimentScore,oldExperimentScore)
+        .updateExpScor(widget.exp.id, experimentScore, oldExperimentScore)
         .then((value) => print("user changes the experimentScore"));
     widget.exp.experimentScore = experimentScore;
     validExperimentScore = true;
@@ -571,7 +571,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                          '/AdminHomePage', (Route<dynamic> route) => false);
+                        '/AdminHomePage', (Route<dynamic> route) => false);
                   },
                   child: Text(
                     "نعم",
@@ -657,7 +657,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
 // ignore: must_be_immutable
 class QuestionsWidget extends StatefulWidget {
   final ExperimentInfo exp;
-  final DataBase db;
+  final Presenter db;
 
   QuestionsWidget({
     required this.db,
@@ -734,7 +734,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
 
 class CardsOfQuestions extends StatelessWidget {
   final Question question;
-  final DataBase db;
+  final Presenter db;
   final ExperimentInfo exp;
   final int index;
 
@@ -783,11 +783,11 @@ class CardsOfQuestions extends StatelessWidget {
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.w600,
                       fontSize: 7.2.w,
-                      color: Color.fromARGB(255, 114, 78,
-                                        140))),
+                      color: Color.fromARGB(255, 114, 78, 140))),
               decoration: BoxDecoration(
-                //Color(0xFFe0f2f1)
-                  shape: BoxShape.circle, color: Colors.white.withOpacity(.80)),
+                  //Color(0xFFe0f2f1)
+                  shape: BoxShape.circle,
+                  color: Colors.white.withOpacity(.80)),
             )),
           ),
           Container(

@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nahaj/HomePage/homePage.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/expriment.dart';
 import 'package:sizer/sizer.dart';
-import '../NahajClasses/child.dart';
+import '../NahajClasses/classes.dart';
 import '../presenter.dart';
 
 bool showLevelDialog = false;
 int userLevelUpdated = 0;
 
 class Category extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final String categoryTitle;
 
   const Category({
@@ -110,7 +110,12 @@ class _Category extends State<Category> {
             ),
             onPressed: () {
               setState(() {
-                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomePage(
+                              db: widget.db,
+                            )));
               });
             },
           ),
@@ -137,7 +142,7 @@ class _Category extends State<Category> {
 // ignore: must_be_immutable
 class ExperimentsWidget extends StatelessWidget {
   final String category;
-  final DataBase db;
+  final Presenter db;
   List<ExperimentInfo>? allExperiments;
 
   ExperimentsWidget({
@@ -259,7 +264,7 @@ class ExperimentsWidget extends StatelessWidget {
 
 class ExperimentCard extends StatefulWidget {
   final String category;
-  final DataBase db;
+  final Presenter db;
   final ExperimentInfo exp;
   const ExperimentCard({
     required this.category,
@@ -381,7 +386,7 @@ class _ExperimentCardState extends State<ExperimentCard> {
 // ignore: must_be_immutable
 class ScoreStars extends StatefulWidget {
   var totalScore, expId;
-  late DataBase db;
+  late Presenter db;
 
   ScoreStars(expid, ts, d) {
     expId = expid;

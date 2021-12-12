@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nahaj/presenter.dart';
 
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 
 class AddGroup2 extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final String nameoftheGroup;
   final User user;
   AddGroup2(

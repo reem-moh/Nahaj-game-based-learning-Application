@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final User user;
 
   const ProfilePage({Key? key, required this.db, required this.user})
@@ -615,7 +615,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return false;
   }
 
-   getAvatarImages() async {
+  getAvatarImages() async {
     await widget.db.listOfAvatars().then((value) => avatars = value);
   }
 }

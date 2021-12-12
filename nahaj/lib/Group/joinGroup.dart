@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/presenter.dart';
 
 class JoinGroup extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final User user;
   const JoinGroup({Key? key, required this.db, required this.user})
       : super(key: key);
@@ -127,6 +127,7 @@ class _JoinGroup extends State<JoinGroup> {
                 //button
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
+                  // ignore: deprecated_member_use
                   child: FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),

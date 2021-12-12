@@ -4,13 +4,13 @@ import 'package:nahaj/Group/GroupInfo.dart';
 import 'package:nahaj/NahajClasses/Chats.dart';
 import 'package:nahaj/presenter.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:sizer/sizer.dart';
 
 class Group extends StatefulWidget {
   final Groups group;
   final User user;
-  final DataBase db;
+  final Presenter db;
   Group({
     Key? key,
     required this.db,
@@ -59,7 +59,7 @@ class _Group extends State<Group> {
 //header
 class ProfileHeaderWidget extends StatelessWidget {
   final Groups group;
-  final DataBase db;
+  final Presenter db;
   final User user;
 
   const ProfileHeaderWidget({
@@ -99,6 +99,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                       textDirection: TextDirection.rtl,
                       style: TextStyle(
                         fontSize: 2.4.w,
+                        fontFamily: 'Cairo',
                         color: Colors.blue[800],
                         fontWeight: FontWeight.bold,
                       ),
@@ -157,7 +158,7 @@ class ProfileHeaderWidget extends StatelessWidget {
 class MessagesWidget extends StatelessWidget {
   final Groups group;
   final User user;
-  final DataBase db;
+  final Presenter db;
   //final Groups group;
 
   const MessagesWidget({
@@ -212,7 +213,7 @@ class MessagesWidget extends StatelessWidget {
 //send message tstyle
 class NewMessageWidget extends StatefulWidget {
   final User user;
-  final DataBase db;
+  final Presenter db;
   final String groupId;
 
   const NewMessageWidget({
@@ -332,12 +333,13 @@ class MessageWidget extends StatelessWidget {
               ),
             Container(
               padding: isMe
-                  ? EdgeInsets.all(1.6.w)
-                  : EdgeInsets.only(bottom: 1.6.w, left: 1.6.h, right: 1.6.h),
+                  ? EdgeInsets.only(
+                      top: 1.6.w, bottom: 1.6.w, left: 3.6.h, right: 1.6.h)
+                  : EdgeInsets.only(bottom: 1.6.w, left: 1.6.h, right: 3.6.h),
               margin: isMe
                   ? EdgeInsets.all(16)
                   : EdgeInsets.only(bottom: 16, left: 16, right: 16),
-              constraints: BoxConstraints(maxWidth: 600),
+              constraints: BoxConstraints(maxWidth: 40.h),
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
                 color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,

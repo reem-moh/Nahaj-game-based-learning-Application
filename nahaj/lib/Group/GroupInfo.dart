@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
-import 'package:nahaj/NahajClasses/child.dart';
+import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/presenter.dart';
 import 'package:sizer/sizer.dart';
 
 class GroupInfo extends StatefulWidget {
-  final DataBase db;
+  final Presenter db;
   final User user;
 
   final Groups group;
@@ -107,6 +107,7 @@ class _GroupInfo extends State<GroupInfo> {
                     child: Text(
                       "${widget.group.goupCode} :رمز المجموعة ",
                       style: TextStyle(
+                        fontFamily: 'Cairo',
                         color: Colors.black,
                         fontSize: 2.2.w,
                       ),
@@ -213,6 +214,23 @@ class _GroupInfo extends State<GroupInfo> {
             context: context,
           );
         },
+        child: Container(
+          padding: EdgeInsets.only(
+              top: 1.6.w, bottom: 1.6.w, right: 1.7.w, left: 1.6.w),
+          decoration: BoxDecoration(
+            color: Colors.red,
+            // border: BoxBorder()
+          ),
+          child: Text(
+            widget.group.leaderId == widget.user.userId
+                ? 'حذف المجموعة'
+                : 'الخروج من المجموعة',
+            style: TextStyle(
+              fontFamily: 'Cairo',
+              color: Colors.white,
+            ),
+          ),
+        ),
       );
   List getMembers(List members) {
     var users = [];
@@ -256,7 +274,7 @@ class ButtonWidget extends StatelessWidget {
 
 class CardsOfMembers extends StatelessWidget {
   final User user;
-  final DataBase db;
+  final Presenter db;
   final Groups group;
   final List members;
 
@@ -341,7 +359,7 @@ class CardsOfMembers extends StatelessWidget {
 }
 
 class MemberCard extends StatelessWidget {
-  final DataBase db;
+  final Presenter db;
   final User member;
   final Groups group;
   final User me;
@@ -506,7 +524,7 @@ class MemberCard extends StatelessWidget {
                             : (index == 1 //rank 2
                                 ? Image.asset("assets/Ranking2.png")
                                 : (index == 2 //rank3
-                                    ? Image.asset("assets/anking3.png")
+                                    ? Image.asset("assets/Ranking3.png")
                                     : SizedBox(
                                         width: 5.h,
                                       ) //other

@@ -21,7 +21,8 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -65,7 +66,8 @@
             "fullManagedTypeName": "UnityEngine.Material",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -116,7 +118,8 @@
             "fullManagedTypeName": "UnityEngine.TextAsset",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -125,7 +128,8 @@
             "fullManagedTypeName": "UnityEditor.MonoScript",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -134,7 +138,8 @@
             "fullManagedTypeName": "UnityEngine.Object",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -150,7 +155,8 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -166,7 +172,8 @@
             "fullManagedTypeName": "UnityEngine.Shader",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -182,7 +189,8 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -212,7 +220,8 @@
             "fullManagedTypeName": "UnityEngine.Camera",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -221,7 +230,8 @@
             "fullManagedTypeName": "UnityEngine.MeshRenderer",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -230,7 +240,8 @@
             "fullManagedTypeName": "UnityEngine.AudioSource",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -239,7 +250,8 @@
             "fullManagedTypeName": "UnityEngine.AudioBehaviour",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -248,7 +260,8 @@
             "fullManagedTypeName": "UnityEngine.AudioListener",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -266,7 +279,8 @@
             "fullManagedTypeName": "UnityEngine.Collider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -293,7 +307,8 @@
             "fullManagedTypeName": "UnityEngine.BoxCollider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -302,7 +317,8 @@
             "fullManagedTypeName": "UnityEngine.Canvas",
             "moduleName": "UI",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -320,7 +336,8 @@
             "fullManagedTypeName": "UnityEngine.Animator",
             "moduleName": "Animation",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -347,7 +364,8 @@
             "fullManagedTypeName": "UnityEngine.Behaviour",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -356,7 +374,8 @@
             "fullManagedTypeName": "UnityEngine.Renderer",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -383,7 +402,8 @@
             "fullManagedTypeName": "UnityEngine.Sprite",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -392,7 +412,8 @@
             "fullManagedTypeName": "UnityEngine.Texture2D",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -401,7 +422,8 @@
             "fullManagedTypeName": "UnityEngine.RenderSettings",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -410,7 +432,8 @@
             "fullManagedTypeName": "UnityEngine.Component",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -419,7 +442,8 @@
             "fullManagedTypeName": "UnityEngine.Transform",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -428,7 +452,8 @@
             "fullManagedTypeName": "UnityEngine.Texture",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -437,7 +462,8 @@
             "fullManagedTypeName": "UnityEngine.Mesh",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -446,7 +472,8 @@
             "fullManagedTypeName": "UnityEngine.GameObject",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -455,7 +482,8 @@
             "fullManagedTypeName": "UnityEngine.AudioClip",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -464,7 +492,8 @@
             "fullManagedTypeName": "",
             "moduleName": "AI",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -473,7 +502,8 @@
             "fullManagedTypeName": "",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -482,7 +512,8 @@
             "fullManagedTypeName": "UnityEngine.MonoBehaviour",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -491,7 +522,8 @@
             "fullManagedTypeName": "UnityEngine.MeshFilter",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -500,7 +532,8 @@
             "fullManagedTypeName": "UnityEngine.RectTransform",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -518,7 +551,8 @@
             "fullManagedTypeName": "UnityEngine.CanvasRenderer",
             "moduleName": "UI",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -531,21 +565,13 @@
             ]
         },
         {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Cubemap",
-            "fullManagedTypeName": "UnityEngine.Cubemap",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
             "managedAssemblyName": "",
             "nativeClass": "LevelGameManager",
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -554,7 +580,8 @@
             "fullManagedTypeName": "UnityEngine.LightmapSettings",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -564,6 +591,15 @@
             "moduleName": "Core",
             "usedInScenes": [
                 "Assets/Scenes/VolcanoExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Cubemap",
+            "fullManagedTypeName": "UnityEngine.Cubemap",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -584,6 +620,13 @@
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
             "fullManagedTypeName": "LiquidVolumeAnimator",
+            "moduleName": "",
+            "usedInScenes": []
+        },
+        {
+            "managedAssemblyName": "Assembly-CSharp.dll",
+            "nativeClass": "",
+            "fullManagedTypeName": "LoadSceneManager",
             "moduleName": "",
             "usedInScenes": []
         },
