@@ -18,7 +18,7 @@ using Vuforia;
             //disable image 
             //clickOnScrean.SetActive(false);
             Destroy(clickOnScrean);
-            Invoke("showInstruction",timeToInvokeInstrucation);
+            //Invoke("showInstruction",timeToInvokeInstrucation);
         }
     }
 
