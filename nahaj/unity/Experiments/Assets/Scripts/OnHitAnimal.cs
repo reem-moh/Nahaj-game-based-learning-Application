@@ -4,31 +4,33 @@ using UnityEngine.UI;
 using Vuforia;
 using UnityEngine.SceneManagement;
  
- public class OnHit : MonoBehaviour 
+ public class OnHitAnimal : MonoBehaviour 
  {
-     [SerializeField] private GameObject clickOnScrean,firstInstruction,arrow;
+     [SerializeField] private GameObject firstInstruction,arrow;
      [SerializeField] private float timeToInvokeInstrucation;
 
      Scene scene;
-   
 
-
-     public void OnInteractiveHitTest(HitTestResult result)
+     void Start()
     {
-        //if(scene.buildIndex == 0){
+           print("\n\n\n\n1 in satrt onHit\n\n\n\n");
+        scene = SceneManager.GetActiveScene();
+       // if(scene.buildIndex == 1){
         var listenerBehaviour = GetComponent<AnchorInputListenerBehaviour>();
         var planeBehaviour = GetComponent<PlaneFinderBehaviour>();
-        if (listenerBehaviour != null)
-        {
+        print("\n\n\n\n2 in satrt onHit\n\n\n\n");
+        //if (listenerBehaviour != null)
+        //{
+            Vector2 pos = new Vector2(0, 0);
+            planeBehaviour.PerformHitTest(pos);
             listenerBehaviour.enabled = false;
             planeBehaviour.PlaneIndicator.SetActive(false);
-            //disable image 
-            //clickOnScrean.SetActive(false);
-            Destroy(clickOnScrean);
+            print("\n\n\n\n3 in satrt onHit\n\n\n\n");
             Invoke("showInstruction",timeToInvokeInstrucation);
-        }
+        //}
        // }
     }
+
 
     void showInstruction(){
 

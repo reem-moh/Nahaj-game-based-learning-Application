@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NextInstruction : MonoBehaviour
 {
-    [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7,instruction8;
+    [SerializeField] private GameObject instruction1,instruction2,instruction3,instruction4,instruction5,instruction6,instruction7;
     
     //progress bar
     [SerializeField] private GameObject pb0,pb1,pb2,pb3,pb4,pb5;

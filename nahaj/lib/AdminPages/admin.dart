@@ -152,7 +152,7 @@ class _AdminHomePage extends State<AdminHomePage>
                     backgroundColor: Colors.white54,
                   ),
                   currentAccountPictureSize:
-                      Size(screenHeight * 0.41, screenWidth * 0.1),
+                      Size(screenHeight * 0.38, screenWidth * 0.1),
                   decoration: BoxDecoration(
                     color: backgroundColorOfSideBar,
                   ),
