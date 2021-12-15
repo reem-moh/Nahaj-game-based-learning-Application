@@ -522,14 +522,13 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                       closed: false,
                                     ),
                                     CategoryCard(
-                                      cardColor:
-                                          Color.fromARGB(255, 230, 230, 230),
-                                      title: 'الحيوانات',
-                                      image: 'assets/animals.png',
-                                      db: widget.db,
-                                      user: user_,
-                                      closed: false,
-                                    ),
+                                        cardColor:
+                                            Color.fromARGB(255, 230, 230, 230),
+                                        title: 'الحيوانات',
+                                        image: 'assets/animals.png',
+                                        db: widget.db,
+                                        user: user_,
+                                        closed: true),
                                     CategoryCard(
                                       cardColor:
                                           Color.fromARGB(255, 202, 203, 203),
