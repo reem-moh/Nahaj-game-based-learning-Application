@@ -321,7 +321,7 @@ class Presenter extends ChangeNotifier {
       }
     ];
 
-    child.Groups _Obj = new child.Groups(
+    child.Groups obj = new child.Groups(
         goupCode: code,
         groupId: groupDocument.id,
         groupName: groupName,
@@ -331,7 +331,7 @@ class Presenter extends ChangeNotifier {
         members: members);
 
     groupDocument
-        .set(_Obj.toJson())
+        .set(obj.toJson())
         .then((value) => print("Group created"))
         .catchError((error) => print("Failed to create group: $error"));
     //to add more on members array using groupDocument.updateData rather than groupDocument.set
@@ -454,7 +454,7 @@ class Presenter extends ChangeNotifier {
         .map((snapShot) => snapShot.docs
             .map((document) => child.User.fromJson(document.data()))
             .toList());
-    print("inside getMembers: \n members list after fetch: ${x}");
+    print("inside getMembers: \n members list after fetch: $x");
     return x;
   }
 
@@ -491,7 +491,6 @@ class Presenter extends ChangeNotifier {
         username: userName,
         message: message,
         createdAt: DateTime.now());
-    List<Map> chattt = [c.toJson()];
 
     refMessages
         .set(c.toJson())
@@ -641,18 +640,19 @@ class Presenter extends ChangeNotifier {
       print("User Added, database page");
       updateTotalScore(expID, score);
     }).catchError(
+        // ignore: invalid_return_type_for_catch_error
         (error) => print("database page, Failed to add user: $error"));
     //update total score of exp
   }
 
   Future updateTotalScore(String expID, int score) async {
     await firestore.collection('Experiments').doc(expID).get().then((value) {
-      int TotlaScore = value.get('TotlaScore');
-      print("TotlaScore inside updateTotalScore $TotlaScore score: $score");
+      int totlaScore = value.get('TotlaScore');
+      print("TotlaScore inside updateTotalScore $totlaScore score: $score");
       firestore
           .collection('Experiments')
           .doc(expID)
-          .update({'TotlaScore': (TotlaScore + score)});
+          .update({'TotlaScore': (totlaScore + score)});
     });
   }
 }

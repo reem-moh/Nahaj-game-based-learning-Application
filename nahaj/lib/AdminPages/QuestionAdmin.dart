@@ -38,6 +38,12 @@ class _QuestionCardState extends State<QuestionCard> {
   bool savedChanges = true;
   int oldScore = 0;
 
+  bool emptyQ = false;
+  bool emptyA1 = false;
+  bool emptyA2 = false;
+  bool emptyA3 = false;
+  bool emptyA4 = false;
+
   @override
   void initState() {
     super.initState();
@@ -196,7 +202,7 @@ class _QuestionCardState extends State<QuestionCard> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.2,
                       child: Text(
-                        'يجب تعبئة البيانات المطلوبه (*)',
+                        'يجب تعبئة البيانات المطلوبه *',
                         style: TextStyle(
                           color: Colors.red,
                           fontFamily: 'Cairo',
@@ -671,7 +677,7 @@ class _QuestionCardState extends State<QuestionCard> {
           .then((value) {
         print("update question");
         print(
-            "${widget.question.expID},${widget.question.id},$questionString,${answers[0]},${answers[1]},${answers[2]},${answers[3]},${answers[_raidoButtonValue - 1]},${dropdownvalue}, ${savedChanges = true}");
+            "${widget.question.expID},${widget.question.id},$questionString,${answers[0]},${answers[1]},${answers[2]},${answers[3]},${answers[_raidoButtonValue - 1]},$dropdownvalue, ${savedChanges = true}");
         showDialog(
           builder: (BuildContext context) {
             return CupertinoAlertDialog(

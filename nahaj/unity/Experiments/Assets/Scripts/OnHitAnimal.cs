@@ -21,7 +21,7 @@ using UnityEngine.SceneManagement;
         print("\n\n\n\n2 in satrt onHit\n\n\n\n");
         //if (listenerBehaviour != null)
         //{
-            Vector2 pos = new Vector2(0, 0);
+            Vector3 pos = new Vector3(0, 0,0);
             planeBehaviour.PerformHitTest(pos);
             listenerBehaviour.enabled = false;
             planeBehaviour.PlaneIndicator.SetActive(false);

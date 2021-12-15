@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:nahaj/HomePage/homePage.dart';
 import 'package:nahaj/NahajClasses/classes.dart';
 import 'package:nahaj/expriment.dart';
@@ -317,9 +316,25 @@ class _ExperimentCardState extends State<ExperimentCard> {
               color: Color.fromARGB(255, 230, 230, 230),
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            child: Image.network(
-              widget.exp.expImage,
-              width: 200.0.h,
+            child: Container(
+              padding: EdgeInsets.only(top: 1.w),
+              child: Image.network(
+                widget.exp.expImage,
+                width: 200.h,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    padding: EdgeInsets.only(top: 10.w),
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           //info container

@@ -1379,10 +1379,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t65B972D6A585A0A5B63153CF1177A90D3C90
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t65B972D6A585A0A5B63153CF1177A90D3C90D65E  EmitParams_get_velocity_m75D403CB1383A5CA01876501BFFE49727505B712 (EmitParams_t4F6429654653488A5D430701CD0743D011807CCC * __this, const RuntimeMethod* method);
 // System.Void UnityEngine.ParticleSystem/EmitParams::set_velocity(UnityEngine.Vector3)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void EmitParams_set_velocity_m25F490612E27D29E8A49FA2C57963ABAF61540EB (EmitParams_t4F6429654653488A5D430701CD0743D011807CCC * __this, Vector3_t65B972D6A585A0A5B63153CF1177A90D3C90D65E  ___value0, const RuntimeMethod* method);
-// System.Void UnityEngine.ParticleSystem/MainModule::set_duration_Injected(UnityEngine.ParticleSystem/MainModule&,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * ____unity_self0, float ___value1, const RuntimeMethod* method);
-// System.Void UnityEngine.ParticleSystem/MainModule::set_duration(System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_set_duration_m3965C31AE6F33C75B02E164D0ADAC4E911808DB4 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * __this, float ___value0, const RuntimeMethod* method);
 // System.Void UnityEngine.ParticleSystem/MainModule::get_startSpeed_Injected(UnityEngine.ParticleSystem/MainModule&,UnityEngine.ParticleSystem/MinMaxCurve&)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_get_startSpeed_Injected_m1359321FFE48310A4705CA1ED60335FB8560A103 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * ____unity_self0, MinMaxCurve_tF036239442AB2D438B1EDABEBC785426871084CD * ___ret1, const RuntimeMethod* method);
 // UnityEngine.ParticleSystem/MinMaxCurve UnityEngine.ParticleSystem/MainModule::get_startSpeed()
@@ -1977,21 +1973,6 @@ IL2CPP_EXTERN_C  void MainModule__ctor_m34F626B568C6D3C80A036409049761C8316E6A76
 	MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * _thisAdjusted = reinterpret_cast<MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B *>(__this + _offset);
 	MainModule__ctor_m34F626B568C6D3C80A036409049761C8316E6A76(_thisAdjusted, ___particleSystem0, method);
 }
-// System.Void UnityEngine.ParticleSystem/MainModule::set_duration(System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_set_duration_m3965C31AE6F33C75B02E164D0ADAC4E911808DB4 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * __this, float ___value0, const RuntimeMethod* method)
-{
-	{
-		float L_0 = ___value0;
-		MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0((MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B *)__this, L_0, /*hidden argument*/NULL);
-		return;
-	}
-}
-IL2CPP_EXTERN_C  void MainModule_set_duration_m3965C31AE6F33C75B02E164D0ADAC4E911808DB4_AdjustorThunk (RuntimeObject * __this, float ___value0, const RuntimeMethod* method)
-{
-	int32_t _offset = 1;
-	MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * _thisAdjusted = reinterpret_cast<MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B *>(__this + _offset);
-	MainModule_set_duration_m3965C31AE6F33C75B02E164D0ADAC4E911808DB4(_thisAdjusted, ___value0, method);
-}
 // UnityEngine.ParticleSystem/MinMaxCurve UnityEngine.ParticleSystem/MainModule::get_startSpeed()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MinMaxCurve_tF036239442AB2D438B1EDABEBC785426871084CD  MainModule_get_startSpeed_m52CC474FD3A126C52AB69A93EB366A31D1749800 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * __this, const RuntimeMethod* method)
 {
@@ -2024,15 +2005,6 @@ IL2CPP_EXTERN_C  void MainModule_set_startColor_m19663CAE16C6A546B7BC4B949EBA0CC
 	int32_t _offset = 1;
 	MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * _thisAdjusted = reinterpret_cast<MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B *>(__this + _offset);
 	MainModule_set_startColor_m19663CAE16C6A546B7BC4B949EBA0CCE3DD51A42(_thisAdjusted, ___value0, method);
-}
-// System.Void UnityEngine.ParticleSystem/MainModule::set_duration_Injected(UnityEngine.ParticleSystem/MainModule&,System.Single)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * ____unity_self0, float ___value1, const RuntimeMethod* method)
-{
-	typedef void (*MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0_ftn) (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B *, float);
-	static MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0_ftn _il2cpp_icall_func;
-	if (!_il2cpp_icall_func)
-	_il2cpp_icall_func = (MainModule_set_duration_Injected_mDA29D56D8E47391D60DB6D0B3B3210904DF497D0_ftn)il2cpp_codegen_resolve_icall ("UnityEngine.ParticleSystem/MainModule::set_duration_Injected(UnityEngine.ParticleSystem/MainModule&,System.Single)");
-	_il2cpp_icall_func(____unity_self0, ___value1);
 }
 // System.Void UnityEngine.ParticleSystem/MainModule::get_startSpeed_Injected(UnityEngine.ParticleSystem/MainModule&,UnityEngine.ParticleSystem/MinMaxCurve&)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MainModule_get_startSpeed_Injected_m1359321FFE48310A4705CA1ED60335FB8560A103 (MainModule_t671F49558CB1A3CFAAD637A7927C076EC2E61F0B * ____unity_self0, MinMaxCurve_tF036239442AB2D438B1EDABEBC785426871084CD * ___ret1, const RuntimeMethod* method)

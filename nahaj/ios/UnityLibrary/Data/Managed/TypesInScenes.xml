@@ -50,11 +50,20 @@
 		<type fullname="UnityEngine.Motion" preserve="nothing"/>
 		<type fullname="UnityEngine.CanvasRenderer" preserve="nothing"/>
 		<type fullname="UnityEngine.Light" preserve="nothing"/>
+		<type fullname="UnityEngine.Cubemap" preserve="nothing"/>
 		<type fullname="UnityEngine.LightmapSettings" preserve="nothing"/>
 		<type fullname="UnityEngine.LightingSettings" preserve="nothing"/>
-		<type fullname="UnityEngine.Cubemap" preserve="nothing"/>
+		<type fullname="UnityEngine.LightProbes" preserve="nothing"/>
+		<type fullname="UnityEngine.SkinnedMeshRenderer" preserve="nothing"/>
+		<type fullname="UnityEngine.TerrainCollider" preserve="nothing"/>
+		<type fullname="UnityEngine.Avatar" preserve="nothing"/>
+		<type fullname="UnityEngine.WindZone" preserve="nothing"/>
+		<type fullname="UnityEngine.TerrainLayer" preserve="nothing"/>
+		<type fullname="UnityEngine.TerrainData" preserve="nothing"/>
+		<type fullname="UnityEngine.Terrain" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Assembly-CSharp">
+		<type fullname="AnimalExpInstructions" preserve="nothing"/>
 		<type fullname="BottleSmash" preserve="nothing"/>
 		<type fullname="LiquidColor" preserve="nothing"/>
 		<type fullname="LiquidVolumeAnimator" preserve="nothing"/>
@@ -62,6 +71,7 @@
 		<type fullname="MeshLiquidEmission" preserve="nothing"/>
 		<type fullname="NextInstruction" preserve="nothing"/>
 		<type fullname="OnHit" preserve="nothing"/>
+		<type fullname="OnHitAnimal" preserve="nothing"/>
 		<type fullname="PS_Color" preserve="nothing"/>
 		<type fullname="ParticleColor" preserve="nothing"/>
 		<type fullname="ResetColors" preserve="nothing"/>
@@ -76,16 +86,11 @@
 		<type fullname="explosion" preserve="nothing"/>
 		<type fullname="fillLiquidOnBottle" preserve="nothing"/>
 		<type fullname="hideCheck" preserve="nothing"/>
+		<type fullname="moveAnimal" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="LeanTouch">
 		<type fullname="Lean.Touch.LeanDragTranslate" preserve="nothing"/>
 		<type fullname="Lean.Touch.LeanTouch" preserve="nothing"/>
-	</assembly>
-	<assembly fullname="Unity.TextMeshPro">
-		<type fullname="TMPro.TMP_FontAsset" preserve="nothing"/>
-		<type fullname="TMPro.TMP_Settings" preserve="nothing"/>
-		<type fullname="TMPro.TMP_SpriteAsset" preserve="nothing"/>
-		<type fullname="TMPro.TMP_StyleSheet" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="UnityEngine.UI">
 		<type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing"/>
@@ -101,9 +106,11 @@
 		<type fullname="Vuforia.AnchorInputListenerBehaviour" preserve="nothing"/>
 		<type fullname="Vuforia.ContentPositioningBehaviour" preserve="nothing"/>
 		<type fullname="Vuforia.PlaneFinderBehaviour" preserve="nothing"/>
+		<type fullname="Vuforia.VuforiaBehaviour" preserve="nothing"/>
 		<type fullname="Vuforia.VuforiaConfiguration" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="VuforiaScripts">
+		<type fullname="DefaultInitializationErrorHandler" preserve="nothing"/>
 		<type fullname="DefaultObserverEventHandler" preserve="nothing"/>
 	</assembly>
 </linker>

@@ -182,7 +182,7 @@ class _AddGroup extends State<AddGroup> {
                             MaterialPageRoute(
                                 builder: (context) => AddGroup2(
                                       db: widget.db,
-                                      nameoftheGroup: "$code",
+                                      groupCode: "$code",
                                       user: widget.user,
                                     )),
                           );

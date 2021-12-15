@@ -16,12 +16,15 @@ public class AnimalExpInstructions : MonoBehaviour
     [HideInInspector]
     public bool pbEnabled0, pbEnabled1, pbEnabled2,pbEnabled3,pbEnabled4,pbEnabled5;
     
+    [HideInInspector]
+    public bool clickable;
     //for arrow
     public RectTransform rt;
     public Image arrow;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(ShowInstruction);
+
 
         instructionIsEnabled1 = true;
         instructionIsEnabled2 = false;
@@ -66,7 +69,7 @@ public class AnimalExpInstructions : MonoBehaviour
             instructionIsEnabled2 = true;
             instruction1.SetActive(instructionIsEnabled1);
             instruction2.SetActive(instructionIsEnabled2);
-            //move position of arrow to rightcorner screen
+             
             rt.anchoredPosition3D=new Vector3(-176f,82f,0f);
         }else 
         //show first question
@@ -77,18 +80,19 @@ public class AnimalExpInstructions : MonoBehaviour
             instruction2.SetActive(instructionIsEnabled2);
             instruction3.SetActive(instructionIsEnabled3);
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+            arrow.enabled = false;
+            //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+            
         }else 
         //show second question
         if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
         {
-            arrow.enabled = false;
             instructionIsEnabled3 = false;
             instructionIsEnabled4 = true;
             instruction3.SetActive(instructionIsEnabled3);
             instruction4.SetActive(instructionIsEnabled4);
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show third question
         if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
@@ -98,7 +102,7 @@ public class AnimalExpInstructions : MonoBehaviour
             instruction4.SetActive(instructionIsEnabled4);
             instruction5.SetActive(instructionIsEnabled5);
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show fourth question
         if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
@@ -108,7 +112,7 @@ public class AnimalExpInstructions : MonoBehaviour
             instruction5.SetActive(instructionIsEnabled5);
             instruction6.SetActive(instructionIsEnabled6);
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
         }else 
         //show baking soda instruction
         if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
@@ -118,17 +122,18 @@ public class AnimalExpInstructions : MonoBehaviour
             instruction6.SetActive(instructionIsEnabled6);
             instruction7.SetActive(instructionIsEnabled7);
             //move position of arrow to rightcorner screen
-            rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+            //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
 
         }else
         if(instructionIsEnabled7){
+            
             instruction7.SetActive(false);
             //after finish the experiment
-            
             Destroy(gameObject);
             
         }
     }
+    
 
 
 

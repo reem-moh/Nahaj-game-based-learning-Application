@@ -16,13 +16,15 @@ class _SigninState extends State<Signin> {
   final _key = GlobalKey<FormState>();
 
   String email = "";
-  String password = "12345678";
+  String password = "";
   String username = "1";
   String avatar = "1";
   double level = 0;
   bool valid = false;
   bool vaildEmail = false;
   bool loginErr = false;
+  bool emptyEmail = false;
+  bool emptyPass = false;
   bool isUser = false;
 
   @override
@@ -85,7 +87,9 @@ class _SigninState extends State<Signin> {
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
                       initialValue: "child@nahaj.com",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: loginErr || emptyPass
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.onUserInteraction,
                       textDirection: TextDirection.rtl,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -138,7 +142,9 @@ class _SigninState extends State<Signin> {
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
                         initialValue: '12345678',
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        autovalidateMode: emptyPass
+                            ? AutovalidateMode.always
+                            : AutovalidateMode.onUserInteraction,
                         textDirection: TextDirection.rtl,
                         obscureText: true,
                         decoration: InputDecoration(
@@ -170,7 +176,6 @@ class _SigninState extends State<Signin> {
                               color: Color.fromARGB(255, 129, 190, 255))),
                       onPressed: () async {
                         loginErr = false;
-                        // if(_key.currentContext.validate())
                         if (valid) {
                           if (await loginUser()) {
                             if (isUser) {
@@ -184,8 +189,15 @@ class _SigninState extends State<Signin> {
                               });
                             }
                           } else {
-                            loginErr = true;
+                            setState(() {
+                              loginErr = true;
+                            });
                           }
+                        } else {
+                          setState(() {
+                            if (email == '') emptyEmail = true;
+                            if (password == '') emptyPass = true;
+                          });
                         }
                       },
                       padding: EdgeInsets.all(0.0),
@@ -227,7 +239,31 @@ class _SigninState extends State<Signin> {
                                   builder: (BuildContext context) {
                                     return CupertinoAlertDialog(
                                       title: Text(
-                                          'تم ارسال اعادة تعيين كلمة المرور الى الايميل'),
+                                        'تم ارسال اعادة تعيين كلمة المرور الى الايميل',
+                                        style: TextStyle(
+                                          fontFamily: 'Cairo',
+                                        ),
+                                      ),
+                                      actions: [
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "حسناً",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Cairo',
+                                              ),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                              primary:
+                                                  Colors.white.withOpacity(0),
+                                              shadowColor:
+                                                  Colors.white.withOpacity(0),
+                                              onPrimary: Colors.white,
+                                            )),
+                                      ],
                                     );
                                   },
                                   context: context,
@@ -238,7 +274,31 @@ class _SigninState extends State<Signin> {
                           showDialog(
                             builder: (BuildContext context) {
                               return CupertinoAlertDialog(
-                                title: Text('الرجاء ادخال البريد الالكتروني'),
+                                title: Text(
+                                  'الرجاء ادخال البريد الالكتروني',
+                                  style: TextStyle(
+                                    fontFamily: 'Cairo',
+                                  ),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "حسناً",
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Cairo',
+                                        ),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.white.withOpacity(0),
+                                        shadowColor:
+                                            Colors.white.withOpacity(0),
+                                        onPrimary: Colors.white,
+                                      )),
+                                ],
                               );
                             },
                             context: context,
@@ -253,7 +313,8 @@ class _SigninState extends State<Signin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.all(25),
+                      margin: EdgeInsets.only(
+                          left: 25, top: 25, bottom: 25, right: 10),
                       // ignore: deprecated_member_use
                       child: FlatButton(
                         child: Text(
@@ -272,19 +333,14 @@ class _SigninState extends State<Signin> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                        child: Text(
-                          " لاتمتلك حساب ؟  ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 2.7.w,
-                          ),
+                    Container(
+                      child: Text(
+                        " لاتمتلك حساب ؟  ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 2.7.w,
                         ),
                       ),
                     ),

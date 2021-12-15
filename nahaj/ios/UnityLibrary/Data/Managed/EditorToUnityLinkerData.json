@@ -270,7 +270,8 @@
             "fullManagedTypeName": "UnityEngine.Rigidbody",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -289,7 +290,8 @@
             "fullManagedTypeName": "UnityEngine.MeshCollider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -298,7 +300,8 @@
             "fullManagedTypeName": "UnityEngine.CapsuleCollider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -327,7 +330,8 @@
             "fullManagedTypeName": "UnityEngine.AnimationClip",
             "moduleName": "Animation",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -346,7 +350,8 @@
             "fullManagedTypeName": "UnityEditor.Animations.AnimatorController",
             "moduleName": "Animation",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -355,7 +360,8 @@
             "fullManagedTypeName": "UnityEngine.RuntimeAnimatorController",
             "moduleName": "Animation",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -542,7 +548,8 @@
             "fullManagedTypeName": "UnityEngine.Motion",
             "moduleName": "Animation",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
         {
@@ -559,6 +566,16 @@
             "managedAssemblyName": "UnityEngine.dll",
             "nativeClass": "Light",
             "fullManagedTypeName": "UnityEngine.Light",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Cubemap",
+            "fullManagedTypeName": "UnityEngine.Cubemap",
             "moduleName": "Core",
             "usedInScenes": [
                 "Assets/Scenes/VolcanoExperiment.unity"
@@ -595,12 +612,82 @@
         },
         {
             "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Cubemap",
-            "fullManagedTypeName": "UnityEngine.Cubemap",
+            "nativeClass": "LightProbes",
+            "fullManagedTypeName": "UnityEngine.LightProbes",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/VolcanoExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "SkinnedMeshRenderer",
+            "fullManagedTypeName": "UnityEngine.SkinnedMeshRenderer",
             "moduleName": "Core",
             "usedInScenes": [
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "TerrainCollider",
+            "fullManagedTypeName": "UnityEngine.TerrainCollider",
+            "moduleName": "TerrainPhysics",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Avatar",
+            "fullManagedTypeName": "UnityEngine.Avatar",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "WindZone",
+            "fullManagedTypeName": "UnityEngine.WindZone",
+            "moduleName": "Wind",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "TerrainLayer",
+            "fullManagedTypeName": "UnityEngine.TerrainLayer",
+            "moduleName": "Terrain",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "TerrainData",
+            "fullManagedTypeName": "UnityEngine.TerrainData",
+            "moduleName": "Terrain",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Terrain",
+            "fullManagedTypeName": "UnityEngine.Terrain",
+            "moduleName": "Terrain",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "Assembly-CSharp.dll",
+            "nativeClass": "",
+            "fullManagedTypeName": "AnimalExpInstructions",
+            "moduleName": "",
+            "usedInScenes": []
         },
         {
             "managedAssemblyName": "Assembly-CSharp.dll",
@@ -648,6 +735,13 @@
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
             "fullManagedTypeName": "OnHit",
+            "moduleName": "",
+            "usedInScenes": []
+        },
+        {
+            "managedAssemblyName": "Assembly-CSharp.dll",
+            "nativeClass": "",
+            "fullManagedTypeName": "OnHitAnimal",
             "moduleName": "",
             "usedInScenes": []
         },
@@ -750,6 +844,13 @@
             "usedInScenes": []
         },
         {
+            "managedAssemblyName": "Assembly-CSharp.dll",
+            "nativeClass": "",
+            "fullManagedTypeName": "moveAnimal",
+            "moduleName": "",
+            "usedInScenes": []
+        },
+        {
             "managedAssemblyName": "LeanTouch.dll",
             "nativeClass": "",
             "fullManagedTypeName": "Lean.Touch.LeanDragTranslate",
@@ -760,34 +861,6 @@
             "managedAssemblyName": "LeanTouch.dll",
             "nativeClass": "",
             "fullManagedTypeName": "Lean.Touch.LeanTouch",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Unity.TextMeshPro.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "TMPro.TMP_FontAsset",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Unity.TextMeshPro.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "TMPro.TMP_Settings",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Unity.TextMeshPro.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "TMPro.TMP_SpriteAsset",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Unity.TextMeshPro.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "TMPro.TMP_StyleSheet",
             "moduleName": "",
             "usedInScenes": []
         },
@@ -871,7 +944,21 @@
         {
             "managedAssemblyName": "Vuforia.Unity.Engine.dll",
             "nativeClass": "",
+            "fullManagedTypeName": "Vuforia.VuforiaBehaviour",
+            "moduleName": "",
+            "usedInScenes": []
+        },
+        {
+            "managedAssemblyName": "Vuforia.Unity.Engine.dll",
+            "nativeClass": "",
             "fullManagedTypeName": "Vuforia.VuforiaConfiguration",
+            "moduleName": "",
+            "usedInScenes": []
+        },
+        {
+            "managedAssemblyName": "VuforiaScripts.dll",
+            "nativeClass": "",
+            "fullManagedTypeName": "DefaultInitializationErrorHandler",
             "moduleName": "",
             "usedInScenes": []
         },

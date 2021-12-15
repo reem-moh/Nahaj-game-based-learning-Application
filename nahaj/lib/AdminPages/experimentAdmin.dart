@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:nahaj/NahajClasses/classes.dart';
@@ -302,45 +301,44 @@ class _ExpInfo extends State<ExperimentAdmin> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                //Question field
-                Expanded(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.09,
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
-                    child: TextFormField(
-                      textDirection: TextDirection.rtl,
-                      initialValue: widget.exp.name,
-                      textAlign: TextAlign.start,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      cursorRadius: Radius.circular(50),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          fillColor: Colors.white,
-                          filled: true),
-                      validator: (val) {
-                        savedChanges = false;
-                        name = val!;
-                        if (val.length <= 0) {
-                          validName = false;
-                          return 'هذا الحقل مطلوب';
-                        } else {
-                          validName = true;
-                        }
-                        if (!validName) {
-                          return 'الرجاء كتابة اسم التجربه';
-                        }
-                        return null;
-                      },
-                    ),
+                //Expanded(
+                //child:
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
+                  child: TextFormField(
+                    textDirection: TextDirection.rtl,
+                    initialValue: widget.exp.name,
+                    textAlign: TextAlign.start,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    cursorRadius: Radius.circular(50),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true),
+                    validator: (val) {
+                      savedChanges = false;
+                      name = val!;
+                      if (val.length <= 0) {
+                        validName = false;
+                        return 'هذا الحقل مطلوب';
+                      } else {
+                        validName = true;
+                      }
+                      if (!validName) {
+                        return 'الرجاء كتابة اسم التجربه';
+                      }
+                      return null;
+                    },
                   ),
                 ),
+                //),
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
-                    //padding:
-                    //  EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 12.2.h, bottom: 2.w),
                     child: textFieldInput(": أسم التجربة *", 2.7)),
               ],
             ),
@@ -353,16 +351,16 @@ class _ExpInfo extends State<ExperimentAdmin> {
                 //Score drop down Question
                 Container(
                     height: MediaQuery.of(context).size.height * 0.09,
-                    width: MediaQuery.of(context).size.width * 0.49,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     padding:
                         EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
-                    child: dropDownCategory()
-                    // Container()
-                    ),
+                    child: dropDownCategory()),
                 //Score name
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 8.8.h, bottom: 2.w),
                     child: textFieldInput(':  الصنف *', 2.7)),
               ],
             ),
@@ -375,7 +373,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
                 //Score drop down Question
                 Container(
                     height: MediaQuery.of(context).size.height * 0.09,
-                    width: MediaQuery.of(context).size.width * 0.49,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     padding:
                         EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
                     child: dropDownScore()),
@@ -383,6 +381,8 @@ class _ExpInfo extends State<ExperimentAdmin> {
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 12.5.h, bottom: 2.w),
                     child: textFieldInput(': نقاط التجربة *', 2.7)),
               ],
             ),
@@ -393,42 +393,44 @@ class _ExpInfo extends State<ExperimentAdmin> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 //exp description
-                Expanded(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.09,
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
-                    child: TextFormField(
-                      textDirection: TextDirection.rtl,
-                      initialValue: widget.exp.info,
-                      textAlign: TextAlign.start,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      cursorRadius: Radius.circular(50),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          fillColor: Colors.white,
-                          filled: true),
-                      validator: (val) {
-                        savedChanges = false;
-                        info = val!;
-                        if (val.length <= 0) {
-                          validInfo = false;
-                          return 'هذا الحقل مطلوب';
-                        } else {
-                          validInfo = true;
-                        }
-                        if (!validInfo) {
-                          return ' الرجاء كتابة وصف';
-                        }
-                        return null;
-                      },
-                    ),
+                //Expanded(
+                //child:
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
+                  child: TextFormField(
+                    textDirection: TextDirection.rtl,
+                    initialValue: widget.exp.info,
+                    textAlign: TextAlign.start,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    cursorRadius: Radius.circular(50),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true),
+                    validator: (val) {
+                      savedChanges = false;
+                      info = val!;
+                      if (val.length <= 0) {
+                        validInfo = false;
+                        return 'هذا الحقل مطلوب';
+                      } else {
+                        validInfo = true;
+                      }
+                      if (!validInfo) {
+                        return ' الرجاء كتابة وصف';
+                      }
+                      return null;
+                    },
                   ),
                 ),
+                //),
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 13.5.h, bottom: 2.w),
                     child: textFieldInput(": وصف التجربة *", 2.7)),
               ],
             ),
@@ -439,32 +441,32 @@ class _ExpInfo extends State<ExperimentAdmin> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 //Question field
-                Expanded(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.09,
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
-                    child: TextFormField(
-                      enabled: false,
-                      textDirection: TextDirection.rtl,
-                      initialValue: "${widget.exp.totalScore}",
-                      textAlign: TextAlign.start,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      cursorRadius: Radius.circular(50),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          fillColor: Colors.white,
-                          filled: true),
-                    ),
+                // Expanded(
+                //child:
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  padding: EdgeInsets.symmetric(horizontal: 2.0.h, vertical: 0),
+                  child: TextFormField(
+                    enabled: false,
+                    textDirection: TextDirection.rtl,
+                    initialValue: "${widget.exp.totalScore}",
+                    textAlign: TextAlign.start,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    cursorRadius: Radius.circular(50),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true),
                   ),
                 ),
+                //),
 
                 Container(
                     height: MediaQuery.of(context).size.height * 0.08,
                     width: MediaQuery.of(context).size.width * 0.4,
-                    //padding:
-                    //  EdgeInsets.symmetric(horizontal: 8.0.h, vertical: 0),
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 20.h, bottom: 2.w),
                     child: textFieldInput(": المجموع الكلي للتجربة ", 2.7)),
               ],
             ),
@@ -574,7 +576,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
                         '/AdminHomePage', (Route<dynamic> route) => false);
                   },
                   child: Text(
-                    "نعم",
+                    "حسناً",
                     style: TextStyle(color: Colors.black),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -778,16 +780,15 @@ class CardsOfQuestions extends StatelessWidget {
             ),
             child: ClipOval(
                 child: Container(
-              child: Text("\t $counter",
+              alignment: Alignment.center,
+              child: Text("$counter",
                   style: TextStyle(
                       fontFamily: 'Cairo',
                       fontWeight: FontWeight.w600,
                       fontSize: 7.2.w,
                       color: Color.fromARGB(255, 114, 78, 140))),
               decoration: BoxDecoration(
-                  //Color(0xFFe0f2f1)
-                  shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(.80)),
+                  shape: BoxShape.circle, color: Colors.white.withOpacity(.80)),
             )),
           ),
           Container(

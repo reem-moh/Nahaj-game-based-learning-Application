@@ -11,23 +11,19 @@ using UnityEngine.SceneManagement;
 
      Scene scene;
    
-
-
      public void OnInteractiveHitTest(HitTestResult result)
     {
-        //if(scene.buildIndex == 0){
         var listenerBehaviour = GetComponent<AnchorInputListenerBehaviour>();
-        var planeBehaviour = GetComponent<PlaneFinderBehaviour>();
+       // var planeBehaviour = GetComponent<PlaneFinderBehaviour>();
         if (listenerBehaviour != null)
         {
             listenerBehaviour.enabled = false;
-            planeBehaviour.PlaneIndicator.SetActive(false);
+            //planeBehaviour.PlaneIndicator.SetActive(false);
             //disable image 
             //clickOnScrean.SetActive(false);
             Destroy(clickOnScrean);
             Invoke("showInstruction",timeToInvokeInstrucation);
         }
-       // }
     }
 
     void showInstruction(){

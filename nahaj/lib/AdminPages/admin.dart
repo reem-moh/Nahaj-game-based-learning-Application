@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nahaj/NahajClasses/classes.dart';
@@ -46,7 +45,7 @@ class _AdminHomePage extends State<AdminHomePage>
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
         .animate(_controller);
     tappedIndex = 0;
-    print("inside initState admin home pAGE");
+    print("inside initState admin home page");
     _getInfoFromSession();
   }
 
@@ -145,7 +144,7 @@ class _AdminHomePage extends State<AdminHomePage>
                   accountEmail: Text(""),
                   currentAccountPicture: CircleAvatar(
                     child: Image.asset(
-                      'assets/user 2.png',
+                      'assets/Admin.png',
                       fit: BoxFit.contain,
                       alignment: Alignment.center,
                     ),
@@ -344,8 +343,9 @@ class _AdminHomePage extends State<AdminHomePage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/user 2.png',
+                                  'assets/Admin.png',
                                   fit: BoxFit.contain,
+                                  height: 20.w,
                                 ),
                                 SizedBox(
                                     width: MediaQuery.of(context).size.height *
@@ -538,9 +538,25 @@ class _AdminExperimentCardState extends State<AdminExperimentCard> {
               color: Color.fromARGB(255, 230, 230, 230),
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            child: Image.network(
-              widget.exp.expImage,
-              width: 200.0.h,
+            child: Container(
+              padding: EdgeInsets.only(top: 1.5.w),
+              child: Image.network(
+                widget.exp.expImage,
+                width: 200.0.h,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    padding: EdgeInsets.only(top: 10.w),
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           //info container

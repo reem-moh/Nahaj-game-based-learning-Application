@@ -66,7 +66,7 @@ class _GroupInfo extends State<GroupInfo> {
                             },
                           ),
                         ),
-                        SizedBox(width: 46.w),
+                        SizedBox(width: 37.h),
                         //image of group
                         Center(
                           child: Container(
@@ -300,6 +300,7 @@ class CardsOfMembers extends StatelessWidget {
                 final allMembers = snapshot.data;
                 allMembers != null
                     ? allMembers.sort((a, b) => b.level.compareTo(a.level))
+                    // ignore: unnecessary_statements
                     : "";
                 return allMembers == null
                     ? buildText('لا يوجد لديك اعضاء!')

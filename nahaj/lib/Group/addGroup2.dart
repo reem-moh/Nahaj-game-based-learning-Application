@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:nahaj/presenter.dart';
 
 import 'package:nahaj/NahajClasses/classes.dart';
+import 'package:sizer/sizer.dart';
 
 class AddGroup2 extends StatefulWidget {
   final Presenter db;
-  final String nameoftheGroup;
+  final String groupCode;
   final User user;
   AddGroup2(
-      {Key? key,
-      required this.db,
-      required this.nameoftheGroup,
-      required this.user})
+      {Key? key, required this.db, required this.groupCode, required this.user})
       : super(key: key);
 
   @override
@@ -67,13 +65,13 @@ class _AddGroup2 extends State<AddGroup2> {
                 ),
               ),
 
-              //Name
+              //Code
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Container(
                   alignment: Alignment.center,
                   child: Text(
-                    widget.nameoftheGroup + "",
+                    widget.groupCode + "  :رمز المجموعة",
                     style: TextStyle(
                       color: Colors.black,
                       fontFamily: 'Cairo',
@@ -84,7 +82,21 @@ class _AddGroup2 extends State<AddGroup2> {
                 ),
               ),
 
-              //Name text field
+              SizedBox(
+                height: 7.w,
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    "بإمكانك مشاركة هذا الرمز مع أصدقائك للانضمام للمجموعة*",
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontFamily: 'Cairo',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
 
               Container(
                 margin: EdgeInsets.all(10),

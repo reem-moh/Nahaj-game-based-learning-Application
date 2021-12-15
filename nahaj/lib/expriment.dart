@@ -160,13 +160,24 @@ class _Experiment extends State<Experiment> {
 
   void exitExperiment() {
     if (paused) {
-      _unityWidgetController.resume()!.then((value) => _unityWidgetController
-          .unload()!
-          .then((value) => Navigator.of(context).pop()));
+      _unityWidgetController.resume()!.then((value) =>
+          _unityWidgetController.unload()!.then((value) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Category(
+                          categoryTitle: widget.category,
+                          db: widget.db,
+                        )),
+              )));
     } else {
-      _unityWidgetController
-          .unload()!
-          .then((value) => Navigator.of(context).pop());
+      _unityWidgetController.unload()!.then((value) => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Category(
+                      categoryTitle: widget.category,
+                      db: widget.db,
+                    )),
+          ));
     }
   }
 }

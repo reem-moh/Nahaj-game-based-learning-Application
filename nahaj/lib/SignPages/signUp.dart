@@ -20,7 +20,10 @@ class _SignupState extends State<SignUp> {
   bool validEmail = false;
   bool validPass = false;
   bool validRePass = false;
-  bool loginErr = false;
+  bool emptyName = false;
+  bool emptyEmail = false;
+  bool emptyPass = false;
+  bool emptyRePass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +103,13 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        autovalidateMode: emptyName
+                            ? AutovalidateMode.always
+                            : AutovalidateMode.onUserInteraction,
                         cursorRadius: Radius.circular(50),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        /*onChanged: (val) {
-                          name = val;
-                        },*/
                         validator: (val) {
                           if (val!.length <= 0) {
                             validName = false;
@@ -120,9 +122,6 @@ class _SignupState extends State<SignUp> {
                             validName = true;
                             name = val;
                           }
-                          /*if (loginErr) {
-                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
-                          }*/
                           return null;
                         },
                       )),
@@ -151,13 +150,12 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        autovalidateMode: emptyEmail
+                            ? AutovalidateMode.always
+                            : AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        /*onChanged: (val) {
-                          email = val;
-                        },*/
                         validator: (val) {
                           bool emailValid = RegExp(
                                   r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
@@ -173,9 +171,6 @@ class _SignupState extends State<SignUp> {
                             validEmail = true;
                             email = val;
                           }
-                          /*if (loginErr) {
-                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
-                          }*/
                           return null;
                         },
                       )),
@@ -203,14 +198,13 @@ class _SignupState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: emptyPass
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.onUserInteraction,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      /*onChanged: (val) {
-                          password = val;
-                        },*/
                       validator: (val) {
                         if (val!.length <= 0) {
                           validPass = false;
@@ -223,9 +217,6 @@ class _SignupState extends State<SignUp> {
                           validPass = true;
                           password = val;
                         }
-                        /*if (loginErr) {
-                            return 'البريد الإلكتروني أو كلمة المرور خاطئة';
-                          }*/
                         return null;
                       },
                     ),
@@ -255,7 +246,9 @@ class _SignupState extends State<SignUp> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        autovalidateMode: emptyRePass
+                            ? AutovalidateMode.always
+                            : AutovalidateMode.onUserInteraction,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -340,6 +333,13 @@ class _SignupState extends State<SignUp> {
           Navigator.of(context).pushNamed('/HomePage');
         }
       }
+    } else {
+      setState(() {
+        if (email == '') emptyEmail = true;
+        if (name == '') emptyName = true;
+        if (password == '') emptyPass = true;
+        if (repeatedPassword == '') emptyRePass = true;
+      });
     }
   }
 }
