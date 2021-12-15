@@ -63,7 +63,7 @@ public class AnimalExpInstructions : MonoBehaviour
         
     }
 
-    void ShowInstruction(){
+    public void ShowInstruction(){
          if(instructionIsEnabled1 && instruction1!=null && instruction2!=null){
             instructionIsEnabled1 = false;
             instructionIsEnabled2 = true;
@@ -133,6 +133,77 @@ public class AnimalExpInstructions : MonoBehaviour
             
         }
     }
+
+    /*public void ShowInstruction(){
+         if(instructionIsEnabled1 && instruction1!=null && instruction2!=null){
+            instructionIsEnabled1 = false;
+            instructionIsEnabled2 = true;
+            instruction1.SetActive(instructionIsEnabled1);
+            instruction2.SetActive(instructionIsEnabled2);
+             
+            rt.anchoredPosition3D=new Vector3(-176f,82f,0f);
+        }else 
+        //show first question
+        if (instructionIsEnabled2 && instruction2!=null && instruction3!=null)
+        {
+            instructionIsEnabled2 = false;
+            instructionIsEnabled4 = true;
+            instruction2.SetActive(instructionIsEnabled2);
+            instruction4.SetActive(instructionIsEnabled4);            
+            //move position of arrow to rightcorner screen
+            arrow.enabled = false;
+            //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+            
+        }else 
+        //show second question
+        if (instructionIsEnabled3 && instruction3!=null && instruction4!=null)
+        {
+            instructionIsEnabled3 = false;
+            instructionIsEnabled4 = true;
+            instruction3.SetActive(instructionIsEnabled3);
+            instruction4.SetActive(instructionIsEnabled4);
+            //move position of arrow to rightcorner screen
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+        }else 
+        //show third question
+        if (instructionIsEnabled4 && instruction4!=null && instruction5!=null)
+        {
+            instructionIsEnabled4 = false;
+            instructionIsEnabled5 = true;
+            instruction4.SetActive(instructionIsEnabled4);
+            instruction5.SetActive(instructionIsEnabled5);
+            //move position of arrow to rightcorner screen
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+        }else 
+        //show fourth question
+        if (instructionIsEnabled5 && instruction5!=null && instruction6!=null)
+        {
+            instructionIsEnabled5 = false;
+            instructionIsEnabled6 = true;
+            instruction5.SetActive(instructionIsEnabled5);
+            instruction6.SetActive(instructionIsEnabled6);
+            //move position of arrow to rightcorner screen
+           //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+        }else 
+        //show baking soda instruction
+        if (instructionIsEnabled6 && instruction6!=null && instruction7!=null)
+        {
+            instructionIsEnabled6 = false;
+            instructionIsEnabled7 = true;
+            instruction6.SetActive(instructionIsEnabled6);
+            instruction7.SetActive(instructionIsEnabled7);
+            //move position of arrow to rightcorner screen
+            //rt.anchoredPosition3D=new Vector3(-39.9000015f,15f,0f);
+
+        }else
+        if(instructionIsEnabled7){
+            
+            instruction7.SetActive(false);
+            //after finish the experiment
+            Destroy(gameObject);
+            
+        }
+    }*/
     
 
 

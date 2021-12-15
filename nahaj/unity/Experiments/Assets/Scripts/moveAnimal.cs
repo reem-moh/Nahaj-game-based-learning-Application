@@ -11,8 +11,9 @@ public class moveAnimal : MonoBehaviour
     private BoxCollider cr;
 
         //for the instructions button
-    [SerializeField] private NextInstruction nextInstruction;
+    [SerializeField] private AnimalExpInstructions nextInstruction;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private BoxCollider crStraws;
 
     //check image enables
     [SerializeField] private GameObject enableCheck;
@@ -28,10 +29,10 @@ public class moveAnimal : MonoBehaviour
 
     void OnCollisionEnter(Collision other){
         Debug.Log("\nOnCollisionEnter");
-       // if (other.gameObject.CompareTag("Cube"))
-       // {
-            Debug.Log("Triggered by Cube");
-            //change the position of bottle above the volcano
+        //if (other.gameObject.CompareTag("Straw"))
+        //{
+            Debug.Log("Triggered by "+other.gameObject.tag);
+            //change the position of animal to the target
             if(drag.enabled){
                 //turn off some property 
                 Debug.Log("\n\t\t***** Disable method *****\t\t\n");
@@ -45,19 +46,30 @@ public class moveAnimal : MonoBehaviour
 
               //disable collider
               cr.enabled = false;
-
-              Debug.Log("\n\t\t***** End of Disable method *****\t\t\n");
+              //disable collider of straws
+              crStraws.enabled = false;
+              Debug.Log("\n\t\t***** End of Disable method ***** \t"+other.gameObject.tag+"\n");
 
               //before move the object
               Debug.Log("before: "+gameObject.GetComponent<Transform>().position);
 
                 
               gameObject.GetComponent<Transform>().position = target.position;
+              //gameObject.GetComponent<Transform>().rotation =new Vector3(1.8197155f,39.4758301f,359.724487f);
 
-                //after move the object
-               // Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
+               //after move the object
+              Debug.Log("after: "+gameObject.GetComponent<Transform>().position);
+              
+              //display next instruction
+              nextInstruction.ShowInstruction();
+              
+              //display check icon
+              enableCheck.SetActive(true);
+
+              //update progress bar
+              nextInstruction.incrementPB();
     
             }
-      //  }
+       // }
     }
 }

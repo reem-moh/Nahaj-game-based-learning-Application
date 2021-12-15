@@ -6,6 +6,10 @@ TagManager:
   tags:
   - bottle
   - Cube
+  - Straw
+  - turtle
+  - horse
+  - elephant
   layers:
   - Default
   - TransparentFX
