@@ -21,7 +21,6 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -66,7 +65,6 @@
             "fullManagedTypeName": "UnityEngine.Material",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -118,7 +116,6 @@
             "fullManagedTypeName": "UnityEngine.TextAsset",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -128,7 +125,6 @@
             "fullManagedTypeName": "UnityEditor.MonoScript",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -138,7 +134,6 @@
             "fullManagedTypeName": "UnityEngine.Object",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -155,7 +150,6 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -172,7 +166,6 @@
             "fullManagedTypeName": "UnityEngine.Shader",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -189,7 +182,6 @@
             "fullManagedTypeName": "",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -220,7 +212,15 @@
             "fullManagedTypeName": "UnityEngine.Camera",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "SkinnedMeshRenderer",
+            "fullManagedTypeName": "UnityEngine.SkinnedMeshRenderer",
+            "moduleName": "Core",
+            "usedInScenes": [
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -230,7 +230,6 @@
             "fullManagedTypeName": "UnityEngine.MeshRenderer",
             "moduleName": "Core",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -240,7 +239,6 @@
             "fullManagedTypeName": "UnityEngine.AudioSource",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -250,7 +248,6 @@
             "fullManagedTypeName": "UnityEngine.AudioBehaviour",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -260,7 +257,6 @@
             "fullManagedTypeName": "UnityEngine.AudioListener",
             "moduleName": "Audio",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -270,7 +266,6 @@
             "fullManagedTypeName": "UnityEngine.Rigidbody",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -280,7 +275,6 @@
             "fullManagedTypeName": "UnityEngine.Collider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -290,7 +284,6 @@
             "fullManagedTypeName": "UnityEngine.MeshCollider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -300,7 +293,6 @@
             "fullManagedTypeName": "UnityEngine.CapsuleCollider",
             "moduleName": "Physics",
             "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
         },
@@ -309,321 +301,6 @@
             "nativeClass": "BoxCollider",
             "fullManagedTypeName": "UnityEngine.BoxCollider",
             "moduleName": "Physics",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Canvas",
-            "fullManagedTypeName": "UnityEngine.Canvas",
-            "moduleName": "UI",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "AnimationClip",
-            "fullManagedTypeName": "UnityEngine.AnimationClip",
-            "moduleName": "Animation",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Animator",
-            "fullManagedTypeName": "UnityEngine.Animator",
-            "moduleName": "Animation",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "AnimatorController",
-            "fullManagedTypeName": "UnityEditor.Animations.AnimatorController",
-            "moduleName": "Animation",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "RuntimeAnimatorController",
-            "fullManagedTypeName": "UnityEngine.RuntimeAnimatorController",
-            "moduleName": "Animation",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Behaviour",
-            "fullManagedTypeName": "UnityEngine.Behaviour",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Renderer",
-            "fullManagedTypeName": "UnityEngine.Renderer",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "ParticleSystemRenderer",
-            "fullManagedTypeName": "UnityEngine.ParticleSystemRenderer",
-            "moduleName": "ParticleSystem",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "ParticleSystem",
-            "fullManagedTypeName": "UnityEngine.ParticleSystem",
-            "moduleName": "ParticleSystem",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Sprite",
-            "fullManagedTypeName": "UnityEngine.Sprite",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Texture2D",
-            "fullManagedTypeName": "UnityEngine.Texture2D",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "RenderSettings",
-            "fullManagedTypeName": "UnityEngine.RenderSettings",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Component",
-            "fullManagedTypeName": "UnityEngine.Component",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Transform",
-            "fullManagedTypeName": "UnityEngine.Transform",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Texture",
-            "fullManagedTypeName": "UnityEngine.Texture",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Mesh",
-            "fullManagedTypeName": "UnityEngine.Mesh",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "GameObject",
-            "fullManagedTypeName": "UnityEngine.GameObject",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "AudioClip",
-            "fullManagedTypeName": "UnityEngine.AudioClip",
-            "moduleName": "Audio",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "",
-            "nativeClass": "NavMeshSettings",
-            "fullManagedTypeName": "",
-            "moduleName": "AI",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "",
-            "nativeClass": "SampleClip",
-            "fullManagedTypeName": "",
-            "moduleName": "Audio",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "MonoBehaviour",
-            "fullManagedTypeName": "UnityEngine.MonoBehaviour",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "MeshFilter",
-            "fullManagedTypeName": "UnityEngine.MeshFilter",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "RectTransform",
-            "fullManagedTypeName": "UnityEngine.RectTransform",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Motion",
-            "fullManagedTypeName": "UnityEngine.Motion",
-            "moduleName": "Animation",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "CanvasRenderer",
-            "fullManagedTypeName": "UnityEngine.CanvasRenderer",
-            "moduleName": "UI",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Light",
-            "fullManagedTypeName": "UnityEngine.Light",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "Cubemap",
-            "fullManagedTypeName": "UnityEngine.Cubemap",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "",
-            "nativeClass": "LevelGameManager",
-            "fullManagedTypeName": "",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "LightmapSettings",
-            "fullManagedTypeName": "UnityEngine.LightmapSettings",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity",
-                "Assets/Scenes/AnimalExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "LightingSettings",
-            "fullManagedTypeName": "UnityEngine.LightingSettings",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "LightProbes",
-            "fullManagedTypeName": "UnityEngine.LightProbes",
-            "moduleName": "Core",
-            "usedInScenes": [
-                "Assets/Scenes/VolcanoExperiment.unity"
-            ]
-        },
-        {
-            "managedAssemblyName": "UnityEngine.dll",
-            "nativeClass": "SkinnedMeshRenderer",
-            "fullManagedTypeName": "UnityEngine.SkinnedMeshRenderer",
-            "moduleName": "Core",
             "usedInScenes": [
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
@@ -639,6 +316,51 @@
         },
         {
             "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Canvas",
+            "fullManagedTypeName": "UnityEngine.Canvas",
+            "moduleName": "UI",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "AnimationClip",
+            "fullManagedTypeName": "UnityEngine.AnimationClip",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Animator",
+            "fullManagedTypeName": "UnityEngine.Animator",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "AnimatorController",
+            "fullManagedTypeName": "UnityEditor.Animations.AnimatorController",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "RuntimeAnimatorController",
+            "fullManagedTypeName": "UnityEngine.RuntimeAnimatorController",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
             "nativeClass": "Avatar",
             "fullManagedTypeName": "UnityEngine.Avatar",
             "moduleName": "Animation",
@@ -648,9 +370,126 @@
         },
         {
             "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Behaviour",
+            "fullManagedTypeName": "UnityEngine.Behaviour",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Renderer",
+            "fullManagedTypeName": "UnityEngine.Renderer",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
             "nativeClass": "WindZone",
             "fullManagedTypeName": "UnityEngine.WindZone",
             "moduleName": "Wind",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Sprite",
+            "fullManagedTypeName": "UnityEngine.Sprite",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Texture2D",
+            "fullManagedTypeName": "UnityEngine.Texture2D",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "RenderSettings",
+            "fullManagedTypeName": "UnityEngine.RenderSettings",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Component",
+            "fullManagedTypeName": "UnityEngine.Component",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Transform",
+            "fullManagedTypeName": "UnityEngine.Transform",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Texture",
+            "fullManagedTypeName": "UnityEngine.Texture",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Mesh",
+            "fullManagedTypeName": "UnityEngine.Mesh",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "GameObject",
+            "fullManagedTypeName": "UnityEngine.GameObject",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "AudioClip",
+            "fullManagedTypeName": "UnityEngine.AudioClip",
+            "moduleName": "Audio",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "",
+            "nativeClass": "NavMeshSettings",
+            "fullManagedTypeName": "",
+            "moduleName": "AI",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "",
+            "nativeClass": "SampleClip",
+            "fullManagedTypeName": "",
+            "moduleName": "Audio",
             "usedInScenes": [
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
@@ -675,9 +514,90 @@
         },
         {
             "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "MonoBehaviour",
+            "fullManagedTypeName": "UnityEngine.MonoBehaviour",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "MeshFilter",
+            "fullManagedTypeName": "UnityEngine.MeshFilter",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
             "nativeClass": "Terrain",
             "fullManagedTypeName": "UnityEngine.Terrain",
             "moduleName": "Terrain",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "RectTransform",
+            "fullManagedTypeName": "UnityEngine.RectTransform",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Motion",
+            "fullManagedTypeName": "UnityEngine.Motion",
+            "moduleName": "Animation",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "CanvasRenderer",
+            "fullManagedTypeName": "UnityEngine.CanvasRenderer",
+            "moduleName": "UI",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Light",
+            "fullManagedTypeName": "UnityEngine.Light",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Cubemap",
+            "fullManagedTypeName": "UnityEngine.Cubemap",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "",
+            "nativeClass": "LevelGameManager",
+            "fullManagedTypeName": "",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/Scenes/AnimalExperiment.unity"
+            ]
+        },
+        {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "LightmapSettings",
+            "fullManagedTypeName": "UnityEngine.LightmapSettings",
+            "moduleName": "Core",
             "usedInScenes": [
                 "Assets/Scenes/AnimalExperiment.unity"
             ]
@@ -692,21 +612,7 @@
         {
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
-            "fullManagedTypeName": "BottleSmash",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "LiquidColor",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "LiquidVolumeAnimator",
+            "fullManagedTypeName": "DetectTouch",
             "moduleName": "",
             "usedInScenes": []
         },
@@ -720,84 +626,7 @@
         {
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
-            "fullManagedTypeName": "MeshLiquidEmission",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "NextInstruction",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "OnHit",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
             "fullManagedTypeName": "OnHitAnimal",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "PS_Color",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ParticleColor",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ResetColors",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ShowBottleBakingSoda",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ShowBottleColor",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ShowBottleSoap",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ShowBottleVinegar",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "ShowBottlewater",
             "moduleName": "",
             "usedInScenes": []
         },
@@ -811,7 +640,7 @@
         {
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
-            "fullManagedTypeName": "countdownController",
+            "fullManagedTypeName": "animalDeath",
             "moduleName": "",
             "usedInScenes": []
         },
@@ -825,42 +654,7 @@
         {
             "managedAssemblyName": "Assembly-CSharp.dll",
             "nativeClass": "",
-            "fullManagedTypeName": "explosion",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "fillLiquidOnBottle",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
             "fullManagedTypeName": "hideCheck",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "Assembly-CSharp.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "moveAnimal",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "LeanTouch.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "Lean.Touch.LeanDragTranslate",
-            "moduleName": "",
-            "usedInScenes": []
-        },
-        {
-            "managedAssemblyName": "LeanTouch.dll",
-            "nativeClass": "",
-            "fullManagedTypeName": "Lean.Touch.LeanTouch",
             "moduleName": "",
             "usedInScenes": []
         },
