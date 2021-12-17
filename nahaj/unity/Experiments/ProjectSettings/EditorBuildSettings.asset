@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/VolcanoExperiment.unity
     guid: 517e26f72702e441293374af37ee9778
   - enabled: 1

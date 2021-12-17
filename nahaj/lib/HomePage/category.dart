@@ -28,48 +28,50 @@ class _Category extends State<Category> {
   @override
   void initState() {
     super.initState();
-    if (showLevelDialog) {
-      Future.delayed(Duration(milliseconds: 10), () {
-        showDialog(
-          builder: (BuildContext context) {
-            return CupertinoAlertDialog(
-              title: Text(
-                "تهانينا🎉",
-                style: TextStyle(
-                  fontFamily: 'Cairo',
+    checkUserLeve().then((value) {
+      if (showLevelDialog) {
+        Future.delayed(Duration(milliseconds: 10), () {
+          showDialog(
+            builder: (BuildContext context) {
+              return CupertinoAlertDialog(
+                title: Text(
+                  "تهانينا🎉",
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
                 ),
-              ),
-              content: Text(
-                'لقد وصلت إلى المستوى ' + userLevelUpdated.toString(),
-                style: TextStyle(
-                  fontFamily: 'Cairo',
+                content: Text(
+                  'لقد وصلت إلى المستوى ' + userLevelUpdated.toString(),
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
                 ),
-              ),
-              actions: [
-                ElevatedButton(
-                    onPressed: () {
-                      showLevelDialog = false;
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      "حسناً",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Cairo',
+                actions: [
+                  ElevatedButton(
+                      onPressed: () {
+                        showLevelDialog = false;
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "حسناً",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                        ),
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white.withOpacity(0),
-                      shadowColor: Colors.white.withOpacity(0),
-                      onPrimary: Colors.white,
-                    )),
-              ],
-            );
-          },
-          context: context,
-        );
-      });
-    }
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white.withOpacity(0),
+                        shadowColor: Colors.white.withOpacity(0),
+                        onPrimary: Colors.white,
+                      )),
+                ],
+              );
+            },
+            context: context,
+          );
+        });
+      }
+    });
   }
 
   @override
@@ -135,69 +137,11 @@ class _Category extends State<Category> {
       ),
     );
   }
-}
 
-//Experiments stream builder
-// ignore: must_be_immutable
-class ExperimentsWidget extends StatelessWidget {
-  final String category;
-  final Presenter db;
-  List<ExperimentInfo>? allExperiments;
-
-  ExperimentsWidget({
-    required this.db,
-    required this.category,
-  });
-
-  @override
-  Widget build(BuildContext context) => StreamBuilder<List<ExperimentInfo>>(
-        stream: db.getExperiments(category),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return buildText(
-                    'Something Went Wrong Try later ${snapshot.error}');
-              } else {
-                allExperiments = snapshot.data;
-                checkUserLeve();
-                return allExperiments == null
-                    ? buildText('لا توجد تجارب')
-                    : ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        reverse: true,
-                        itemCount: allExperiments!.length,
-                        itemBuilder: (context, index) {
-                          final exp = allExperiments![index]; //[index];
-
-                          return ExperimentCard(
-                            category: category,
-                            db: db,
-                            exp: exp,
-                          );
-                        },
-                        scrollDirection: Axis.horizontal,
-                      );
-              }
-          }
-        },
-      );
-
-  Widget buildText(String text) => Center(
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 24),
-        ),
-      );
   Future<void> checkUserLeve() async {
     int x = 0;
     int newLevel = 0;
-    /*for (var exp in allExperiments!) {
-      x += exp.userScore;
-    }*/
-    await db.getAllUserScores(user_.userId).then((value) => x = value);
+    await widget.db.getAllUserScores(user_.userId).then((value) => x = value);
     print('score is ' + x.toString());
     if (x >= 5 && x < 10)
       newLevel = 1;
@@ -251,14 +195,72 @@ class ExperimentsWidget extends StatelessWidget {
 
     print(user_.level.toString() + " " + newLevel.toString());
     if (newLevel > user_.level) {
-      db.updateUserLevel(user_.userId, newLevel);
-      db.userInfo(user_.userId);
-      userLevelUpdated = newLevel;
-      showLevelDialog = true;
+      widget.db.updateUserLevel(user_.userId, newLevel);
+      widget.db.userInfo(user_.userId);
+      setState(() {
+        userLevelUpdated = newLevel;
+        showLevelDialog = true;
+      });
       print(user_.level.toString() + " " + newLevel.toString());
       return;
     }
   }
+}
+
+//Experiments stream builder
+// ignore: must_be_immutable
+class ExperimentsWidget extends StatelessWidget {
+  final String category;
+  final Presenter db;
+  List<ExperimentInfo>? allExperiments;
+
+  ExperimentsWidget({
+    required this.db,
+    required this.category,
+  });
+
+  @override
+  Widget build(BuildContext context) => StreamBuilder<List<ExperimentInfo>>(
+        stream: db.getExperiments(category),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError) {
+                return buildText(
+                    'Something Went Wrong Try later ${snapshot.error}');
+              } else {
+                allExperiments = snapshot.data;
+                //checkUserLeve();
+                return allExperiments == null
+                    ? buildText('لا توجد تجارب')
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        reverse: true,
+                        itemCount: allExperiments!.length,
+                        itemBuilder: (context, index) {
+                          final exp = allExperiments![index]; //[index];
+
+                          return ExperimentCard(
+                            category: category,
+                            db: db,
+                            exp: exp,
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                      );
+              }
+          }
+        },
+      );
+
+  Widget buildText(String text) => Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24),
+        ),
+      );
 }
 
 class ExperimentCard extends StatefulWidget {
