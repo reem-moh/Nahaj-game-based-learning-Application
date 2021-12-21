@@ -176,7 +176,12 @@ class _GroupInfo extends State<GroupInfo> {
           showDialog(
             builder: (BuildContext context) {
               return CupertinoAlertDialog(
-                title: Text("هل انت متاكد ؟"),
+                title: Text(
+                  "هل انت متاكد ؟",
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ),
                 actions: [
                   ElevatedButton(
                       onPressed: () {
@@ -191,7 +196,10 @@ class _GroupInfo extends State<GroupInfo> {
                       },
                       child: Text(
                         "نعم",
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white.withOpacity(0),
@@ -202,7 +210,11 @@ class _GroupInfo extends State<GroupInfo> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("لا", style: TextStyle(color: Colors.black)),
+                      child: Text("لا",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Cairo',
+                          )),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white.withOpacity(0),
                         shadowColor: Colors.white.withOpacity(0),
@@ -341,7 +353,10 @@ class CardsOfMembers extends StatelessWidget {
   Widget buildText(String text) => Center(
         child: Text(
           text,
-          style: TextStyle(fontSize: 2.4.w),
+          style: TextStyle(
+            fontSize: 2.4.w,
+            fontFamily: 'Cairo',
+          ),
         ),
       );
 
@@ -403,7 +418,12 @@ class MemberCard extends StatelessWidget {
                     showDialog(
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: Text("هل انت متاكد؟"),
+                          title: Text(
+                            "هل انت متاكد؟",
+                            style: TextStyle(
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
                           actions: [
                             ElevatedButton(
                                 onPressed: () {
@@ -412,7 +432,12 @@ class MemberCard extends StatelessWidget {
                                   showDialog(
                                     builder: (BuildContext context) {
                                       return CupertinoAlertDialog(
-                                        title: Text("تم حذف العضو بنجاح"),
+                                        title: Text(
+                                          "تم حذف العضو بنجاح",
+                                          style: TextStyle(
+                                            fontFamily: 'Cairo',
+                                          ),
+                                        ),
                                       );
                                     },
                                     context: context,
@@ -420,7 +445,10 @@ class MemberCard extends StatelessWidget {
                                 },
                                 child: Text(
                                   "نعم",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),
@@ -433,7 +461,10 @@ class MemberCard extends StatelessWidget {
                                 },
                                 child: Text(
                                   "لا",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),

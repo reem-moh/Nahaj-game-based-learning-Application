@@ -229,7 +229,12 @@ class _ExpInfo extends State<ExperimentAdmin> {
                       showDialog(
                         builder: (BuildContext context) {
                           return CupertinoAlertDialog(
-                            title: Text("هل تريد الخروج بدون حفظ التغييرات؟"),
+                            title: Text(
+                              "هل تريد الخروج بدون حفظ التغييرات؟",
+                              style: TextStyle(
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
@@ -238,7 +243,10 @@ class _ExpInfo extends State<ExperimentAdmin> {
                                   },
                                   child: Text(
                                     "نعم",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -251,7 +259,10 @@ class _ExpInfo extends State<ExperimentAdmin> {
                                   },
                                   child: Text(
                                     "لا",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -488,7 +499,14 @@ class _ExpInfo extends State<ExperimentAdmin> {
           menuMaxHeight: 180,
           icon: Icon(Icons.keyboard_arrow_down),
           items: items.map((int items) {
-            return DropdownMenuItem(value: items, child: Text("$items"));
+            return DropdownMenuItem(
+                value: items,
+                child: Text(
+                  "$items",
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ));
           }).toList(),
           onChanged: (newValue) {
             setState(() {
@@ -515,7 +533,14 @@ class _ExpInfo extends State<ExperimentAdmin> {
           menuMaxHeight: 180,
           icon: Icon(Icons.keyboard_arrow_down),
           items: itemsCategory.map((String items) {
-            return DropdownMenuItem(value: items, child: Text(items));
+            return DropdownMenuItem(
+                value: items,
+                child: Text(
+                  items,
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ));
           }).toList(),
           onChanged: (newValue) {
             setState(() {
@@ -567,7 +592,12 @@ class _ExpInfo extends State<ExperimentAdmin> {
     showDialog(
       builder: (BuildContext context) {
         return CupertinoAlertDialog(
-            title: Text('تم تحديث البيانات بنجاح'),
+            title: Text(
+              'تم تحديث البيانات بنجاح',
+              style: TextStyle(
+                fontFamily: 'Cairo',
+              ),
+            ),
             content: Image.asset("assets/party.png", fit: BoxFit.cover),
             actions: [
               ElevatedButton(
@@ -577,7 +607,10 @@ class _ExpInfo extends State<ExperimentAdmin> {
                   },
                   child: Text(
                     "حسناً",
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Cairo',
+                    ),
                   ),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.white.withOpacity(0),
@@ -612,7 +645,12 @@ class _ExpInfo extends State<ExperimentAdmin> {
             showDialog(
               builder: (BuildContext context) {
                 return CupertinoAlertDialog(
-                    title: Text("هل انت متاكد ؟"),
+                    title: Text(
+                      "هل انت متاكد ؟",
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                      ),
+                    ),
                     actions: [
                       //yes
                       ElevatedButton(
@@ -623,7 +661,10 @@ class _ExpInfo extends State<ExperimentAdmin> {
                           },
                           child: Text(
                             "نعم",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Cairo',
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white.withOpacity(0),
@@ -635,8 +676,11 @@ class _ExpInfo extends State<ExperimentAdmin> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child:
-                              Text("لا", style: TextStyle(color: Colors.black)),
+                          child: Text("لا",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                              )),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white.withOpacity(0),
                             shadowColor: Colors.white.withOpacity(0),

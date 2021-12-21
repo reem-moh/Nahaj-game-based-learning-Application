@@ -217,7 +217,12 @@ class _AdminHomePage extends State<AdminHomePage>
                     showDialog(
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: Text("هل تريد تسجيل الخروج ؟"),
+                          title: Text(
+                            "هل تريد تسجيل الخروج ؟",
+                            style: TextStyle(
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
                           actions: [
                             ElevatedButton(
                                 onPressed: () {
@@ -226,7 +231,10 @@ class _AdminHomePage extends State<AdminHomePage>
                                 },
                                 child: Text(
                                   "نعم",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),
@@ -238,7 +246,10 @@ class _AdminHomePage extends State<AdminHomePage>
                                   Navigator.of(context).pop();
                                 },
                                 child: Text("لا",
-                                    style: TextStyle(color: Colors.black)),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    )),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),
                                   shadowColor: Colors.white.withOpacity(0),

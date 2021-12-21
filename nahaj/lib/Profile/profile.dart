@@ -121,7 +121,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       showDialog(
                         builder: (BuildContext context) {
                           return CupertinoAlertDialog(
-                            title: Text("هل تريد الخروج بدون حفظ التغييرات؟"),
+                            title: Text(
+                              "هل تريد الخروج بدون حفظ التغييرات؟",
+                              style: TextStyle(
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
@@ -131,7 +136,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   },
                                   child: Text(
                                     "نعم",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -144,7 +152,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   },
                                   child: Text(
                                     "لا",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -177,6 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
             style: TextStyle(
               color: Colors.black,
               fontSize: 2.7.w,
+              fontFamily: 'Cairo',
             ),
           )
         ],
@@ -471,7 +483,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                           builder: (BuildContext context) {
                                             return CupertinoAlertDialog(
                                               title: Text(
-                                                  'سيتم فتح صورة العرض عندما تصل الى مستوى ${avatars[i]['level']}'),
+                                                'سيتم فتح صورة العرض عندما تصل الى مستوى ${avatars[i]['level']}',
+                                                style: TextStyle(
+                                                  fontFamily: 'Cairo',
+                                                ),
+                                              ),
                                             );
                                           },
                                           context: context,
@@ -516,8 +532,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         child: Text(
                                                           "حسنا",
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.black),
+                                                            color: Colors.black,
+                                                            fontFamily: 'Cairo',
+                                                          ),
                                                         ),
                                                         style: ElevatedButton
                                                             .styleFrom(
@@ -565,7 +582,12 @@ class _ProfilePageState extends State<ProfilePage> {
             showDialog(
               builder: (BuildContext context) {
                 return CupertinoAlertDialog(
-                  title: Text('تم تحديث البيانات بنجاح'),
+                  title: Text(
+                    'تم تحديث البيانات بنجاح',
+                    style: TextStyle(
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
                   content: Image.asset("assets/party.png", fit: BoxFit.cover),
                 );
               },
@@ -720,7 +742,12 @@ class ButtonWidget extends StatelessWidget {
           onPrimary: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 3.2.h, vertical: 1.2.w),
         ),
-        child: Text(text),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontFamily: 'Cairo',
+          ),
+        ),
         onPressed: onClicked,
       );
 }

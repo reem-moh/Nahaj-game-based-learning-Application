@@ -312,7 +312,12 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                     showDialog(
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: Text("هل تريد تسجيل الخروج ؟"),
+                          title: Text(
+                            "هل تريد تسجيل الخروج ؟",
+                            style: TextStyle(
+                              fontFamily: 'Cairo',
+                            ),
+                          ),
                           actions: [
                             ElevatedButton(
                                 onPressed: () {
@@ -321,7 +326,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                 },
                                 child: Text(
                                   "نعم",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Cairo',
+                                  ),
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),
@@ -333,7 +341,10 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                                   Navigator.of(context).pop();
                                 },
                                 child: Text("لا",
-                                    style: TextStyle(color: Colors.black)),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    )),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white.withOpacity(0),
                                   shadowColor: Colors.white.withOpacity(0),
@@ -775,16 +786,20 @@ class _HomePage extends State<HomePage> with SingleTickerProviderStateMixin {
                             showSkipButton: true,
                             skip: Text("Skip",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 7.sp)),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 7.sp,
+                                  fontFamily: 'Cairo',
+                                )),
                             next: Icon(
                               Icons.arrow_forward,
                               size: 2.5.h,
                             ),
                             done: Text("Done",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 7.sp)),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 7.sp,
+                                  fontFamily: 'Cairo',
+                                )),
                             dotsDecorator: DotsDecorator(
                                 size: Size.square(10.0),
                                 activeSize: Size(20.0, 10.0),

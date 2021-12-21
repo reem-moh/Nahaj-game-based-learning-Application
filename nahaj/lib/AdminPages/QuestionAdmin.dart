@@ -143,7 +143,12 @@ class _QuestionCardState extends State<QuestionCard> {
                       showDialog(
                         builder: (BuildContext context) {
                           return CupertinoAlertDialog(
-                            title: Text("هل تريد الخروج بدون حفظ التغييرات؟"),
+                            title: Text(
+                              "هل تريد الخروج بدون حفظ التغييرات؟",
+                              style: TextStyle(
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
@@ -152,7 +157,10 @@ class _QuestionCardState extends State<QuestionCard> {
                                   },
                                   child: Text(
                                     "نعم",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -165,7 +173,10 @@ class _QuestionCardState extends State<QuestionCard> {
                                   },
                                   child: Text(
                                     "لا",
-                                    style: TextStyle(color: Colors.black),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Cairo',
+                                    ),
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors.white.withOpacity(0),
@@ -451,7 +462,14 @@ class _QuestionCardState extends State<QuestionCard> {
           menuMaxHeight: 180,
           icon: Icon(Icons.keyboard_arrow_down),
           items: items.map((int items) {
-            return DropdownMenuItem(value: items, child: Text("$items"));
+            return DropdownMenuItem(
+                value: items,
+                child: Text(
+                  "$items",
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ));
           }).toList(),
           onChanged: (newValue) {
             setState(() {
@@ -539,7 +557,12 @@ class _QuestionCardState extends State<QuestionCard> {
               showDialog(
                 builder: (BuildContext context) {
                   return CupertinoAlertDialog(
-                      title: Text("هل انت متاكد ؟"),
+                      title: Text(
+                        "هل انت متاكد ؟",
+                        style: TextStyle(
+                          fontFamily: 'Cairo',
+                        ),
+                      ),
                       actions: [
                         //yes
                         ElevatedButton(
@@ -549,7 +572,10 @@ class _QuestionCardState extends State<QuestionCard> {
                             },
                             child: Text(
                               "نعم",
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                              ),
                             ),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white.withOpacity(0),
@@ -562,7 +588,10 @@ class _QuestionCardState extends State<QuestionCard> {
                               Navigator.of(context).pop();
                             },
                             child: Text("لا",
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Cairo',
+                                )),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.white.withOpacity(0),
                               shadowColor: Colors.white.withOpacity(0),
@@ -579,7 +608,12 @@ class _QuestionCardState extends State<QuestionCard> {
             showDialog(
               builder: (BuildContext context) {
                 return CupertinoAlertDialog(
-                    title: Text("هل انت متاكد من حذف السؤال ؟"),
+                    title: Text(
+                      "هل انت متاكد من حذف السؤال ؟",
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                      ),
+                    ),
                     actions: [
                       //yes
                       ElevatedButton(
@@ -589,7 +623,10 @@ class _QuestionCardState extends State<QuestionCard> {
                           },
                           child: Text(
                             "نعم",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Cairo',
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white.withOpacity(0),
@@ -601,8 +638,11 @@ class _QuestionCardState extends State<QuestionCard> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child:
-                              Text("لا", style: TextStyle(color: Colors.black)),
+                          child: Text("لا",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Cairo',
+                              )),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white.withOpacity(0),
                             shadowColor: Colors.white.withOpacity(0),
@@ -635,7 +675,12 @@ class _QuestionCardState extends State<QuestionCard> {
         showDialog(
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
-                title: Text('تم تحديث البيانات بنجاح'),
+                title: Text(
+                  'تم تحديث البيانات بنجاح',
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ),
                 content: Image.asset("assets/party.png", fit: BoxFit.cover),
                 actions: [
                   ElevatedButton(
@@ -645,8 +690,11 @@ class _QuestionCardState extends State<QuestionCard> {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        "نعم",
-                        style: TextStyle(color: Colors.black),
+                        "حسناً",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white.withOpacity(0),
@@ -681,7 +729,12 @@ class _QuestionCardState extends State<QuestionCard> {
         showDialog(
           builder: (BuildContext context) {
             return CupertinoAlertDialog(
-                title: Text('تم تحديث البيانات بنجاح'),
+                title: Text(
+                  'تم تحديث البيانات بنجاح',
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                  ),
+                ),
                 content: Image.asset("assets/party.png", fit: BoxFit.cover),
                 actions: [
                   ElevatedButton(
@@ -691,8 +744,11 @@ class _QuestionCardState extends State<QuestionCard> {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        "نعم",
-                        style: TextStyle(color: Colors.black),
+                        "حسناً",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Cairo',
+                        ),
                       ),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white.withOpacity(0),
@@ -769,7 +825,12 @@ class _QuestionCardState extends State<QuestionCard> {
       showDialog(
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-              title: Text('تم حذف السؤال بنجاح'),
+              title: Text(
+                'تم حذف السؤال بنجاح',
+                style: TextStyle(
+                  fontFamily: 'Cairo',
+                ),
+              ),
               content: Image.asset("assets/party.png", fit: BoxFit.cover),
               actions: [
                 ElevatedButton(
@@ -778,8 +839,11 @@ class _QuestionCardState extends State<QuestionCard> {
                           '/AdminHomePage', (Route<dynamic> route) => false);
                     },
                     child: Text(
-                      "نعم",
-                      style: TextStyle(color: Colors.black),
+                      "حسناً",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Cairo',
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white.withOpacity(0),
