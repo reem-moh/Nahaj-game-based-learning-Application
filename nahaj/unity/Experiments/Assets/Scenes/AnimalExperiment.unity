@@ -11126,7 +11126,6 @@ GameObject:
   - component: {fileID: 1582400101}
   - component: {fileID: 1582400104}
   - component: {fileID: 1582400103}
-  - component: {fileID: 1582400105}
   - component: {fileID: 1582400102}
   - component: {fileID: 1582400106}
   m_Layer: 0
@@ -11190,36 +11189,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.204162, y: 5.0788198, z: 8.249447}
   m_Center: {x: -3.6947904, y: 2.0394099, z: 0.9195461}
---- !u!114 &1582400105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582400100}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d712c10cda64568bb28d0301c2a1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextInstruction: {fileID: 394989270}
-  audioSource: {fileID: 0}
-  enableCheck: {fileID: 1839497079}
-  lastInstruction: {fileID: 0}
-  instruction7: {fileID: 0}
-  endGame: {fileID: 0}
-  progressBar: {fileID: 0}
-  Zebra: {fileID: 1996300542}
-  horse1: {fileID: 1112149759}
-  horse2: {fileID: 152864904}
-  Sheep1: {fileID: 1905546381}
-  Sheep2: {fileID: 1399419441}
-  Sheep3: {fileID: 592460897}
-  sraw: {fileID: 1582400100}
-  tiger: {fileID: 1707669684}
-  turtle: {fileID: 1156617825}
-  elephant: {fileID: 1208588196}
-  tag: Sraws
 --- !u!114 &1582400106
 MonoBehaviour:
   m_ObjectHideFlags: 0

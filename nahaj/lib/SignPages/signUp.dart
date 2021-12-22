@@ -107,6 +107,7 @@ class _SignupState extends State<SignUp> {
                             ? AutovalidateMode.always
                             : AutovalidateMode.onUserInteraction,
                         cursorRadius: Radius.circular(50),
+                        textDirection: TextDirection.rtl,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -153,6 +154,7 @@ class _SignupState extends State<SignUp> {
                         autovalidateMode: emptyEmail
                             ? AutovalidateMode.always
                             : AutovalidateMode.onUserInteraction,
+                        textDirection: TextDirection.rtl,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -201,6 +203,7 @@ class _SignupState extends State<SignUp> {
                       autovalidateMode: emptyPass
                           ? AutovalidateMode.always
                           : AutovalidateMode.onUserInteraction,
+                      textDirection: TextDirection.rtl,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -249,6 +252,7 @@ class _SignupState extends State<SignUp> {
                         autovalidateMode: emptyRePass
                             ? AutovalidateMode.always
                             : AutovalidateMode.onUserInteraction,
+                        textDirection: TextDirection.rtl,
                         obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),

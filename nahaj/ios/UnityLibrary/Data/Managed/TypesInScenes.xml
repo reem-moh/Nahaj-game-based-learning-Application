@@ -65,7 +65,11 @@
 	<assembly fullname="Assembly-CSharp">
 		<type fullname="AnimalExpInstructions" preserve="nothing"/>
 		<type fullname="BottleSmash" preserve="nothing"/>
-		<type fullname="DetectTouch" preserve="nothing"/>
+		<type fullname="DetectElephant" preserve="nothing"/>
+		<type fullname="DetectHorse" preserve="nothing"/>
+		<type fullname="DetectSheep" preserve="nothing"/>
+		<type fullname="DetectTiger" preserve="nothing"/>
+		<type fullname="DetectTurtle" preserve="nothing"/>
 		<type fullname="LiquidColor" preserve="nothing"/>
 		<type fullname="LiquidVolumeAnimator" preserve="nothing"/>
 		<type fullname="LoadSceneManager" preserve="nothing"/>

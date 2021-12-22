@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
                   db: this.database,
                 ),
           },
+          debugShowCheckedModeBanner: false,
         );
       },
     );

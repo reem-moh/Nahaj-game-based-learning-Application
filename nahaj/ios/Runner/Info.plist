@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>photo library usage description</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Nahaj | نهج</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,6 +24,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Describe why your app needs AR here.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photo library usage description</string>
+	<key>Privacy - Camera Usage Description</key>
+	<string>$(PRODUCT_NAME) uses Cameras</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -44,11 +50,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Describe why your app needs AR here.</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
-	<key>Privacy - Camera Usage Description</key>
-	<string>$(PRODUCT_NAME) uses Cameras</string>
 </dict>
 </plist>

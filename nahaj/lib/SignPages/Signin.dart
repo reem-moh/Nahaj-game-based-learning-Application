@@ -86,7 +86,7 @@ class _SigninState extends State<Signin> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                     child: TextFormField(
-                      initialValue: "child@nahaj.com",
+                      initialValue: "",
                       autovalidateMode: loginErr || emptyPass
                           ? AutovalidateMode.always
                           : AutovalidateMode.onUserInteraction,
@@ -141,7 +141,7 @@ class _SigninState extends State<Signin> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 120, vertical: 0),
                       child: TextFormField(
-                        initialValue: '12345678',
+                        initialValue: '',
                         autovalidateMode: emptyPass
                             ? AutovalidateMode.always
                             : AutovalidateMode.onUserInteraction,

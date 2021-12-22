@@ -364,7 +364,7 @@ class _ExperimentCardState extends State<ExperimentCard> {
                       style: TextStyle(
                           fontFamily: 'Cairo',
                           fontWeight: FontWeight.w600,
-                          fontSize: 2.2.w,
+                          fontSize: 2.w,
                           color: Color.fromARGB(255, 114, 78, 140)),
                     ),
                   ],
@@ -385,7 +385,7 @@ class _ExperimentCardState extends State<ExperimentCard> {
                       style: TextStyle(
                         fontFamily: 'Cairo',
                         fontWeight: FontWeight.w600,
-                        fontSize: 1.5.w,
+                        fontSize: 1.4.w,
                         color: Color.fromARGB(170, 0, 0, 0),
                       ),
                     ),
