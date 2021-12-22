@@ -88,7 +88,7 @@ public class DetectTouch : MonoBehaviour
     }
 
     public void clicked(){
-         Debug.Log("----------inside update "+tag+"---firstTime:"+firstTime+" ------------- nextInstruction.instructionIsEnabled:"+instructionIsEnabled+"");
+         Debug.Log("----------inside update "+tag+" DetectTouch---firstTime:"+firstTime+" ------------- nextInstruction.instructionIsEnabled:"+instructionIsEnabled+"");
         if(firstTime && instructionIsEnabled){
             if(Input.GetMouseButtonDown(0))
              {

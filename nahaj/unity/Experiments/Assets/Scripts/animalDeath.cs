@@ -31,10 +31,13 @@ public class animalDeath : MonoBehaviour
         animalAnimation.SetTrigger("walk");
     }
 
+    //called from sheep1 eat 
     public void Done(){
         if(firstTime){
-            sraw.GetComponent<DetectTouch>().Done();
+            sraw.GetComponent<DetectSheep>().Done();
             firstTime = false;
+            //turn of the code
+            sraw.GetComponent<DetectSheep>().enabled = false;
         }
         
     }

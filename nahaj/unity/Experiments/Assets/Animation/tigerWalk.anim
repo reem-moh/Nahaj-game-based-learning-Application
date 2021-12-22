@@ -82053,7 +82053,7 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.3833333
+  - time: 1.5
     functionName: enableAnimation
     data: 
     objectReferenceParameter: {fileID: 0}
