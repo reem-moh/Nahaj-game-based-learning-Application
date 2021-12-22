@@ -35,7 +35,11 @@ class _ExpInfo extends State<ExperimentAdmin> {
   List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   String dropdownCategory = "الكيمياء";
-  List<String> itemsCategory = ['الكيمياء', 'الحيوانات', "النباتات"];
+  List<String> itemsCategory = [
+    'الكيمياء',
+    'الحيوانات'
+    /* , "النباتات"*/
+  ];
 
   String name = "";
   String info = "";
@@ -445,10 +449,10 @@ class _ExpInfo extends State<ExperimentAdmin> {
                     child: textFieldInput(": وصف التجربة *", 2.7)),
               ],
             ),
-            SizedBox(height: 6.0.w),
+            // SizedBox(height: 6.0.w),
 
             //total score
-            Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 //Question field
@@ -480,7 +484,7 @@ class _ExpInfo extends State<ExperimentAdmin> {
                     padding: EdgeInsets.only(right: 20.h, bottom: 2.w),
                     child: textFieldInput(": المجموع الكلي للتجربة ", 2.7)),
               ],
-            ),
+            ),*/
             SizedBox(height: 6.0.w),
           ],
         ),
