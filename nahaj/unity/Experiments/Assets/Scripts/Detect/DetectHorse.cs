@@ -17,6 +17,10 @@ public class DetectHorse : MonoBehaviour
     //instruction
     [SerializeField] private GameObject lastInstruction,endGame,progressBar;
 
+    //for audio
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource wrongClick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,10 @@ public class DetectHorse : MonoBehaviour
                   if(hit.transform.gameObject.CompareTag(tag)){
                     Debug.Log("horse");
                     Done();
+                    click.Play();
+                  }else{
+                    //sound error
+                     wrongClick.Play();;
                   }
               }
             }

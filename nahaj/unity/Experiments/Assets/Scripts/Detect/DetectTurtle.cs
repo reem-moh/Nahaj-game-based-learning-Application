@@ -14,6 +14,10 @@ public class DetectTurtle : MonoBehaviour
     //game onject to turn their script
     [SerializeField] private GameObject sraw, elephant;
 
+    //for audio
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource wrongClick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,10 @@ public class DetectTurtle : MonoBehaviour
                   if(hit.transform.gameObject.CompareTag(tag)){
                     Debug.Log("Turtule");
                     Done();
+                    click.Play();
+                  }else{
+                    //sound error
+                     wrongClick.Play();;
                   }
               }
             }

@@ -14,6 +14,10 @@ public class DetectElephant : MonoBehaviour
     //game onject to turn their script
     [SerializeField] private GameObject turtle, tiger;
 
+    //for audio
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource wrongClick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,10 @@ public class DetectElephant : MonoBehaviour
                 if(hit.transform.gameObject.CompareTag(tag)){
                     Debug.Log("elephant");
                     Done();
+                     click.Play();
+                }else{
+                    //sound error
+                    wrongClick.Play();;
                 }
                 
               }

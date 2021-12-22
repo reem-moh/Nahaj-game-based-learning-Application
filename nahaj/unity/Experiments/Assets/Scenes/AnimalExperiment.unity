@@ -1579,36 +1579,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100034, guid: 1eed6d988d485f54aa92e29a79453555, type: 3}
   m_PrefabInstance: {fileID: 152864902}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &152864905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152864904}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d712c10cda64568bb28d0301c2a1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextInstruction: {fileID: 394989270}
-  audioSource: {fileID: 0}
-  enableCheck: {fileID: 1839497079}
-  lastInstruction: {fileID: 565662942}
-  instruction7: {fileID: 2000385360}
-  endGame: {fileID: 1611686579}
-  progressBar: {fileID: 1371539417}
-  Zebra: {fileID: 1996300542}
-  horse1: {fileID: 1112149759}
-  horse2: {fileID: 152864904}
-  Sheep1: {fileID: 1905546381}
-  Sheep2: {fileID: 1399419441}
-  Sheep3: {fileID: 592460897}
-  sraw: {fileID: 1582400100}
-  tiger: {fileID: 1707669684}
-  turtle: {fileID: 1156617825}
-  elephant: {fileID: 1208588196}
-  tag: horse
 --- !u!65 &152864906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1817,7 +1787,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 43b5d44f498f9433caf67b37cccd9a0b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6174,6 +6144,133 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &977242706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977242708}
+  - component: {fileID: 977242707}
+  m_Layer: 0
+  m_Name: clicked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &977242707
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977242706}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e01c506f867e2495d9c1c15567b3ec2e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &977242708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977242706}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.6000004, y: 3, z: -54.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984099073
 GameObject:
   m_ObjectHideFlags: 0
@@ -6374,7 +6471,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7475768, y: 2.8929353, z: 2.790731}
   m_Center: {x: 0.09459445, y: 0.48479035, z: 0.37696707}
---- !u!114 &1112149762
+--- !u!114 &1112149764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6383,27 +6480,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1112149759}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d712c10cda64568bb28d0301c2a1ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3df2aace5c643739e40fa074fe4565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nextInstruction: {fileID: 394989270}
-  audioSource: {fileID: 0}
   enableCheck: {fileID: 1839497079}
+  Tiger: {fileID: 1707669684}
   lastInstruction: {fileID: 565662942}
-  instruction7: {fileID: 2000385360}
   endGame: {fileID: 1611686579}
   progressBar: {fileID: 1371539417}
-  Zebra: {fileID: 1341553548}
-  horse1: {fileID: 1112149759}
-  horse2: {fileID: 152864904}
-  Sheep1: {fileID: 1905546381}
-  Sheep2: {fileID: 1399419441}
-  Sheep3: {fileID: 592460897}
-  sraw: {fileID: 1582400100}
-  tiger: {fileID: 1707669684}
-  turtle: {fileID: 1156617825}
-  elephant: {fileID: 1208588196}
-  tag: horse
+  click: {fileID: 977242707}
+  wrongClick: {fileID: 1209346414}
 --- !u!1 &1116951198
 GameObject:
   m_ObjectHideFlags: 0
@@ -6459,36 +6546,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39628902, y: 1, z: 0.5024262}
   m_Center: {x: -0.010951677, y: 0, z: 0.015966957}
---- !u!114 &1156617827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156617825}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d712c10cda64568bb28d0301c2a1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextInstruction: {fileID: 394989270}
-  audioSource: {fileID: 0}
-  enableCheck: {fileID: 1839497079}
-  lastInstruction: {fileID: 0}
-  instruction7: {fileID: 0}
-  endGame: {fileID: 0}
-  progressBar: {fileID: 0}
-  Zebra: {fileID: 1996300542}
-  horse1: {fileID: 1112149759}
-  horse2: {fileID: 152864904}
-  Sheep1: {fileID: 1905546381}
-  Sheep2: {fileID: 1399419441}
-  Sheep3: {fileID: 592460897}
-  sraw: {fileID: 1582400100}
-  tiger: {fileID: 1707669684}
-  turtle: {fileID: 1156617825}
-  elephant: {fileID: 1208588196}
-  tag: turtle
 --- !u!54 &1156617828
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6521,6 +6578,8 @@ MonoBehaviour:
   enableCheck: {fileID: 1839497079}
   sraw: {fileID: 1582400100}
   elephant: {fileID: 1208588196}
+  click: {fileID: 977242707}
+  wrongClick: {fileID: 1209346414}
 --- !u!1001 &1161041785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6642,36 +6701,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1014789747999944, guid: 9f261fd1add2311419c0a9eaeabc7d13, type: 3}
   m_PrefabInstance: {fileID: 684399595}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1208588197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208588196}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d712c10cda64568bb28d0301c2a1ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextInstruction: {fileID: 394989270}
-  audioSource: {fileID: 0}
-  enableCheck: {fileID: 1839497079}
-  lastInstruction: {fileID: 0}
-  instruction7: {fileID: 0}
-  endGame: {fileID: 0}
-  progressBar: {fileID: 0}
-  Zebra: {fileID: 1996300542}
-  horse1: {fileID: 1112149759}
-  horse2: {fileID: 152864904}
-  Sheep1: {fileID: 1905546381}
-  Sheep2: {fileID: 1399419441}
-  Sheep3: {fileID: 592460897}
-  sraw: {fileID: 1582400100}
-  tiger: {fileID: 1707669684}
-  turtle: {fileID: 1156617825}
-  elephant: {fileID: 1208588196}
-  tag: elephant
 --- !u!65 &1208588198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6708,7 +6737,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208588196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f2b1f4560c7f4e9d84f10e4fa52c068, type: 3}
   m_Name: 
@@ -6717,6 +6746,135 @@ MonoBehaviour:
   enableCheck: {fileID: 1839497079}
   turtle: {fileID: 1156617825}
   tiger: {fileID: 1707669684}
+  click: {fileID: 977242707}
+  wrongClick: {fileID: 1209346414}
+--- !u!1 &1209346413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209346415}
+  - component: {fileID: 1209346414}
+  m_Layer: 0
+  m_Name: wrongClick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1209346414
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209346413}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6434066ebe5d84ce3a82cbaadcb1026b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1209346415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209346413}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.6000004, y: 3, z: -54.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1239059411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11081,6 +11239,8 @@ MonoBehaviour:
   Sheep3: {fileID: 592460897}
   turtle: {fileID: 1156617825}
   tag: Sraws
+  click: {fileID: 977242707}
+  wrongClick: {fileID: 1209346414}
 --- !u!1001 &1589828755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12037,6 +12197,8 @@ MonoBehaviour:
   Sheep1: {fileID: 1905546381}
   Sheep2: {fileID: 1399419441}
   Zebra: {fileID: 1996300542}
+  click: {fileID: 977242707}
+  wrongClick: {fileID: 1209346414}
 --- !u!1001 &1734350831
 PrefabInstance:
   m_ObjectHideFlags: 0

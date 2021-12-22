@@ -18,6 +18,10 @@ public class DetectTiger : MonoBehaviour
     //animals
     [SerializeField] private GameObject Sheep1,Sheep2,Zebra;
 
+    //for audio
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource wrongClick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,11 +53,15 @@ public class DetectTiger : MonoBehaviour
                      Debug.Log("Tiger attaks Zebra");
                      enableTigerAnimation("attakZebra");
                      enableSound();
-
+                     click.Play();
                 }else if(hit.transform.gameObject.CompareTag("sheep")){
                       Debug.Log("Tiger attaks sheep");
                      enableTigerAnimation("attakSheep");
                      enableSound();
+                     click.Play();
+                }else{
+                    //sound error
+                  wrongClick.Play();;
                 }
               }
             }

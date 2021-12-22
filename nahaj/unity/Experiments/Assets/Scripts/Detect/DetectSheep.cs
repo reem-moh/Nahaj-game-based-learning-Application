@@ -20,6 +20,10 @@ public class DetectSheep : MonoBehaviour
     //tag
     [SerializeField] private string tag;
 
+    //for audio
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource wrongClick;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,10 @@ public class DetectSheep : MonoBehaviour
                   Sheep1.GetComponent<animalDeath>().enableWalk();
                   Sheep2.GetComponent<animalDeath>().enableWalk();
                   Sheep3.GetComponent<animalDeath>().enableWalk();
+                  click.Play();
+                }else{
+                    //sound error
+                  wrongClick.Play();;
                 }
               }
             }
