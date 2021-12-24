@@ -233,8 +233,11 @@ class ExperimentsWidget extends StatelessWidget {
               } else {
                 allExperiments = snapshot.data;
                 //checkUserLeve();
-                return allExperiments == null
-                    ? buildText('لا توجد تجارب')
+                return allExperiments == null || allExperiments!.isEmpty
+                    ? Center(
+                        child: buildText(
+                            "🧑🏻‍🔬  " + 'المزيد من التجارب قادمة في الطريق'),
+                      )
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         reverse: true,
@@ -258,7 +261,7 @@ class ExperimentsWidget extends StatelessWidget {
   Widget buildText(String text) => Center(
         child: Text(
           text,
-          style: TextStyle(fontSize: 24),
+          style: TextStyle(fontSize: 24, fontFamily: 'Cairo'),
         ),
       );
 }

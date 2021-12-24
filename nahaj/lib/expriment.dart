@@ -212,8 +212,121 @@ class QuestionsWidget extends StatelessWidget {
                     'Something Went Wrong Try later ${snapshot.hasError}');
               } else {
                 final allQuestions = snapshot.data;
-                return allQuestions == null
-                    ? buildText('لا توجد أسئلة')
+                return allQuestions == null || allQuestions.isEmpty
+                    ? //buildText('لا توجد أسئلة')
+                    AlertDialog(
+                        backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                        content: Container(
+                          alignment: Alignment.center,
+                          width: 30.h,
+                          height: 30.h,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/ScoreBackground.png'),
+                              scale: 0.5,
+                            ),
+                          ),
+                          child: Stack(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 5.w),
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'assets/FullRatingStar.png',
+                                  width: 10.h,
+                                  height: 10.w,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 10.w),
+                                alignment: Alignment.topCenter,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(0),
+                                      child: Image.asset(
+                                        'assets/FullRatingStar.png',
+                                        width: 5.h,
+                                        height: 5.w,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 3.h,
+                                    ),
+                                    Container(
+                                      child: Image.asset(
+                                        'assets/FullRatingStar.png',
+                                        width: 5.h,
+                                        height: 5.w,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(top: 7.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'لقد أتممت التجربة بنجاح',
+                                      style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 5.sp,
+                                        color: Color.fromARGB(255, 0, 71, 147),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.w,
+                                    ),
+                                    Text(
+                                      exp.experimentScore.toString() +
+                                          "/" +
+                                          exp.totalScore.toString(),
+                                      style: TextStyle(
+                                        fontFamily: 'Cairo',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 5.sp,
+                                        color: Color.fromARGB(255, 0, 71, 147),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.w,
+                                    ),
+                                    InkWell(
+                                      child: Image.asset(
+                                        'assets/ٍReturnButton.png',
+                                        width: 10.h,
+                                      ),
+                                      onTap: () {
+                                        unityWidgetController.resume()!.then(
+                                            (value) => unityWidgetController
+                                                    .unload()!
+                                                    .then((value) {
+                                                  Navigator.pop(context);
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Category(
+                                                              categoryTitle:
+                                                                  exp.category,
+                                                              db: db,
+                                                            )),
+                                                  );
+                                                }));
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     : QuestionCard(
                         db: db,
                         questions: allQuestions,
