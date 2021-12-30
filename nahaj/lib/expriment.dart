@@ -731,21 +731,17 @@ class _QuestionCardState extends State<QuestionCard> {
                             width: 10.h,
                           ),
                           onTap: () {
-                            widget.unityWidgetController.resume()!.then(
-                                (value) => widget.unityWidgetController
-                                        .unload()!
-                                        .then((value) {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Category(
-                                                  categoryTitle:
-                                                      widget.exp.category,
-                                                  db: widget.db,
-                                                )),
-                                      );
-                                    }));
+                            widget.unityWidgetController.resume();
+                            widget.unityWidgetController.unload();
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Category(
+                                        categoryTitle: widget.exp.category,
+                                        db: widget.db,
+                                      )),
+                            );
                           },
                         )
                       ],

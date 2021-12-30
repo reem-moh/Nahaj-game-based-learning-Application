@@ -111,12 +111,8 @@ class _Category extends State<Category> {
             ),
             onPressed: () {
               setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(
-                              db: widget.db,
-                            )));
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/HomePage', (Route<dynamic> route) => false);
               });
             },
           ),
